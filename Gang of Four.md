@@ -1,8 +1,8 @@
 # Gang-of-Four
 PPA Assignment 4
 
-Group members:
-Xinran Tao
-Zain Raja
-Mansour Eamonn
-Talal Hassan
+## Team members
+* Xinran Tao
+* Eamonn Mansour
+* (add names here)
+*
