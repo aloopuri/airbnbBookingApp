@@ -20,13 +20,27 @@ public class AirbnbApplication extends Application
 {
     private Label myLabel = new Label("Welcome"); // Temporary
     
-    private ArrayList<Scene> scenes = new ArrayList<>();
+    private ArrayList<Scene> scenes;
+    private ArrayList<AirbnbListing> listings;
     
     // Controls on most panels
     private Button backButton = new Button("<");
     private Button frontButton = new Button(">");
-    private ComboBox fromBox = new ComboBox(getOptionsList());
-    private ComboBox toBox = new ComboBox(getOptionsList());
+    private ComboBox fromBox;
+    private ComboBox toBox;
+    
+    /**
+     * Class Constructor
+     */
+    public AirbnbApplication() 
+    {
+        scenes = new ArrayList<Scene>();
+        listings = new ArrayList<AirbnbListing>();
+        AirbnbDataLoader loader = new AirbnbDataLoader();
+        listings = loader.load();
+        fromBox = new ComboBox(getOptionsList());
+        toBox = new ComboBox(getOptionsList());
+    }
     
     /**
      * Sets up the application's window
@@ -110,12 +124,13 @@ public class AirbnbApplication extends Application
      */
     private ObservableList<Integer> getOptionsList() 
     {
-        ObservableList<Integer> options = 
-        FXCollections.observableArrayList (
-            1,
-            2,
-            3
-        );
+        ObservableList<Integer> options = FXCollections.observableArrayList();
+        
+        for (AirbnbListing aListing : listings) {
+            options.add(aListing.getPrice());
+        }
+        FXCollections.sort(options);
+        
         return options;
     }
     
