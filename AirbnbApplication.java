@@ -1,11 +1,11 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
 import javafx.collections.*;
 
@@ -18,8 +18,6 @@ import java.util.ArrayList;
  */
 public class AirbnbApplication extends Application
 {
-    private Label myLabel = new Label("Welcome"); // Temporary
-    
     private ArrayList<Scene> scenes;
     private ArrayList<AirbnbListing> listings;
     
@@ -28,6 +26,7 @@ public class AirbnbApplication extends Application
     private Button frontButton = new Button(">");
     private ComboBox fromBox;
     private ComboBox toBox;
+    private Label priceRange;
     
     /**
      * Class Constructor
@@ -40,6 +39,7 @@ public class AirbnbApplication extends Application
         listings = loader.load();
         fromBox = new ComboBox(getOptionsList());
         toBox = new ComboBox(getOptionsList());
+        priceRange = new Label();
     }
     
     /**
@@ -48,39 +48,16 @@ public class AirbnbApplication extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Label fromLabel = new Label("From:");
-        Label toLabel = new Label("To:");
-
-        fromBox.setPromptText("-");
-        toBox.setPromptText("-");
+        BorderPane welcomePane = createWelcome();
         
-        backButton.setPrefWidth(50);
-        frontButton.setPrefWidth(50);
-        backButton.setDisable(true);
-        frontButton.setDisable(true);
-        
-        // Create a new HBox
-        HBox topPane = new HBox();
-        topPane.setAlignment(Pos.CENTER_RIGHT);
-        topPane.setSpacing(10);
-        topPane.getChildren().add(fromLabel);
-        topPane.getChildren().add(fromBox);
-        topPane.getChildren().add(toLabel);
-        topPane.getChildren().add(toBox);
-        
-        BorderPane bottomPane = new BorderPane();
-        bottomPane.setRight(frontButton);
-        bottomPane.setLeft(backButton);
-
-        // Create a new border pane
-        BorderPane root = new BorderPane();
-        root.setTop(topPane);
-        root.setCenter(myLabel);
-        root.setBottom(bottomPane);
-        
-        // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene welcomeScene = new Scene(root, 500, 500);
+        // Create Welcome scene
+        Scene welcomeScene = new Scene(welcomePane, 500, 500);
         scenes.add(welcomeScene);
+        
+        // Create Map scene
+        //Scene mapScene = new Scene(mapPane, 500, 500);
+        //scenes.add(mapScene);
+        
         stage.setTitle("Airbnb London");
         stage.setScene(welcomeScene);
         
@@ -90,6 +67,71 @@ public class AirbnbApplication extends Application
         
         // Show the Stage (window)
         stage.show();
+    }
+    
+    /**
+     * Creates the application's Welcome Panel
+     */
+    private BorderPane createWelcome() 
+    {
+        Label welcomeLabel = new Label();
+        Label fromLabel = new Label("From:");
+        Label toLabel = new Label("To:");
+        
+        welcomeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        welcomeLabel.setText("Welcome to Airbnb London!");
+        
+        Label infoLabel = new Label("Select a price range to begin." +
+                                    "\nCurrently selected price range:");
+        infoLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 18));
+        
+        priceRange.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        updatePriceRange(fromBox.getValue(), toBox.getValue());
+        
+        fromBox.setPromptText("-");
+        toBox.setPromptText("-");
+        
+        backButton.setPrefWidth(50);
+        frontButton.setPrefWidth(50);
+        backButton.setDisable(true);
+        frontButton.setDisable(true);
+        
+        // Create a new HBox for the top area
+        HBox topPane = new HBox();
+        topPane.setAlignment(Pos.CENTER_RIGHT);
+        topPane.setSpacing(10);
+        topPane.getChildren().add(fromLabel);
+        topPane.getChildren().add(fromBox);
+        topPane.getChildren().add(toLabel);
+        topPane.getChildren().add(toBox);
+        
+        // Create a new VBox for the center area
+        VBox centerPane = new VBox();
+        centerPane.setAlignment(Pos.CENTER);
+        centerPane.setSpacing(10);
+        centerPane.getChildren().add(welcomeLabel);
+        centerPane.getChildren().add(infoLabel);
+        centerPane.getChildren().add(priceRange);
+        
+        BorderPane bottomPane = new BorderPane();
+        bottomPane.setRight(frontButton);
+        bottomPane.setLeft(backButton);
+
+        // Create a new border pane
+        BorderPane root = new BorderPane();
+        root.setTop(topPane);
+        root.setCenter(centerPane);
+        root.setBottom(bottomPane);
+        
+        return root;
+    }
+    
+    /**
+     * Create Map Panel
+     */
+    private void createMap() 
+    {
+        // to do...
     }
     
     /**
@@ -109,10 +151,12 @@ public class AirbnbApplication extends Application
                 alert.setTitle("Value Warning");
                 alert.setHeaderText(null);
                 alert.setContentText("From value is greater than To value.");
-                alert.showAndWait();
+                updatePriceRange(fromBox.getValue(), toBox.getValue());
                 disableNavigation();
+                alert.showAndWait();
             }
             else {
+                updatePriceRange(fromBox.getValue(), toBox.getValue());
                 enableNavigation();
             }
         }
@@ -141,6 +185,20 @@ public class AirbnbApplication extends Application
     {
         frontButton.setDisable(false);
         backButton.setDisable(false);        
+    }
+    
+    /**
+     * Updates the priceRange Label's text
+     */
+    private void updatePriceRange(Object fromValue, Object toValue)
+    {
+        if (fromValue == null || toValue == null) {
+            priceRange.setText("From: £- To £-");
+        }
+        else {
+            priceRange.setText("From: £" + fromValue.toString() +
+                               " To: £" + toValue.toString());
+        }
     }
     
     /**
