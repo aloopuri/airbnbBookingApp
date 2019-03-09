@@ -21,7 +21,7 @@ public class AirbnbApplication extends Application
     private Label myLabel = new Label("Welcome"); // Temporary
     
     private ArrayList<Scene> scenes;
-    private ArrayList<AirbnbListing> listings;
+    private ListingManager listingManager;
     
     // Controls on most panels
     private Button backButton = new Button("<");
@@ -35,9 +35,10 @@ public class AirbnbApplication extends Application
     public AirbnbApplication() 
     {
         scenes = new ArrayList<Scene>();
-        listings = new ArrayList<AirbnbListing>();
+        ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
+        listingManager = new ListingManager(listings);
         fromBox = new ComboBox(getOptionsList());
         toBox = new ComboBox(getOptionsList());
     }
@@ -98,8 +99,8 @@ public class AirbnbApplication extends Application
     private void comboBoxAction() 
     {
         if (fromBox.getValue() != null && toBox.getValue() != null) {
-            Integer toValue = (Integer)toBox.getValue();
-            Integer fromValue = (Integer)fromBox.getValue();
+            Integer toValue = (Integer) toBox.getValue();
+            Integer fromValue = (Integer) fromBox.getValue();
             int to = toValue.intValue();
             int from = fromValue.intValue();
             if (to < from) {
@@ -124,13 +125,16 @@ public class AirbnbApplication extends Application
      */
     private ObservableList<Integer> getOptionsList() 
     {
-        ObservableList<Integer> options = FXCollections.observableArrayList();
+        ObservableList<Integer> options = FXCollections.observableArrayList(listingManager.getAllPrices());
         
-        for (AirbnbListing aListing : listings) {
-            options.add(aListing.getPrice());
+        /**for (AirbnbListing aListing : listingManager.getListings()) {
+            //if (!options.contains(aListing))
+            {
+                options.add(aListing.getPrice());
+            }
         }
+        listingManager.getAllPrices();**/
         FXCollections.sort(options);
-        
         return options;
     }
     
