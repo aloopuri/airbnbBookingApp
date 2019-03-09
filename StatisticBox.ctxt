@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=StatisticBox
+comment0.text=\r\n\ This\ creates\ the\ layout\ for\ an\ individual\ statistic\ box\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=StatisticBox()
+comment1.text=\r\n\ The\ Statistic\ box\ is\ created\r\n
+comment2.params=
+comment2.target=javafx.scene.layout.GridPane\ createStatBox()
+comment2.text=\r\n\ This\ returns\ the\ statistic\ box\r\n
+numComments=3
