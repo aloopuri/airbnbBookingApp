@@ -8,4 +8,6 @@ comment2.params=
 comment2.target=java.util.ArrayList\ getListings()
 comment3.params=
 comment3.target=java.util.ArrayList\ getAllPrices()
-numComments=4
+comment4.params=
+comment4.target=int\ numberOfListings()
+numComments=5

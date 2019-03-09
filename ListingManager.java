@@ -37,4 +37,8 @@ public class ListingManager
         return prices;
     }
     
+    public int numberOfListings()
+    {
+        return listings.size();
+    }
 }
