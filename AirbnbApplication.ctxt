@@ -23,4 +23,6 @@ comment7.params=event
 comment7.target=void\ nextScene(javafx.event.ActionEvent)
 comment8.params=event
 comment8.target=void\ previousScene(javafx.event.ActionEvent)
-numComments=9
+comment9.params=sceneIndex
+comment9.target=void\ moveScene(int)
+numComments=10

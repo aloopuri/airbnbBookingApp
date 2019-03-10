@@ -9,7 +9,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.collections.*;
 import javafx.*;
-import javafx.scene.*;
+import java.awt.Insets;
+//import javafx.scene.*;
 import java.util.*;
 /**
  * Write a description of JavaFX class Application here.
@@ -83,16 +84,33 @@ public class AirbnbApplication extends Application
         root.setBottom(bottomPane);
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene welcomeScene = new Scene(root, 500, 500);
+        Scene welcomeScene = new Scene(root, 750, 750);
         scenes.add(welcomeScene);
         stage.setTitle("Airbnb London");
         stage.setScene(welcomeScene);
         //
         BorderPane mapRoot = new BorderPane();
-        Scene mapScene = new Scene(mapRoot, 500, 500);
-        Label mapLabel = new Label("This is the map");
-        mapRoot.setCenter(mapLabel);
+        Scene mapScene = new Scene(mapRoot, 750, 750);
+        GridPane mapPane = new GridPane();
+        mapPane.setHgap(10);
+        mapPane.setVgap(10);
+        mapPane.add(new Button("MAP"),1,0);
+        mapPane.add(new Button("ENFI"),7,1);
+        mapPane.add(new Button("BARN"),4,2);
+        mapPane.add(new Button("HRGY"),6,2);
+        mapPane.add(new Button("WALT"),8,2);
+        mapPane.add(new Button("HRRW"),1,3);
+        mapPane.add(new Button("BREN"),3,3);
+        mapPane.add(new Button("CAMD"),5,3);
+        mapPane.add(new Button("ISLI"),7,3);
+        mapPane.add(new Button("HACK"),9,3);
+        mapPane.add(new Button("HILL"),0,4);
+        mapRoot.setCenter(mapPane);
         scenes.add(mapScene);
+        //
+        BorderPane statsRoot = new BorderPane();
+        Scene statsScene = new Scene(statsRoot, 750, 750);
+        scenes.add(statsScene);
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
         toBox.setOnAction(e -> comboBoxAction());
@@ -161,21 +179,25 @@ public class AirbnbApplication extends Application
     private void nextScene(ActionEvent event)
     {
         currentScene ++;
-        Scene newScene = scenes.get(0);
-        ((BorderPane)newScene.getRoot()).setTop(topPane);
-        ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
-        mainStage.setScene(newScene);
-        mainStage.show();
-        //Stage stage = (Stage)((Notde)event.getSource()).getScene().getWindow();
+        currentScene = currentScene % scenes.size();
+        moveScene(currentScene);
     }
 
     private void previousScene(ActionEvent event)
     {
         currentScene --;
-        Scene newScene = scenes.get(1);
+        if (currentScene<0)
+        {
+            currentScene = scenes.size()-1;
+        }
+        moveScene(currentScene);
+    }
+    
+    private void moveScene(int sceneIndex)
+    {
+        Scene newScene = scenes.get(sceneIndex);
         ((BorderPane)newScene.getRoot()).setTop(topPane);
         ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
         mainStage.setScene(newScene);
-        mainStage.show();
     }
 }
