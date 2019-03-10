@@ -5,173 +5,40 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="405.0" layoutY="14.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="ENFI" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="314.0" layoutY="137.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="BARN" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="422.0" layoutY="137.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="HRGY" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="530.0" layoutY="137.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="WALT" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="88.0" layoutY="245.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="HRRW" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="196.0" layoutY="245.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="BREN" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="304.0" layoutY="245.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="CAMD" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="412.0" layoutY="245.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="ISLI" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="513.0" layoutY="245.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="HACK" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="621.0" layoutY="245.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="32.0" layoutY="42.0" mnemonicParsing="false" text="REDB" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="729.0" layoutY="245.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="HAVE" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="14.0" layoutY="353.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="HILL" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="122.0" layoutY="353.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="EALI" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="230.0" layoutY="353.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="KENS" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="338.0" layoutY="353.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="WSTM" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="446.0" layoutY="353.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="TOWH" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="554.0" layoutY="353.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="NEWH" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="662.0" layoutY="353.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="BARK" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="88.0" layoutY="461.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="HOUN" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="196.0" layoutY="461.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="HAMM" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="304.0" layoutY="461.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="WAND" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="412.0" layoutY="461.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="CITY" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="513.0" layoutY="461.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="GWCH" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="638.0" layoutY="461.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="BEXL" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="176.0" layoutY="569.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="RICH" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="284.0" layoutY="569.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="MERT" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="392.0" layoutY="569.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="LAMB" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="513.0" layoutY="569.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="STHW" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="638.0" layoutY="569.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="LEWS" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="222.0" layoutY="677.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="KING" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="330.0" layoutY="677.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="SUTT" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="438.0" layoutY="677.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="CROY" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="546.0" layoutY="677.0" prefHeight="108.0" prefWidth="108.0">
-         <children>
-            <Button layoutX="28.0" layoutY="42.0" mnemonicParsing="false" text="BROM" />
-         </children>
-      </AnchorPane>
+      <Button layoutX="373.0" layoutY="633.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="SUTT" />
+      <Button layoutX="435.0" layoutY="117.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HRGY" />
+      <Button layoutX="846.0" layoutY="223.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HAVE" />
+      <Button layoutX="142.0" layoutY="219.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HRRW" />
+      <Button layoutX="787.0" layoutY="328.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BARK" />
+      <Button layoutX="611.0" layoutY="429.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="GWCH" />
+      <Button layoutX="728.0" layoutY="429.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BEXL" />
+      <Button layoutX="492.0" layoutY="20.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="108.0" text="ENFI" textOverrun="CLIP" />
+      <Button layoutX="318.0" layoutY="116.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BARN" />
+      <Button layoutX="552.0" layoutY="117.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WALT" />
+      <Button layoutX="83.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HILL" />
+      <Button layoutX="199.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="EALI" />
+      <Button layoutX="259.0" layoutY="219.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BREN" />
+      <Button layoutX="376.0" layoutY="220.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CAMD" />
+      <Button layoutX="435.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WSTM" />
+      <Button layoutX="494.0" layoutY="221.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="ISLI" />
+      <Button layoutX="611.0" layoutY="222.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HACK" />
+      <Button layoutX="552.0" layoutY="325.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="TOWH" />
+      <Button layoutX="729.0" layoutY="223.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="REDB" />
+      <Button layoutX="317.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="KENS" />
+      <Button layoutX="670.0" layoutY="326.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="NEWH" />
+      <Button layoutX="141.0" layoutY="425.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HOUN" />
+      <Button layoutX="257.0" layoutY="426.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HAMM" />
+      <Button layoutX="375.0" layoutY="426.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WAND" />
+      <Button layoutX="493.0" layoutY="427.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CITY" />
+      <Button layoutX="197.0" layoutY="529.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="RICH" />
+      <Button layoutX="314.0" layoutY="529.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="MERT" />
+      <Button layoutX="255.0" layoutY="631.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="KING" />
+      <Button layoutX="432.0" layoutY="530.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="LAMB" />
+      <Button layoutX="550.0" layoutY="531.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="STHW" />
+      <Button layoutX="491.0" layoutY="634.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CROY" />
+      <Button layoutX="669.0" layoutY="531.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="LEWS" />
+      <Button layoutX="609.0" layoutY="634.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BROM" />
    </children>
 </Pane>
