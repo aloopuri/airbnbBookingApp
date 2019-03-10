@@ -9,7 +9,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.collections.*;
 import javafx.*;
-import java.*;
+import javafx.scene.*;
 import java.util.*;
 /**
  * Write a description of JavaFX class Application here.
@@ -162,7 +162,8 @@ public class AirbnbApplication extends Application
     {
         currentScene ++;
         Scene newScene = scenes.get(0);
-        newScene.getRoot().setTop(topPane);
+        ((BorderPane)newScene.getRoot()).setTop(topPane);
+        ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
         mainStage.setScene(newScene);
         mainStage.show();
         //Stage stage = (Stage)((Notde)event.getSource()).getScene().getWindow();
@@ -171,7 +172,10 @@ public class AirbnbApplication extends Application
     private void previousScene(ActionEvent event)
     {
         currentScene --;
-        mainStage.setScene(scenes.get(0));
+        Scene newScene = scenes.get(1);
+        ((BorderPane)newScene.getRoot()).setTop(topPane);
+        ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
+        mainStage.setScene(newScene);
         mainStage.show();
     }
 }
