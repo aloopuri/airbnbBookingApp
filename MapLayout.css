@@ -1,3 +1,11 @@
-.button{
+.borough-button{
   -fx-shape: "M 250 300 L 350 250 L 450 300 L 450 400 L 350 450 L 250 400 L 250 300";
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
 }

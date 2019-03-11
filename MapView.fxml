@@ -1,44 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button layoutX="373.0" layoutY="633.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="SUTT" />
-      <Button layoutX="435.0" layoutY="117.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HRGY" />
-      <Button layoutX="846.0" layoutY="223.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HAVE" />
-      <Button layoutX="142.0" layoutY="219.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HRRW" />
-      <Button layoutX="787.0" layoutY="328.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BARK" />
-      <Button layoutX="611.0" layoutY="429.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="GWCH" />
-      <Button layoutX="728.0" layoutY="429.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BEXL" />
-      <Button layoutX="492.0" layoutY="20.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="108.0" text="ENFI" textOverrun="CLIP" />
-      <Button layoutX="318.0" layoutY="116.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BARN" />
-      <Button layoutX="552.0" layoutY="117.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WALT" />
-      <Button layoutX="83.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HILL" />
-      <Button layoutX="199.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="EALI" />
-      <Button layoutX="259.0" layoutY="219.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BREN" />
-      <Button layoutX="376.0" layoutY="220.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CAMD" />
-      <Button layoutX="435.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WSTM" />
-      <Button layoutX="494.0" layoutY="221.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="ISLI" />
-      <Button layoutX="611.0" layoutY="222.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HACK" />
-      <Button layoutX="552.0" layoutY="325.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="TOWH" />
-      <Button layoutX="729.0" layoutY="223.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="REDB" />
-      <Button layoutX="317.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="KENS" />
-      <Button layoutX="670.0" layoutY="326.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="NEWH" />
-      <Button layoutX="141.0" layoutY="425.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HOUN" />
-      <Button layoutX="257.0" layoutY="426.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HAMM" />
-      <Button layoutX="375.0" layoutY="426.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WAND" />
-      <Button layoutX="493.0" layoutY="427.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CITY" />
-      <Button layoutX="197.0" layoutY="529.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="RICH" />
-      <Button layoutX="314.0" layoutY="529.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="MERT" />
-      <Button layoutX="255.0" layoutY="631.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="KING" />
-      <Button layoutX="432.0" layoutY="530.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="LAMB" />
-      <Button layoutX="550.0" layoutY="531.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="STHW" />
-      <Button layoutX="491.0" layoutY="634.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CROY" />
-      <Button layoutX="669.0" layoutY="531.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="LEWS" />
-      <Button layoutX="609.0" layoutY="634.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BROM" />
-   </children>
-</Pane>
+
+<TabPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
+   <tabs>
+      <Tab text="London's Boroughs">
+         <content>
+            <ScrollPane prefViewportHeight="830.0" prefViewportWidth="1023.0">
+               <content>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" stylesheets="@MapLayout.css">
+                     <children>
+                        <Button layoutX="373.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="SUTT" />
+                        <Button layoutX="435.0" layoutY="145.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRGY" />
+                        <Button layoutX="846.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAVE" />
+                        <Button layoutX="142.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRRW" />
+                        <Button layoutX="787.0" layoutY="355.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARK" />
+                        <Button layoutX="611.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="GWCH" />
+                        <Button layoutX="728.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BEXL" />
+                        <Button layoutX="492.0" layoutY="47.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="108.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP" />
+                        <Button layoutX="318.0" layoutY="146.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARN" />
+                        <Button layoutX="552.0" layoutY="144.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WALT" />
+                        <Button layoutX="83.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HILL" />
+                        <Button layoutX="199.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="EALI" />
+                        <Button layoutX="259.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BREN" />
+                        <Button layoutX="376.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CAMD" />
+                        <Button layoutX="435.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WSTM" />
+                        <Button layoutX="494.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="ISLI" />
+                        <Button layoutX="611.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HACK" />
+                        <Button layoutX="552.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="TOWH" />
+                        <Button layoutX="729.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="REDB" />
+                        <Button layoutX="317.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KENS" />
+                        <Button layoutX="670.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="NEWH" />
+                        <Button layoutX="141.0" layoutY="457.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HOUN" />
+                        <Button layoutX="257.0" layoutY="458.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAMM" />
+                        <Button layoutX="375.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WAND" />
+                        <Button layoutX="493.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CITY" />
+                        <Button layoutX="198.0" layoutY="561.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="RICH" />
+                        <Button layoutX="315.0" layoutY="562.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="MERT" />
+                        <Button layoutX="255.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KING" />
+                        <Button layoutX="433.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LAMB" />
+                        <Button layoutX="551.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="STHW" />
+                        <Button layoutX="491.0" layoutY="667.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CROY" />
+                        <Button layoutX="669.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LEWS" />
+                        <Button layoutX="609.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
+                        <ToolBar prefHeight="34.0" prefWidth="1023.0">
+                          <items>
+                            <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" promptText="Price Range" />
+                          </items>
+                        </ToolBar>
+                     </children>
+                  </Pane>
+               </content>
+            </ScrollPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

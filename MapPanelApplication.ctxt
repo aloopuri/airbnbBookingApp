@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.target=MapPanel
+comment0.target=MapPanelApplication
 comment1.params=stage
 comment1.target=void\ start(javafx.stage.Stage)
 numComments=2
