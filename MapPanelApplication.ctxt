@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=MapPanelApplication
+comment1.params=stage
+comment1.target=void\ start(javafx.stage.Stage)
+comment2.params=e
+comment2.target=void\ boroughClick(javafx.event.ActionEvent)
+comment3.params=e
+comment3.target=void\ priceRangeClick(javafx.event.ActionEvent)
+numComments=4

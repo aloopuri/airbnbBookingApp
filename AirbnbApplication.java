@@ -42,7 +42,7 @@ public class AirbnbApplication extends Application
         ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
-        listingManager = new ListingManager(listings);
+        listingManager = new ListingManager();
         fromBox = new ComboBox(getOptionsList());
         toBox = new ComboBox(getOptionsList());
     }
