@@ -11,7 +11,40 @@ import javafx.fxml.*;
 
 public class MapPanelApplication extends Application
 {
-  private MapPanelController mapPanelController;
+  private ListingManager listingManager;
+  
+  @FXML Button Sutton;
+  @FXML Button Haringey;
+  @FXML Button Havering;
+  @FXML Button Harrow;
+  @FXML Button BarkingandDagenham;
+  @FXML Button Greenwich;
+  @FXML Button Bexley;
+  @FXML Button Enfield;
+  @FXML Button Barnet;
+  @FXML Button WalthamForest;
+  @FXML Button Hillingdon;
+  @FXML Button Ealing;
+  @FXML Button Brent;
+  @FXML Button Camden;
+  @FXML Button Westminster;
+  @FXML Button Islington;
+  @FXML Button Hackney;
+  @FXML Button TowerHamlets;
+  @FXML Button Redbridge;
+  @FXML Button KensingtonandChelsea;
+  @FXML Button Newham;
+  @FXML Button Hounslow;
+  @FXML Button HammersmithandFulham;
+  @FXML Button Wandsworth;
+  @FXML Button CityofLondon;
+  @FXML Button RichmonduponThames;
+  @FXML Button KingstonuponThames;
+  @FXML Button Lambeth;
+  @FXML Button Southwark;
+  @FXML Button Croydon;
+  @FXML Button Lewisham;
+  @FXML Button Bromley;
 
   @Override
   public void start(Stage stage) throws Exception
@@ -26,14 +59,14 @@ public class MapPanelApplication extends Application
   }
 
   @FXML
-  private void boroughClick(ActionEvent e)
+  public void initialize()
   {
-    mapPanelController.openBoroughWindow();
+        openBoroughWindow();
   }
 
-  @FXML
-  private void priceRangeClick(ActionEvent e)
-  {
-    mapPanelController.showSelectedPriceRangeView();
+  public void openBoroughWindow()
+  {   
+      
+      Sutton.setDisable(true);
   }
 }

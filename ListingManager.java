@@ -15,10 +15,9 @@ public class ListingManager
     /**
      * Constructor for objects of class listingManager
      */
-    public ListingManager()
+    public ListingManager(ArrayList<AirbnbListing> listings)
     {
-        dataLoader = new AirbnbDataLoader();
-        listings = dataLoader.load();
+        this.listings = listings;
         currentListing = 0;
     }
 

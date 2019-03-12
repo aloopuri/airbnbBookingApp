@@ -36,13 +36,13 @@ public class AirbnbApplication extends Application
     /**
      * Class Constructor
      */
-    public AirbnbApplication() 
+    public AirbnbApplication()
     {
         scenes = new ArrayList<Scene>();
         ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
-        listingManager = new ListingManager();
+        listingManager = new ListingManager(listings);
         fromBox = new ComboBox(getOptionsList());
         toBox = new ComboBox(getOptionsList());
     }
@@ -124,7 +124,7 @@ public class AirbnbApplication extends Application
     /**
      * Performs the ComboBox actions when interacted with
      */
-    private void comboBoxAction() 
+    private void comboBoxAction()
     {
         if (fromBox.getValue() != null && toBox.getValue() != null) {
             Integer toValue = (Integer) toBox.getValue();
@@ -133,7 +133,7 @@ public class AirbnbApplication extends Application
             int from = fromValue.intValue();
             if (to < from) {
                 toBox.setValue(null);
-                fromBox.setValue(null);                
+                fromBox.setValue(null);
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Value Warning");
                 alert.setHeaderText(null);
@@ -151,7 +151,7 @@ public class AirbnbApplication extends Application
      * Sets up and returns the list of options for use in combo boxes
      * @return options The list of combo box options
      */
-    private ObservableList<Integer> getOptionsList() 
+    private ObservableList<Integer> getOptionsList()
     {
         ObservableList<Integer> options = FXCollections.observableArrayList(listingManager.getAllPrices());
         FXCollections.sort(options);
@@ -161,16 +161,16 @@ public class AirbnbApplication extends Application
     /**
      * Enables the navigation buttons at the bottom of the window
      */
-    private void enableNavigation() 
+    private void enableNavigation()
     {
         frontButton.setDisable(false);
-        backButton.setDisable(false);        
+        backButton.setDisable(false);
     }
 
     /**
      * Disables the navigation buttons at the bottom of the window
      */
-    private void disableNavigation() 
+    private void disableNavigation()
     {
         frontButton.setDisable(true);
         backButton.setDisable(true);
@@ -192,7 +192,7 @@ public class AirbnbApplication extends Application
         }
         moveScene(currentScene);
     }
-    
+
     private void moveScene(int sceneIndex)
     {
         Scene newScene = scenes.get(sceneIndex);
