@@ -11,23 +11,11 @@ import javafx.fxml.*;
 
 public class MapPanelApplication extends Application
 {
-  //@FXML
-  //private ComboBox<String> priceRange;
+  private MapPanelController mapPanelController;
 
-  //@FXML // fx:id="selectedPriceRange"
-  //private Label selectedPriceRange; // Value injected by FXMLLoader
   @Override
   public void start(Stage stage) throws Exception
   {
-    //assert priceRange != null : "fx:id=\"priceRange\" was not injected: check your FXML file 'MapView.fxml'.";
-    //assert selectedPriceRange != null : "fx:id=\"selectedPriceRange\" was not injected: check your FXML file 'MapView.fxml'.";
-    
-    // populate the price combo box with item choices.
-    //priceRange.getItems().setAll("5", "6");
-    
-    // bind the selected price range label to the selected price range in the combo box.
-    //selectedPriceRange.textProperty().bind(priceRange.getSelectionModel().selectedItemProperty());
-    
     URL url = getClass().getResource("MapView.fxml");
     Parent root = FXMLLoader.load(url);
     Scene scene = new Scene(root);
@@ -35,5 +23,17 @@ public class MapPanelApplication extends Application
     stage.setTitle("Map");
     stage.setScene(scene);
     stage.show();
+  }
+
+  @FXML
+  private void boroughClick(ActionEvent e)
+  {
+    mapPanelController.openBoroughWindow();
+  }
+
+  @FXML
+  private void priceRangeClick(ActionEvent e)
+  {
+    mapPanelController.showSelectedPriceRangeView();
   }
 }

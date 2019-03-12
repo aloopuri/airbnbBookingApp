@@ -11,20 +11,22 @@ public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
     private int currentListing;
+    private AirbnbDataLoader dataLoader;
     /**
      * Constructor for objects of class listingManager
      */
-    public ListingManager(ArrayList<AirbnbListing> listings)
+    public ListingManager()
     {
-        this.listings = listings;
+        dataLoader = new AirbnbDataLoader();
+        listings = dataLoader.load();
         currentListing = 0;
     }
-    
+
     public ArrayList<AirbnbListing> getListings()
     {
         return listings;
     }
-    
+
     public ArrayList<Integer> getAllPrices()
     {
         ArrayList<Integer> prices = new ArrayList();
@@ -38,17 +40,17 @@ public class ListingManager
         }
         return prices;
     }
-    
+
     public AirbnbListing getCurrentListing()
     {
         return listings.get(currentListing);
     }
-    
+
     public int numberOfListings()
     {
         return listings.size();
     }
-    
+
     public int listingsInBorough(String borough)
     {
         int n = 0;
@@ -61,12 +63,12 @@ public class ListingManager
         }
         return n;
     }
-    
+
     public String getHostName(int index)
     {
         return listings.get(index).getHost_name();
     }
-    
+
     public String getCurrentHostName()
     {
         return getHostName(currentListing);

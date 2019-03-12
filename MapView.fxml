@@ -1,56 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<TabPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
+<TabPane stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanelApplication">
    <tabs>
       <Tab text="London's Boroughs">
          <content>
             <ScrollPane prefViewportHeight="830.0" prefViewportWidth="1023.0">
                <content>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" stylesheets="@MapLayout.css">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0">
                      <children>
-                        <Button layoutX="373.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="SUTT" />
-                        <Button layoutX="435.0" layoutY="145.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRGY" />
-                        <Button layoutX="846.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAVE" />
-                        <Button layoutX="142.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRRW" />
-                        <Button layoutX="787.0" layoutY="355.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARK" />
-                        <Button layoutX="611.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="GWCH" />
-                        <Button layoutX="728.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BEXL" />
-                        <Button layoutX="492.0" layoutY="47.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="108.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP" />
-                        <Button layoutX="318.0" layoutY="146.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARN" />
-                        <Button layoutX="552.0" layoutY="144.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WALT" />
-                        <Button layoutX="83.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HILL" />
-                        <Button layoutX="199.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="EALI" />
-                        <Button layoutX="259.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BREN" />
-                        <Button layoutX="376.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CAMD" />
-                        <Button layoutX="435.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WSTM" />
-                        <Button layoutX="494.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="ISLI" />
-                        <Button layoutX="611.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HACK" />
-                        <Button layoutX="552.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="TOWH" />
-                        <Button layoutX="729.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="REDB" />
-                        <Button layoutX="317.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KENS" />
-                        <Button layoutX="670.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="NEWH" />
-                        <Button layoutX="141.0" layoutY="457.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HOUN" />
-                        <Button layoutX="257.0" layoutY="458.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAMM" />
-                        <Button layoutX="375.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WAND" />
+                        <Button id="Sutton" layoutX="373.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="SUTT" />
+                        <Button id="Haringey" layoutX="435.0" layoutY="145.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRGY" />
+                        <Button id="Havering" layoutX="846.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAVE" />
+                        <Button id="Harrow" layoutX="142.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRRW" />
+                        <Button id="Barking and Dagenham" layoutX="787.0" layoutY="355.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARK" />
+                        <Button id="Greenwich" layoutX="611.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="GWCH" />
+                        <Button id="Bexley" layoutX="728.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BEXL" />
+                        <Button id="Enfield" layoutX="492.0" layoutY="47.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="108.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP" />
+                        <Button id="Barnet" layoutX="318.0" layoutY="146.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARN" />
+                        <Button id="Waltham Forest" layoutX="552.0" layoutY="144.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WALT" />
+                        <Button id="Hillingdon" layoutX="83.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HILL" />
+                        <Button id="Ealing" layoutX="199.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="EALI" />
+                        <Button id="Brent" layoutX="259.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BREN" />
+                        <Button id="Camden" layoutX="376.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CAMD" />
+                        <Button id="Westminster" layoutX="435.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WSTM" />
+                        <Button id="Islington" layoutX="494.0" layoutY="251.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="ISLI" />
+                        <Button id="Hackney" layoutX="611.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HACK" />
+                        <Button id="Tower Hamlets" layoutX="552.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="TOWH" />
+                        <Button id="Redbridge" layoutX="729.0" layoutY="250.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="REDB" />
+                        <Button id="Kensington and Chelsea" layoutX="317.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KENS" />
+                        <Button id="Newham" layoutX="670.0" layoutY="354.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="NEWH" />
+                        <Button id="Hounslow" layoutX="141.0" layoutY="457.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HOUN" />
+                        <Button id="Hammersmith and Fulham" layoutX="257.0" layoutY="458.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAMM" />
+                        <Button id="Wandsworth" layoutX="375.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WAND" />
                         <Button layoutX="493.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CITY" />
-                        <Button layoutX="198.0" layoutY="561.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="RICH" />
-                        <Button layoutX="315.0" layoutY="562.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="MERT" />
-                        <Button layoutX="255.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KING" />
-                        <Button layoutX="433.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LAMB" />
-                        <Button layoutX="551.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="STHW" />
-                        <Button layoutX="491.0" layoutY="667.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CROY" />
-                        <Button layoutX="669.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LEWS" />
-                        <Button layoutX="609.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
+                        <Button id="Richmond upon Thames" layoutX="198.0" layoutY="561.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="RICH" />
+                        <Button id="Merton" layoutX="315.0" layoutY="562.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="MERT" />
+                        <Button id="Kingston upon Thames" layoutX="255.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KING" />
+                        <Button id="Lambeth" layoutX="433.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LAMB" />
+                        <Button id="Southwark" layoutX="551.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="STHW" />
+                        <Button id="Croydon" layoutX="491.0" layoutY="667.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CROY" />
+                        <Button id="Lewisham" layoutX="669.0" layoutY="563.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LEWS" />
+                        <Button id="Bromley" layoutX="609.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
                         <ToolBar prefHeight="34.0" prefWidth="1023.0">
                           <items>
-                            <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" promptText="Price Range" />
+                              <SplitMenuButton mnemonicParsing="false" text="Price Range (per night)">
+                                 <items>
+                                  <MenuItem mnemonicParsing="false" text="£5-10" />
+                                    <MenuItem mnemonicParsing="false" text="£10-20" />
+                                    <MenuItem mnemonicParsing="false" text="£20-30" />
+                                    <MenuItem mnemonicParsing="false" text="£30-40" />
+                                    <MenuItem mnemonicParsing="false" text="£40-50" />
+                                    <MenuItem mnemonicParsing="false" text="£50-100" />
+                                    <MenuItem mnemonicParsing="false" text="£100-300" />
+                                    <MenuItem mnemonicParsing="false" text="£300-600" />
+                                    <MenuItem mnemonicParsing="false" text="£600-1000" />
+                                 </items>
+                              </SplitMenuButton>
                           </items>
                         </ToolBar>
                      </children>
