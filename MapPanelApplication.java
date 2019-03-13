@@ -124,41 +124,33 @@ public class MapPanelApplication extends Application
 
   private String nameOfBorough(Button button)
   {
-    if (button.getId().equals("BarkingandDagenham"))
-    {
-      return "Barking and Dagenham";
-    }
-    else if (button.getId().equals("WalthamForest"))
-    {
-      return "Waltham Forest";
-    }
-    else if (button.getId().equals("TowerHamlets"))
-    {
-      return "Tower Hamlets";
-    }
-    else if (button.getId().equals("KensingtonandChelsea"))
-    {
-      return "Kensington and Chelsea";
-    }
-    else if (button.getId().equals("HammersmithandFulham"))
-    {
-      return "Hammersmith and Fulham";
-    }
-    else if (button.getId().equals("CityofLondon"))
-    {
-      return "City of London";
-    }
-    else if (button.getId().equals("RichmonduponThames"))
-    {
-      return "Richmond upon Thames";
-    }
-    else if (button.getId().equals("KingstonuponThames"))
-    {
-      return "Kingston upon Thames";
-    }
-    else
-    {
-      return button.getId();
+    switch(button.getId()){
+      case "BarkingandDagenham":
+        return "Barking and Dagenham";
+
+      case "WalthamForest":
+        return "Waltham Forest";
+
+      case "TowerHamlets":
+        return "Waltham Forest";
+
+      case "KensingtonandChelsea":
+        return "Kensington and Chelsea";
+
+      case "HammersmithandFulham":
+        return "Hammersmith and Fulham";
+
+      case "CityofLondon":
+        return "City of London";
+
+      case "RichmonduponThames":
+        return "Richmond upon Thames";
+
+      case "KingstonuponThames":
+        return "Kingston upon Thames";
+
+      default:
+        return button.getId();
     }
   }
 
