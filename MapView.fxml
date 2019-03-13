@@ -53,15 +53,15 @@
                           <items>
                               <SplitMenuButton mnemonicParsing="false" text="Price Range (per night)">
                                  <items>
-                                  <MenuItem mnemonicParsing="false" text="£5-10" />
-                                    <MenuItem mnemonicParsing="false" text="£10-20" />
-                                    <MenuItem mnemonicParsing="false" text="£20-30" />
-                                    <MenuItem mnemonicParsing="false" text="£30-40" />
-                                    <MenuItem mnemonicParsing="false" text="£40-50" />
-                                    <MenuItem mnemonicParsing="false" text="£50-100" />
-                                    <MenuItem mnemonicParsing="false" text="£100-300" />
-                                    <MenuItem mnemonicParsing="false" text="£300-600" />
-                                    <MenuItem mnemonicParsing="false" text="£600-1000" />
+                                  <MenuItem fx:id="FiveToTen" mnemonicParsing="false" onAction="#priceRangeClick" text="£5-10" />
+                                    <MenuItem fx:id="TenToTwenty" mnemonicParsing="false" onAction="#priceRangeClick" text="£10-20" />
+                                    <MenuItem fx:id="TwentyToThirty" mnemonicParsing="false" onAction="#priceRangeClick" text="£20-30" />
+                                    <MenuItem fx:id="ThirtyToFourty" mnemonicParsing="false" onAction="#priceRangeClick" text="£30-40" />
+                                    <MenuItem fx:id="FortyToFifty" mnemonicParsing="false" onAction="#priceRangeClick" text="£40-50" />
+                                    <MenuItem fx:id="FiftyToOneH" mnemonicParsing="false" onAction="#priceRangeClick" text="£50-100" />
+                                    <MenuItem fx:id="OneHToThreeH" mnemonicParsing="false" onAction="#priceRangeClick" text="£100-300" />
+                                    <MenuItem fx:id="ThreeHToSixH" mnemonicParsing="false" onAction="#priceRangeClick" text="£300-600" />
+                                    <MenuItem fx:id="SixHToOneT" mnemonicParsing="false" onAction="#priceRangeClick" text="£600-1000" />
                                  </items>
                               </SplitMenuButton>
                           </items>

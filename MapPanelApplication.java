@@ -8,11 +8,13 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.net.URL;
 import javafx.fxml.*;
+import javafx.scene.paint.*;
 
 public class MapPanelApplication extends Application
 {
   private ListingManager listingManager;
-  
+  private AirbnbDataLoader dataLoader;
+  private Color color;
   @FXML Button Sutton;
   @FXML Button Haringey;
   @FXML Button Havering;
@@ -45,6 +47,16 @@ public class MapPanelApplication extends Application
   @FXML Button Croydon;
   @FXML Button Lewisham;
   @FXML Button Bromley;
+  @FXML Button Merton;
+  @FXML MenuItem FiveToTen;
+  @FXML MenuItem TenToTwenty;
+  @FXML MenuItem TwentyToThirty;
+  @FXML MenuItem ThirtyToFourty;
+  @FXML MenuItem FortyToFifty;
+  @FXML MenuItem FiftyToOneH;
+  @FXML MenuItem OneHToThreeH;
+  @FXML MenuItem ThreeHToSixH;
+  @FXML MenuItem SixHToOneT;
 
   @Override
   public void start(Stage stage) throws Exception
@@ -64,9 +76,146 @@ public class MapPanelApplication extends Application
         openBoroughWindow();
   }
 
-  public void openBoroughWindow()
-  {   
-      
-      Sutton.setDisable(true);
+  private void openBoroughWindow()
+  {
+      //Cannot be in Constructor as this is before the MapView is created
+      dataLoader = new AirbnbDataLoader();
+      listingManager = new ListingManager(dataLoader.load());
+
+      setButtonColor(Sutton);
+      setButtonColor(Haringey);
+      setButtonColor(Havering);
+      setButtonColor(Harrow);
+      setButtonColor(Greenwich);
+      setButtonColor(Bexley);
+      setButtonColor(Enfield);
+      setButtonColor(Barnet);
+      setButtonColor(Hillingdon);
+      setButtonColor(Ealing);
+      setButtonColor(Camden);
+      setButtonColor(Islington);
+      setButtonColor(Hackney);
+      setButtonColor(Redbridge);
+      setButtonColor(Newham);
+      setButtonColor(Hounslow);
+      setButtonColor(Wandsworth);
+      setButtonColor(Merton);
+      setButtonColor(Lambeth);
+      setButtonColor(Southwark);
+      setButtonColor(Croydon);
+      setButtonColor(Lewisham);
+      setButtonColor(Brent);
+      setButtonColor(Westminster);
+      setButtonColor(Bromley);
+      setButtonColor(BarkingandDagenham);
+      setButtonColor(WalthamForest);
+      setButtonColor(TowerHamlets);
+      setButtonColor(KensingtonandChelsea);
+      setButtonColor(HammersmithandFulham);
+      setButtonColor(CityofLondon);
+      setButtonColor(RichmonduponThames);
+      setButtonColor(KingstonuponThames);
+  }
+
+  private int NoOfListingsEachBorough(Button button)
+  {
+    return listingManager.listingsInBorough(nameOfBorough(button));
+  }
+
+  private String nameOfBorough(Button button)
+  {
+    if (button.getId().equals("BarkingandDagenham"))
+    {
+      return "Barking and Dagenham";
+    }
+    else if (button.getId().equals("WalthamForest"))
+    {
+      return "Waltham Forest";
+    }
+    else if (button.getId().equals("TowerHamlets"))
+    {
+      return "Tower Hamlets";
+    }
+    else if (button.getId().equals("KensingtonandChelsea"))
+    {
+      return "Kensington and Chelsea";
+    }
+    else if (button.getId().equals("HammersmithandFulham"))
+    {
+      return "Hammersmith and Fulham";
+    }
+    else if (button.getId().equals("CityofLondon"))
+    {
+      return "City of London";
+    }
+    else if (button.getId().equals("RichmonduponThames"))
+    {
+      return "Richmond upon Thames";
+    }
+    else if (button.getId().equals("KingstonuponThames"))
+    {
+      return "Kingston upon Thames";
+    }
+    else
+    {
+      return button.getId();
+    }
+  }
+
+  private Color individualBoroughColor(Button button)
+  {
+    int listingCount = NoOfListingsEachBorough(button);
+
+    if(listingCount <= 300)
+    {
+      Color c = Color.web("#B0C4DE");
+      return c;
+    }
+    else if(listingCount > 300 & listingCount <= 600)
+    {
+      Color c = Color.web("#B0E0E6");
+      return c;
+    }
+    else if(listingCount > 600 & listingCount <= 1000)
+    {
+      Color c = Color.web("#ADD8E6");
+      return c;
+    }
+    else if(listingCount > 1000 & listingCount <= 1500)
+    {
+      Color c = Color.web("#87CEEB");
+      return c;
+    }
+    else if(listingCount > 1500 & listingCount <= 2000)
+    {
+      Color c = Color.web("#87CEFA");
+      return c;
+    }
+    else if(listingCount > 2000 & listingCount <= 2500)
+    {
+      Color c = Color.web("#00BFFF");
+      return c;
+    }
+    else if(listingCount > 2500 & listingCount <= 3500)
+    {
+      Color c = Color.web("#1E90FF");
+      return c;
+    }
+    else
+    {
+      Color c = Color.web("#6495ED");
+      return c;
+    }
+  }
+
+  private void setButtonColor(Button button)
+  {
+    button.setBackground(new Background(new BackgroundFill(individualBoroughColor(button), null, null)));
+  }
+
+  @FXML
+  private void priceRangeClick(ActionEvent event)
+  {
+    System.out.println("Test");
   }
 }
