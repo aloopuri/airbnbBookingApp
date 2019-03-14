@@ -1,6 +1,11 @@
 #BlueJ class context
 comment0.target=StatisticPanel
-comment0.text=\r\n\ This\ \r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=stage
-comment1.target=void\ start(javafx.stage.Stage)
-numComments=2
+comment0.text=\r\n\ This\ Panel\ contains\ four\ statistic\ boxes\ which\ display\ statistics\ \r\n\ about\ the\ airbnb\ listings.\r\n\ The\ user\ can\ click\ between\ different\ statistics\ in\ each\ box.\r\n\ The\ same\ statistic\ cannot\ be\ shown\ in\ two\ or\ more\ separate\ panels\ \r\n\ at\ the\ same\ time.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=StatisticPanel()
+comment2.params=stage
+comment2.target=void\ start(javafx.stage.Stage)
+comment3.params=
+comment3.target=void\ createData()
+comment3.text=\r\n\ This\ creates\ the\ data\ of\ type\ DataDisplay\ and\ adds\ it\ to\ an\ \r\n\ arraylist\r\n
+numComments=4

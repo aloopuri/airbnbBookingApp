@@ -8,17 +8,33 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 
+import java.util.List;
+import java.util.ArrayList;
 
 /**
- * This 
+ * This Panel contains four statistic boxes which display statistics 
+ * about the airbnb listings.
+ * The user can click between different statistics in each box.
+ * The same statistic cannot be shown in two or more separate panels 
+ * at the same time.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
 public class StatisticPanel extends Application
 {  
+    private List<DataDisplay> data = new ArrayList<>();
+    private static Statistics stats;
+
+    public StatisticPanel()
+    {
+        ArrayList<AirbnbListing> listings = new ArrayList<>();
+        listings = new AirbnbDataLoader().load();
+        stats = new Statistics(listings);
+    }
     
     @Override
     public void start(Stage stage) throws Exception
@@ -41,14 +57,15 @@ public class StatisticPanel extends Application
             row.setPercentHeight(50);
             row.setVgrow(Priority.ALWAYS);
             pane.getRowConstraints().add(row);
-        }
-        
+        }        
         //pane.setGridLinesVisible(true); // uncomment to show gridlines
-           
-        GridPane statBox1 =  new StatisticBox().createStatBox();        
-        GridPane statBox2 =  new StatisticBox().createStatBox(); 
-        GridPane statBox3 =  new StatisticBox().createStatBox();        
-        GridPane statBox4 =  new StatisticBox().createStatBox();
+        
+        createData();
+        
+        GridPane statBox1 = new StatisticBox(data).createStatBox();        
+        GridPane statBox2 = new StatisticBox(data).createStatBox(); 
+        GridPane statBox3 = new StatisticBox(data).createStatBox();        
+        GridPane statBox4 = new StatisticBox(data).createStatBox();
         
         // Add the statBoxes to the panel
         pane.add(statBox1, 0, 0);
@@ -57,11 +74,27 @@ public class StatisticPanel extends Application
         pane.add(statBox4, 1, 1);
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene scene = new Scene(pane, 500,500);
+        Scene scene = new Scene(pane, 600, 600);
         stage.setTitle("Statistics");
         stage.setScene(scene);        
 
         // Show the Stage (window)
         stage.show();
+    }
+    
+    /**
+     * This creates the data of type DataDisplay and adds it to an 
+     * arraylist
+     */
+    private void createData()
+    {
+        data.add(new DataDisplay("Average Number of Reviews", stats.getAvgNumOfReviewsString()));
+        data.add(new DataDisplay("Total Available Properties", stats.getTotalAvailPropertiesString()));
+        data.add(new DataDisplay("Number of Entire Homes\nand Apartments", stats.getNumOfHomesAndAptsString()));
+        data.add(new DataDisplay("Most Expensive Borough", stats.getMostExpBorough()));
+        data.add(new DataDisplay("Statistic 5", "bruh#1"));
+        data.add(new DataDisplay("Statistic 6", "bruh#2"));
+        data.add(new DataDisplay("Statistic 7", "bruh#3"));
+        data.add(new DataDisplay("Statistic 8", "bruh#4"));
     }
 }
