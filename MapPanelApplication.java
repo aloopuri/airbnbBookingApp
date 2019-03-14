@@ -16,7 +16,6 @@ public class MapPanelApplication extends Application
   private ListingManager listingManager;
   private AirbnbDataLoader dataLoader;
   private Color color;
-  private int listingCount;
   private BackgroundFill backgroundFill;
   private Background background;
   private ArrayList<Button> listOfButtons;
@@ -79,23 +78,7 @@ public class MapPanelApplication extends Application
   @FXML
   private void initialize()
   {
-        openBoroughWindow();
-  }
-
-  private void openBoroughWindow()
-  {
-      //Cannot be in Constructor as this is before the MapView is created
-      dataLoader = new AirbnbDataLoader();
-      listingManager = new ListingManager(dataLoader.load());
-
-      for(Button button: buttons()){
-        setButtonColor(button);
-      }
-  }
-
-  private int NoOfListingsEachBorough(Button button)
-  {
-    return listingManager.numOflistingsInBorough(nameOfBorough(button));
+    showViewInRange(0, getListOfAllPrices().size());
   }
 
   private String nameOfBorough(Button button)
@@ -130,155 +113,75 @@ public class MapPanelApplication extends Application
     }
   }
 
-  private Color individualBoroughColor(Button button)
-  {
-    listingCount = NoOfListingsEachBorough(button);
-    if(listingCount > 300 & listingCount <= 600)
-    {
-      color = Color.web("#B0E0E6");
-    }
-    else if(listingCount > 600 & listingCount <= 1000)
-    {
-      color = Color.web("#ADD8E6");
-    }
-    else if(listingCount > 1000 & listingCount <= 1500)
-    {
-      color = Color.web("#87CEEB");
-    }
-    else if(listingCount > 1500 & listingCount <= 2000)
-    {
-      color = Color.web("#87CEFA");
-    }
-    else if(listingCount > 2000 & listingCount <= 2500)
-    {
-      color = Color.web("#00BFFF");
-    }
-    else if(listingCount > 2500 & listingCount <= 3500)
-    {
-      color = Color.web("#1E90FF");
-    }
-    else if(listingCount > 2500 & listingCount <= 3500)
-    {
-      color = Color.web("#1E90FF");
-    }
-    else if(listingCount >= 0 & listingCount <= 10 )
-    {
-      color = Color.web("#E0FFFF");
-    }
-    else if(listingCount > 10 & listingCount <= 20)
-    {
-      color = Color.web("#AFEEEE");
-    }
-    else if(listingCount > 20 & listingCount <= 30)
-    {
-      color = Color.web("#7FFFD4");
-    }
-    else if(listingCount > 30 & listingCount <= 40)
-    {
-      color = Color.web("#1E90FF");
-    }
-    else if(listingCount > 40 & listingCount <= 50)
-    {
-      color = Color.web("#40E0D0");
-    }
-    else if(listingCount > 50 & listingCount <= 100)
-    {
-      color = Color.web("#48D1CC");
-    }
-    else if(listingCount > 100 & listingCount <= 150)
-    {
-      color = Color.web("#40E0D0");
-    }
-    else if(listingCount > 150 & listingCount <= 200)
-    {
-      color = Color.web("#00CED1");
-    }
-    else if(listingCount > 200 & listingCount <= 250)
-    {
-      color = Color.web("#5F9EA0");
-    }
-    else if(listingCount > 250 & listingCount <= 300)
-    {
-      color = Color.web("#40E0D0");
-    }
-    else
-    {
-      color = Color.web("#6495ED");
-    }
-    return color;
-  }
-
-  private void setButtonColor(Button button)
-  {
-    backgroundFill = new BackgroundFill(individualBoroughColor(button), null, null);
-    background = new Background(backgroundFill);
-    button.setBackground(background);
-  }
-
   @FXML
   private void belowTenRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(0, 10);
+    showViewInRange(0, 10);
   }
 
   @FXML
   private void TenToTwentyRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(10, 20);
+    showViewInRange(10, 20);
   }
 
   @FXML
   private void TwentyToThirtyRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(20, 30);
+    showViewInRange(20, 30);
   }
 
   @FXML
   private void ThirtyToFourtyRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(30, 40);
+    showViewInRange(30, 40);
   }
 
   @FXML
   private void FourtyToFiftyRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(40, 50);
+    showViewInRange(40, 50);
   }
 
   @FXML
   private void FiftyToOneHRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(50, 100);
+    showViewInRange(50, 100);
   }
 
   @FXML
   private void OneHToThreeHRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(100, 300);
+    showViewInRange(100, 300);
   }
 
   @FXML
   private void ThreeHToSixHRangeClick(ActionEvent event)
   {
-    numberOfListingsInRange(300, 600);
+    showViewInRange(300, 600);
   }
 
   @FXML
   private void SixHToOneTRangeClick(ActionEvent event)
   {
-      numberOfListingsInRange(600, 1000);
+      showViewInRange(600, 1000);
   }
 
   @FXML
   private void AllPricesClick(ActionEvent event)
   {
-      numberOfListingsInRange(0, 100000);
+      showViewInRange(0, getListOfAllPrices().size());
   }
 
-  private void numberOfListingsInRange(int LowerBound, int upperBound)
+  private ArrayList<Integer> getListOfAllPrices()
   {
-    dataLoader = new AirbnbDataLoader();
-    listingManager = new ListingManager(dataLoader.load());
+    return getListingManager().getAllPrices();
+  }
+
+  private void showViewInRange(int LowerBound, int upperBound)
+  {
+    //use this loading method outisde the loop so the program runs fasters
+    listingManager = getListingManager();
     ArrayList<Integer> listOfSelectedPricesInBorough = new ArrayList<>();
 
     for(Button button: buttons()){
@@ -287,11 +190,19 @@ public class MapPanelApplication extends Application
           listOfSelectedPricesInBorough.add(i);
         }
       }
-    setButtonColorAfterSelection(button, listOfSelectedPricesInBorough.size());
+      ButtonColor(button, listOfSelectedPricesInBorough.size());
+      setButtonColor(button);
     }
   }
 
-  private void setButtonColorAfterSelection(Button button, int listingCount)
+  private ListingManager getListingManager()
+  {
+    dataLoader = new AirbnbDataLoader();
+    listingManager = new ListingManager(dataLoader.load());
+    return listingManager;
+  }
+
+  private void ButtonColor(Button button, int listingCount)
   {
     if(listingCount > 300 & listingCount <= 600)
     {
@@ -365,6 +276,10 @@ public class MapPanelApplication extends Application
     {
       color = Color.web("#6495ED");
     }
+  }
+
+  private  void setButtonColor(Button button)
+  {
     backgroundFill = new BackgroundFill(color, null, null);
     background = new Background(backgroundFill);
     button.setBackground(background);
@@ -409,5 +324,11 @@ public class MapPanelApplication extends Application
     listOfButtons.add(Bromley);
 
     return listOfButtons;
+  }
+
+  @FXML
+  private void ENFIClick(ActionEvent event)
+  {
+    
   }
  }
