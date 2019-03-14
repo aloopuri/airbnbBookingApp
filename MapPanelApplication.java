@@ -9,12 +9,17 @@ import javafx.stage.Stage;
 import java.net.URL;
 import javafx.fxml.*;
 import javafx.scene.paint.*;
+import java.util.ArrayList;
 
 public class MapPanelApplication extends Application
 {
   private ListingManager listingManager;
   private AirbnbDataLoader dataLoader;
   private Color color;
+  private int listingCount;
+  private BackgroundFill backgroundFill;
+  private Background background;
+  private ArrayList<Button> listOfButtons;
   @FXML Button Sutton;
   @FXML Button Haringey;
   @FXML Button Havering;
@@ -48,15 +53,16 @@ public class MapPanelApplication extends Application
   @FXML Button Lewisham;
   @FXML Button Bromley;
   @FXML Button Merton;
-  @FXML MenuItem FiveToTen;
-  @FXML MenuItem TenToTwenty;
-  @FXML MenuItem TwentyToThirty;
-  @FXML MenuItem ThirtyToFourty;
-  @FXML MenuItem FortyToFifty;
-  @FXML MenuItem FiftyToOneH;
-  @FXML MenuItem OneHToThreeH;
-  @FXML MenuItem ThreeHToSixH;
-  @FXML MenuItem SixHToOneT;
+  @FXML Button FiveToTen;
+  @FXML Button TenToTwenty;
+  @FXML Button TwentyToThirty;
+  @FXML Button ThirtyToFourty;
+  @FXML Button FortyToFifty;
+  @FXML Button FiftyToOneH;
+  @FXML Button OneHToThreeH;
+  @FXML Button ThreeHToSixH;
+  @FXML Button SixHToOneT;
+  @FXML Button AllPrices;
 
   @Override
   public void start(Stage stage) throws Exception
@@ -71,7 +77,7 @@ public class MapPanelApplication extends Application
   }
 
   @FXML
-  public void initialize()
+  private void initialize()
   {
         openBoroughWindow();
   }
@@ -82,44 +88,14 @@ public class MapPanelApplication extends Application
       dataLoader = new AirbnbDataLoader();
       listingManager = new ListingManager(dataLoader.load());
 
-      setButtonColor(Sutton);
-      setButtonColor(Haringey);
-      setButtonColor(Havering);
-      setButtonColor(Harrow);
-      setButtonColor(Greenwich);
-      setButtonColor(Bexley);
-      setButtonColor(Enfield);
-      setButtonColor(Barnet);
-      setButtonColor(Hillingdon);
-      setButtonColor(Ealing);
-      setButtonColor(Camden);
-      setButtonColor(Islington);
-      setButtonColor(Hackney);
-      setButtonColor(Redbridge);
-      setButtonColor(Newham);
-      setButtonColor(Hounslow);
-      setButtonColor(Wandsworth);
-      setButtonColor(Merton);
-      setButtonColor(Lambeth);
-      setButtonColor(Southwark);
-      setButtonColor(Croydon);
-      setButtonColor(Lewisham);
-      setButtonColor(Brent);
-      setButtonColor(Westminster);
-      setButtonColor(Bromley);
-      setButtonColor(BarkingandDagenham);
-      setButtonColor(WalthamForest);
-      setButtonColor(TowerHamlets);
-      setButtonColor(KensingtonandChelsea);
-      setButtonColor(HammersmithandFulham);
-      setButtonColor(CityofLondon);
-      setButtonColor(RichmonduponThames);
-      setButtonColor(KingstonuponThames);
+      for(Button button: buttons()){
+        setButtonColor(button);
+      }
   }
 
   private int NoOfListingsEachBorough(Button button)
   {
-    return listingManager.listingsInBorough(nameOfBorough(button));
+    return listingManager.numOflistingsInBorough(nameOfBorough(button));
   }
 
   private String nameOfBorough(Button button)
@@ -156,58 +132,282 @@ public class MapPanelApplication extends Application
 
   private Color individualBoroughColor(Button button)
   {
-    int listingCount = NoOfListingsEachBorough(button);
-
-    if(listingCount <= 300)
+    listingCount = NoOfListingsEachBorough(button);
+    if(listingCount > 300 & listingCount <= 600)
     {
-      Color c = Color.web("#B0C4DE");
-      return c;
-    }
-    else if(listingCount > 300 & listingCount <= 600)
-    {
-      Color c = Color.web("#B0E0E6");
-      return c;
+      color = Color.web("#B0E0E6");
     }
     else if(listingCount > 600 & listingCount <= 1000)
     {
-      Color c = Color.web("#ADD8E6");
-      return c;
+      color = Color.web("#ADD8E6");
     }
     else if(listingCount > 1000 & listingCount <= 1500)
     {
-      Color c = Color.web("#87CEEB");
-      return c;
+      color = Color.web("#87CEEB");
     }
     else if(listingCount > 1500 & listingCount <= 2000)
     {
-      Color c = Color.web("#87CEFA");
-      return c;
+      color = Color.web("#87CEFA");
     }
     else if(listingCount > 2000 & listingCount <= 2500)
     {
-      Color c = Color.web("#00BFFF");
-      return c;
+      color = Color.web("#00BFFF");
     }
     else if(listingCount > 2500 & listingCount <= 3500)
     {
-      Color c = Color.web("#1E90FF");
-      return c;
+      color = Color.web("#1E90FF");
+    }
+    else if(listingCount > 2500 & listingCount <= 3500)
+    {
+      color = Color.web("#1E90FF");
+    }
+    else if(listingCount >= 0 & listingCount <= 10 )
+    {
+      color = Color.web("#E0FFFF");
+    }
+    else if(listingCount > 10 & listingCount <= 20)
+    {
+      color = Color.web("#AFEEEE");
+    }
+    else if(listingCount > 20 & listingCount <= 30)
+    {
+      color = Color.web("#7FFFD4");
+    }
+    else if(listingCount > 30 & listingCount <= 40)
+    {
+      color = Color.web("#1E90FF");
+    }
+    else if(listingCount > 40 & listingCount <= 50)
+    {
+      color = Color.web("#40E0D0");
+    }
+    else if(listingCount > 50 & listingCount <= 100)
+    {
+      color = Color.web("#48D1CC");
+    }
+    else if(listingCount > 100 & listingCount <= 150)
+    {
+      color = Color.web("#40E0D0");
+    }
+    else if(listingCount > 150 & listingCount <= 200)
+    {
+      color = Color.web("#00CED1");
+    }
+    else if(listingCount > 200 & listingCount <= 250)
+    {
+      color = Color.web("#5F9EA0");
+    }
+    else if(listingCount > 250 & listingCount <= 300)
+    {
+      color = Color.web("#40E0D0");
     }
     else
     {
-      Color c = Color.web("#6495ED");
-      return c;
+      color = Color.web("#6495ED");
     }
+    return color;
   }
 
   private void setButtonColor(Button button)
   {
-    button.setBackground(new Background(new BackgroundFill(individualBoroughColor(button), null, null)));
+    backgroundFill = new BackgroundFill(individualBoroughColor(button), null, null);
+    background = new Background(backgroundFill);
+    button.setBackground(background);
   }
 
   @FXML
-  private void priceRangeClick(ActionEvent event)
+  private void belowTenRangeClick(ActionEvent event)
   {
-    System.out.println("Test");
+    numberOfListingsInRange(0, 10);
   }
-}
+
+  @FXML
+  private void TenToTwentyRangeClick(ActionEvent event)
+  {
+    numberOfListingsInRange(10, 20);
+  }
+
+  @FXML
+  private void TwentyToThirtyRangeClick(ActionEvent event)
+  {
+    numberOfListingsInRange(20, 30);
+  }
+
+  @FXML
+  private void ThirtyToFourtyRangeClick(ActionEvent event)
+  {
+    numberOfListingsInRange(30, 40);
+  }
+
+  @FXML
+  private void FourtyToFiftyRangeClick(ActionEvent event)
+  {
+    numberOfListingsInRange(40, 50);
+  }
+
+  @FXML
+  private void FiftyToOneHRangeClick(ActionEvent event)
+  {
+    numberOfListingsInRange(50, 100);
+  }
+
+  @FXML
+  private void OneHToThreeHRangeClick(ActionEvent event)
+  {
+    numberOfListingsInRange(100, 300);
+  }
+
+  @FXML
+  private void ThreeHToSixHRangeClick(ActionEvent event)
+  {
+    numberOfListingsInRange(300, 600);
+  }
+
+  @FXML
+  private void SixHToOneTRangeClick(ActionEvent event)
+  {
+      numberOfListingsInRange(600, 1000);
+  }
+
+  @FXML
+  private void AllPricesClick(ActionEvent event)
+  {
+      numberOfListingsInRange(0, 100000);
+  }
+
+  private void numberOfListingsInRange(int LowerBound, int upperBound)
+  {
+    dataLoader = new AirbnbDataLoader();
+    listingManager = new ListingManager(dataLoader.load());
+    ArrayList<Integer> listOfSelectedPricesInBorough = new ArrayList<>();
+
+    for(Button button: buttons()){
+      for(Integer i: listingManager.pricesInBorough(nameOfBorough(button))){
+        if(i >= LowerBound & i < upperBound){
+          listOfSelectedPricesInBorough.add(i);
+        }
+      }
+    setButtonColorAfterSelection(button, listOfSelectedPricesInBorough.size());
+    }
+  }
+
+  private void setButtonColorAfterSelection(Button button, int listingCount)
+  {
+    if(listingCount > 300 & listingCount <= 600)
+    {
+      color = Color.web("#B0E0E6");
+    }
+    else if(listingCount > 600 & listingCount <= 1000)
+    {
+      color = Color.web("#ADD8E6");
+    }
+    else if(listingCount > 1000 & listingCount <= 1500)
+    {
+      color = Color.web("#87CEEB");
+    }
+    else if(listingCount > 1500 & listingCount <= 2000)
+    {
+      color = Color.web("#87CEFA");
+    }
+    else if(listingCount > 2000 & listingCount <= 2500)
+    {
+      color = Color.web("#00BFFF");
+    }
+    else if(listingCount > 2500 & listingCount <= 3500)
+    {
+      color = Color.web("#1E90FF");
+    }
+    else if(listingCount > 2500 & listingCount <= 3500)
+    {
+      color = Color.web("#1E90FF");
+    }
+    else if(listingCount >= 0 & listingCount <= 10 )
+    {
+      color = Color.web("#E0FFFF");
+    }
+    else if(listingCount > 10 & listingCount <= 20)
+    {
+      color = Color.web("#AFEEEE");
+    }
+    else if(listingCount > 20 & listingCount <= 30)
+    {
+      color = Color.web("#7FFFD4");
+    }
+    else if(listingCount > 30 & listingCount <= 40)
+    {
+      color = Color.web("#1E90FF");
+    }
+    else if(listingCount > 40 & listingCount <= 50)
+    {
+      color = Color.web("#40E0D0");
+    }
+    else if(listingCount > 50 & listingCount <= 100)
+    {
+      color = Color.web("#48D1CC");
+    }
+    else if(listingCount > 100 & listingCount <= 150)
+    {
+      color = Color.web("#40E0D0");
+    }
+    else if(listingCount > 150 & listingCount <= 200)
+    {
+      color = Color.web("#00CED1");
+    }
+    else if(listingCount > 200 & listingCount <= 250)
+    {
+      color = Color.web("#5F9EA0");
+    }
+    else if(listingCount > 250 & listingCount <= 300)
+    {
+      color = Color.web("#40E0D0");
+    }
+    else
+    {
+      color = Color.web("#6495ED");
+    }
+    backgroundFill = new BackgroundFill(color, null, null);
+    background = new Background(backgroundFill);
+    button.setBackground(background);
+  }
+
+  private ArrayList<Button> buttons()
+  {
+    listOfButtons = new ArrayList<>();
+
+    listOfButtons.add(Sutton);
+    listOfButtons.add(Haringey);
+    listOfButtons.add(Havering);
+    listOfButtons.add(Harrow);
+    listOfButtons.add(BarkingandDagenham);
+    listOfButtons.add(Greenwich);
+    listOfButtons.add(Bexley);
+    listOfButtons.add(Enfield);
+    listOfButtons.add(Barnet);
+    listOfButtons.add(WalthamForest);
+    listOfButtons.add(Hillingdon);
+    listOfButtons.add(Ealing);
+    listOfButtons.add(Brent);
+    listOfButtons.add(Camden);
+    listOfButtons.add(Westminster);
+    listOfButtons.add(Islington);
+    listOfButtons.add(Hackney);
+    listOfButtons.add(TowerHamlets);
+    listOfButtons.add(Redbridge);
+    listOfButtons.add(KensingtonandChelsea);
+    listOfButtons.add(Newham);
+    listOfButtons.add(Hounslow);
+    listOfButtons.add(HammersmithandFulham);
+    listOfButtons.add(Wandsworth);
+    listOfButtons.add(CityofLondon);
+    listOfButtons.add(RichmonduponThames);
+    listOfButtons.add(Merton);
+    listOfButtons.add(KingstonuponThames);
+    listOfButtons.add(Lambeth);
+    listOfButtons.add(Southwark);
+    listOfButtons.add(Croydon);
+    listOfButtons.add(Lewisham);
+    listOfButtons.add(Bromley);
+
+    return listOfButtons;
+  }
+ }

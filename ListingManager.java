@@ -50,7 +50,7 @@ public class ListingManager
         return listings.size();
     }
 
-    public int listingsInBorough(String borough)
+    public int numOflistingsInBorough(String borough)
     {
         int n = 0;
         for (AirbnbListing aListing : listings)
@@ -61,6 +61,32 @@ public class ListingManager
             }
         }
         return n;
+    }
+
+    public ArrayList<AirbnbListing> listingsEachBorough(String borough)
+    {
+      ArrayList<AirbnbListing> listInBorough = new ArrayList<>();
+      for (AirbnbListing listing: listings)
+      {
+          if (listing.getNeighbourhood().equals(borough))
+          {
+              listInBorough.add(listing);
+          }
+      }
+      return listInBorough;
+    }
+
+    public ArrayList<Integer> pricesInBorough(String borough)
+    {
+      ArrayList<Integer> listOfPricesInBorough = new ArrayList<>();
+      for (AirbnbListing aListing : listings)
+      {
+          if (aListing.getNeighbourhood().equals(borough))
+          {
+              listOfPricesInBorough.add(aListing.getPrice());
+          }
+      }
+      return listOfPricesInBorough;
     }
 
     public String getHostName(int index)

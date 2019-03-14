@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.shape.*?>
@@ -51,19 +52,17 @@
                         <Button fx:id="Bromley" layoutX="609.0" layoutY="666.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
                         <ToolBar prefHeight="34.0" prefWidth="1023.0">
                           <items>
-                              <SplitMenuButton mnemonicParsing="false" text="Price Range (per night)">
-                                 <items>
-                                  <MenuItem fx:id="FiveToTen" mnemonicParsing="false" onAction="#priceRangeClick" text="£5-10" />
-                                    <MenuItem fx:id="TenToTwenty" mnemonicParsing="false" onAction="#priceRangeClick" text="£10-20" />
-                                    <MenuItem fx:id="TwentyToThirty" mnemonicParsing="false" onAction="#priceRangeClick" text="£20-30" />
-                                    <MenuItem fx:id="ThirtyToFourty" mnemonicParsing="false" onAction="#priceRangeClick" text="£30-40" />
-                                    <MenuItem fx:id="FortyToFifty" mnemonicParsing="false" onAction="#priceRangeClick" text="£40-50" />
-                                    <MenuItem fx:id="FiftyToOneH" mnemonicParsing="false" onAction="#priceRangeClick" text="£50-100" />
-                                    <MenuItem fx:id="OneHToThreeH" mnemonicParsing="false" onAction="#priceRangeClick" text="£100-300" />
-                                    <MenuItem fx:id="ThreeHToSixH" mnemonicParsing="false" onAction="#priceRangeClick" text="£300-600" />
-                                    <MenuItem fx:id="SixHToOneT" mnemonicParsing="false" onAction="#priceRangeClick" text="£600-1000" />
-                                 </items>
-                              </SplitMenuButton>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pirce Range/Night: " />
+                              <Button fx:id="FiveToTen" mnemonicParsing="false" onAction="#belowTenRangeClick" text="below £10" />
+                              <Button fx:id="TenToTwenty" mnemonicParsing="false" onAction="#TenToTwentyRangeClick" text="£10-20" />
+                              <Button fx:id="TwentyToThirty" mnemonicParsing="false" onAction="#TwentyToThirtyRangeClick" text="£20-30" />
+                              <Button fx:id="ThirtyToFourty" mnemonicParsing="false" onAction="#ThirtyToFourtyRangeClick" text="£30-40" />
+                              <Button fx:id="FourtyToFifty" mnemonicParsing="false" onAction="#FourtyToFiftyRangeClick" text="£40-50" />
+                              <Button fx:id="FiftyToOneH" mnemonicParsing="false" onAction="#FiftyToOneHRangeClick" text="£50-100" />
+                              <Button fx:id="OneHToThreeH" mnemonicParsing="false" onAction="#OneHToThreeHRangeClick" text="£100-300" />
+                              <Button fx:id="ThreeHToSixH" mnemonicParsing="false" onAction="#ThreeHToSixHRangeClick" text="£300-600" />
+                              <Button fx:id="SixHToOneT" mnemonicParsing="false" onAction="#SixHToOneTRangeClick" text="£600-1000" />
+                              <Button fx:id="AllPrices" mnemonicParsing="false" onAction="#AllPricesClick" text="All Prices" />
                           </items>
                         </ToolBar>
                      </children>
