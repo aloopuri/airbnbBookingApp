@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ListingsEachBorough">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="855.0" minWidth="10.0" prefWidth="638.0" />
         </columnConstraints>
@@ -21,6 +21,11 @@
                 <Button mnemonicParsing="false" text="Button" />
               </items>
             </ToolBar>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enfield" wrappingWidth="44.771484375" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Text fx:id="NameOfBorough" strokeType="OUTSIDE" strokeWidth="0.0" text="Enfield" wrappingWidth="44.771484375" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
          </children>
       </GridPane>

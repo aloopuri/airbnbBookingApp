@@ -5,6 +5,7 @@ import javafx.scene.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
 import java.net.URL;
 import javafx.fxml.*;
@@ -12,6 +13,8 @@ import javafx.scene.paint.*;
 
 public class ListingsEachBorough extends Application
 {
+  @FXML Text NameOfBorough;
+
   @Override
   public void start(Stage stage) throws Exception
   {

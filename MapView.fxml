@@ -27,7 +27,7 @@
                                           <Button fx:id="BarkingandDagenham" layoutX="787.0" layoutY="355.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARK" />
                                           <Button fx:id="Greenwich" layoutX="611.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="GWCH" />
                                           <Button fx:id="Bexley" layoutX="728.0" layoutY="459.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BEXL" />
-                                          <Button fx:id="Enfield" layoutX="492.0" layoutY="47.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="108.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP" />
+                                          <Button fx:id="Enfield" layoutX="492.0" layoutY="47.0" mnemonicParsing="false" onAction="#ENFIClick" prefHeight="122.0" prefWidth="108.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP" />
                                           <Button fx:id="Barnet" layoutX="318.0" layoutY="146.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARN" />
                                           <Button fx:id="WalthamForest" layoutX="552.0" layoutY="144.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WALT" />
                                           <Button fx:id="Hillingdon" layoutX="83.0" layoutY="353.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HILL" />

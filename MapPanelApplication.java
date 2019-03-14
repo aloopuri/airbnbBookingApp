@@ -10,6 +10,7 @@ import java.net.URL;
 import javafx.fxml.*;
 import javafx.scene.paint.*;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class MapPanelApplication extends Application
 {
@@ -325,6 +326,22 @@ public class MapPanelApplication extends Application
   @FXML
   private void ENFIClick(ActionEvent event)
   {
+    openNewWindowForListingsInBorough(Enfield);
+  }
 
+  private void openNewWindowForListingsInBorough(Button button)
+  {
+    try{
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListingsInBoroughView.fxml"));
+      Parent root = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+
+      stage.setTitle(nameOfBorough(button));
+      stage.setScene(new Scene(root));
+      stage.show();
+    }
+    catch(Exception e){
+      System.out.println("Oops! Something's wrong with opening the new window.");
+    }
   }
  }
