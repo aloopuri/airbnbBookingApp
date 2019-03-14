@@ -1,0 +1,25 @@
+#title {
+    -fx-font: 30px "Rockwell";
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF5A5F;
+}
+
+#topControls {
+    -fx-font: 15px "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+
+}
+
+#info {
+    -fx-font: 18px "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    
+}
+
+.label {
+    -fx-font: 15px "Arial";
+    -fx-text-fill: #FF5A5F;
+    
+}
