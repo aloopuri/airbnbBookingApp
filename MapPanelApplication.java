@@ -206,31 +206,27 @@ public class MapPanelApplication extends Application
   {
     if(listingCount > 300 & listingCount <= 600)
     {
-      color = Color.web("#B0E0E6");
+      color = Color.web("#ADD8E6");
     }
     else if(listingCount > 600 & listingCount <= 1000)
     {
-      color = Color.web("#ADD8E6");
+      color = Color.web("#87CEEB");
     }
     else if(listingCount > 1000 & listingCount <= 1500)
     {
-      color = Color.web("#87CEEB");
+      color = Color.web("#87CEFA");
     }
     else if(listingCount > 1500 & listingCount <= 2000)
     {
-      color = Color.web("#87CEFA");
+      color = Color.web("#00BFFF");
     }
     else if(listingCount > 2000 & listingCount <= 2500)
     {
-      color = Color.web("#00BFFF");
-    }
-    else if(listingCount > 2500 & listingCount <= 3500)
-    {
       color = Color.web("#1E90FF");
     }
     else if(listingCount > 2500 & listingCount <= 3500)
     {
-      color = Color.web("#1E90FF");
+      color = Color.web("#6495ED");
     }
     else if(listingCount >= 0 & listingCount <= 10 )
     {
@@ -246,35 +242,35 @@ public class MapPanelApplication extends Application
     }
     else if(listingCount > 30 & listingCount <= 40)
     {
-      color = Color.web("#1E90FF");
+      color = Color.web("#40E0D0");
     }
     else if(listingCount > 40 & listingCount <= 50)
     {
-      color = Color.web("#40E0D0");
+      color = Color.web("#48D1CC");
     }
     else if(listingCount > 50 & listingCount <= 100)
     {
-      color = Color.web("#48D1CC");
+      color = Color.web("#00CED1");
     }
     else if(listingCount > 100 & listingCount <= 150)
     {
-      color = Color.web("#40E0D0");
+      color = Color.web("#5F9EA0");
     }
     else if(listingCount > 150 & listingCount <= 200)
     {
-      color = Color.web("#00CED1");
+      color = Color.web("#4682B4");
     }
     else if(listingCount > 200 & listingCount <= 250)
     {
-      color = Color.web("#5F9EA0");
+      color = Color.web("#B0C4DE");
     }
     else if(listingCount > 250 & listingCount <= 300)
     {
-      color = Color.web("#40E0D0");
+      color = Color.web("#B0E0E6");
     }
     else
     {
-      color = Color.web("#6495ED");
+      color = Color.web("#4169E1");
     }
   }
 
@@ -329,6 +325,6 @@ public class MapPanelApplication extends Application
   @FXML
   private void ENFIClick(ActionEvent event)
   {
-    
+
   }
  }
