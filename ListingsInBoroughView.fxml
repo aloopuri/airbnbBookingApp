@@ -6,26 +6,39 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ListingsEachBorough">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enfield" wrappingWidth="35.771484375" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <GridPane prefHeight="580.0" prefWidth="540.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="855.0" minWidth="10.0" prefWidth="638.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.0" minWidth="0.0" prefWidth="0.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="846.0" minWidth="10.0" prefWidth="846.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="175.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="360.0" minHeight="7.0" prefHeight="54.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="666.0" minHeight="10.0" prefHeight="666.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="215.0" minHeight="8.0" prefHeight="39.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="541.0" minHeight="10.0" prefHeight="541.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="106.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToolBar prefHeight="35.0" prefWidth="771.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ToolBar prefHeight="38.0" prefWidth="846.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
               <items>
                 <Button mnemonicParsing="false" text="Button" />
               </items>
             </ToolBar>
-            <Text fx:id="NameOfBorough" strokeType="OUTSIDE" strokeWidth="0.0" text="Enfield" wrappingWidth="44.771484375" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
+            <ScrollPane prefHeight="541.0" prefWidth="566.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
+   </center>
+   <left>
+      <Pane prefHeight="580.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane prefHeight="579.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <VBox prefHeight="0.0" prefWidth="846.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

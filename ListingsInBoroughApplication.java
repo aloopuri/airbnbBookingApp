@@ -2,19 +2,19 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.*;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.*;
 import javafx.stage.Stage;
 import java.net.URL;
 import javafx.fxml.*;
 import javafx.scene.paint.*;
+import java.util.ArrayList;
+import java.io.IOException;
 
-public class ListingsEachBorough extends Application
+public class ListingsInBoroughApplication extends Application
 {
-  @FXML Text NameOfBorough;
-
+  private ListingsInBoroughEngine lbe;
+  
   @Override
   public void start(Stage stage) throws Exception
   {

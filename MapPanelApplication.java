@@ -2,7 +2,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.*;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -15,10 +14,7 @@ import java.io.IOException;
 public class MapPanelApplication extends Application
 {
   private ListingManager listingManager;
-  private AirbnbDataLoader dataLoader;
-  private Color color;
-  private BackgroundFill backgroundFill;
-  private Background background;
+  private MapPanelEngine mpe;
   private ArrayList<Button> listOfButtons;
   @FXML Button Sutton;
   @FXML Button Haringey;
@@ -76,42 +72,52 @@ public class MapPanelApplication extends Application
     stage.show();
   }
 
+  private ArrayList<Button> buttons()
+  {
+    listOfButtons = new ArrayList<>();
+
+    listOfButtons.add(Sutton);
+    listOfButtons.add(Haringey);
+    listOfButtons.add(Havering);
+    listOfButtons.add(Harrow);
+    listOfButtons.add(BarkingandDagenham);
+    listOfButtons.add(Greenwich);
+    listOfButtons.add(Bexley);
+    listOfButtons.add(Enfield);
+    listOfButtons.add(Barnet);
+    listOfButtons.add(WalthamForest);
+    listOfButtons.add(Hillingdon);
+    listOfButtons.add(Ealing);
+    listOfButtons.add(Brent);
+    listOfButtons.add(Camden);
+    listOfButtons.add(Westminster);
+    listOfButtons.add(Islington);
+    listOfButtons.add(Hackney);
+    listOfButtons.add(TowerHamlets);
+    listOfButtons.add(Redbridge);
+    listOfButtons.add(KensingtonandChelsea);
+    listOfButtons.add(Newham);
+    listOfButtons.add(Hounslow);
+    listOfButtons.add(HammersmithandFulham);
+    listOfButtons.add(Wandsworth);
+    listOfButtons.add(CityofLondon);
+    listOfButtons.add(RichmonduponThames);
+    listOfButtons.add(Merton);
+    listOfButtons.add(KingstonuponThames);
+    listOfButtons.add(Lambeth);
+    listOfButtons.add(Southwark);
+    listOfButtons.add(Croydon);
+    listOfButtons.add(Lewisham);
+    listOfButtons.add(Bromley);
+
+    return listOfButtons;
+  }
+
   @FXML
   private void initialize()
   {
-    showViewInRange(0, getListOfAllPrices().size());
-  }
-
-  private String nameOfBorough(Button button)
-  {
-    switch(button.getId()){
-      case "BarkingandDagenham":
-        return "Barking and Dagenham";
-
-      case "WalthamForest":
-        return "Waltham Forest";
-
-      case "TowerHamlets":
-        return "Waltham Forest";
-
-      case "KensingtonandChelsea":
-        return "Kensington and Chelsea";
-
-      case "HammersmithandFulham":
-        return "Hammersmith and Fulham";
-
-      case "CityofLondon":
-        return "City of London";
-
-      case "RichmonduponThames":
-        return "Richmond upon Thames";
-
-      case "KingstonuponThames":
-        return "Kingston upon Thames";
-
-      default:
-        return button.getId();
-    }
+    mpe = new MapPanelEngine();
+    showViewInRange(0, mpe.getListOfAllPrices().size());
   }
 
   @FXML
@@ -171,160 +177,222 @@ public class MapPanelApplication extends Application
   @FXML
   private void AllPricesClick(ActionEvent event)
   {
-      showViewInRange(0, getListOfAllPrices().size());
-  }
-
-  private ArrayList<Integer> getListOfAllPrices()
-  {
-    return getListingManager().getAllPrices();
+      mpe = new MapPanelEngine();
+      showViewInRange(0, mpe.getListOfAllPrices().size());
   }
 
   private void showViewInRange(int LowerBound, int upperBound)
   {
     //use this loading method outisde the loop so the program runs fasters
-    listingManager = getListingManager();
+    mpe = new MapPanelEngine();
+    listingManager = mpe.getListingManager();
     ArrayList<Integer> listOfSelectedPricesInBorough = new ArrayList<>();
 
     for(Button button: buttons()){
-      for(Integer i: listingManager.pricesInBorough(nameOfBorough(button))){
+      for(Integer i: listingManager.pricesInBorough(mpe.nameOfBorough(button))){
         if(i >= LowerBound & i < upperBound){
           listOfSelectedPricesInBorough.add(i);
         }
       }
-      ButtonColor(button, listOfSelectedPricesInBorough.size());
-      setButtonColor(button);
+      mpe.ButtonColor(button, listOfSelectedPricesInBorough.size());
+      mpe.setButtonColor(button);
     }
-  }
-
-  private ListingManager getListingManager()
-  {
-    dataLoader = new AirbnbDataLoader();
-    listingManager = new ListingManager(dataLoader.load());
-    return listingManager;
-  }
-
-  private void ButtonColor(Button button, int listingCount)
-  {
-    if(listingCount > 300 & listingCount <= 600)
-    {
-      color = Color.web("#ADD8E6");
-    }
-    else if(listingCount > 600 & listingCount <= 1000)
-    {
-      color = Color.web("#87CEEB");
-    }
-    else if(listingCount > 1000 & listingCount <= 1500)
-    {
-      color = Color.web("#87CEFA");
-    }
-    else if(listingCount > 1500 & listingCount <= 2000)
-    {
-      color = Color.web("#00BFFF");
-    }
-    else if(listingCount > 2000 & listingCount <= 2500)
-    {
-      color = Color.web("#1E90FF");
-    }
-    else if(listingCount > 2500 & listingCount <= 3500)
-    {
-      color = Color.web("#6495ED");
-    }
-    else if(listingCount >= 0 & listingCount <= 10 )
-    {
-      color = Color.web("#E0FFFF");
-    }
-    else if(listingCount > 10 & listingCount <= 20)
-    {
-      color = Color.web("#AFEEEE");
-    }
-    else if(listingCount > 20 & listingCount <= 30)
-    {
-      color = Color.web("#7FFFD4");
-    }
-    else if(listingCount > 30 & listingCount <= 40)
-    {
-      color = Color.web("#40E0D0");
-    }
-    else if(listingCount > 40 & listingCount <= 50)
-    {
-      color = Color.web("#48D1CC");
-    }
-    else if(listingCount > 50 & listingCount <= 100)
-    {
-      color = Color.web("#00CED1");
-    }
-    else if(listingCount > 100 & listingCount <= 150)
-    {
-      color = Color.web("#5F9EA0");
-    }
-    else if(listingCount > 150 & listingCount <= 200)
-    {
-      color = Color.web("#4682B4");
-    }
-    else if(listingCount > 200 & listingCount <= 250)
-    {
-      color = Color.web("#B0C4DE");
-    }
-    else if(listingCount > 250 & listingCount <= 300)
-    {
-      color = Color.web("#B0E0E6");
-    }
-    else
-    {
-      color = Color.web("#4169E1");
-    }
-  }
-
-  private  void setButtonColor(Button button)
-  {
-    backgroundFill = new BackgroundFill(color, null, null);
-    background = new Background(backgroundFill);
-    button.setBackground(background);
-  }
-
-  private ArrayList<Button> buttons()
-  {
-    listOfButtons = new ArrayList<>();
-
-    listOfButtons.add(Sutton);
-    listOfButtons.add(Haringey);
-    listOfButtons.add(Havering);
-    listOfButtons.add(Harrow);
-    listOfButtons.add(BarkingandDagenham);
-    listOfButtons.add(Greenwich);
-    listOfButtons.add(Bexley);
-    listOfButtons.add(Enfield);
-    listOfButtons.add(Barnet);
-    listOfButtons.add(WalthamForest);
-    listOfButtons.add(Hillingdon);
-    listOfButtons.add(Ealing);
-    listOfButtons.add(Brent);
-    listOfButtons.add(Camden);
-    listOfButtons.add(Westminster);
-    listOfButtons.add(Islington);
-    listOfButtons.add(Hackney);
-    listOfButtons.add(TowerHamlets);
-    listOfButtons.add(Redbridge);
-    listOfButtons.add(KensingtonandChelsea);
-    listOfButtons.add(Newham);
-    listOfButtons.add(Hounslow);
-    listOfButtons.add(HammersmithandFulham);
-    listOfButtons.add(Wandsworth);
-    listOfButtons.add(CityofLondon);
-    listOfButtons.add(RichmonduponThames);
-    listOfButtons.add(Merton);
-    listOfButtons.add(KingstonuponThames);
-    listOfButtons.add(Lambeth);
-    listOfButtons.add(Southwark);
-    listOfButtons.add(Croydon);
-    listOfButtons.add(Lewisham);
-    listOfButtons.add(Bromley);
-
-    return listOfButtons;
   }
 
   @FXML
   private void ENFIClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void BARNClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void HRGYClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void WALTClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void HRRWClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void BRENClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void CAMDClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void ISLIClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void HACKClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void REDBClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void HAVEClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void HILLClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void EALIClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void KENSClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void WSTMClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void TOWHClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void NEWHClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void BARKClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void HOUNClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void HAMMClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void WANDClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void CITYClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void GWCHClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void BEXLClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void RICHClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void MERTClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void LAMBClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void STHWClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void LEWSClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void KINGClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void SUTTClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void CROYClick(ActionEvent event)
+  {
+    openNewWindowForListingsInBorough(Enfield);
+  }
+
+  @FXML
+  private void BROMClick(ActionEvent event)
   {
     openNewWindowForListingsInBorough(Enfield);
   }
@@ -336,8 +404,8 @@ public class MapPanelApplication extends Application
       Parent root = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
 
-      stage.setTitle(nameOfBorough(button));
-      stage.setScene(new Scene(root));
+      stage.setTitle(mpe.nameOfBorough(button));
+      stage.setScene(new Scene((root)));
       stage.show();
     }
     catch(Exception e){
