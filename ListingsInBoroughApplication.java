@@ -14,7 +14,9 @@ import java.io.IOException;
 public class ListingsInBoroughApplication extends Application
 {
   private ListingsInBoroughEngine lbe;
-  
+
+  @FXML TextArea textArea;
+
   @Override
   public void start(Stage stage) throws Exception
   {
@@ -25,5 +27,17 @@ public class ListingsInBoroughApplication extends Application
     stage.setTitle("Map");
     stage.setScene(scene);
     stage.show();
+  }
+
+  @FXML
+  private void initialize()
+  {
+
+  }
+
+  private ListingsInBoroughEngine lbeSetup()
+  {
+    lbe = new ListingsInBoroughEngine();
+    return lbe;
   }
 }
