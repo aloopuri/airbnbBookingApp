@@ -6,11 +6,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.collections.*<<<<<<< HEAD
+import javafx.collections.*;
 import java.awt.Insets;
-//import javafx.scene.*;
 import java.util.*;
-
 import javafx.animation.*;
 import javafx.util.Duration;
 import javafx.scene.image.*;
@@ -199,14 +197,6 @@ public class AirbnbApplication extends Application
     private ObservableList<Integer> getOptionsList()
     {
         ObservableList<Integer> options = FXCollections.observableArrayList(listingManager.getAllPrices());
-
-        /*for (AirbnbListing aListing : listingManager.getListings()) {
-            //if (!options.contains(aListing))
-            {
-                options.add(aListing.getPrice());
-            }
-        }
-        listingManager.getAllPrices();*/
         FXCollections.sort(options);
         return options;
     }
