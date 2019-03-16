@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
@@ -7,10 +6,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.collections.*;
+import javafx.collections.*<<<<<<< HEAD
 import java.awt.Insets;
 //import javafx.scene.*;
 import java.util.*;
+
+import javafx.animation.*;
+import javafx.util.Duration;
+import javafx.scene.image.*;
+import java.util.ArrayList;
 /**
  * Write a description of JavaFX class Application here.
  *
@@ -19,6 +23,7 @@ import java.util.*;
  */
 public class AirbnbApplication extends Application
 {
+
     private Label myLabel = new Label("Welcome - Choose a range of prices to continue"); // Temporary
 
     private ArrayList<Scene> scenes;
@@ -32,6 +37,7 @@ public class AirbnbApplication extends Application
     private ComboBox toBox;
     private HBox topPane;
     private BorderPane bottomPane;
+    private Label priceRange;
     /**
      * Class Constructor
      */
@@ -44,6 +50,7 @@ public class AirbnbApplication extends Application
         listingManager = new ListingManager(listings);
         fromBox = new ComboBox(getOptionsList());
         toBox = new ComboBox(getOptionsList());
+        priceRange = new Label();
     }
 
     /**
@@ -52,8 +59,58 @@ public class AirbnbApplication extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
+        BorderPane welcomePane = createWelcome();
+        Scene welcomeScene = new Scene(welcomePane, 500, 500);
+        welcomeScene.getStylesheets().add("WelcomeLayout.css");
+
+        scenes.add(welcomeScene);
+        stage.setTitle("Airbnb London");
+        stage.setScene(welcomeScene);
+
+        // Set ComboBox actions
+        fromBox.setOnAction(e -> comboBoxAction());
+        toBox.setOnAction(e -> comboBoxAction());
+
+        // Show the Stage (window)
+        stage.show();
+
+    }
+
+    /**
+     * Creates the application's Welcome Panel
+     */
+    private BorderPane createWelcome()
+    {
+        // Create Labels and ImageViews with appropriate styling
+        priceRange.setId("info");
+
+        Image logo = new Image("/images/airbnb-logo.png");
+        ImageView logoView = new ImageView();
+        logoView.setImage(logo);
+        logoView.setPreserveRatio(true);
+        logoView.setFitHeight(200);
+        logoView.setFitWidth(200);
+
+        Image icon = new Image("/images/airbnb-small.png");
+        ImageView iconView = new ImageView();
+        iconView.setImage(icon);
+        iconView.setPreserveRatio(true);
+        iconView.setFitHeight(50);
+        iconView.setFitWidth(50);
+
+        Label welcomeLabel = new Label("Welcome to Airbnb London");
+        welcomeLabel.setId("title");
+
         Label fromLabel = new Label("From:");
         Label toLabel = new Label("To:");
+        fromLabel.setId("topControls");
+        toLabel.setId("topControls");
+
+        Label infoLabel = new Label("Select a price range to begin." +
+                                    "\nCurrently selected price range:");
+
+        // Set price range Labels appropriately
+        updatePriceRange(fromBox.getValue(), toBox.getValue());
 
         fromBox.setPromptText("-");
         toBox.setPromptText("-");
@@ -63,61 +120,48 @@ public class AirbnbApplication extends Application
         backButton.setDisable(true);
         frontButton.setDisable(true);
 
-        // Create a new HBox
-        topPane = new HBox();
+        // Used to align the airbnb icon to the top-left
+        Region leftRegion = new Region();
+
+        // Create a new HBox for the top area
+        HBox topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
         topPane.setSpacing(10);
+        topPane.getChildren().add(iconView);
+        topPane.getChildren().add(leftRegion);
         topPane.getChildren().add(fromLabel);
         topPane.getChildren().add(fromBox);
         topPane.getChildren().add(toLabel);
         topPane.getChildren().add(toBox);
+        topPane.setHgrow(leftRegion, Priority.ALWAYS);
 
-        bottomPane = new BorderPane();
+        // Create a new VBox for the center area
+        VBox centerPane = new VBox();
+        centerPane.setAlignment(Pos.CENTER);
+        centerPane.setSpacing(10);
+        centerPane.getChildren().add(logoView);
+        centerPane.getChildren().add(welcomeLabel);
+        centerPane.getChildren().add(infoLabel);
+        centerPane.getChildren().add(priceRange);
+
+        // Creates a BorderPane for the bottom area
+        BorderPane bottomPane = new BorderPane();
         bottomPane.setRight(frontButton);
         bottomPane.setLeft(backButton);
 
-        // Create a new border pane
+        // Create a BorderPane for the general scene
         BorderPane root = new BorderPane();
         root.setTop(topPane);
-        root.setCenter(myLabel);
+        root.setCenter(centerPane);
         root.setBottom(bottomPane);
 
-        // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene welcomeScene = new Scene(root, 750, 750);
-        scenes.add(welcomeScene);
-        stage.setTitle("Airbnb London");
-        stage.setScene(welcomeScene);
-        //
-        BorderPane mapRoot = new BorderPane();
-        Scene mapScene = new Scene(mapRoot, 750, 750);
-        GridPane mapPane = new GridPane();
-        mapPane.setHgap(10);
-        mapPane.setVgap(10);
-        mapPane.add(new Button("MAP"),1,0);
-        mapPane.add(new Button("ENFI"),7,1);
-        mapPane.add(new Button("BARN"),4,2);
-        mapPane.add(new Button("HRGY"),6,2);
-        mapPane.add(new Button("WALT"),8,2);
-        mapPane.add(new Button("HRRW"),1,3);
-        mapPane.add(new Button("BREN"),3,3);
-        mapPane.add(new Button("CAMD"),5,3);
-        mapPane.add(new Button("ISLI"),7,3);
-        mapPane.add(new Button("HACK"),9,3);
-        mapPane.add(new Button("HILL"),0,4);
-        mapRoot.setCenter(mapPane);
-        scenes.add(mapScene);
-        //
-        BorderPane statsRoot = new BorderPane();
-        Scene statsScene = new Scene(statsRoot, 750, 750);
-        scenes.add(statsScene);
-        // Set ComboBox actions
-        fromBox.setOnAction(e -> comboBoxAction());
-        toBox.setOnAction(e -> comboBoxAction());
-        frontButton.setOnAction(e -> nextScene(e));
-        backButton.setOnAction(e -> previousScene(e));
-        // Show the Stage (window)
-        stage.show();
-        mainStage = stage;
+        FadeTransition ft = new FadeTransition(Duration.millis(4000), logoView);
+        ft.setFromValue(0.0);
+        ft.setToValue(1.0);
+        ft.setCycleCount(1);
+        ft.play();
+
+        return root;
     }
 
     /**
@@ -137,10 +181,12 @@ public class AirbnbApplication extends Application
                 alert.setTitle("Value Warning");
                 alert.setHeaderText(null);
                 alert.setContentText("From value is greater than To value.");
-                alert.showAndWait();
+                updatePriceRange(fromBox.getValue(), toBox.getValue());
                 disableNavigation();
+                alert.showAndWait();
             }
             else {
+                updatePriceRange(fromBox.getValue(), toBox.getValue());
                 enableNavigation();
             }
         }
@@ -153,8 +199,30 @@ public class AirbnbApplication extends Application
     private ObservableList<Integer> getOptionsList()
     {
         ObservableList<Integer> options = FXCollections.observableArrayList(listingManager.getAllPrices());
+
+        /*for (AirbnbListing aListing : listingManager.getListings()) {
+            //if (!options.contains(aListing))
+            {
+                options.add(aListing.getPrice());
+            }
+        }
+        listingManager.getAllPrices();*/
         FXCollections.sort(options);
         return options;
+    }
+
+    /**
+     * Updates the priceRange Label's text
+     */
+    private void updatePriceRange(Object fromValue, Object toValue)
+    {
+        if (fromValue == null || toValue == null) {
+            priceRange.setText("From: £- To £-");
+        }
+        else {
+            priceRange.setText("From: £" + fromValue.toString() +
+                               " To: £" + toValue.toString());
+        }
     }
 
     /**
@@ -173,30 +241,5 @@ public class AirbnbApplication extends Application
     {
         frontButton.setDisable(true);
         backButton.setDisable(true);
-    }
-
-    private void nextScene(ActionEvent event)
-    {
-        currentScene ++;
-        currentScene = currentScene % scenes.size();
-        moveScene(currentScene);
-    }
-
-    private void previousScene(ActionEvent event)
-    {
-        currentScene --;
-        if (currentScene<0)
-        {
-            currentScene = scenes.size()-1;
-        }
-        moveScene(currentScene);
-    }
-
-    private void moveScene(int sceneIndex)
-    {
-        Scene newScene = scenes.get(sceneIndex);
-        ((BorderPane)newScene.getRoot()).setTop(topPane);
-        ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
-        mainStage.setScene(newScene);
     }
 }

@@ -1,6 +1,5 @@
 import java.util.*;
 import javafx.collections.*;
-import java.lang.*;
 /**
  * Write a description of class listingManager here.
  *
@@ -10,15 +9,13 @@ import java.lang.*;
 public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
-    private int currentListing;
-    private AirbnbDataLoader dataLoader;
+
     /**
      * Constructor for objects of class listingManager
      */
     public ListingManager(ArrayList<AirbnbListing> listings)
     {
         this.listings = listings;
-        currentListing = 0;
     }
 
     public ArrayList<AirbnbListing> getListings()
@@ -39,22 +36,22 @@ public class ListingManager
         }
         return prices;
     }
-    
+
     /**
      * Gets borough listings as an ObservableList for view on the map panel
      * @param borough The name of the borough whose button was clicked on
      */
-    public ObservableList<AirbnbListing> getBoroughListings(String borough) 
+    public ObservableList<AirbnbListing> getBoroughListings(String borough)
     {
         ObservableList<AirbnbListing> observableListings = FXCollections.observableArrayList();
-        
-        for (AirbnbListing listing : listings) 
+
+        for (AirbnbListing listing : listings)
         {
             if (listing.getNeighbourhood().equals(borough)) {
                 observableListings.add(listing);
             }
         }
-        
+
         return observableListings;
     }
 
