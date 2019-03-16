@@ -78,7 +78,7 @@ public class MapPanelApplication extends Application
         URL url = getClass().getResource("MapView.fxml");
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
-        
+
         stage.setTitle("Map");
         stage.setScene(scene);
         stage.show();
@@ -121,17 +121,17 @@ public class MapPanelApplication extends Application
         mapButtons.add(Lewisham);
         mapButtons.add(Bromley);
     }
-    
+
     /**
      * @return The list of buttons in the map panel
      */
-    private ArrayList<Button> getButtons() 
+    private ArrayList<Button> getButtons()
     {
         return mapButtons;
     }
-    
+
     @FXML
-    private void initialize() 
+    private void initialize()
     {
         showViewInRange(0, listingManager.getAllPrices().size());
     }
@@ -219,81 +219,81 @@ public class MapPanelApplication extends Application
     private void openBoroughWindow(Button button)
     {
         String boroughName = mpe.getBoroughName(button);
-        
+
         TableView<AirbnbListing> listingTable = new TableView();
         listingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
+
         // Host-Name column
         TableColumn<AirbnbListing, String> hostNameCol = new TableColumn<>("Host Name");
         hostNameCol.setId("hostName");
         hostNameCol.setCellValueFactory(new PropertyValueFactory<>("host_name"));
         hostNameCol.setReorderable(false);
-        
+
         // Price column
         TableColumn<AirbnbListing, Integer> priceCol = new TableColumn<>("Price");
         priceCol.setId("price");
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         priceCol.setReorderable(false);
-        
+
         // Reviews column
         TableColumn<AirbnbListing, Integer> reviewCol = new TableColumn<>("Number of reviews");
         reviewCol.setId("review");
         reviewCol.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
         reviewCol.setReorderable(false);
-        
+
         // Minimum nights column
         TableColumn<AirbnbListing, Integer> nightsCol = new TableColumn<>("Minimum no. nights stay");
         nightsCol.setId("nights");
         nightsCol.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
         nightsCol.setReorderable(false);
-        
+
         // Populate table
         listingTable.getColumns().addAll(hostNameCol, priceCol, reviewCol, nightsCol);
         listingTable.setItems(listingManager.getBoroughListings(boroughName));
-        
+
         ComboBox sortingBox = new ComboBox();
         sortingBox.setItems(getSortingOptions());
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
-        sortingBox.setOnAction(e -> tableSort(sortingBox, listingManager.getBoroughListings(boroughName), listingTable));        
-        
+        sortingBox.setOnAction(e -> tableSort(sortingBox, listingManager.getBoroughListings(boroughName), listingTable));
+
         ToolBar sortBar = new ToolBar();
         sortBar.getItems().add(new Label("Sort by:"));
         sortBar.getItems().add(sortingBox);
-        
+
         BorderPane boroughPane = new BorderPane();
         boroughPane.setCenter(listingTable);
         boroughPane.setTop(sortBar);
-        
+
         Stage boroughWindow = new Stage();
         boroughWindow.setScene(new Scene(boroughPane, 500, 500));
         boroughWindow.setTitle(boroughName + " Properties");
         boroughWindow.show();
     }
-    
+
     /**
      * Create an ObservableList that holds the sorting options for the drop-down box
      * @return sortOptions The list of sorting options
      */
-    private ObservableList<String> getSortingOptions() 
+    private ObservableList<String> getSortingOptions()
     {
         ObservableList<String> sortOptions = FXCollections.observableArrayList(
-                    "Alphabetical order",
+                    "Host Name Alphabetical Order",
                     "Price",
-                    "Number of reviews"
+                    "Number of Reviews"
         );
         return sortOptions;
     }
-    
+
     /**
      * Sorts the table data based on drop-down box selection
      */
-    private void tableSort(ComboBox sortBox, ObservableList<AirbnbListing> boroughListings, TableView table) 
+    private void tableSort(ComboBox sortBox, ObservableList<AirbnbListing> boroughListings, TableView table)
     {
         ObservableList<TableColumn> columns = table.getColumns();
         table.getSortOrder().removeAll(columns);
         switch(sortBox.getSelectionModel().getSelectedItem().toString()) {
-            
-            case "Alphabetical order":
+
+            case "Host Name Alphabetical Order":
                 for (TableColumn col : columns) {
                     if (col.getId().equals("hostName")) {
                         col.setSortType(SortType.ASCENDING);
@@ -301,17 +301,17 @@ public class MapPanelApplication extends Application
                     }
                 }
                 break;
-                
+
             case "Price":
                 for (TableColumn col : columns) {
                     if (col.getId().equals("price")) {
                         col.setSortType(SortType.ASCENDING);
                         table.getSortOrder().add(col);
                     }
-                }     
+                }
                 break;
-                
-            case "Number of reviews":
+
+            case "Number of Reviews":
                 for (TableColumn col : columns) {
                     if (col.getId().equals("review")) {
                         col.setSortType(SortType.ASCENDING);
@@ -319,13 +319,13 @@ public class MapPanelApplication extends Application
                     }
                 }
                 break;
-                
+
             default:
                 System.out.println("Column not found! No Action");
                 break;
         }
     }
-    
+
 
     // ----------- Following methods implement click events for each map button -----------
     @FXML
