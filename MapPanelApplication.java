@@ -129,6 +129,12 @@ public class MapPanelApplication extends Application
     {
         return mapButtons;
     }
+    
+    @FXML
+    private void initialize() 
+    {
+        showViewInRange(0, listingManager.getAllPrices().size());
+    }
 
     @FXML
     private void belowTenRangeClick(ActionEvent event)
@@ -195,7 +201,6 @@ public class MapPanelApplication extends Application
         initializeButtons();
         //use this loading method outisde the loop so the program runs faster
         ArrayList<Integer> selectedBoroughPrices = new ArrayList<>();
-        System.out.println(getButtons().size());
         for(Button button: getButtons()){
             for(Integer price: listingManager.getBoroughPrices(mpe.getBoroughName(button))){
                 if(price >= lowerBound & price <= upperBound){
