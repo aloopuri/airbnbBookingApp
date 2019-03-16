@@ -6,19 +6,11 @@ import java.util.ArrayList;
 public class MapPanelEngine
 {
     private Button button;
-    private ListingManager listingManager;
-    private AirbnbDataLoader dataLoader;
     private Color color;
     private BackgroundFill backgroundFill;
     private Background background;
 
-    public MapPanelEngine()
-    {
-      dataLoader = new AirbnbDataLoader();
-      listingManager = new ListingManager(dataLoader.load());
-    }
-
-    public String nameOfBorough(Button button)
+    public String getBoroughName(Button button)
     {
       switch(button.getId()){
         case "BarkingandDagenham":
@@ -50,7 +42,7 @@ public class MapPanelEngine
       }
     }
 
-    public void ButtonColor(Button button, int listingCount)
+    public void getButtonColor(Button button, int listingCount)
     {
       if(listingCount > 300 & listingCount <= 600)
       {
@@ -127,15 +119,5 @@ public class MapPanelEngine
       backgroundFill = new BackgroundFill(color, null, null);
       background = new Background(backgroundFill);
       button.setBackground(background);
-    }
-
-    public ListingManager getListingManager()
-    {
-      return listingManager;
-    }
-
-    public ArrayList<Integer> getListOfAllPrices()
-    {
-      return getListingManager().getAllPrices();
     }
 }

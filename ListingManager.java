@@ -1,6 +1,7 @@
 import java.util.*;
 import javafx.collections.*;
 import java.lang.*;
+import javafx.collections.transformation.SortedList;
 /**
  * Write a description of class listingManager here.
  *
@@ -39,44 +40,26 @@ public class ListingManager
         }
         return prices;
     }
-
-    public AirbnbListing getCurrentListing()
+    
+    /**
+     * Gets borough listings as an ObservableList for view on the map panel
+     * @param borough The name of the borough whose button was clicked on
+     */
+    public ObservableList<AirbnbListing> getBoroughListings(String borough) 
     {
-        return listings.get(currentListing);
-    }
-
-    public int numberOfListings()
-    {
-        return listings.size();
-    }
-
-    public int numOflistingsInBorough(String borough)
-    {
-        int n = 0;
-        for (AirbnbListing aListing : listings)
+        ObservableList<AirbnbListing> observableListings = FXCollections.observableArrayList();
+        
+        for (AirbnbListing listing : listings) 
         {
-            if (aListing.getNeighbourhood().equals(borough))
-            {
-                n++;
+            if (listing.getNeighbourhood().equals(borough)) {
+                observableListings.add(listing);
             }
         }
-        return n;
+        
+        return observableListings;
     }
 
-    public ArrayList<AirbnbListing> listingsEachBorough(String borough)
-    {
-      ArrayList<AirbnbListing> listInBorough = new ArrayList<>();
-      for (AirbnbListing listing: listings)
-      {
-          if (listing.getNeighbourhood().equals(borough))
-          {
-              listInBorough.add(listing);
-          }
-      }
-      return listInBorough;
-    }
-
-    public ArrayList<Integer> pricesInBorough(String borough)
+    public ArrayList<Integer> getBoroughPrices(String borough)
     {
       ArrayList<Integer> listOfPricesInBorough = new ArrayList<>();
       for (AirbnbListing aListing : listings)
@@ -87,15 +70,5 @@ public class ListingManager
           }
       }
       return listOfPricesInBorough;
-    }
-
-    public String getHostName(int index)
-    {
-        return listings.get(index).getHost_name();
-    }
-
-    public String getCurrentHostName()
-    {
-        return getHostName(currentListing);
     }
 }
