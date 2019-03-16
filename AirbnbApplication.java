@@ -8,7 +8,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.collections.*;
-import javafx.*;
 import java.awt.Insets;
 //import javafx.scene.*;
 import java.util.*;
