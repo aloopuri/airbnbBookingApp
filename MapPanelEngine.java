@@ -2,6 +2,9 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.*;
 import java.util.ArrayList;
+import javafx.collections.*;
+import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.SortType;
 
 public class MapPanelEngine
 {
@@ -119,5 +122,61 @@ public class MapPanelEngine
       backgroundFill = new BackgroundFill(color, null, null);
       background = new Background(backgroundFill);
       button.setBackground(background);
+    }
+
+    /**
+     * Create an ObservableList that holds the sorting options for the drop-down box
+     * @return sortOptions The list of sorting options
+     */
+    public ObservableList<String> getSortingOptions()
+    {
+        ObservableList<String> sortOptions = FXCollections.observableArrayList(
+                    "Host Name Alphabetical Order",
+                    "Price",
+                    "Number of Reviews"
+        );
+        return sortOptions;
+    }
+
+    /**
+     * Sorts the table data based on drop-down box selection
+     */
+    public void tableSort(ComboBox sortBox, ObservableList<AirbnbListing> boroughListings, TableView table)
+    {
+        ObservableList<TableColumn> columns = table.getColumns();
+        table.getSortOrder().removeAll(columns);
+        switch(sortBox.getSelectionModel().getSelectedItem().toString()) {
+
+            case "Host Name Alphabetical Order":
+                for (TableColumn col : columns) {
+                    if (col.getId().equals("hostName")) {
+                        col.setSortType(SortType.ASCENDING);
+                        table.getSortOrder().add(col);
+                    }
+                }
+                break;
+
+            case "Price":
+                for (TableColumn col : columns) {
+                    if (col.getId().equals("price")) {
+                        col.setSortType(SortType.ASCENDING);
+                        table.getSortOrder().add(col);
+                    }
+                }
+                break;
+
+            case "Number of Reviews":
+                for (TableColumn col : columns) {
+                    if (col.getId().equals("review")) {
+                        col.setSortType(SortType.ASCENDING);
+                        table.getSortOrder().add(col);
+                    }
+                }
+                break;
+
+            default:
+                System.out.println("Column not found! No Action");
+                break;
+        }
     }
 }
