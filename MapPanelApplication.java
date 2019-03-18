@@ -16,6 +16,7 @@ import javafx.geometry.*;
 import javafx.scene.input.*;
 import java.awt.Desktop;
 import java.io.IOException;
+import javafx.scene.image.*;
 public class MapPanelApplication extends Application
 {
     private ListingManager listingManager;
@@ -492,14 +493,21 @@ public class MapPanelApplication extends Application
       BorderPane singleListingView = new BorderPane();
       GridPane centerPane = new GridPane();
 
+      Image logo = new Image("/images/airbnb-logo.png");
+      ImageView logoView = new ImageView();
+      logoView.setImage(logo);
+      logoView.setPreserveRatio(true);
+      logoView.setFitHeight(200);
+      logoView.setFitWidth(200);
+      singleListingView.setTop(logoView);
       singleListingView.setCenter(centerPane);
+      centerPane.setAlignment(Pos.CENTER);
       centerPane.setPadding(new Insets(10, 10, 10, 10));
-      centerPane.setMinSize(300, 300);
+      centerPane.setPrefWidth(600);
+      centerPane.setPrefHeight(600);
       centerPane.setVgap(10);
       centerPane.setHgap(10);
 
-      Button nextButton = new Button("Next Property");
-      Button previousButton = new Button("Previous Property");
       Button viewOnMapButton = new Button("View on Map");
 
       viewOnMapButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -507,16 +515,6 @@ public class MapPanelApplication extends Application
           viewOnMapButtonClicked();
         }
       });
-
-      nextButton.setMinWidth(150);
-      nextButton.setPrefWidth(150);
-      nextButton.setMaxWidth(150);
-      previousButton.setMinWidth(150);
-      previousButton.setPrefWidth(150);
-      previousButton.setMaxWidth(150);
-      viewOnMapButton.setMinWidth(150);
-      viewOnMapButton.setPrefWidth(150);
-      viewOnMapButton.setMaxWidth(150);
 
       Label hostId = new Label("Host ID: " + aListing.getHost_id());
       Label calculatedHostListings = new Label("Total No. of Host Properties: " + Integer.toString(aListing.getCalculatedHostListingsCount()));
@@ -547,9 +545,7 @@ public class MapPanelApplication extends Application
 
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
-      centerPane.add(previousButton, 0, 1);
-      centerPane.add(nextButton, 0, 2);
-      centerPane.add(viewOnMapButton, 0, 3);
+      centerPane.add(viewOnMapButton, 0, 1);
       centerPane.add(reviews, 0, 9);
       centerPane.add(reviewNum, 0, 10);
       centerPane.add(reviewNumContent, 1, 10);
@@ -580,20 +576,10 @@ public class MapPanelApplication extends Application
       centerPane.add(boroughContent, 2, 8);
 
       Stage stage = new Stage();
-      Scene scene = new Scene(singleListingView, 700, 400);
+      Scene scene = new Scene(singleListingView, 600, 600);
       stage.setTitle(aListing.getName());
       stage.setScene(scene);
       stage.show();
-    }
-
-    private void previousButtonClicked(ActionEvent event)
-    {
-        
-    }
-
-    private void nextButtonClicked(ActionEvent event)
-    {
-
     }
 
     private void viewOnMapButtonClicked()
