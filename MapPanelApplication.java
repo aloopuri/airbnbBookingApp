@@ -1,10 +1,10 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.event.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import java.net.URL;
+import java.net.*;
 import javafx.fxml.*;
 import javafx.scene.paint.*;
 import java.util.ArrayList;
@@ -12,11 +12,16 @@ import javafx.scene.control.cell.*;
 import javafx.collections.*;
 import java.util.*;
 import javafx.scene.control.TableColumn.*;
+import javafx.geometry.*;
+import javafx.scene.input.*;
+import java.awt.Desktop;
+import java.io.IOException;
 public class MapPanelApplication extends Application
 {
     private ListingManager listingManager;
     private MapPanelEngine mpe;
     private ArrayList<Button> mapButtons;
+    private AirbnbListing airbnbListing;
 
     // Map Button declarations
     @FXML Button Sutton;
@@ -222,6 +227,18 @@ public class MapPanelApplication extends Application
 
         TableView<AirbnbListing> listingTable = new TableView();
         listingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        listingTable.setRowFactory(tv -> {
+          TableRow<AirbnbListing> row = new TableRow<>();
+          row.setOnMouseClicked(event -> {
+            if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY
+              && event.getClickCount() == 2) {
+
+            AirbnbListing clickedRow = row.getItem();
+            openWindowView(clickedRow);
+           }
+         });
+        return row ;
+        });
 
         // Host-Name column
         TableColumn<AirbnbListing, String> hostNameCol = new TableColumn<>("Host Name");
@@ -469,110 +486,121 @@ public class MapPanelApplication extends Application
         openBoroughWindow(Bromley);
     }
 
-    public void openSingleAirbnbWindow()
+    public void openWindowView(AirbnbListing aListing)
     {
-      TableView<AirbnbListing> listingTable = new TableView();
-      listingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      BorderPane singleListingView = new BorderPane();
+      GridPane centerPane = new GridPane();
 
-      TableColumn<AirbnbListing, String> airbnbIdCol = new TableColumn<>("Airbnb ID");
-      airbnbIdCol.setId("airbnbId");
-      airbnbIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-      airbnbIdCol.setReorderable(false);
+      singleListingView.setCenter(centerPane);
+      centerPane.setPadding(new Insets(10, 10, 10, 10));
+      centerPane.setMinSize(300, 300);
+      centerPane.setVgap(10);
+      centerPane.setHgap(10);
 
-      TableColumn<AirbnbListing, String> airbnbNameCol = new TableColumn<>("Airbnb Name");
-      airbnbNameCol.setId("airbnbName");
-      airbnbNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-      airbnbNameCol.setReorderable(false);
+      Button nextButton = new Button("Next Property");
+      Button previousButton = new Button("Previous Property");
+      Button viewOnMapButton = new Button("View on Map");
 
-      TableColumn<AirbnbListing, String> hostIdCol = new TableColumn<>("Host ID");
-      hostIdCol.setId("hostId");
-      hostIdCol.setCellValueFactory(new PropertyValueFactory<>("host_id"));
-      hostIdCol.setReorderable(false);
+      viewOnMapButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override public void handle(ActionEvent e) {
+          viewOnMapButtonClicked();
+        }
+      });
 
-      // Host-Name column
-      TableColumn<AirbnbListing, String> hostNameCol = new TableColumn<>("Host Name");
-      hostNameCol.setId("hostName");
-      hostNameCol.setCellValueFactory(new PropertyValueFactory<>("host_name"));
-      hostNameCol.setReorderable(false);
+      nextButton.setMinWidth(150);
+      nextButton.setPrefWidth(150);
+      nextButton.setMaxWidth(150);
+      previousButton.setMinWidth(150);
+      previousButton.setPrefWidth(150);
+      previousButton.setMaxWidth(150);
+      viewOnMapButton.setMinWidth(150);
+      viewOnMapButton.setPrefWidth(150);
+      viewOnMapButton.setMaxWidth(150);
 
-      TableColumn<AirbnbListing, String> boroughCol = new TableColumn<>("Borough");
-      boroughCol.setId("borough");
-      boroughCol.setCellValueFactory(new PropertyValueFactory<>("neighbourhood"));
-      boroughCol.setReorderable(false);
+      Label hostId = new Label("Host ID: " + aListing.getHost_id());
+      Label calculatedHostListings = new Label("Total No. of Host Properties: " + Integer.toString(aListing.getCalculatedHostListingsCount()));
+      Label propertyName = new Label("Airbnb Name: ");
+      Label propertyNameContent = new Label(aListing.getName());
+      Label propertyId = new Label("Airbnb ID: ");
+      Label propertyIdContent = new Label(aListing.getId());
+      Label hostName = new Label("Host Name: ");
+      Label hostNameContent = new Label(aListing.getHost_name());
+      Label roomType = new Label("Room Type: ");
+      Label roomTypeContent = new Label(aListing.getRoom_type());
+      Label price = new Label("Price per Night: ");
+      Label priceContent = new Label(Integer.toString(aListing.getPrice()));
+      Label minNights = new Label("Min Nights to Book: ");
+      Label minNightsContent = new Label(Integer.toString(aListing.getMinimumNights()));
+      Label availability365 = new Label("Availability365: ");
+      Label availability365Content = new Label(Integer.toString(aListing.getAvailability365()));
+      Label borough = new Label("Borough: ");
+      Label boroughContent = new Label(aListing.getNeighbourhood());
+      Label reviews = new Label("Reviews: ");
+      Label reviewNum = new Label("Total No. of Reviews: ");
+      Label reviewNumContent = new Label(Integer.toString(aListing.getNumberOfReviews()));
+      Label reviewsPerMonth = new Label("Reviews per Month: ");
+      Label reviewsPerMonthContent = new Label(Double.toString(aListing.getReviewsPerMonth()));
+      Label lastReview = new Label("Last Review: ");
+      Label lastReviewContent = new Label(aListing.getLastReview());
 
-      TableColumn<AirbnbListing, String> latitudeCol = new TableColumn<>("Latitude");
-      latitudeCol.setId("latitude");
-      latitudeCol.setCellValueFactory(new PropertyValueFactory<>("latitude"));
-      latitudeCol.setReorderable(false);
+      centerPane.add(hostId, 0, 0);
+      centerPane.add(calculatedHostListings, 2, 0);
+      centerPane.add(previousButton, 0, 1);
+      centerPane.add(nextButton, 0, 2);
+      centerPane.add(viewOnMapButton, 0, 3);
+      centerPane.add(reviews, 0, 9);
+      centerPane.add(reviewNum, 0, 10);
+      centerPane.add(reviewNumContent, 1, 10);
+      centerPane.add(reviewsPerMonth, 0, 11);
+      centerPane.add(reviewsPerMonthContent, 1, 11);
+      centerPane.add(lastReview, 0, 12);
+      centerPane.add(lastReviewContent, 1, 12);
+      centerPane.add(propertyName, 1, 1);
+      centerPane.add(propertyNameContent, 2,1);
+      centerPane.add(propertyId, 1, 2);
+      centerPane.add(propertyIdContent, 2, 2);
+      centerPane.add(hostName, 1, 3);
+      centerPane.add(hostNameContent, 2, 3);
+      centerPane.add(roomType, 1, 4);
+      centerPane.add(roomTypeContent, 2, 4);
+      centerPane.add(price, 1, 5);
+      centerPane.add(priceContent, 2, 5);
+      centerPane.add(minNights, 1, 6);
+      centerPane.add(minNightsContent, 2, 6);
+      centerPane.add(availability365, 1, 7);
+      centerPane.add(availability365Content, 2, 7);
+      centerPane.add(borough, 1, 8);
+      centerPane.add(boroughContent, 2, 8);
 
-      TableColumn<AirbnbListing, String> longitudeCol = new TableColumn<>("Longitude");
-      longitudeCol.setId("longitude");
-      longitudeCol.setCellValueFactory(new PropertyValueFactory<>("longitude"));
-      longitudeCol.setReorderable(false);
+      Stage stage = new Stage();
+      Scene scene = new Scene(singleListingView, 700, 400);
+      stage.setTitle(aListing.getName());
+      stage.setScene(scene);
+      stage.show();
+    }
 
-      TableColumn<AirbnbListing, String> roomTypeCol = new TableColumn<>("Room Type");
-      roomTypeCol.setId("roomType");
-      roomTypeCol.setCellValueFactory(new PropertyValueFactory<>("room_type"));
-      roomTypeCol.setReorderable(false);
+    private void previousButtonClicked(ActionEvent event)
+    {
 
-      // Price column
-      TableColumn<AirbnbListing, Integer> priceCol = new TableColumn<>("Price");
-      priceCol.setId("price");
-      priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-      priceCol.setReorderable(false);
+    }
 
-      // Reviews column
-      TableColumn<AirbnbListing, Integer> reviewNumCol = new TableColumn<>("Number of reviews");
-      reviewNumCol.setId("reviewNum");
-      reviewNumCol.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
-      reviewNumCol.setReorderable(false);
+    private void nextButtonClicked(ActionEvent event)
+    {
 
-      TableColumn<AirbnbListing, String> reviewsPerMonthCol = new TableColumn<>("Reviews per Month");
-      reviewsPerMonthCol.setId("reviewsPerMonth");
-      reviewsPerMonthCol.setCellValueFactory(new PropertyValueFactory<>("reviewsPerMonth"));
-      reviewsPerMonthCol.setReorderable(false);
+    }
 
-      TableColumn<AirbnbListing, String> lastReviewCol = new TableColumn<>("Last Review");
-      lastReviewCol.setId("lastReview");
-      lastReviewCol.setCellValueFactory(new PropertyValueFactory<>("lastReview"));
-      lastReviewCol.setReorderable(false);
-
-      // Minimum nights column
-      TableColumn<AirbnbListing, Integer> nightsCol = new TableColumn<>("Minimum no. nights stay");
-      nightsCol.setId("nights");
-      nightsCol.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
-      nightsCol.setReorderable(false);
-
-      TableColumn<AirbnbListing, String> calculatedHostListingsCol = new TableColumn<>("Calculated Host Listings");
-      calculatedHostListingsCol.setId("calculatedHostListings");
-      calculatedHostListingsCol.setCellValueFactory(new PropertyValueFactory<>("calculatedHostListingsCount"));
-      calculatedHostListingsCol.setReorderable(false);
-
-      TableColumn<AirbnbListing, String> availability365Col = new TableColumn<>("Availability 365");
-      availability365Col.setId("availability365");
-      availability365Col.setCellValueFactory(new PropertyValueFactory<>("availability365"));
-      availability365Col.setReorderable(false);
-
-      // Populate table
-      listingTable.getColumns().addAll(hostIdCol, hostNameCol, calculatedHostListingsCol, airbnbIdCol, airbnbNameCol, roomTypeCol, priceCol, nightsCol, availability365Col, boroughCol, latitudeCol, longitudeCol, reviewNumCol,  reviewsPerMonthCol, lastReviewCol);
-      listingTable.setItems(listingManager.getBoroughListings("Sutton"));
-
-      ComboBox sortingBox = new ComboBox();
-      sortingBox.setItems(mpe.getSortingOptions());
-      sortingBox.setMaxWidth(Integer.MAX_VALUE);
-      sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, listingManager.getBoroughListings("Sutton"), listingTable));
-
-      ToolBar sortBar = new ToolBar();
-      sortBar.getItems().add(new Label("Sort by:"));
-      sortBar.getItems().add(sortingBox);
-
-      BorderPane boroughPane = new BorderPane();
-      boroughPane.setCenter(listingTable);
-      boroughPane.setTop(sortBar);
-
-      Stage boroughWindow = new Stage();
-      boroughWindow.setScene(new Scene(boroughPane, 500, 500));
-      boroughWindow.setTitle("Sutton" + " Properties");
-      boroughWindow.show();
+    private void viewOnMapButtonClicked()
+    {
+      try {
+            Desktop.getDesktop().browse(new URI("https://www.google.com/maps/place/" + airbnbListing.getLatitude() + "," + airbnbListing.getLongitude()));
+          }
+      catch (IOException e1) {
+            System.out.println("Oops! Something's wrong with opening the map.");
+            e1.printStackTrace();
+          }
+      catch (URISyntaxException e1) {
+            System.out.println("Oops! Something's wrong with opening the map.");
+            e1.printStackTrace();
+        }
     }
  }
