@@ -234,10 +234,11 @@ public class MapPanelApplication extends Application
               && event.getClickCount() == 2) {
 
             AirbnbListing clickedRow = row.getItem();
-            openWindowView(clickedRow);
+            airbnbListing = clickedRow;
+            openWindowView(airbnbListing);
            }
          });
-        return row ;
+         return row ;
         });
 
         // Host-Name column
@@ -542,6 +543,7 @@ public class MapPanelApplication extends Application
       Label reviewsPerMonthContent = new Label(Double.toString(aListing.getReviewsPerMonth()));
       Label lastReview = new Label("Last Review: ");
       Label lastReviewContent = new Label(aListing.getLastReview());
+      Label nullLabel = new Label("no information");
 
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
@@ -554,7 +556,12 @@ public class MapPanelApplication extends Application
       centerPane.add(reviewsPerMonth, 0, 11);
       centerPane.add(reviewsPerMonthContent, 1, 11);
       centerPane.add(lastReview, 0, 12);
-      centerPane.add(lastReviewContent, 1, 12);
+      switch(aListing.getLastReview()){
+          case (""):
+          centerPane.add(nullLabel, 1, 12);
+          default:
+          centerPane.add(lastReviewContent, 1, 12);
+        }
       centerPane.add(propertyName, 1, 1);
       centerPane.add(propertyNameContent, 2,1);
       centerPane.add(propertyId, 1, 2);
@@ -581,7 +588,7 @@ public class MapPanelApplication extends Application
 
     private void previousButtonClicked(ActionEvent event)
     {
-
+        
     }
 
     private void nextButtonClicked(ActionEvent event)
