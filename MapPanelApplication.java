@@ -493,12 +493,12 @@ public class MapPanelApplication extends Application
       BorderPane singleListingView = new BorderPane();
       GridPane centerPane = new GridPane();
 
-      Image logo = new Image("/images/airbnb-logo.png");
+      Image logo = new Image("/images/horizontal_pic1.png");
       ImageView logoView = new ImageView();
       logoView.setImage(logo);
-      logoView.setPreserveRatio(true);
       logoView.setFitHeight(200);
-      logoView.setFitWidth(200);
+      logoView.setFitWidth(600);
+      singleListingView.setAlignment(logoView, Pos.CENTER);
       singleListingView.setTop(logoView);
       singleListingView.setCenter(centerPane);
       centerPane.setAlignment(Pos.CENTER);

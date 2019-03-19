@@ -14,21 +14,21 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanelApplication">
+<BorderPane stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanelApplication">
    <top>
                                     <ToolBar prefHeight="34.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
                                       <items>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price Range Per Night: " />
-                                          <Button fx:id="FiveToTen" mnemonicParsing="false" onAction="#belowTenRangeClick" text="below £10" />
-                                          <Button fx:id="TenToTwenty" mnemonicParsing="false" onAction="#TenToTwentyRangeClick" text="£10-20" />
-                                          <Button fx:id="TwentyToThirty" mnemonicParsing="false" onAction="#TwentyToThirtyRangeClick" text="£20-30" />
-                                          <Button fx:id="ThirtyToFourty" mnemonicParsing="false" onAction="#ThirtyToFourtyRangeClick" text="£30-40" />
-                                          <Button fx:id="FourtyToFifty" mnemonicParsing="false" onAction="#FourtyToFiftyRangeClick" text="£40-50" />
-                                          <Button fx:id="FiftyToOneH" mnemonicParsing="false" onAction="#FiftyToOneHRangeClick" text="£50-100" />
-                                          <Button fx:id="OneHToThreeH" mnemonicParsing="false" onAction="#OneHToThreeHRangeClick" text="£100-300" />
-                                          <Button fx:id="ThreeHToSixH" mnemonicParsing="false" onAction="#ThreeHToSixHRangeClick" text="£300-600" />
-                                          <Button fx:id="SixHToOneT" mnemonicParsing="false" onAction="#SixHToOneTRangeClick" text="£600-1000" />
-                                          <Button fx:id="AllPrices" mnemonicParsing="false" onAction="#AllPricesClick" text="All Prices" />
+                                          <Button fx:id="FiveToTen" mnemonicParsing="false" onAction="#belowTenRangeClick" styleClass="price-button" text="below £10" />
+                                          <Button fx:id="TenToTwenty" mnemonicParsing="false" onAction="#TenToTwentyRangeClick" styleClass="price-button" text="£10-20" />
+                                          <Button fx:id="TwentyToThirty" mnemonicParsing="false" onAction="#TwentyToThirtyRangeClick" styleClass="price-button" text="£20-30" />
+                                          <Button fx:id="ThirtyToFourty" mnemonicParsing="false" onAction="#ThirtyToFourtyRangeClick" styleClass="price-button" text="£30-40" />
+                                          <Button fx:id="FourtyToFifty" mnemonicParsing="false" onAction="#FourtyToFiftyRangeClick" styleClass="price-button" text="£40-50" />
+                                          <Button fx:id="FiftyToOneH" mnemonicParsing="false" onAction="#FiftyToOneHRangeClick" styleClass="price-button" text="£50-100" />
+                                          <Button fx:id="OneHToThreeH" mnemonicParsing="false" onAction="#OneHToThreeHRangeClick" styleClass="price-button" text="£100-300" />
+                                          <Button fx:id="ThreeHToSixH" mnemonicParsing="false" onAction="#ThreeHToSixHRangeClick" styleClass="price-button" text="£300-600" />
+                                          <Button fx:id="SixHToOneT" mnemonicParsing="false" onAction="#SixHToOneTRangeClick" styleClass="price-button" text="£600-1000" />
+                                          <Button fx:id="AllPrices" mnemonicParsing="false" onAction="#AllPricesClick" styleClass="price-button" text="All Prices" />
                                       </items>
          <opaqueInsets>
             <Insets />
@@ -36,7 +36,7 @@
                                     </ToolBar>
    </top>
    <center>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" stylesheets="@MapLayout.css" BorderPane.alignment="CENTER">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <Button fx:id="Sutton" layoutX="373.0" layoutY="666.0" mnemonicParsing="false" onAction="#SUTTClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="SUTT" />
                                           <Button fx:id="Haringey" layoutX="435.0" layoutY="145.0" mnemonicParsing="false" onAction="#HRGYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRGY" />
