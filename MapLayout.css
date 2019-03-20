@@ -1,308 +1,42 @@
+.comboBoxLabel {
+  -fx-font: 30px "Tw Cen MT";
+  -fx-text-fill: white;
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.combo-box {
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: white;
+}
+
 .borough-button{
   -fx-shape: "M 250 300 L 350 250 L 450 300 L 450 400 L 350 450 L 250 400 L 250 300";
   -fx-font-size: 20px;
   -fx-font-family: "Tw Cen MT";
 }
 
-#FiveToTen{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#FiveToTen:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#TenToTwenty{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#TenToTwenty:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#TwentyToThirty{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#TwentyToThirty:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#ThirtyToFourty{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#ThirtyToFourty:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#FourtyToFifty{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#FourtyToFifty:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#FiftyToOneH{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#FiftyToOneH:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#OneHToThreeH{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#OneHToThreeH:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#ThreeHToSixH{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#ThreeHToSixH:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#SixHToOneT{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#SixHToOneT:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#AllPrices{
-  -fx-text-align: center;
-  -fx-background-color: white;
-}
-
-#AllPrices:hover{
-  -fx-background-color: #e0ffff;
-}
-
-#Sutton:hover{
+.borough-button:hover{
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
   -fx-text-fill:black;
-  -fx-font-weight:bold;
+  -fx-font-weight:bold;    
 }
 
-#Haringey:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
+.price-button {
+    -fx-text-align: center;
+    -fx-background-color: white;
 }
 
-#Havering:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Harrow:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#BarkingandDagenham:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Greenwich:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Bexley:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Enfield:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Barnet:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#WalthamForest:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Hillingdon:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Ealing:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Brent:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Camden:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Westminster:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Islington:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Hackney:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#TowerHamlets:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Redbridge:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Enfield:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#KensingtonandChelsea:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Newham:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Hounslow:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#HammersmithandFulham:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Wandsworth:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#CityofLondon:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#RichmonduponThames:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Merton:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#KingstonuponThames:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Lambeth:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Southwark:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Croydon:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Lewisham:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
-}
-
-#Bromley:hover{
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
-  -fx-text-fill:black;
-  -fx-font-weight:bold;
+.price-button:hover {
+    -fx-background-color: #e0ffff;
 }
 
 #toolBar{
   -fx-background-color: #000000;
 }
 
-#borderPane{
+#mapPane{
   -fx-background-image:url('/images/horizontal_pic1.jpg');
   -fx-background-repeat: stretch;
 }
@@ -325,39 +59,18 @@
 
 #sortBar{
   -fx-background-color: black;
-}
-
-#sortingBox{
-  -fx-background-color: white;
-}
-
-#hostName{
-  -fx-font-family: "Tw Cen MT";
-  -fx-font-size: 20px;
-  -fx-text-fill:black;
-}
-
-#price{
-  -fx-font-family: "Tw Cen MT";
-  -fx-font-size: 20px;
-  -fx-text-fill:black;
-}
-
-
-#nights{
-  -fx-font-family: "Tw Cen MT";
-  -fx-font-size: 20px;
-  -fx-text-fill:black;
-}
-
-#review{
-  -fx-font-family: "Tw Cen MT";
-  -fx-font-size: 20px;
-  -fx-text-fill:black;
+  
 }
 
 #sortingBox{
   -fx-font-family: "Tw Cen MT";
   -fx-font-size: 18px;
+  -fx-text-fill:black;
+  -fx-background-color: white;
+}
+
+.columnStyle{
+  -fx-font-family: "Tw Cen MT";
+  -fx-font-size: 20px;
   -fx-text-fill:black;
 }

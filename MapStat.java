@@ -32,47 +32,52 @@ public class MapStat
     /**
      * Creates the Map Stats
      */
-    public AnchorPane createMapStats()
+    public AnchorPane createMapStats(double lat, double lon)
     {
         // Create buttons
-        Button nextProperty = new Button("Next Property");
-        Button previousProperty = new Button("Previous Property");
+        //Button nextProperty = new Button("Next Property");
+        //Button previousProperty = new Button("Previous Property");
         Button directions = new Button("Show Directions");
         
         AnchorPane pane = new AnchorPane();
-        pane.setPrefHeight(400);
-        browser.setMaxHeight(400);
+        pane.setPrefSize(800, 700);
+        browser.prefWidthProperty().bind(pane.widthProperty());
+        browser.prefHeightProperty().bind(pane.heightProperty());
         
         HBox toolbar = new HBox();
         toolbar.setSpacing(10);
         toolbar.setAlignment(Pos.CENTER);
         
-        toolbar.getChildren().add(nextProperty);
-        toolbar.getChildren().add(previousProperty);
+        //toolbar.getChildren().add(nextProperty);
+        //toolbar.getChildren().add(previousProperty);
         toolbar.getChildren().add(directions);
         
-        nextButton(); // move to the first property
+        viewProperty(lat, lon);
         
         pane.getChildren().add(browser);
         pane.getChildren().add(toolbar);
         pane.setRightAnchor(toolbar, 10.0);
         pane.setTopAnchor(toolbar, 5.0);
         
-        nextProperty.setOnAction(e -> nextButton());
-        previousProperty.setOnAction(e -> previousButton());
-        directions.setOnAction(e -> showDirections());
+        //nextProperty.setOnAction(e -> nextButton());
+        //previousProperty.setOnAction(e -> previousButton());
+        directions.setOnAction(e -> showDirections(lat, lon));
         return pane;
     }
     
     /**
      * Shows the directions to the property
      */
-    private void showDirections() 
+    private void showDirections(double lat, double lon)
     {
         webEngine.load("https://maps.google.com/?saddr=My+Location&daddr="
-                       + listings.get(listingIndex).getLatitude()
-                       + "," + listings.get(listingIndex).getLongitude());
+                       + lat + "," + lon);
     }
+    
+    private void viewProperty(double lat, double lon) 
+    {
+        webEngine.load("https://google.com/maps/place/" + lat + "," + lon);
+    }    
     
     /**
      * Move to the next property on the map

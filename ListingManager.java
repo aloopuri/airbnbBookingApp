@@ -22,6 +22,24 @@ public class ListingManager
     {
         return listings;
     }
+    
+    public ArrayList<Integer> getMenuOptions() 
+    {
+        ArrayList<Integer> prices = getAllPrices();
+        
+        Integer maxPrice = Collections.max(prices);
+        prices = new ArrayList();
+        int counter = 0;
+        while (counter < maxPrice) {
+            prices.add(counter);
+            counter += 100;
+        }
+        
+        if (counter != maxPrice && counter > maxPrice) {
+            prices.add(counter);
+        }    
+        return prices;
+    }    
 
     public ArrayList<Integer> getAllPrices()
     {
@@ -44,7 +62,6 @@ public class ListingManager
     public ObservableList<AirbnbListing> getBoroughListings(String borough)
     {
         ObservableList<AirbnbListing> observableListings = FXCollections.observableArrayList();
-
         for (AirbnbListing listing : listings)
         {
             if (listing.getNeighbourhood().equals(borough)) {
