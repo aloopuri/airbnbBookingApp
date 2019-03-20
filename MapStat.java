@@ -17,14 +17,14 @@ import java.util.ArrayList;
  */
 public class MapStat
 {
-    ArrayList<AirbnbListing> listings;
+    ListingManager listingManager;
     private WebView browser;
     private WebEngine webEngine;
     private int listingIndex = -1;
     
-    public MapStat() 
+    public MapStat(ListingManager listingManager) 
     {
-        listings = new AirbnbDataLoader().load();
+        this.listingManager = listingManager;
         browser = new WebView();
         webEngine = browser.getEngine();
     }    
@@ -85,8 +85,8 @@ public class MapStat
     private void nextButton()
     {
         listingIndex++;
-        if (listingIndex != listings.size()) {
-            AirbnbListing element = listings.get(listingIndex);
+        if (listingIndex != listingManager.getListings().size()) {
+            AirbnbListing element = listingManager.getListings().get(listingIndex);
             webEngine.load("https://google.com/maps/place/" +
                            element.getLatitude() + "," + element.getLongitude());
         }
@@ -103,12 +103,12 @@ public class MapStat
     {
         listingIndex--;
         if (listingIndex >= 0) {
-            AirbnbListing element = listings.get(listingIndex);
+            AirbnbListing element = listingManager.getListings().get(listingIndex);
             webEngine.load("https://google.com/maps/place/" +
                            element.getLatitude() + "," + element.getLongitude());                          
         }
         else {
-            listingIndex = listings.size(); // wrap to end listing
+            listingIndex = listingManager.getListings().size(); // wrap to end listing
             previousButton();
         }        
     }

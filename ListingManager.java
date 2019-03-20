@@ -30,14 +30,14 @@ public class ListingManager
         Integer maxPrice = Collections.max(prices);
         prices = new ArrayList();
         int counter = 0;
-        while (counter < maxPrice) {
+        while (counter <= maxPrice) {
             prices.add(counter);
-            counter += 100;
+            counter += 200;
         }
         
-        if (counter != maxPrice && counter > maxPrice) {
+        if (counter > maxPrice) {
             prices.add(counter);
-        }    
+        }
         return prices;
     }    
 

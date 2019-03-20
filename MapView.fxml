@@ -13,11 +13,11 @@
    <top>
                                     <ToolBar fx:id="toolBar" prefHeight="34.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
                                       <items>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Price Range Per Night: ">
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Price Range Per Night: " wrappingWidth="176.9375">
                <font>
                   <Font name="Tw Cen MT" size="19.0" />
                </font></Text>
-                                          <Button fx:id="FiveToTen" mnemonicParsing="false" onAction="#belowTenRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="below £10">
+                                          <Button fx:id="BelowTen" mnemonicParsing="false" onAction="#belowTenRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="below £10">
                <font>
                   <Font name="Tw Cen MT" size="13.0" />
                </font></Button>
@@ -50,7 +50,7 @@
                   <Font name="Tw Cen MT" size="13.0" />
                </font></Button>
                                           <Button fx:id="SixHToOneT" mnemonicParsing="false" onAction="#SixHToOneTRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£600-1000" />
-                                          <Button fx:id="AllPrices" mnemonicParsing="false" onAction="#AllPricesClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="All Prices">
+                                          <Button fx:id="AllPrices" mnemonicParsing="false" onAction="#AllPricesClick" prefHeight="30.0" prefWidth="85.0" styleClass="price-button" text="All Prices">
                <font>
                   <Font name="Tw Cen MT" size="13.0" />
                </font></Button>

@@ -23,7 +23,7 @@ public class MapPanelEngine
           return "Waltham Forest";
 
         case "TowerHamlets":
-          return "Waltham Forest";
+          return "Tower Hamlets";
 
         case "KensingtonandChelsea":
           return "Kensington and Chelsea";

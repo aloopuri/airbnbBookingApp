@@ -1,7 +1,12 @@
 .comboBoxLabel {
   -fx-font: 30px "Tw Cen MT";
   -fx-text-fill: white;
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.borough-button {
+  -fx-shape: "M 250 300 L 350 250 L 450 300 L 450 400 L 350 450 L 250 400 L 250 300";
+  -fx-font-size: 20px;
+  -fx-font-family: "Tw Cen MT";
 }
 
 .combo-box {
@@ -11,13 +16,13 @@
   -fx-background-color: white;
 }
 
-.borough-button{
+.borough-button {
   -fx-shape: "M 250 300 L 350 250 L 450 300 L 450 400 L 350 450 L 250 400 L 250 300";
   -fx-font-size: 20px;
   -fx-font-family: "Tw Cen MT";
 }
 
-.borough-button:hover{
+.borough-button:hover {
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
   -fx-text-fill:black;
   -fx-font-weight:bold;    
@@ -32,32 +37,34 @@
     -fx-background-color: #e0ffff;
 }
 
-#toolBar{
+#toolBar {
   -fx-background-color: #000000;
 }
 
-#mapPane{
+#mapPane {
   -fx-background-image:url('/images/horizontal_pic1.jpg');
   -fx-background-repeat: stretch;
+  -fx-background-position: center center;
+  -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
-#viewOnMapButton{
+#viewOnMapButton {
   -fx-background-color: black;
 }
 
-#viewOnMapButton:hover{
+#viewOnMapButton:hover {
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
   -fx-text-fill:grey;
 }
 
-#singleListingView{
+#singleListingView {
     -fx-background-image: url("/images/horizontal_pic2.png");
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
-#sortBar{
+#sortBar {
   -fx-background-color: black;
   
 }

@@ -55,7 +55,7 @@ public class MapPanel
     @FXML Button Lewisham;
     @FXML Button Bromley;
     @FXML Button Merton;
-    @FXML Button FiveToTen;
+    @FXML Button BelowTen;
     @FXML Button TenToTwenty;
     @FXML Button TwentyToThirty;
     @FXML Button ThirtyToFourty;
@@ -64,6 +64,8 @@ public class MapPanel
     @FXML Button OneHToThreeH;
     @FXML Button ThreeHToSixH;
     @FXML Button SixHToOneT;
+    @FXML Button OneTToFourT;
+    @FXML Button FourTToSevenT;
     @FXML Button AllPrices;
 
     public MapPanel()
@@ -187,6 +189,18 @@ public class MapPanel
     }
 
     @FXML
+    private void OneTToFourTRangeClick(ActionEvent event)
+    {
+        showViewInRange(1000, 4000);
+    }
+
+    @FXML
+    private void FourTToSevenTRangeClick(ActionEvent event)
+    {
+        showViewInRange(4000, 7000);
+    }
+
+    @FXML
     private void AllPricesClick(ActionEvent event)
     {
         showViewInRange(0, listingManager.getAllPrices().size());
@@ -268,6 +282,7 @@ public class MapPanel
 
         ComboBox sortingBox = new ComboBox();
         sortingBox.setId("sortingBox");
+        sortingBox.setPromptText("please choose a condition");
         sortingBox.setItems(mpe.getSortingOptions());
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
         sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, listingManager.getBoroughListings(boroughName), listingTable));
@@ -276,8 +291,9 @@ public class MapPanel
         Label sortByLabel = new Label("Sort by:");
         sortByLabel.setStyle("-fx-text-fill: white;");
         sortBar.getItems().add(sortByLabel);
-        sortBar.setId("sortBar");
         sortBar.getItems().add(sortingBox);
+        sortBar.setId("sortBar");
+        
 
         BorderPane boroughPane = new BorderPane();
         boroughPane.setId("boroughPane");
@@ -450,7 +466,7 @@ public class MapPanel
     private void viewOnMapButtonClicked(double lat, double lon)
     {
         Stage mapStage = new Stage();
-        Scene mapScene = new Scene(new MapStat().createMapStats(lat, lon));
+        Scene mapScene = new Scene(new MapStat(listingManager).createMapStats(lat, lon));
         mapStage.setScene(mapScene);
         mapStage.setTitle("Property Map Viewer");
         mapStage.getIcons().add(new Image("/images/airbnb-small.png"));

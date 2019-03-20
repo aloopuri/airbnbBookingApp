@@ -115,8 +115,12 @@ public class AirbnbApplication extends Application
         updatePriceRange(fromBox.getValue(), toBox.getValue());
 
         fromBox.setPromptText("-");
+        fromBox.setId("fromBox");
         toBox.setPromptText("-");
+        toBox.setId("toBox");
 
+        frontButton.setId("frontButton");
+        backButton.setId("backButton");
         backButton.setPrefWidth(50);
         frontButton.setPrefWidth(50);
         backButton.setDisable(true);
@@ -159,7 +163,7 @@ public class AirbnbApplication extends Application
         addAnimation(fromBox);
         addAnimation(toLabel);
         addAnimation(toBox);
-
+        
         return root;
     }
 
