@@ -4,12 +4,12 @@
   -fx-font-family: "Tw Cen MT";
 }
 
-#FiveToTen{
+#BelowTen{
   -fx-text-align: center;
   -fx-background-color: white;
 }
 
-#FiveToTen:hover{
+#BelowTen:hover{
   -fx-background-color: #e0ffff;
 }
 
@@ -82,6 +82,24 @@
 }
 
 #SixHToOneT:hover{
+  -fx-background-color: #e0ffff;
+}
+
+#OneTToFourT{
+  -fx-text-align: center;
+  -fx-background-color: white;
+}
+
+#OneTToFourT:hover{
+  -fx-background-color: #e0ffff;
+}
+
+#FourTToSevenT{
+  -fx-text-align: center;
+  -fx-background-color: white;
+}
+
+#FourTToSevenT:hover{
   -fx-background-color: #e0ffff;
 }
 
@@ -305,6 +323,8 @@
 #borderPane{
   -fx-background-image:url('/images/horizontal_pic1.jpg');
   -fx-background-repeat: stretch;
+  -fx-background-position: center center;
+  -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
 #viewOnMapButton{
@@ -360,4 +380,10 @@
   -fx-font-family: "Tw Cen MT";
   -fx-font-size: 18px;
   -fx-text-fill:black;
+}
+
+#sortText{
+  -fx-font-family: "Tw Cen MT";
+  -fx-font-size: 18px;
+  -fx-text-fill:white;
 }

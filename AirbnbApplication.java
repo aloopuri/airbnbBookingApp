@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.geometry.Pos;
+import javafx.scene.*;
+import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
@@ -21,9 +21,7 @@ import java.util.ArrayList;
  */
 public class AirbnbApplication extends Application
 {
-
     private Label myLabel = new Label("Welcome - Choose a range of prices to continue"); // Temporary
-
     private ArrayList<Scene> scenes;
     private ListingManager listingManager;
     private int currentScene = 0;
@@ -58,7 +56,8 @@ public class AirbnbApplication extends Application
     public void start(Stage stage) throws Exception
     {
         BorderPane welcomePane = createWelcome();
-        Scene welcomeScene = new Scene(welcomePane, 500, 500);
+        welcomePane.setId("welcomePane");
+        Scene welcomeScene = new Scene(welcomePane, 1200, 900);
         welcomeScene.getStylesheets().add("WelcomeLayout.css");
 
         scenes.add(welcomeScene);
@@ -86,23 +85,23 @@ public class AirbnbApplication extends Application
         ImageView logoView = new ImageView();
         logoView.setImage(logo);
         logoView.setPreserveRatio(true);
-        logoView.setFitHeight(200);
-        logoView.setFitWidth(200);
+        logoView.setFitHeight(300);
+        logoView.setFitWidth(300);
 
         Image icon = new Image("/images/airbnb-small.png");
         ImageView iconView = new ImageView();
         iconView.setImage(icon);
         iconView.setPreserveRatio(true);
-        iconView.setFitHeight(50);
-        iconView.setFitWidth(50);
+        iconView.setFitHeight(100);
+        iconView.setFitWidth(100);
 
         Label welcomeLabel = new Label("Welcome to Airbnb London");
         welcomeLabel.setId("title");
 
         Label fromLabel = new Label("From:");
         Label toLabel = new Label("To:");
-        fromLabel.setId("topControls");
-        toLabel.setId("topControls");
+        fromLabel.setId("fromLabel");
+        toLabel.setId("toLabel");
 
         Label infoLabel = new Label("Select a price range to begin." +
                                     "\nCurrently selected price range:");
@@ -111,8 +110,12 @@ public class AirbnbApplication extends Application
         updatePriceRange(fromBox.getValue(), toBox.getValue());
 
         fromBox.setPromptText("-");
+        fromBox.setId("fromBox");
         toBox.setPromptText("-");
+        toBox.setId("toBox");
 
+        frontButton.setId("frontButton");
+        backButton.setId("backButton");
         backButton.setPrefWidth(50);
         frontButton.setPrefWidth(50);
         backButton.setDisable(true);
@@ -125,22 +128,14 @@ public class AirbnbApplication extends Application
         HBox topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
         topPane.setSpacing(10);
-        topPane.getChildren().add(iconView);
-        topPane.getChildren().add(leftRegion);
-        topPane.getChildren().add(fromLabel);
-        topPane.getChildren().add(fromBox);
-        topPane.getChildren().add(toLabel);
-        topPane.getChildren().add(toBox);
+        topPane.getChildren().addAll(iconView, leftRegion, fromLabel, fromBox, toLabel, toBox, new Region());
         topPane.setHgrow(leftRegion, Priority.ALWAYS);
 
         // Create a new VBox for the center area
         VBox centerPane = new VBox();
         centerPane.setAlignment(Pos.CENTER);
         centerPane.setSpacing(10);
-        centerPane.getChildren().add(logoView);
-        centerPane.getChildren().add(welcomeLabel);
-        centerPane.getChildren().add(infoLabel);
-        centerPane.getChildren().add(priceRange);
+        centerPane.getChildren().addAll(logoView, welcomeLabel, infoLabel, priceRange);
 
         // Creates a BorderPane for the bottom area
         BorderPane bottomPane = new BorderPane();
@@ -153,13 +148,29 @@ public class AirbnbApplication extends Application
         root.setCenter(centerPane);
         root.setBottom(bottomPane);
 
-        FadeTransition ft = new FadeTransition(Duration.millis(4000), logoView);
+        //add animation effects for all components
+        addAnimation(logoView);
+        addAnimation(iconView);
+        addAnimation(welcomeLabel);
+        addAnimation(infoLabel);
+        addAnimation(priceRange);
+        addAnimation(fromLabel);
+        addAnimation(fromBox);
+        addAnimation(toLabel);
+        addAnimation(toBox);
+        addAnimation(frontButton);
+        addAnimation(backButton);
+
+        return root;
+    }
+
+    private void addAnimation(Node node)
+    {
+        FadeTransition ft = new FadeTransition(Duration.millis(5000), node);
         ft.setFromValue(0.0);
         ft.setToValue(1.0);
         ft.setCycleCount(1);
         ft.play();
-
-        return root;
     }
 
     /**

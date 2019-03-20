@@ -58,7 +58,7 @@ public class MapPanelApplication extends Application
     @FXML Button Lewisham;
     @FXML Button Bromley;
     @FXML Button Merton;
-    @FXML Button FiveToTen;
+    @FXML Button BelowTen;
     @FXML Button TenToTwenty;
     @FXML Button TwentyToThirty;
     @FXML Button ThirtyToFourty;
@@ -67,6 +67,8 @@ public class MapPanelApplication extends Application
     @FXML Button OneHToThreeH;
     @FXML Button ThreeHToSixH;
     @FXML Button SixHToOneT;
+    @FXML Button OneTToFourT;
+    @FXML Button FourTToSevenT;
     @FXML Button AllPrices;
 
     public MapPanelApplication()
@@ -83,7 +85,7 @@ public class MapPanelApplication extends Application
     {
         URL url = getClass().getResource("MapView.fxml");
         Parent root = FXMLLoader.load(url);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 1200, 900);
 
         stage.setTitle("Map");
         stage.setScene(scene);
@@ -197,6 +199,18 @@ public class MapPanelApplication extends Application
     }
 
     @FXML
+    private void OneTToFourTRangeClick(ActionEvent event)
+    {
+        showViewInRange(1000, 4000);
+    }
+
+    @FXML
+    private void FourTToSevenTRangeClick(ActionEvent event)
+    {
+        showViewInRange(4000, 7000);
+    }
+
+    @FXML
     private void AllPricesClick(ActionEvent event)
     {
         showViewInRange(0, listingManager.getAllPrices().size());
@@ -272,14 +286,16 @@ public class MapPanelApplication extends Application
 
         ComboBox sortingBox = new ComboBox();
         sortingBox.setId("sortingBox");
+        sortingBox.setPromptText("please choose a condition");
         sortingBox.setItems(mpe.getSortingOptions());
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
         sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, listingManager.getBoroughListings(boroughName), listingTable));
 
         ToolBar sortBar = new ToolBar();
-        sortBar.getItems().add(new Label("Sort by:"));
+        Label sortText = new Label("Sort by:");
+        sortText.setId("sortText");
         sortBar.setId("sortBar");
-        sortBar.getItems().add(sortingBox);
+        sortBar.getItems().addAll(sortText, sortingBox);
 
         BorderPane boroughPane = new BorderPane();
         boroughPane.setId("boroughPane");
@@ -499,7 +515,7 @@ public class MapPanelApplication extends Application
       BorderPane singleListingView = new BorderPane();
       singleListingView.setId("singleListingView");
       GridPane centerPane = new GridPane();
-      
+
       //the GridPane is wrapped in the BorderPane in order to keep
       //the contents in the middle of the screen at all time
       singleListingView.setCenter(centerPane);
@@ -603,7 +619,7 @@ public class MapPanelApplication extends Application
       nullLabel.setTextFill(Color.web("#ffffff"));
       viewOnMapButton.setFont(new Font("Tw Cen MT", 18));
       viewOnMapButton.setTextFill(Color.web("#ffffff"));
-      
+
       //add labels to specific positions on centerPane
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
@@ -637,7 +653,7 @@ public class MapPanelApplication extends Application
       centerPane.add(availability365Content, 2, 7);
       centerPane.add(borough, 1, 8);
       centerPane.add(boroughContent, 2, 8);
-      
+
       //show the stage
       Stage stage = new Stage();
       Scene scene = new Scene(singleListingView, 700, 450);
