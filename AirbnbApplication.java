@@ -199,6 +199,7 @@ public class AirbnbApplication extends Application
                 alert.setContentText("From value is greater than To value.");
                 updatePriceRange(fromBox.getValue(), toBox.getValue());
                 disableNavigation();
+                map.updateView(0, listingManager.getListings().size());
                 alert.showAndWait();
             }
             else {
