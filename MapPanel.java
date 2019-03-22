@@ -15,6 +15,7 @@ import javafx.geometry.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
+import java.util.ResourceBundle;
 public class MapPanel
 {
     private ListingManager listingManager;
@@ -68,17 +69,19 @@ public class MapPanel
     @FXML Button FourTToSevenT;
     @FXML Button AllPrices;
 
-    public MapPanel()
+    public MapPanel(ListingManager listingManager)
     {
-        ArrayList<AirbnbListing> listings = new AirbnbDataLoader().load();
-        listingManager = new ListingManager(listings);
+        this.listingManager = listingManager;
         mpe = new MapPanelEngine();
+        initializeButtons();
     }
 
     public BorderPane createMap() throws Exception
     {
         URL url = getClass().getResource("MapView.fxml");
-        Parent root = FXMLLoader.load(url);
+        FXMLLoader loader = new FXMLLoader(url);
+        loader.setControllerFactory(c -> { return this; });
+        Parent root = loader.load();
         return (BorderPane)root;
     }
 
@@ -129,9 +132,17 @@ public class MapPanel
     }
     
     @FXML
-    private void initialize() 
+    public void initialize() 
     {
-        showViewInRange(0, listingManager.getAllPrices().size());
+        initializeButtons();
+    }
+    
+    /**
+     * Updates the map view
+     */
+    public void updateView(int from, int to) 
+    {
+        showViewInRange(from, to);
     }
 
     @FXML
@@ -208,7 +219,6 @@ public class MapPanel
 
     private void showViewInRange(int lowerBound, int upperBound)
     {
-        initializeButtons();
         //use this loading method outisde the loop so the program runs faster
         ArrayList<Integer> selectedBoroughPrices = new ArrayList<>();
         for(Button button: getButtons()){

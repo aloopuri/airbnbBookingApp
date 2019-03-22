@@ -24,12 +24,14 @@ public class AirbnbApplication extends Application
     private int currentScene = 0;
     private Stage mainStage;
     
+    private MapPanel map;
+    
     // Controls on most panels
     private Button backButton = new Button("<");
     private Button frontButton = new Button(">");
     private ComboBox fromBox;
     private ComboBox toBox;
-    private HBox topPane;    
+    private HBox topPane;
     private BorderPane bottomPane;
     private Label priceRange;
     /**
@@ -58,9 +60,12 @@ public class AirbnbApplication extends Application
         Scene welcomeScene = new Scene(welcomePane, 1200, 900);
         welcomeScene.getStylesheets().add("WelcomeLayout.css");
 
+        map = new MapPanel(listingManager);
+        BorderPane pane = map.createMap();
+        Scene mapScene = new Scene(pane);
+        
+        scenes.add(mapScene);        
         scenes.add(welcomeScene);
-        stage.setTitle("Airbnb London");
-        stage.setScene(welcomeScene);
 
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
@@ -68,10 +73,9 @@ public class AirbnbApplication extends Application
 
         frontButton.setOnAction(e -> nextScene(e));
         backButton.setOnAction(e -> previousScene(e));
-        MapPanel map = new MapPanel();
-        BorderPane pane = map.createMap();
-        Scene mapScene = new Scene(pane);
-        scenes.add(mapScene);
+
+        stage.setTitle("Airbnb London");
+        stage.setScene(welcomeScene);
         
         // Show the Stage (window)
         stage.show();
@@ -199,6 +203,7 @@ public class AirbnbApplication extends Application
             }
             else {
                 updatePriceRange(fromBox.getValue(), toBox.getValue());
+                map.updateView(from, to);
                 enableNavigation();
             }
         }
@@ -266,7 +271,7 @@ public class AirbnbApplication extends Application
     private void moveScene(int sceneIndex) 
     {
         Scene newScene = scenes.get(sceneIndex);
-        //((BorderPane)newScene.getRoot()).setTop(topPane); // uncomment to put from/to boxes on all scenes
+        ((BorderPane)newScene.getRoot()).setTop(topPane); // uncomment to put from/to boxes on all scenes
         ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
         mainStage.setScene(newScene);
     }
