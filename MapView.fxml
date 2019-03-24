@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="mapPane" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
+<BorderPane fx:id="mapPane" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
    <center>
                   <Pane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
                                        <children>
@@ -47,7 +47,7 @@
                                           <Button fx:id="Croydon" layoutX="491.0" layoutY="667.0" mnemonicParsing="false" onAction="#CROYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CROY" />
                                           <Button fx:id="Lewisham" layoutX="669.0" layoutY="563.0" mnemonicParsing="false" onAction="#LEWSClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LEWS" />
                                           <Button fx:id="Bromley" layoutX="609.0" layoutY="666.0" mnemonicParsing="false" onAction="#BROMClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
-                        <Text fx:id="keyTitle" fill="WHITE" layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Avilable Airbnb: " wrappingWidth="326.615234375">
+                        <Text fx:id="keyTitle" fill="WHITE" layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Available Airbnbs:" wrappingWidth="326.615234375">
                <font>
                   <Font name="Tw Cen MT Bold" size="23.0" />
                </font></Text>

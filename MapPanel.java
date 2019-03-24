@@ -6,7 +6,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.net.*;
 import javafx.fxml.*;
-import javafx.scene.paint.*;
 import java.util.ArrayList;
 import javafx.scene.control.cell.*;
 import javafx.collections.*;
@@ -15,7 +14,7 @@ import javafx.geometry.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
-import java.util.ResourceBundle;
+
 public class MapPanel
 {
     private ListingManager listingManager;
@@ -208,7 +207,7 @@ public class MapPanel
 
         ComboBox sortingBox = new ComboBox();
         sortingBox.setId("sortingBox");
-        sortingBox.setPromptText("please choose a condition");
+        sortingBox.setPromptText("-");
         sortingBox.setItems(mpe.getSortingOptions());
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
         sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, listingManager.getBoroughListings(boroughName), listingTable));

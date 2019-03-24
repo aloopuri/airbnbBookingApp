@@ -63,8 +63,8 @@ public class AirbnbApplication extends Application
         BorderPane pane = map.createMap();
         Scene mapScene = new Scene(pane, 1200, 1000);
 
-        scenes.add(mapScene);
         scenes.add(welcomeScene);
+        scenes.add(mapScene);
 
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
@@ -77,7 +77,10 @@ public class AirbnbApplication extends Application
         stage.setScene(welcomeScene);
 
         // Show the Stage (window)
+        stage.centerOnScreen();
+        stage.sizeToScene();
         stage.show();
+        
         mainStage = stage;
         mainStage.getIcons().add(new Image("/images/airbnb-small.png"));
     }
