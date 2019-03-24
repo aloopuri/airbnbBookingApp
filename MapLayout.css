@@ -3,12 +3,6 @@
   -fx-text-fill: white;
 }
 
-.borough-button {
-  -fx-shape: "M 250 300 L 350 250 L 450 300 L 450 400 L 350 450 L 250 400 L 250 300";
-  -fx-font-size: 20px;
-  -fx-font-family: "Tw Cen MT";
-}
-
 .combo-box {
   -fx-font: 15px "Tw Cen MT";
   -fx-text-fill: black;
@@ -25,20 +19,16 @@
 .borough-button:hover {
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
   -fx-text-fill:black;
-  -fx-font-weight:bold;    
+  -fx-font-weight:bold;
 }
 
-.price-button {
-    -fx-text-align: center;
-    -fx-background-color: white;
+.singlePropertyLabel{
+  -fx-font: 18px "Tw Cen MT";
+  -fx-text-fill: white;
 }
 
-.price-button:hover {
-    -fx-background-color: #e0ffff;
-}
-
-#toolBar {
-  -fx-background-color: #000000;
+#keyTitle{
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
 }
 
 #mapPane {
@@ -50,6 +40,9 @@
 
 #viewOnMapButton {
   -fx-background-color: black;
+  -fx-font-family: "Tw Cen MT";
+  -fx-text-fill:white;
+  -fx-font-size: 15px;
 }
 
 #viewOnMapButton:hover {
@@ -66,7 +59,7 @@
 
 #sortBar {
   -fx-background-color: black;
-  
+
 }
 
 #sortingBox{
@@ -80,4 +73,16 @@
   -fx-font-family: "Tw Cen MT";
   -fx-font-size: 20px;
   -fx-text-fill:black;
+}
+
+.googleMapButton {
+  -fx-background-color: black;
+  -fx-font-family: "Tw Cen MT";
+  -fx-text-fill:white;
+  -fx-font-size: 15px;
+}
+
+.googleMapButton:hover {
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-text-fill:grey;
 }

@@ -23,9 +23,8 @@ public class AirbnbApplication extends Application
     private ListingManager listingManager;
     private int currentScene = 0;
     private Stage mainStage;
-    
     private MapPanel map;
-    
+
     // Controls on most panels
     private Button backButton = new Button("<");
     private Button frontButton = new Button(">");
@@ -57,14 +56,14 @@ public class AirbnbApplication extends Application
     {
         BorderPane welcomePane = createWelcome();
         welcomePane.setId("welcomePane");
-        Scene welcomeScene = new Scene(welcomePane, 1200, 900);
+        Scene welcomeScene = new Scene(welcomePane, 1200, 1000);
         welcomeScene.getStylesheets().add("WelcomeLayout.css");
 
         map = new MapPanel(listingManager);
         BorderPane pane = map.createMap();
-        Scene mapScene = new Scene(pane);
-        
-        scenes.add(mapScene);        
+        Scene mapScene = new Scene(pane, 1200, 1000);
+
+        scenes.add(mapScene);
         scenes.add(welcomeScene);
 
         // Set ComboBox actions
@@ -76,7 +75,7 @@ public class AirbnbApplication extends Application
 
         stage.setTitle("Airbnb London");
         stage.setScene(welcomeScene);
-        
+
         // Show the Stage (window)
         stage.show();
         mainStage = stage;
@@ -114,7 +113,7 @@ public class AirbnbApplication extends Application
         Label infoLabel = new Label("Select a price range to begin." +
                                     "\nCurrently selected price range:");
         infoLabel.setId("infoLabel");
-        
+
         // Set price range Labels appropriately
         updatePriceRange(fromBox.getValue(), toBox.getValue());
 
@@ -156,7 +155,7 @@ public class AirbnbApplication extends Application
         root.setTop(topPane);
         root.setCenter(centerPane);
         root.setBottom(bottomPane);
-        
+
         //add animation effects for all components
         addAnimation(logoView);
         addAnimation(iconView);
@@ -167,7 +166,7 @@ public class AirbnbApplication extends Application
         addAnimation(fromBox);
         addAnimation(toLabel);
         addAnimation(toBox);
-        
+
         return root;
     }
 
@@ -179,7 +178,7 @@ public class AirbnbApplication extends Application
         ft.setCycleCount(1);
         ft.play();
     }
-    
+
     /**
      * Performs the ComboBox actions when interacted with
      */
@@ -252,15 +251,15 @@ public class AirbnbApplication extends Application
         frontButton.setDisable(true);
         backButton.setDisable(true);
     }
-    
-    private void nextScene(ActionEvent event) 
+
+    private void nextScene(ActionEvent event)
     {
         currentScene++;
         currentScene = currentScene % scenes.size();
         moveScene(currentScene);
     }
-    
-    private void previousScene(ActionEvent event) 
+
+    private void previousScene(ActionEvent event)
     {
         currentScene--;
         if (currentScene < 0) {
@@ -268,12 +267,13 @@ public class AirbnbApplication extends Application
         }
         moveScene(currentScene);
     }
-    
-    private void moveScene(int sceneIndex) 
+
+    private void moveScene(int sceneIndex)
     {
         Scene newScene = scenes.get(sceneIndex);
         ((BorderPane)newScene.getRoot()).setTop(topPane); // uncomment to put from/to boxes on all scenes
         ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
+        newScene.getStylesheets().add("WelcomeLayout.css");
         mainStage.setScene(newScene);
     }
 }

@@ -21,7 +21,7 @@ public class MapPanel
     private ListingManager listingManager;
     private MapPanelEngine mpe;
     private ArrayList<Button> mapButtons;
-    
+
     // Map Button declarations
     @FXML Button Sutton;
     @FXML Button Haringey;
@@ -56,18 +56,6 @@ public class MapPanel
     @FXML Button Lewisham;
     @FXML Button Bromley;
     @FXML Button Merton;
-    @FXML Button BelowTen;
-    @FXML Button TenToTwenty;
-    @FXML Button TwentyToThirty;
-    @FXML Button ThirtyToFourty;
-    @FXML Button FortyToFifty;
-    @FXML Button FiftyToOneH;
-    @FXML Button OneHToThreeH;
-    @FXML Button ThreeHToSixH;
-    @FXML Button SixHToOneT;
-    @FXML Button OneTToFourT;
-    @FXML Button FourTToSevenT;
-    @FXML Button AllPrices;
 
     public MapPanel(ListingManager listingManager)
     {
@@ -130,91 +118,19 @@ public class MapPanel
     {
         return mapButtons;
     }
-    
+
     @FXML
-    public void initialize() 
+    public void initialize()
     {
         initializeButtons();
     }
-    
+
     /**
      * Updates the map view
      */
-    public void updateView(int from, int to) 
+    public void updateView(int from, int to)
     {
         showViewInRange(from, to);
-    }
-
-    @FXML
-    private void belowTenRangeClick(ActionEvent event)
-    {
-        showViewInRange(0, 10);
-    }
-
-    @FXML
-    private void TenToTwentyRangeClick(ActionEvent event)
-    {
-        showViewInRange(10, 20);
-    }
-
-    @FXML
-    private void TwentyToThirtyRangeClick(ActionEvent event)
-    {
-        showViewInRange(20, 30);
-    }
-
-    @FXML
-    private void ThirtyToFourtyRangeClick(ActionEvent event)
-    {
-        showViewInRange(30, 40);
-    }
-
-    @FXML
-    private void FourtyToFiftyRangeClick(ActionEvent event)
-    {
-        showViewInRange(40, 50);
-    }
-
-    @FXML
-    private void FiftyToOneHRangeClick(ActionEvent event)
-    {
-        showViewInRange(50, 100);
-    }
-
-    @FXML
-    private void OneHToThreeHRangeClick(ActionEvent event)
-    {
-        showViewInRange(100, 300);
-    }
-
-    @FXML
-    private void ThreeHToSixHRangeClick(ActionEvent event)
-    {
-        showViewInRange(300, 600);
-    }
-
-    @FXML
-    private void SixHToOneTRangeClick(ActionEvent event)
-    {
-        showViewInRange(600, 1000);
-    }
-
-    @FXML
-    private void OneTToFourTRangeClick(ActionEvent event)
-    {
-        showViewInRange(1000, 4000);
-    }
-
-    @FXML
-    private void FourTToSevenTRangeClick(ActionEvent event)
-    {
-        showViewInRange(4000, 7000);
-    }
-
-    @FXML
-    private void AllPricesClick(ActionEvent event)
-    {
-        showViewInRange(0, listingManager.getAllPrices().size());
     }
 
     private void showViewInRange(int lowerBound, int upperBound)
@@ -261,7 +177,7 @@ public class MapPanel
         hostNameCol.setId("hostName");
         hostNameCol.setCellValueFactory(new PropertyValueFactory<>("host_name"));
         hostNameCol.setReorderable(false);
-        
+
         // Price column
         TableColumn<AirbnbListing, Integer> priceCol = new TableColumn<>("Price");
         priceCol.getStyleClass().clear();
@@ -299,11 +215,11 @@ public class MapPanel
 
         ToolBar sortBar = new ToolBar();
         Label sortByLabel = new Label("Sort by:");
-        sortByLabel.setStyle("-fx-text-fill: white;");
+        sortByLabel.setStyle("-fx-text-fill: white; -fx-font-family: 'Tw Cen MT'; -fx-font-size: 18px;");
         sortBar.getItems().add(sortByLabel);
         sortBar.getItems().add(sortingBox);
         sortBar.setId("sortBar");
-        
+
 
         BorderPane boroughPane = new BorderPane();
         boroughPane.setId("boroughPane");
@@ -318,14 +234,14 @@ public class MapPanel
         boroughWindow.getIcons().add(new Image("/images/airbnb-small.png"));
         boroughWindow.show();
     }
-    
+
     public void openWindowView(AirbnbListing aListing)
     {
       //create panes
       BorderPane singleListingView = new BorderPane();
       singleListingView.setId("singleListingView");
       GridPane centerPane = new GridPane();
-      
+
       //the GridPane is wrapped in the BorderPane in order to keep
       //the contents in the middle of the screen at all time
       singleListingView.setCenter(centerPane);
@@ -341,91 +257,61 @@ public class MapPanel
       viewOnMapButton.setId("viewOnMapButton");
       //set button action
       viewOnMapButton.setOnAction(e -> viewOnMapButtonClicked(aListing.getLatitude(), aListing.getLongitude()));
-      
+
       //create new labels
       Label hostId = new Label("Host ID: " + aListing.getHost_id());
+      hostId.getStyleClass().add("singlePropertyLabel");
       Label calculatedHostListings = new Label("Total No. of Host Properties: " + Integer.toString(aListing.getCalculatedHostListingsCount()));
+      calculatedHostListings.getStyleClass().add("singlePropertyLabel");
       Label propertyName = new Label("Airbnb Name: ");
+      propertyName.getStyleClass().add("singlePropertyLabel");
       Label propertyNameContent = new Label(aListing.getName());
+      propertyNameContent.getStyleClass().add("singlePropertyLabel");
       Label propertyId = new Label("Airbnb ID: ");
+      propertyId.getStyleClass().add("singlePropertyLabel");
       Label propertyIdContent = new Label(aListing.getId());
+      propertyIdContent.getStyleClass().add("singlePropertyLabel");
       Label hostName = new Label("Host Name: ");
+      hostName.getStyleClass().add("singlePropertyLabel");
       Label hostNameContent = new Label(aListing.getHost_name());
+      hostNameContent.getStyleClass().add("singlePropertyLabel");
       Label roomType = new Label("Room Type: ");
+      roomType.getStyleClass().add("singlePropertyLabel");
       Label roomTypeContent = new Label(aListing.getRoom_type());
+      roomTypeContent.getStyleClass().add("singlePropertyLabel");
       Label price = new Label("Price per Night: ");
+      price.getStyleClass().add("singlePropertyLabel");
       Label priceContent = new Label(Integer.toString(aListing.getPrice()));
+      priceContent.getStyleClass().add("singlePropertyLabel");
       Label minNights = new Label("Min Nights to Book: ");
+      minNights.getStyleClass().add("singlePropertyLabel");
       Label minNightsContent = new Label(Integer.toString(aListing.getMinimumNights()));
+      minNightsContent.getStyleClass().add("singlePropertyLabel");
       Label availability365 = new Label("Availability365: ");
+      availability365.getStyleClass().add("singlePropertyLabel");
       Label availability365Content = new Label(Integer.toString(aListing.getAvailability365()));
+      availability365Content.getStyleClass().add("singlePropertyLabel");
       Label borough = new Label("Borough: ");
+      borough.getStyleClass().add("singlePropertyLabel");
       Label boroughContent = new Label(aListing.getNeighbourhood());
+      boroughContent.getStyleClass().add("singlePropertyLabel");
       Label reviews = new Label("Reviews: ");
+      reviews.getStyleClass().add("singlePropertyLabel");
       Label reviewNum = new Label("Total No. of Reviews: ");
+      reviewNum.getStyleClass().add("singlePropertyLabel");
       Label reviewNumContent = new Label(Integer.toString(aListing.getNumberOfReviews()));
+      reviewNumContent.getStyleClass().add("singlePropertyLabel");
       Label reviewsPerMonth = new Label("Reviews per Month: ");
+      reviewsPerMonth.getStyleClass().add("singlePropertyLabel");
       Label reviewsPerMonthContent = new Label(Double.toString(aListing.getReviewsPerMonth()));
+      reviewsPerMonthContent.getStyleClass().add("singlePropertyLabel");
       Label lastReview = new Label("Last Review: ");
+      lastReview.getStyleClass().add("singlePropertyLabel");
       Label lastReviewContent = new Label(aListing.getLastReview());
+      lastReviewContent.getStyleClass().add("singlePropertyLabel");
       Label nullLabel = new Label("no information");
+      nullLabel.getStyleClass().add("singlePropertyLabel");
 
-      //styling labels
-      hostId.setFont(new Font("Tw Cen MT", 18));
-      hostId.setTextFill(Color.web("#ffffff"));
-      calculatedHostListings.setFont(new Font("Tw Cen MT", 18));
-      calculatedHostListings.setTextFill(Color.web("#ffffff"));
-      propertyName.setFont(new Font("Tw Cen MT", 18));
-      propertyName.setTextFill(Color.web("#ffffff"));
-      propertyNameContent.setFont(new Font("Tw Cen MT", 18));
-      propertyNameContent.setTextFill(Color.web("#ffffff"));
-      propertyId.setFont(new Font("Tw Cen MT", 18));
-      propertyId.setTextFill(Color.web("#ffffff"));
-      propertyIdContent.setFont(new Font("Tw Cen MT", 18));
-      propertyIdContent.setTextFill(Color.web("#ffffff"));
-      hostName.setFont(new Font("Tw Cen MT", 18));
-      hostName.setTextFill(Color.web("#ffffff"));
-      hostNameContent.setFont(new Font("Tw Cen MT", 18));
-      hostNameContent.setTextFill(Color.web("#ffffff"));
-      roomType.setFont(new Font("Tw Cen MT", 18));
-      roomType.setTextFill(Color.web("#ffffff"));
-      roomTypeContent.setFont(new Font("Tw Cen MT", 18));
-      roomTypeContent.setTextFill(Color.web("#ffffff"));
-      price.setFont(new Font("Tw Cen MT", 18));
-      price.setTextFill(Color.web("#ffffff"));
-      priceContent.setFont(new Font("Tw Cen MT", 18));
-      priceContent.setTextFill(Color.web("#ffffff"));
-      minNights.setFont(new Font("Tw Cen MT", 18));
-      minNights.setTextFill(Color.web("#ffffff"));
-      minNightsContent.setFont(new Font("Tw Cen MT", 18));
-      minNightsContent.setTextFill(Color.web("#ffffff"));
-      availability365.setFont(new Font("Tw Cen MT", 18));
-      availability365.setTextFill(Color.web("#ffffff"));
-      availability365Content.setFont(new Font("Tw Cen MT", 18));
-      availability365Content.setTextFill(Color.web("#ffffff"));
-      borough.setFont(new Font("Tw Cen MT", 18));
-      borough.setTextFill(Color.web("#ffffff"));
-      boroughContent.setFont(new Font("Tw Cen MT", 18));
-      boroughContent.setTextFill(Color.web("#ffffff"));
-      reviews.setFont(new Font("Tw Cen MT", 18));
-      reviews.setTextFill(Color.web("#ffffff"));
-      reviewNum.setFont(new Font("Tw Cen MT", 18));
-      reviewNum.setTextFill(Color.web("#ffffff"));
-      reviewNumContent.setFont(new Font("Tw Cen MT", 18));
-      reviewNumContent.setTextFill(Color.web("#ffffff"));
-      reviewsPerMonth.setFont(new Font("Tw Cen MT", 18));
-      reviewsPerMonth.setTextFill(Color.web("#ffffff"));
-      reviewsPerMonthContent.setFont(new Font("Tw Cen MT", 18));
-      reviewsPerMonthContent.setTextFill(Color.web("#ffffff"));
-      lastReview.setFont(new Font("Tw Cen MT", 18));
-      lastReview.setTextFill(Color.web("#ffffff"));
-      lastReviewContent.setFont(new Font("Tw Cen MT", 18));
-      lastReviewContent.setTextFill(Color.web("#ffffff"));
-      nullLabel.setFont(new Font("Tw Cen MT", 18));
-      nullLabel.setTextFill(Color.web("#ffffff"));
-      viewOnMapButton.setFont(new Font("Tw Cen MT", 18));
-      viewOnMapButton.setTextFill(Color.web("#ffffff"));
-      
       //add labels to specific positions on centerPane
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
@@ -459,7 +345,7 @@ public class MapPanel
       centerPane.add(availability365Content, 2, 7);
       centerPane.add(borough, 1, 8);
       centerPane.add(boroughContent, 2, 8);
-      
+
       //show the stage
       Stage stage = new Stage();
       Scene scene = new Scene(singleListingView, 700, 450);
@@ -477,11 +363,12 @@ public class MapPanel
     {
         Stage mapStage = new Stage();
         Scene mapScene = new Scene(new MapStat(listingManager).createMapStats(lat, lon));
+        mapScene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
         mapStage.setScene(mapScene);
         mapStage.setTitle("Property Map Viewer");
         mapStage.getIcons().add(new Image("/images/airbnb-small.png"));
         mapStage.show();
-    }    
+    }
 
     // ----------- Following methods implement click events for each map button -----------
     @FXML

@@ -1,65 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="mapPane" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
-   <top>
-                                    <ToolBar fx:id="toolBar" prefHeight="34.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
-                                      <items>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Price Range Per Night: " wrappingWidth="176.9375">
-               <font>
-                  <Font name="Tw Cen MT" size="19.0" />
-               </font></Text>
-                                          <Button fx:id="BelowTen" mnemonicParsing="false" onAction="#belowTenRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="below £10">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="TenToTwenty" mnemonicParsing="false" onAction="#TenToTwentyRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£10-20">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="TwentyToThirty" mnemonicParsing="false" onAction="#TwentyToThirtyRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£20-30">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="ThirtyToFourty" mnemonicParsing="false" onAction="#ThirtyToFourtyRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£30-40">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="FourtyToFifty" mnemonicParsing="false" onAction="#FourtyToFiftyRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£40-50">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="FiftyToOneH" mnemonicParsing="false" onAction="#FiftyToOneHRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£50-100">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="OneHToThreeH" mnemonicParsing="false" onAction="#OneHToThreeHRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£100-300">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="ThreeHToSixH" mnemonicParsing="false" onAction="#ThreeHToSixHRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£300-600">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                          <Button fx:id="SixHToOneT" mnemonicParsing="false" onAction="#SixHToOneTRangeClick" prefHeight="30.0" prefWidth="75.0" styleClass="price-button" text="£600-1000" />
-                                          <Button fx:id="AllPrices" mnemonicParsing="false" onAction="#AllPricesClick" prefHeight="30.0" prefWidth="85.0" styleClass="price-button" text="All Prices">
-               <font>
-                  <Font name="Tw Cen MT" size="13.0" />
-               </font></Button>
-                                      </items>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-                                    </ToolBar>
-   </top>
+<BorderPane fx:id="mapPane" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
    <center>
                   <Pane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
                                        <children>
@@ -99,9 +47,9 @@
                                           <Button fx:id="Croydon" layoutX="491.0" layoutY="667.0" mnemonicParsing="false" onAction="#CROYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CROY" />
                                           <Button fx:id="Lewisham" layoutX="669.0" layoutY="563.0" mnemonicParsing="false" onAction="#LEWSClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LEWS" />
                                           <Button fx:id="Bromley" layoutX="609.0" layoutY="666.0" mnemonicParsing="false" onAction="#BROMClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
-                        <Text fx:id="keyTitle" fill="WHITE" layoutX="6.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Avilable Airbnb: " wrappingWidth="191.615234375">
+                        <Text fx:id="keyTitle" fill="WHITE" layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Avilable Airbnb: " wrappingWidth="326.615234375">
                <font>
-                  <Font name="Tw Cen MT Bold" size="16.0" />
+                  <Font name="Tw Cen MT Bold" size="23.0" />
                </font></Text>
                         <Text fill="WHITE" layoutX="13.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 -10" wrappingWidth="60.0">
                <font>

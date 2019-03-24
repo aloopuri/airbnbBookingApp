@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import javafx.collections.*;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.SortType;
-
 public class MapPanelEngine
 {
     private Button button;
     private Color color;
     private BackgroundFill backgroundFill;
     private Background background;
-    
     public String getBoroughName(Button button)
     {
       switch(button.getId()){

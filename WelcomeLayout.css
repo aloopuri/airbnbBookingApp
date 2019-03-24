@@ -43,18 +43,29 @@
   -fx-background-color: white;
 }
 
-.button {
+.button:disabled {
+    -fx-background-color: grey;
+    -fx-text-fill: black;
+}
+
+#frontButton{
   -fx-font: 15px "Tw Cen MT";
   -fx-text-fill: black;
   -fx-background-color: white;
 }
 
-.button:disabled {
-    -fx-background-color: grey;
-    -fx-text-fill: black;
-}
-.button:hover {
+#frontButton:hover{
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
   -fx-background-color: #e0ffff;
+}
+
+#backButton{
+  -fx-font: 15px "Tw Cen MT";
   -fx-text-fill: black;
+  -fx-background-color: white;
+}
+
+#backButton:hover{
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: #e0ffff;
 }
