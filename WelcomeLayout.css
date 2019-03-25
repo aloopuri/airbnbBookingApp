@@ -1,0 +1,71 @@
+#title {
+    -fx-font: 35px "Tw Cen MT";
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF5A5F;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+#priceRange {
+    -fx-font: 22px "Tw Cen MT";
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+#infoLabel {
+    -fx-font: 23px "Tw Cen MT";
+    -fx-text-fill: #FF5A5F;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.label {
+    -fx-font: 23px "Tw Cen MT";
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+#welcomePane{
+  -fx-background-image: url("/images/horizontal_pic3.jpeg");
+  -fx-background-repeat: stretch;
+  -fx-background-position: center;
+  -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+.comboBoxLabel {
+  -fx-font: 30px "Tw Cen MT";
+  -fx-text-fill: white;
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.combo-box {
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: white;
+}
+
+.button:disabled {
+    -fx-background-color: grey;
+    -fx-text-fill: black;
+}
+
+#frontButton{
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-background-color: white;
+}
+
+#frontButton:hover{
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: #e0ffff;
+}
+
+#backButton{
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-background-color: white;
+}
+
+#backButton:hover{
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: #e0ffff;
+}
