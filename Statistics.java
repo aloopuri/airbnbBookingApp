@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 /**
  * This holds the statistics
  *
@@ -19,13 +20,34 @@ public class Statistics
     /**
      * Constructor for objects of class Statistics
      */
-    public Statistics(ArrayList<AirbnbListing> listings)
+    public Statistics(/*ArrayList<AirbnbListing> listings*/)
+    {
+        // this.listings = listings;
+        // AvgNumOfReviews();
+        // totalAvailProperties();
+        // numOfHomesAndApts();
+        // mostExpensiveBorough();
+    }
+    
+    public void updateStatistics(ArrayList<AirbnbListing> listings)
     {
         this.listings = listings;
+        resetStatistics();
         AvgNumOfReviews();
         totalAvailProperties();
         numOfHomesAndApts();
         mostExpensiveBorough();
+    }
+    
+    /**
+     * Resets all the statistics to zero/empty strings
+     */
+    private void resetStatistics()
+    {
+        avgNumOfReviews = 0;
+        totalAvailProperties = 0;
+        numOfHomesAndApts = 0;
+        mostExpBorough = "";
     }
     
     /**
@@ -34,7 +56,7 @@ public class Statistics
     private void AvgNumOfReviews()
     {
         int count = 0;
-        int reviewTotal = 0;
+        double reviewTotal = 0;
         for (AirbnbListing aListing : listings){
             count++;
             reviewTotal += aListing.getNumberOfReviews();
@@ -52,7 +74,7 @@ public class Statistics
                 totalAvailProperties++;
             }
         }  
-    }
+    }  
     
     /**
      * Calculates the number of Homes and Apartments
@@ -106,7 +128,8 @@ public class Statistics
      */
     public String getAvgNumOfReviewsString()
     {
-        return "" + avgNumOfReviews;
+        DecimalFormat number = new DecimalFormat("#.00");
+        return "" + number.format(avgNumOfReviews);
     }
     
     /**

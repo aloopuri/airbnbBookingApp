@@ -1,5 +1,3 @@
-
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,66 +22,98 @@ import java.util.ArrayList;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class StatisticPanel extends Application
+public class StatisticPanel
 {  
     private List<DataDisplay> data = new ArrayList<>();
+    private List<GridPane> statBoxes = new ArrayList<>();
     private static Statistics stats;
+    //private StatisticBox statisticBox;
+    private GridPane statPane;
 
-    public StatisticPanel()
+    public StatisticPanel(ArrayList<AirbnbListing> listings)
     {
-        ArrayList<AirbnbListing> listings = new ArrayList<>();
-        listings = new AirbnbDataLoader().load();
-        stats = new Statistics(listings);
-    }
-    
-    @Override
-    public void start(Stage stage) throws Exception
+        //ArrayList<AirbnbListing> listings = new ArrayList<>();
+        //listings = new AirbnbDataLoader().load();
+        //statisticBox = new StatisticBox(null);
+        stats = new Statistics(/*listings*/);
+        createStatisticPanel();
+    }  
+
+    public void createStatisticPanel() 
     {
         // Create a new grid pane
-        GridPane pane = new GridPane();
-        pane.setPadding(new Insets(10, 10, 10, 10));
-        pane.setVgap(5);
-        pane.setHgap(5);
+        statPane = new GridPane();
+        statPane.setPadding(new Insets(10, 10, 10, 10));
+        statPane.setVgap(5);
+        statPane.setHgap(5);
         
         for (int i=0; i<2 ; i++) {
             ColumnConstraints column = new ColumnConstraints();
             column.setPercentWidth(50);
             column.setHgrow(Priority.ALWAYS);
-            pane.getColumnConstraints().add(column);
+            statPane.getColumnConstraints().add(column);
         }
         
         for (int i=0; i<2 ; i++) {
             RowConstraints row = new RowConstraints();
             row.setPercentHeight(50);
             row.setVgrow(Priority.ALWAYS);
-            pane.getRowConstraints().add(row);
+            statPane.getRowConstraints().add(row);
         }        
         //pane.setGridLinesVisible(true); // uncomment to show gridlines
         
         createData();
         
-        GridPane statBox1 = new StatisticBox(data).createStatBox();        
-        GridPane statBox2 = new StatisticBox(data).createStatBox(); 
-        GridPane statBox3 = new StatisticBox(data).createStatBox();        
-        GridPane statBox4 = new StatisticBox(data).createStatBox();
+        GridPane statBox1 = new StatisticBox(data).getStatBox();        
+        GridPane statBox2 = new StatisticBox(data).getStatBox(); 
+        GridPane statBox3 = new StatisticBox(data).getStatBox();        
+        GridPane statBox4 = new StatisticBox(data).getStatBox();
+        
+        statBoxes.add(statBox1);        
+        statBoxes.add(statBox2);  
+        statBoxes.add(statBox3);  
+        statBoxes.add(statBox4);          
         
         // Add the statBoxes to the panel
-        pane.add(statBox1, 0, 0);
-        pane.add(statBox2, 1, 0);
-        pane.add(statBox3, 0, 1);
-        pane.add(statBox4, 1, 1);
-
-        // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene scene = new Scene(pane, 600, 600);
-        stage.setTitle("Statistics");
-        stage.setScene(scene);        
-
-        // Show the Stage (window)
-        stage.show();
+        statPane.add(statBox1, 0, 0);
+        statPane.add(statBox2, 1, 0);
+        statPane.add(statBox3, 0, 1);
+        statPane.add(statBox4, 1, 1);
+    }
+    
+    public void updateStatistics(ArrayList<AirbnbListing> listings)
+    {
+        stats.updateStatistics(listings);
+        data.clear();
+        createData();
+        for (GridPane box : statBoxes) {
+            statPane.getChildren().remove(box);
+        }
+        addToPanel();
+        //statisticBox.updateData(data);
+    }
+    
+    private void addToPanel()
+    {
+        GridPane statBox1 = new StatisticBox(data).getStatBox();        
+        GridPane statBox2 = new StatisticBox(data).getStatBox(); 
+        GridPane statBox3 = new StatisticBox(data).getStatBox();        
+        GridPane statBox4 = new StatisticBox(data).getStatBox();
+        
+        statBoxes.add(statBox1);        
+        statBoxes.add(statBox2);  
+        statBoxes.add(statBox3);  
+        statBoxes.add(statBox4);          
+        
+        // Add the statBoxes to the panel
+        statPane.add(statBox1, 0, 0);
+        statPane.add(statBox2, 1, 0);
+        statPane.add(statBox3, 0, 1);
+        statPane.add(statBox4, 1, 1);
     }
     
     /**
-     * This creates the data of type DataDisplay and adds it to an 
+     * This creates the data of type DataDisplay and stores it in an
      * arraylist
      */
     private void createData()
@@ -96,5 +126,10 @@ public class StatisticPanel extends Application
         data.add(new DataDisplay("Statistic 6", "bruh#2"));
         data.add(new DataDisplay("Statistic 7", "bruh#3"));
         data.add(new DataDisplay("Statistic 8", "bruh#4"));
+    }
+    
+    public GridPane getStatisticPanel()
+    {
+        return statPane;
     }
 }

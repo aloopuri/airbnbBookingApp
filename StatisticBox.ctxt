@@ -20,6 +20,6 @@ comment6.params=index
 comment6.target=void\ displayNextStat(int)
 comment6.text=\r\n\ If\ the\ next\ data\ is\ displayed\ in\ another\ box,\ it\ recursively\ \r\n\ checks\ if\ the\ data\ after\ that\ is\ also\ in\ another\ box\ \r\n\ When\ it\ finds\ data\ which\ isn't\ displayed\ in\ another\ box,\ it\ displays\ \r\n\ that\ data\ in\ the\ current\ statistic\ box\r\n
 comment7.params=
-comment7.target=javafx.scene.layout.GridPane\ createStatBox()
+comment7.target=javafx.scene.layout.GridPane\ getStatBox()
 comment7.text=\r\n\ This\ returns\ the\ statistic\ box\r\n
 numComments=8

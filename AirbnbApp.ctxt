@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=AirbnbApp
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ AirbnbApp\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=AirbnbApp()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ AirbnbApp\r\n
+comment2.params=stage
+comment2.target=void\ start(javafx.stage.Stage)
+comment2.text=\r\n\ Sets\ up\ the\ application's\ window\r\n
+comment3.params=
+comment3.target=void\ comboBoxAction()
+comment3.text=\r\n\ Performs\ the\ ComboBox\ actions\ when\ interacted\ with\r\n
+comment4.params=
+comment4.target=void\ enableNavigation()
+comment4.text=\r\n\ Enables\ the\ navigation\ buttons\ at\ the\ bottom\ of\ the\ window\r\n
+comment5.params=
+comment5.target=void\ disableNavigation()
+comment5.text=\r\n\ Disables\ the\ navigation\ buttons\ at\ the\ bottom\ of\ the\ window\r\n
+comment6.params=
+comment6.target=javafx.collections.ObservableList\ getOptionsList()
+comment7.params=event
+comment7.target=void\ nextPanel(javafx.event.ActionEvent)
+comment8.params=event
+comment8.target=void\ previousPanel(javafx.event.ActionEvent)
+comment9.params=panelIndex
+comment9.target=void\ changePanel(int)
+numComments=10

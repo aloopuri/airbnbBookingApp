@@ -69,7 +69,7 @@ public class StatisticBox
         statBox.add(rightArrow, 2, 0);
         
     }
-    
+        
     /**
      * When a new statistic box is created, the statistic shown 
      * in the statistic box is one that isn't shown in the other boxes
@@ -164,8 +164,9 @@ public class StatisticBox
     /**
      * This returns the statistic box
      */
-    public GridPane createStatBox()
+    public GridPane getStatBox()
     {
         return statBox;
-    }  
+    }    
+   
 }
