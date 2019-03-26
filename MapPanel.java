@@ -124,26 +124,18 @@ public class MapPanel
         initializeButtons();
     }
 
-    /**
-     * Updates the map view
-     */
-    public void updateView(int from, int to)
-    {
-        showViewInRange(from, to);
-    }
-
-    private void showViewInRange(int lowerBound, int upperBound)
+    public void showViewInRange(int lowerBound, int upperBound)
     {
         //use this loading method outisde the loop so the program runs faster
         ArrayList<Integer> selectedBoroughPrices = new ArrayList<>();
         for(Button button: getButtons()){
+            selectedBoroughPrices.clear();
             for(Integer price: listingManager.getBoroughPrices(mpe.getBoroughName(button))){
-                if(price >= lowerBound & price <= upperBound){
+                if(price >= lowerBound && price <= upperBound){
                     selectedBoroughPrices.add(price);
                 }
             }
-            mpe.getButtonColor(button, selectedBoroughPrices.size());
-            mpe.setButtonColor(button);
+            mpe.setButtonColor(button, selectedBoroughPrices.size());
         }
     }
 
@@ -203,14 +195,15 @@ public class MapPanel
 
         // Populate table
         listingTable.getColumns().addAll(hostNameCol, priceCol, nightsCol, reviewCol);
-        listingTable.setItems(listingManager.getBoroughListings(boroughName));
+        
+        listingTable.setItems(listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue()));
 
         ComboBox sortingBox = new ComboBox();
         sortingBox.setId("sortingBox");
         sortingBox.setPromptText("-");
         sortingBox.setItems(mpe.getSortingOptions());
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
-        sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, listingManager.getBoroughListings(boroughName), listingTable));
+        sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue()), listingTable));
 
         ToolBar sortBar = new ToolBar();
         Label sortByLabel = new Label("Sort by:");

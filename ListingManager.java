@@ -59,13 +59,15 @@ public class ListingManager
      * Gets borough listings as an ObservableList for view on the map panel
      * @param borough The name of the borough whose button was clicked on
      */
-    public ObservableList<AirbnbListing> getBoroughListings(String borough)
+    public ObservableList<AirbnbListing> getBoroughListings(String borough, int lowerBound, int upperBound)
     {
         ObservableList<AirbnbListing> observableListings = FXCollections.observableArrayList();
         for (AirbnbListing listing : listings)
         {
             if (listing.getNeighbourhood().equals(borough)) {
-                observableListings.add(listing);
+                if (listing.getPrice() >= lowerBound && listing.getPrice() <= upperBound) {
+                    observableListings.add(listing);
+                }
             }
         }
 

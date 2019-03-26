@@ -28,8 +28,8 @@ public class AirbnbApplication extends Application
     // Controls on most panels
     private Button backButton = new Button("<");
     private Button frontButton = new Button(">");
-    private ComboBox fromBox;
-    private ComboBox toBox;
+    static ComboBox fromBox;
+    static ComboBox toBox;
     private HBox topPane;
     private BorderPane bottomPane;
     private Label priceRange;
@@ -188,10 +188,8 @@ public class AirbnbApplication extends Application
     private void comboBoxAction()
     {
         if (fromBox.getValue() != null && toBox.getValue() != null) {
-            Integer toValue = (Integer) toBox.getValue();
-            Integer fromValue = (Integer) fromBox.getValue();
-            int to = toValue.intValue();
-            int from = fromValue.intValue();
+            int to = getToValue();
+            int from = getFromValue();
             if (to < from) {
                 toBox.setValue(null);
                 fromBox.setValue(null);
@@ -201,12 +199,12 @@ public class AirbnbApplication extends Application
                 alert.setContentText("From value is greater than To value.");
                 updatePriceRange(fromBox.getValue(), toBox.getValue());
                 disableNavigation();
-                map.updateView(0, listingManager.getListings().size());
+                map.showViewInRange(0, listingManager.getListings().size());
                 alert.showAndWait();
             }
             else {
                 updatePriceRange(fromBox.getValue(), toBox.getValue());
-                map.updateView(from, to);
+                map.showViewInRange(from, to);
                 enableNavigation();
             }
         }
@@ -278,5 +276,29 @@ public class AirbnbApplication extends Application
         ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
         newScene.getStylesheets().add("WelcomeLayout.css");
         mainStage.setScene(newScene);
+    }
+    
+    public static int getFromValue() 
+    {
+        if (fromBox.getValue() != null) {
+            Integer fromValue = (Integer) fromBox.getValue();
+            int from = fromValue.intValue();
+            return from;
+        }
+        else {
+            return -1;
+        }
+    }
+    
+    public static int getToValue() 
+    {
+        if (toBox.getValue() != null) {
+            Integer toValue = (Integer) toBox.getValue();
+            int to = toValue.intValue();
+            return to;
+        }
+        else {
+            return -1;
+        }
     }
 }
