@@ -9,13 +9,15 @@ import javafx.collections.*;
 public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
-
+    private ArrayList<AirbnbListing> currentListings;
+    
     /**
      * Constructor for objects of class listingManager
      */
     public ListingManager(ArrayList<AirbnbListing> listings)
     {
         this.listings = listings;
+        currentListings = new ArrayList<AirbnbListing>();
     }
 
     public ArrayList<AirbnbListing> getListings()
@@ -23,6 +25,26 @@ public class ListingManager
         return listings;
     }
     
+    public ArrayList<AirbnbListing> getCurrentListings()
+    {
+        return currentListings;
+    }
+    
+    /**
+     * This creates a list of all listings which are in the price range
+     */
+    public void updateUserRangeListings(int from, int to)
+    {
+        currentListings.clear();
+        for (AirbnbListing aListing : listings)
+        {
+            if (aListing.getPrice()>=from && aListing.getPrice()<=to){
+                currentListings.add(aListing);
+            }
+        }
+        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
+    }    
+        
     public ArrayList<Integer> getMenuOptions() 
     {
         ArrayList<Integer> prices = getAllPrices();
@@ -58,6 +80,8 @@ public class ListingManager
     /**
      * Gets borough listings as an ObservableList for view on the map panel
      * @param borough The name of the borough whose button was clicked on
+     * @param lowerBound The lower bound of the selected price range
+     * @param upperBound The upper bound of the selected price range
      */
     public ObservableList<AirbnbListing> getBoroughListings(String borough, int lowerBound, int upperBound)
     {
