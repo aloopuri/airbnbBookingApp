@@ -11,6 +11,7 @@ import java.net.*;
  */
 public class LoginSystem
 {
+    private User currentUser;
     /**
      * Constructor for objects of class LoginSystem
      */
@@ -19,8 +20,9 @@ public class LoginSystem
 
     }
 
-    public void addUser(String name, String pass)
+    public String addUser(String name, String pass)
     {
+        String returnString = "";
         try{
             URL url = getClass().getResource("users.csv");
             CSVReader reader = new CSVReader(new FileReader(new File(url.toURI()).getAbsolutePath()));
@@ -30,7 +32,6 @@ public class LoginSystem
             boolean taken = false;
             while ((line = reader.readNext()) != null)
             {
-                System.out.println(line[0] +"  " + name);
                 if (line[0].equals(name))
                 {
                     taken = true;
@@ -46,6 +47,7 @@ public class LoginSystem
                     sb.append(cipherText(pass,name,false));
                     sb.append('\n');
                     writer.write(sb.toString());
+                    returnString = "Account Created";
                 }
                 catch (FileNotFoundException e)
                 {
@@ -54,32 +56,32 @@ public class LoginSystem
             }
             else
             {
-                System.out.println("This username is taken");
+                returnString = "This username is taken";
             }
         } catch(IOException | URISyntaxException e){
             System.out.println("Something went wrong");
             e.printStackTrace();
         }
+        return returnString;
     }
     
-    public void login(String name, String pass)
+    public boolean login(String name, String pass)
     {
+        boolean found = false;
         try{
             URL url = getClass().getResource("users.csv");
             CSVReader reader = new CSVReader(new FileReader(new File(url.toURI()).getAbsolutePath()));
             String [] line;
             //skip the first row (column headers)
             reader.readNext();
-            boolean found = false;
             String deCipheredPass;
             while ((line = reader.readNext()) != null)
             {
                 deCipheredPass = cipherText(line[1],line[0],true);
-                System.out.println(line[1]+">"+deCipheredPass);
                 if (line[0].equals(name) && deCipheredPass.equals(pass))
                 {
-                    System.out.println("LOGGED IN");
                     found = true;
+                    currentUser = new User(line[0],deCipheredPass);
                 }
             }
         }
@@ -88,6 +90,7 @@ public class LoginSystem
             System.out.println("Something went wrong");
             e.printStackTrace();
         }
+        return found;
     }
     
     public String cipherText(String plainText,String key,boolean deCipher)
@@ -115,11 +118,22 @@ public class LoginSystem
         }
         return finalString.toString();
     }
+    
     public void test(String u,String p)
     {
         String n = cipherText(p,u,false);
         System.out.println("1:" + n);
         System.out.println("2:" + cipherText(n,u,true));
         System.out.println("3:" + p);
+    }
+    
+    public void removeCurrentUser()
+    {
+        currentUser = null;
+    }
+    
+    public User getCurrentUser()
+    {
+        return currentUser;
     }
 }

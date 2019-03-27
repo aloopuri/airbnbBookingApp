@@ -8,6 +8,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.collections.*;
+import javafx.animation.*;
+import javafx.util.*;
 
 import java.util.ArrayList;
 /**
@@ -76,7 +78,8 @@ public class AirbnbApplication extends Application
         // Create a new border pane
         BorderPane root = new BorderPane();
         root.setTop(topPane);
-        root.setCenter(myLabel);
+        UserPanel xxx = new UserPanel();
+        root.setCenter(xxx.getPane());
         root.setBottom(bottomPane);
         
         // JavaFX must have a Scene (window content) inside a Stage (window)
@@ -91,6 +94,13 @@ public class AirbnbApplication extends Application
         
         // Show the Stage (window)
         stage.show();
+    }
+    
+    private void hideLogins()
+    {
+        //TranslateTransition tt = new TranslateTransition(Duration.millis(300),);
+        //tt.setToX(-70);
+        //tt.play();
     }
     
     /**
