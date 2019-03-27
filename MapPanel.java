@@ -228,21 +228,19 @@ public class MapPanel
          // 2. Set the filter Predicate whenever the filter changes.
         searchText.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(airbnbListing -> {
-                // If filter text is empty, display all properties.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
                 // Compare host name of every property with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
-                return ((airbnbListing.getHost_name().toLowerCase().contains(lowerCaseFilter))
+                // If filter text is empty, display all properties.
+                return (newValue == null || newValue.isEmpty()
+                        //if filter text contains or euquals to the property info, display the list
+                        ||airbnbListing.getHost_name().toLowerCase().contains(lowerCaseFilter))
                         || (Integer.toString(airbnbListing.getPrice()).equals(lowerCaseFilter))
-                        || (Integer.toString(airbnbListing.getMinimumNights()).equals(lowerCaseFilter)));
+                        || (Integer.toString(airbnbListing.getMinimumNights()).equals(lowerCaseFilter));
             });
         });
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<AirbnbListing> sortedData = new SortedList<>(filteredData);
-        //Pass the sorted list to currentPropertyCollection.
+        //Pass the sorted list to currentPropertyCollection, with a new ArrayList.
         currentPropertyCollection = new ArrayList<>();
         currentPropertyCollection = sortedData;
         // 4. Bind the SortedList comparator to the TableView comparator.
@@ -264,7 +262,7 @@ public class MapPanel
         boroughWindow.getIcons().add(new Image("/images/airbnb-small.png"));
         boroughWindow.show();
     }
-
+    
     public void openWindowView(AirbnbListing aListing)
     {
       //create panes
