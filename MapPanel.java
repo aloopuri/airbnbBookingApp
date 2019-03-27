@@ -15,13 +15,13 @@ import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
 import javafx.collections.transformation.*;
-
+import java.util.List;
 public class MapPanel
 {
     private ListingManager listingManager;
     private MapPanelEngine mpe;
     private ArrayList<Button> mapButtons;
-    private ArrayList<AirbnbListing> currentPropertyCollection;
+    private List<AirbnbListing> currentPropertyCollection;
     private int listingIndex = -1;
 
     // Map Button declarations
@@ -235,20 +235,16 @@ public class MapPanel
 
                 // Compare host name of every property with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
-                if (airbnbListing.getHost_name().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches host name.
-                }
-                else if (Integer.toString(airbnbListing.getPrice()).equals(lowerCaseFilter)){
-                  return true;
-                }
-                else if (Integer.toString(airbnbListing.getMinimumNights()).equals(lowerCaseFilter)){
-                  return true;
-                }
-                return false; // Does not match.
+                return ((airbnbListing.getHost_name().toLowerCase().contains(lowerCaseFilter))
+                        || (Integer.toString(airbnbListing.getPrice()).equals(lowerCaseFilter))
+                        || (Integer.toString(airbnbListing.getMinimumNights()).equals(lowerCaseFilter)));
             });
         });
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<AirbnbListing> sortedData = new SortedList<>(filteredData);
+        //Pass the sorted list to currentPropertyCollection.
+        currentPropertyCollection = new ArrayList<>();
+        currentPropertyCollection = sortedData;
         // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(listingTable.comparatorProperty());
         // 5. Add sorted (and filtered) data to the table.
