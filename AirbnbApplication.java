@@ -28,8 +28,8 @@ public class AirbnbApplication extends Application
     // Controls on most panels
     private Button backButton = new Button("<");
     private Button frontButton = new Button(">");
-    static ComboBox fromBox;
-    static ComboBox toBox;
+    private static ComboBox fromBox;
+    private static ComboBox toBox;
     private HBox topPane;
     private BorderPane bottomPane;
     private Label priceRange;
@@ -43,8 +43,13 @@ public class AirbnbApplication extends Application
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
         listingManager = new ListingManager(listings);
+        
         fromBox = new ComboBox(getOptionsList());
+        fromBox.setCellFactory(c -> new FromBoxCell());
+        
         toBox = new ComboBox(getOptionsList());
+        toBox.setCellFactory(c -> new ToBoxCell());
+        
         priceRange = new Label();
     }
 
@@ -161,18 +166,16 @@ public class AirbnbApplication extends Application
 
         //add animation effects for all components
         addAnimation(logoView);
-        addAnimation(iconView);
         addAnimation(welcomeLabel);
         addAnimation(infoLabel);
         addAnimation(priceRange);
-        addAnimation(fromLabel);
-        addAnimation(fromBox);
-        addAnimation(toLabel);
-        addAnimation(toBox);
 
         return root;
     }
 
+    /**
+     * Creates and applies a fade animation to a node
+     */
     private void addAnimation(Node node)
     {
         FadeTransition ft = new FadeTransition(Duration.millis(5000), node);
@@ -186,27 +189,13 @@ public class AirbnbApplication extends Application
      * Performs the ComboBox actions when interacted with
      */
     private void comboBoxAction()
-    {
+    {   
         if (fromBox.getValue() != null && toBox.getValue() != null) {
             int to = getToValue();
             int from = getFromValue();
-            if (to < from) {
-                toBox.setValue(null);
-                fromBox.setValue(null);
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Value Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("From value is greater than To value.");
-                updatePriceRange(fromBox.getValue(), toBox.getValue());
-                disableNavigation();
-                map.showViewInRange(0, listingManager.getListings().size());
-                alert.showAndWait();
-            }
-            else {
-                updatePriceRange(fromBox.getValue(), toBox.getValue());
-                map.showViewInRange(from, to);
-                enableNavigation();
-            }
+            updatePriceRange(fromBox.getValue(), toBox.getValue());
+            map.showViewInRange(from, to);
+            enableNavigation();
         }
     }
 
@@ -278,6 +267,9 @@ public class AirbnbApplication extends Application
         mainStage.setScene(newScene);
     }
     
+    /**
+     * @return The int value of the selected FromBox value
+     */
     public static int getFromValue() 
     {
         if (fromBox.getValue() != null) {
@@ -290,6 +282,9 @@ public class AirbnbApplication extends Application
         }
     }
     
+    /**
+     * @return The int value of the selected ToBox value
+     */
     public static int getToValue() 
     {
         if (toBox.getValue() != null) {
@@ -300,5 +295,86 @@ public class AirbnbApplication extends Application
         else {
             return -1;
         }
+    }
+    
+    /**
+     * FromBox cell factory class
+     */
+    private class FromBoxCell extends ListCell<Integer> {
+        /**
+         * Adds listener that listens for a change in the value of the toBox 
+         * and updates the relevant disabled cells
+         */
+        private FromBoxCell() 
+        {
+            toBox.valueProperty().addListener((change, oldValue, newValue) -> updateDisabled());
+        }
+        
+        /**
+         * Updates each cell's appearance
+         */
+        @Override
+        protected void updateItem(Integer item, boolean empty) 
+        {
+            super.updateItem(item, empty);
+            if (item != null) {
+                setText(item.toString());
+                updateDisabled();
+            } else {
+                setText(null);
+            }
+        }
+        
+        /**
+         * Updates the disabled property of a cell
+         */
+        private void updateDisabled() 
+        {
+            boolean isDisabled = false;
+            if (getItem() != null && toBox.getValue() != null) {
+                isDisabled = getItem().intValue() > (Integer)toBox.getValue();
+            }
+            setDisable(isDisabled);
+        }        
+    }
+    
+    /**
+     * ToBox cell factory class
+     */
+    private class ToBoxCell extends ListCell<Integer> 
+    {
+        /**
+         * Adds listener that listens for a change in the value of the toBox 
+         * and updates the relevant disabled cells
+         */
+        private ToBoxCell()
+        {
+            fromBox.valueProperty().addListener((change, oldValue, newValue) -> updateDisabled());
+        }
+
+        /**
+         * Updates each cell's appearance
+         */
+        @Override
+        protected void updateItem(Integer item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null) {
+                setText(item.toString());
+                updateDisabled();
+            } else {
+                setText(null);
+            }
+        }
+        
+        /**
+         * Updates the disabled property of a cell
+         */
+        private void updateDisabled() {
+            boolean isDisabled = false;
+            if (getItem() != null && fromBox.getValue() != null) {
+                isDisabled = getItem().intValue() < (Integer)fromBox.getValue();
+            }
+            setDisable(isDisabled);
+        }        
     }
 }

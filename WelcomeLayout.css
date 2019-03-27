@@ -43,6 +43,10 @@
   -fx-background-color: white;
 }
 
+.combo-box-popup .list-cell:disabled {
+    -fx-opacity: 0.4;
+}
+
 .button:disabled {
     -fx-background-color: grey;
     -fx-text-fill: black;
