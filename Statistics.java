@@ -1,6 +1,10 @@
 import java.util.List;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;  
+import javafx.collections.ObservableList; 
 import java.text.DecimalFormat;
+import javafx.scene.chart.PieChart; 
+
 /**
  * This holds the statistics
  *
@@ -20,13 +24,9 @@ public class Statistics
     /**
      * Constructor for objects of class Statistics
      */
-    public Statistics(/*ArrayList<AirbnbListing> listings*/)
+    public Statistics(ArrayList<AirbnbListing> listings)
     {
-        // this.listings = listings;
-        // AvgNumOfReviews();
-        // totalAvailProperties();
-        // numOfHomesAndApts();
-        // mostExpensiveBorough();
+        this.listings = listings;
     }
     
     public void updateStatistics(ArrayList<AirbnbListing> listings)
@@ -114,6 +114,27 @@ public class Statistics
             propertiesInBorough ++;
         } 
     }
+    
+    public ObservableList<PieChart.Data> propertiesInBorough()
+    {
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+        String borough= listings.get(0).getNeighbourhood();
+        int propertiesInBorough = 0;
+        for (AirbnbListing aListing : listings){
+            if (!aListing.getNeighbourhood().equals(borough)) {
+                data.add(new PieChart.Data(borough, propertiesInBorough));
+                borough = aListing.getNeighbourhood();  
+                propertiesInBorough = 0;
+            }
+            propertiesInBorough ++;            
+        }
+        return data;
+    }
+    
+    public void getAvailailityDistribution()
+    {
+        
+    }
         
     /**
      * Returns the average number of reviews
@@ -131,7 +152,7 @@ public class Statistics
         DecimalFormat number = new DecimalFormat("#.00");
         return "" + number.format(avgNumOfReviews);
     }
-    
+        
     /**
      * Returns the total number of available properties
      */

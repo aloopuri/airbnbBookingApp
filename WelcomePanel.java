@@ -1,11 +1,9 @@
-import javafx.application.Application;
 import javafx.event.*;
 import javafx.scene.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.collections.*;
 import javafx.animation.*;
 import javafx.util.Duration;
@@ -28,6 +26,7 @@ public class WelcomePanel
     public WelcomePanel()
     {
         // Create Labels and ImageViews with appropriate styling
+        //root.setId("welcomePane");
         priceRange.setId("priceRange");
 
         Image logo = new Image("/images/airbnb-logo.png");
@@ -55,8 +54,8 @@ public class WelcomePanel
         //root.setTop(topPane);
         root.setCenter(centerPane);
         //root.setBottom(bottomPane);
+        root.setId("welcomePane");
         root.getStylesheets().add("WelcomeLayout.css");
-
 
         //add animation effects for all components
         addAnimation(logoView);

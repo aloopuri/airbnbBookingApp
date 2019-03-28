@@ -9,7 +9,7 @@
 
 <BorderPane fx:id="mapPane" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
    <center>
-                  <Pane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
+                  <Pane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="803.0" prefWidth="966.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <Button fx:id="Sutton" layoutX="373.0" layoutY="666.0" mnemonicParsing="false" onAction="#SUTTClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="SUTT" />
                                           <Button fx:id="Haringey" layoutX="435.0" layoutY="145.0" mnemonicParsing="false" onAction="#HRGYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRGY" />
@@ -18,7 +18,7 @@
                                           <Button fx:id="BarkingandDagenham" layoutX="787.0" layoutY="355.0" mnemonicParsing="false" onAction="#BARKClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARK" />
                                           <Button fx:id="Greenwich" layoutX="611.0" layoutY="459.0" mnemonicParsing="false" onAction="#GWCHClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="GWCH" />
                                           <Button fx:id="Bexley" layoutX="728.0" layoutY="459.0" mnemonicParsing="false" onAction="#BEXLClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BEXL" />
-                                          <Button fx:id="Enfield" layoutX="492.0" layoutY="47.0" mnemonicParsing="false" onAction="#ENFIClick" prefHeight="122.0" prefWidth="108.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP">
+                                          <Button fx:id="Enfield" layoutX="496.0" layoutY="50.0" mnemonicParsing="false" onAction="#ENFIClick" prefHeight="122.0" prefWidth="104.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP">
                <font>
                   <Font name="Tw Cen MT" size="12.0" />
                </font></Button>
@@ -47,7 +47,7 @@
                                           <Button fx:id="Croydon" layoutX="491.0" layoutY="667.0" mnemonicParsing="false" onAction="#CROYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CROY" />
                                           <Button fx:id="Lewisham" layoutX="669.0" layoutY="563.0" mnemonicParsing="false" onAction="#LEWSClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LEWS" />
                                           <Button fx:id="Bromley" layoutX="609.0" layoutY="666.0" mnemonicParsing="false" onAction="#BROMClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
-                        <Text fx:id="keyTitle" fill="WHITE" layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Avilable Airbnb: " wrappingWidth="326.615234375">
+                        <Text fx:id="keyTitle" fill="WHITE" layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Available Airbnb: " wrappingWidth="326.615234375">
                <font>
                   <Font name="Tw Cen MT Bold" size="23.0" />
                </font></Text>

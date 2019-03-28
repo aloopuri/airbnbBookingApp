@@ -10,6 +10,7 @@ import javafx.collections.*;
 import javafx.animation.*;
 import javafx.util.Duration;
 import javafx.scene.image.*;
+import javafx.geometry.Insets;
 import java.util.ArrayList;
 
 /**
@@ -50,7 +51,7 @@ public class AirbnbApplication extends Application
         listingManager = new ListingManager(listings);
         main = new BorderPane();
         fromBox = new ComboBox(getOptionsList());
-        toBox = new ComboBox(getOptionsList());
+        toBox = new ComboBox(getOptionsList());        
         //int i = 0;
         // while (i < listings.size()){
             // System.out.println(listings.get(i).getNeighbourhood());
@@ -91,8 +92,10 @@ public class AirbnbApplication extends Application
         
         fromBox.setPromptText("-");
         fromBox.setId("fromBox");
+        fromBox.toFront();
         toBox.setPromptText("-");
         toBox.setId("toBox");
+        toBox.toFront();
 
         topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
@@ -112,11 +115,13 @@ public class AirbnbApplication extends Application
         bottomPane = new BorderPane();
         bottomPane.setRight(frontButton);
         bottomPane.setLeft(backButton);
-        //bottomPane.setMinHeight(null);
 
         main.setCenter(panels.get(0));
         main.setTop(topPane);        
-        main.setBottom(bottomPane);        
+        main.setBottom(bottomPane);  
+        Insets inset = new Insets(5);
+        main.setMargin(topPane, inset);
+        main.setMargin(bottomPane, inset);
         
         Scene scene = new Scene(main, 1200, 800);
         stage.setTitle("Airbnb London");
@@ -191,7 +196,6 @@ public class AirbnbApplication extends Application
         if (panelIndex >= panels.size()) {
             panelIndex = 0;
         }
-        //panelIndex = panelIndex % panels.size();
         changePanel(panelIndex);
     }
 
