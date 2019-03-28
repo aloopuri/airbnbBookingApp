@@ -22,7 +22,7 @@ public class LoginSystem
 
     public String addUser(String name, String pass)
     {
-        String returnString = "";
+        String returnString = "Adding";
         try{
             URL url = getClass().getResource("users.csv");
             CSVReader reader = new CSVReader(new FileReader(new File(url.toURI()).getAbsolutePath()));
@@ -48,6 +48,7 @@ public class LoginSystem
                     sb.append('\n');
                     writer.write(sb.toString());
                     returnString = "Account Created";
+                    writer.close();
                 }
                 catch (FileNotFoundException e)
                 {
