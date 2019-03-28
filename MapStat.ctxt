@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=MapStat
+comment0.text=\n\ Write\ a\ description\ of\ JavaFX\ class\ MapStat\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=listingManager
+comment1.target=MapStat(ListingManager)
+comment2.params=lat\ lon
+comment2.target=javafx.scene.layout.AnchorPane\ createMapStats(double,\ double)
+comment2.text=\n\ Creates\ the\ Map\ Stats\n
+comment3.params=lat\ lon
+comment3.target=void\ showDirections(double,\ double)
+comment3.text=\n\ Shows\ the\ directions\ to\ the\ property\n
+comment4.params=lat\ lon
+comment4.target=void\ viewProperty(double,\ double)
+numComments=5

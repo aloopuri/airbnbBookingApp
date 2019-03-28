@@ -1,0 +1,68 @@
+#title {
+    -fx-font: 35px "Tw Cen MT";
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF5A5F;
+}
+
+#priceRange {
+    -fx-font: 22px "Tw Cen MT";
+    -fx-text-fill: white;
+}
+
+#infoLabel {
+    -fx-font: 23px "Tw Cen MT";
+    -fx-text-fill: #FF5A5F;
+}
+
+.label {
+    -fx-font: 23px "Tw Cen MT";
+    -fx-text-fill: white;
+}
+
+#welcomePane{
+  -fx-background-image: url("/images/horizontal_pic3.jpeg");
+  -fx-background-repeat: stretch;
+  -fx-background-position: center;
+}
+
+.comboBoxLabel {
+  -fx-font: 30px "Tw Cen MT";
+  -fx-text-fill: white;;
+}
+
+.combo-box {
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-background-color: white;
+}
+
+.combo-box-popup .list-cell:disabled {
+    -fx-opacity: 0.4;
+}
+
+.button:disabled {
+    -fx-background-color: grey;
+    -fx-text-fill: black;
+}
+
+#frontButton{
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-background-color: white;
+}
+
+#frontButton:hover{
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: #e0ffff;
+}
+
+#backButton{
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-background-color: white;
+}
+
+#backButton:hover{
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: #e0ffff;
+}
