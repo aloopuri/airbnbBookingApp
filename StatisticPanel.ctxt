@@ -1,14 +1,16 @@
 #BlueJ class context
 comment0.target=StatisticPanel
 comment0.text=\r\n\ This\ Panel\ contains\ four\ statistic\ boxes\ which\ display\ statistics\ \r\n\ about\ the\ airbnb\ listings.\r\n\ The\ user\ can\ click\ between\ different\ statistics\ in\ each\ box.\r\n\ The\ same\ statistic\ cannot\ be\ shown\ in\ two\ or\ more\ separate\ panels\ \r\n\ at\ the\ same\ time.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=listings
-comment1.target=StatisticPanel(java.util.ArrayList)
+comment1.params=listings\ listingManager
+comment1.target=StatisticPanel(java.util.ArrayList,\ ListingManager)
 comment10.params=backgroundDim\ container
 comment10.target=void\ showLargeStat(javafx.scene.layout.GridPane,\ javafx.scene.layout.VBox)
 comment11.params=
 comment11.target=void\ removeStackLayers()
 comment12.params=
-comment12.target=javafx.scene.layout.StackPane\ getStatisticPanel()
+comment12.target=Statistics\ getStatistics()
+comment13.params=
+comment13.target=javafx.scene.layout.StackPane\ getStatisticPanel()
 comment2.params=
 comment2.target=void\ createStatisticPanel()
 comment3.params=listings
@@ -26,4 +28,4 @@ comment8.params=stat
 comment8.target=void\ showEnlargedStat(javafx.scene.layout.GridPane)
 comment9.params=stat
 comment9.target=void\ removeLargeStat(javafx.scene.layout.Pane)
-numComments=13
+numComments=14

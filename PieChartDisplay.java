@@ -12,35 +12,36 @@ import javafx.geometry.Side;
  */
 public class PieChartDisplay extends DataDisplay
 {
-
+    private PieChart pieChart;
+    private String title;
 
     /**
      * Constructor for objects of class PieChart
      */
-    public PieChartDisplay(StatisticPanel statPanel, ObservableList<PieChart.Data> data)
+    public PieChartDisplay(StatisticPanel statPanel, String title, ObservableList<PieChart.Data> data)
     {
         super(statPanel);
         
         setIsDisplayedFalse();
         
-        //dataDisplay = new GridPane();
-        PieChart pieChart = new PieChart(data);
-        pieChart.setTitle("Number Of Properties in each borough"); 
+        pieChart = new PieChart(data);
+        pieChart.setTitle(title); 
+        createPieChart();      
+        
+        whenStatisiticClicked();
+    }
+    
+    private void createPieChart()
+    {
         pieChart.setClockwise(true); 
         pieChart.setLabelLineLength(50); 
         pieChart.setLabelsVisible(true); 
         pieChart.setStartAngle(180); 
-        //pieChart.setLegendVisible(false);
-        //pieChart.getParent().gets
-        //pieChart.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
         getData().setVgrow(pieChart, Priority.ALWAYS);
         getData().setHgrow(pieChart, Priority.ALWAYS);
         pieChart.setLegendSide(Side.RIGHT);
-        
                         
-        getData().getChildren().add(pieChart);
-        
-        whenStatisiticClicked();
+        getData().getChildren().add(pieChart);        
     }
 
 }

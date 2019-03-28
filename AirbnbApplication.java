@@ -23,7 +23,7 @@ public class AirbnbApplication extends Application
 {
     private ArrayList<Pane> panels;
     private Pane currentPanel;
-    private ListingManager listingManager;
+    private static ListingManager listingManager;
     private ArrayList<AirbnbListing> listings;
     private int panelIndex;
     
@@ -67,7 +67,7 @@ public class AirbnbApplication extends Application
     {
         welcomePanel = new WelcomePanel();       
         map = new MapPanel(listingManager);
-        statsPanel = new StatisticPanel(listings);
+        statsPanel = new StatisticPanel(listings, listingManager);
         
         panels.add(welcomePanel.getWelcomePanel());
         panels.add(map.createMap());
@@ -92,10 +92,8 @@ public class AirbnbApplication extends Application
         
         fromBox.setPromptText("-");
         fromBox.setId("fromBox");
-        fromBox.toFront();
         toBox.setPromptText("-");
         toBox.setId("toBox");
-        toBox.toFront();
 
         topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
@@ -157,7 +155,6 @@ public class AirbnbApplication extends Application
             else {
                 welcomePanel.updatePriceRange(fromBox.getValue(), toBox.getValue());
                 listingManager.updateUserRangeListings(from, to);
-                //System.out.println(listingManager.getCurrentListings().size());
                 map.updateView(from, to);
                 statsPanel.updateStatistics(listingManager.getCurrentListings());
                 enableNavigation();

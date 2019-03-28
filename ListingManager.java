@@ -1,5 +1,6 @@
 import java.util.*;
 import javafx.collections.*;
+
 /**
  * Write a description of class listingManager here.
  *
@@ -41,9 +42,7 @@ public class ListingManager
             if (aListing.getPrice()>=from && aListing.getPrice()<=to){
                 currentListings.add(aListing);
             }
-        }
-        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
-        
+        }      
     }
     
     public ArrayList<Integer> getMenuOptions() 
@@ -62,7 +61,22 @@ public class ListingManager
             prices.add(counter);
         }
         return prices;
-    }    
+    }  
+    
+    public ObservableList<String> getBoroughOptions() 
+    {
+        String borough = currentListings.get(0).getNeighbourhood();
+        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
+        ObservableList<String> allBoroughs = FXCollections.observableArrayList();
+        for (AirbnbListing aListing : currentListings)
+        {
+            if (!aListing.getNeighbourhood().equals(borough)) {
+                allBoroughs.add(borough);
+                borough = aListing.getNeighbourhood();
+            }         
+        }
+        return allBoroughs;
+    }
 
     public ArrayList<Integer> getAllPrices()
     {

@@ -29,13 +29,15 @@ public class StatisticPanel
     private List<DataDisplay> data = new ArrayList<>();
     private List<GridPane> statBoxes = new ArrayList<>();
     private static Statistics stats;
+    private ListingManager listingManager;
     private GridPane statPane;
-    private StackPane stackPane;
+    private StackPane stackPane;    // Used to show the large statistic
     private GridPane enlargedStatBox;   // This is used to store the box which had the statistic in it previously
     private final VBox enlargedStatMessage = new VBox();
     
-    public StatisticPanel(ArrayList<AirbnbListing> listings)
+    public StatisticPanel(ArrayList<AirbnbListing> listings, ListingManager listingManager)
     {
+        this.listingManager = listingManager;
         stackPane = new StackPane();
         statPane = new GridPane();  
         enlargedStatBox = null;
@@ -66,7 +68,7 @@ public class StatisticPanel
         }        
         //pane.setGridLinesVisible(true); // uncomment to show gridlines
         
-        createData();
+        //createData();
         
         createStatisticBoxes();
         
@@ -116,9 +118,9 @@ public class StatisticPanel
         data.add(new BasicStatisticDisplay(this,"Total Available Properties", stats.getTotalAvailPropertiesString()));
         data.add(new BasicStatisticDisplay(this,"Number of Entire Homes\nand Apartments", stats.getNumOfHomesAndAptsString()));
         data.add(new BasicStatisticDisplay(this,"Most Expensive Borough", stats.getMostExpBorough()));
-        data.add(new PieChartDisplay(this, stats.propertiesInBorough()));
-        data.add(new BasicStatisticDisplay(this, "Statistic 6", "bruh#2"));
-        data.add(new BasicStatisticDisplay(this, "Statistic 7", "bruh#3"));
+        data.add(new PieChartDisplay(this, "Number of Properties in each Borough", stats.propertiesInBorough()));
+        data.add(new BarChartDisplay(this, "Room types in Borough ", "roomtypes", listingManager.getBoroughOptions()));
+        data.add(new BarChartDisplay(this, "Availabilty in Borough", "availability", listingManager.getBoroughOptions()));
         data.add(new BasicStatisticDisplay(this, "Statistic 8", "bruh#4"));
     }
     
@@ -229,6 +231,11 @@ public class StatisticPanel
             stackPane.getChildren().remove(num);
             num--;            
         }
+    }
+    
+    public Statistics getStatistics()
+    {
+        return stats;
     }
     
     public StackPane getStatisticPanel()

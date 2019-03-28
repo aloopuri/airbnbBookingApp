@@ -1,7 +1,15 @@
 #BlueJ class context
 comment0.target=BarChartDisplay
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ BarChartDisplay\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=statPanel
-comment1.target=BarChartDisplay(StatisticPanel)
+comment1.params=statPanel\ title\ bcData\ allBoroughs
+comment1.target=BarChartDisplay(StatisticPanel,\ java.lang.String,\ java.lang.String,\ javafx.collections.ObservableList)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ BarChartDisplay\r\n
-numComments=2
+comment2.params=boroughName\ data
+comment2.target=void\ createBarChart(java.lang.String,\ javafx.collections.ObservableList)
+comment3.params=
+comment3.target=void\ selectBorough()
+comment4.params=borough
+comment4.target=javafx.collections.ObservableList\ getStatistic(java.lang.String)
+comment5.params=
+comment5.target=void\ showGraph()
+numComments=6
