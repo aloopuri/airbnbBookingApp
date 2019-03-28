@@ -54,7 +54,7 @@ public class ListingManager
         int counter = 0;
         while (counter <= maxPrice) {
             prices.add(counter);
-            counter += 200;
+            counter += 100;
         }
         
         if (counter > maxPrice) {

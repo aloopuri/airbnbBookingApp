@@ -14,13 +14,13 @@ import java.util.ArrayList;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class MapStat
+public class PropertyLocation
 {
     private ListingManager listingManager;
     private WebView browser;
     private WebEngine webEngine;
     private int listingIndex = -1;
-    public MapStat(ListingManager listingManager)
+    public PropertyLocation(ListingManager listingManager)
     {
         this.listingManager = listingManager;
         browser = new WebView();

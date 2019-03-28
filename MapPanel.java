@@ -23,6 +23,7 @@ public class MapPanel
     private ArrayList<Button> mapButtons;
     private List<AirbnbListing> currentPropertyCollection;
     private int listingIndex = -1;
+    private BorderPane singlePropertyMainPane;
 
     // Map Button declarations
     @FXML Button Sutton;
@@ -134,7 +135,7 @@ public class MapPanel
         for(Button button: getButtons()){
             selectedBoroughPrices.clear();
             for(Integer price: listingManager.getBoroughPrices(mpe.getBoroughName(button))){
-                if(price >= lowerBound && price <= upperBound){
+                if(price >= lowerBound && price < upperBound){
                     selectedBoroughPrices.add(price);
                 }
             }
@@ -158,7 +159,7 @@ public class MapPanel
           row.setOnMouseClicked(event -> {
             if (! row.isEmpty() && event.getButton() == MouseButton.PRIMARY
               && event.getClickCount() == 1) {
-                openWindowView(row.getItem());
+                createSinglePropertyView(row.getItem());
               }
             });
          return row;
@@ -250,7 +251,6 @@ public class MapPanel
 
         //set up the pane
         BorderPane boroughPane = new BorderPane();
-        boroughPane.setId("boroughPane");
         boroughPane.setCenter(listingTable);
         boroughPane.setTop(sortBar);
         //set up the scene and stage for this window
@@ -262,17 +262,46 @@ public class MapPanel
         boroughWindow.getIcons().add(new Image("/images/airbnb-small.png"));
         boroughWindow.show();
     }
-    
-    public void openWindowView(AirbnbListing aListing)
-    {
-      //create panes
-      BorderPane singleListingView = new BorderPane();
-      singleListingView.setId("singleListingView");
-      GridPane centerPane = new GridPane();
 
-      //the GridPane is wrapped in the BorderPane in order to keep
-      //the contents in the middle of the screen at all time
-      singleListingView.setCenter(centerPane);
+    private void createSinglePropertyView(AirbnbListing singleProperty)
+    {
+      singlePropertyMainPane = new BorderPane();
+      singlePropertyMainPane.setId("singlePropertyMainPane");
+      BorderPane bottomPane = new BorderPane();
+
+      Button nextButton = new Button("Next Property ▶");
+      Button previousButton = new Button("◀ Previous Property");
+      nextButton.getStyleClass().add("singlePropertyButton");
+      previousButton.getStyleClass().add("singlePropertyButton");
+      previousButton.setOnAction(e -> previousButtonClicked());
+      nextButton.setOnAction(e -> nextButtonClicked());
+
+      bottomPane.setLeft(previousButton);
+      bottomPane.setRight(nextButton);
+
+      singlePropertyMainPane.setCenter(openWindowView(singleProperty));
+      singlePropertyMainPane.setBottom(bottomPane);
+
+      //show the stage
+      Stage stage = new Stage();
+      Scene scene = new Scene(singlePropertyMainPane, 700, 450);
+      //import css sheet
+      //using css for background image because even if the image is removed from the file,
+      //the program will still run
+      scene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
+      stage.setTitle(singleProperty.getName());
+      stage.getIcons().add(new Image("/images/airbnb-small.png"));
+      stage.setScene(scene);
+      stage.show();
+    }
+
+    private Pane openWindowView(AirbnbListing aListing)
+    {
+      //create pane
+      GridPane centerPane = new GridPane();
+      centerPane.setHgap(10);
+      centerPane.setVgap(10);
+      
       centerPane.setAlignment(Pos.CENTER);
       centerPane.setPadding(new Insets(10, 10, 10, 10));
       centerPane.setPrefWidth(600);
@@ -284,17 +313,9 @@ public class MapPanel
       Button viewOnMapButton = new Button("View on Map");
       viewOnMapButton.getStyleClass().add("singlePropertyButton");
       viewOnMapButton.setPrefSize(140,12);
-      Button previousButton = new Button("Previous Property");
-      previousButton.getStyleClass().add("singlePropertyButton");
-      previousButton.setPrefSize(140, 12);
-      Button nextButton = new Button("Next Property");
-      nextButton.getStyleClass().add("singlePropertyButton");
-      nextButton.setPrefSize(140, 12);
 
       //set button action
       viewOnMapButton.setOnAction(e -> viewOnMapButtonClicked(aListing.getLatitude(), aListing.getLongitude()));
-      previousButton.setOnAction(e -> previousButtonClicked());
-      nextButton.setOnAction(e -> nextButtonClicked());
 
       //create new labels
       Label hostId = new Label("Host ID: " + aListing.getHost_id());
@@ -353,9 +374,7 @@ public class MapPanel
       //add labels to specific positions on centerPane
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
-      centerPane.add(viewOnMapButton, 0, 3);
-      centerPane.add(previousButton, 0 , 2);
-      centerPane.add(nextButton, 0 , 1);
+      centerPane.add(viewOnMapButton, 0, 1);
       centerPane.add(reviews, 0, 9);
       centerPane.add(reviewNum, 0, 10);
       centerPane.add(reviewNumContent, 1, 10);
@@ -386,28 +405,27 @@ public class MapPanel
       centerPane.add(borough, 1, 8);
       centerPane.add(boroughContent, 2, 8);
 
-      //show the stage
-      Stage stage = new Stage();
-      Scene scene = new Scene(singleListingView, 700, 450);
-      //import css sheet
-      //using css for background image because even if the image is removed from the file,
-      //the program will still run
-      scene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
-      stage.setTitle(aListing.getName());
-      stage.getIcons().add(new Image("/images/airbnb-small.png"));
-      stage.setScene(scene);
-      stage.show();
+      return centerPane;
     }
 
     private void viewOnMapButtonClicked(double lat, double lon)
     {
         Stage mapStage = new Stage();
-        Scene mapScene = new Scene(new MapStat(listingManager).createMapStats(lat, lon));
+        Scene mapScene = new Scene(new PropertyLocation(listingManager).createMapStats(lat, lon));
         mapScene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
         mapStage.setScene(mapScene);
         mapStage.setTitle("Property Map Viewer");
         mapStage.getIcons().add(new Image("/images/airbnb-small.png"));
         mapStage.show();
+    }
+
+    /**
+     * get the next or previous panel from the list and
+     * it as the center pane
+     */
+    private void changePanel(int panelIndex)
+    {
+        singlePropertyMainPane.setCenter(openWindowView(currentPropertyCollection.get(panelIndex)));
     }
 
     /**
@@ -417,8 +435,7 @@ public class MapPanel
     {
       listingIndex++;
       if (listingIndex != currentPropertyCollection.size()) {
-          AirbnbListing element = currentPropertyCollection.get(listingIndex);
-          openWindowView(element);
+          changePanel(listingIndex);
       }
       else {
           listingIndex = -1; // reset index
@@ -433,8 +450,7 @@ public class MapPanel
     {
       listingIndex--;
       if (listingIndex >= 0) {
-          AirbnbListing element = currentPropertyCollection.get(listingIndex);
-          openWindowView(element);
+          changePanel(listingIndex);
       }
       else {
           listingIndex = currentPropertyCollection.size(); // wrap to end listing

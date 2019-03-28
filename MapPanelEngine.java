@@ -10,6 +10,11 @@ public class MapPanelEngine
     private Button button;
     private BackgroundFill backgroundFill;
     private Background background;
+    
+    /**
+     * @return the name of the borough according to the buttonId when setting up a borough button
+     * @param button the button for which it is setting up
+     */
     public String getBoroughName(Button button)
     {
       switch(button.getId()){
@@ -41,7 +46,13 @@ public class MapPanelEngine
           return button.getId();
       }
     }
-
+    
+    /**
+     * set up colours for borough buttons according 
+     * to the number of properties in that borough
+     * @param button the button for which it is setting up
+     * @param listingCounr the number of properties in that borough
+     */
     public void setButtonColor(Button button, int listingCount)
     {
       Color color;
