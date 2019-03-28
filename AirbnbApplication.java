@@ -19,33 +19,44 @@ import java.util.ArrayList;
  */
 public class AirbnbApplication extends Application
 {
-    private ArrayList<Scene> scenes;
+    private ArrayList<Pane> panels;
+    private Pane currentPanel;
+    private int panelIndex;
+    
     private ListingManager listingManager;
-    private int currentScene = 0;
-    private Stage mainStage;
-    private MapPanel map;
-
+    
     // Controls on most panels
+    private BorderPane main;
     private Button backButton = new Button("<");
     private Button frontButton = new Button(">");
-    static ComboBox fromBox;
-    static ComboBox toBox;
+    private static ComboBox fromBox;
+    private static ComboBox toBox;
     private HBox topPane;
     private BorderPane bottomPane;
-    private Label priceRange;
+    
+    // Application panels
+    private WelcomePanel welcomePanel;
+    private MapPanel map;
+    
     /**
      * Class Constructor
      */
     public AirbnbApplication()
     {
-        scenes = new ArrayList<Scene>();
+        panels = new ArrayList<Pane>();
         ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
         listingManager = new ListingManager(listings);
+        
+        main = new BorderPane();
+        main.setId("welcomePane");
+        
         fromBox = new ComboBox(getOptionsList());
+        fromBox.setCellFactory(c -> new FromBoxCell());
+        
         toBox = new ComboBox(getOptionsList());
-        priceRange = new Label();
+        toBox.setCellFactory(c -> new ToBoxCell());
     }
 
     /**
@@ -54,159 +65,86 @@ public class AirbnbApplication extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        BorderPane welcomePane = createWelcome();
-        welcomePane.setId("welcomePane");
-        Scene welcomeScene = new Scene(welcomePane, 1200, 1000);
-        welcomeScene.getStylesheets().add("WelcomeLayout.css");
-
+        welcomePanel = new WelcomePanel();
         map = new MapPanel(listingManager);
-        BorderPane pane = map.createMap();
-        Scene mapScene = new Scene(pane, 1200, 1000);
-
-        scenes.add(welcomeScene);
-        scenes.add(mapScene);
-
+        
+        panels.add(welcomePanel.getWelcomePanel());
+        panels.add(map.createMap());
+        
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
         toBox.setOnAction(e -> comboBoxAction());
 
-        frontButton.setOnAction(e -> nextScene(e));
-        backButton.setOnAction(e -> previousScene(e));
-
-        stage.setTitle("Airbnb London");
-        stage.setScene(welcomeScene);
-
-        // Show the Stage (window)
-        stage.centerOnScreen();
-        stage.sizeToScene();
-        stage.show();
-        
-        mainStage = stage;
-        mainStage.getIcons().add(new Image("/images/airbnb-small.png"));
-    }
-
-    /**
-     * Creates the application's Welcome Panel
-     */
-    private BorderPane createWelcome()
-    {
-        // Create Labels and ImageViews with appropriate styling
-        priceRange.setId("priceRange");
-
-        Image logo = new Image("/images/airbnb-logo.png");
-        ImageView logoView = new ImageView();
-        logoView.setImage(logo);
-        logoView.setPreserveRatio(true);
-        logoView.setFitHeight(300);
-        logoView.setFitWidth(300);
+        frontButton.setOnAction(e -> nextPanel(e));
+        backButton.setOnAction(e -> previousPanel(e));
 
         Image icon = new Image("/images/airbnb-small.png");
         ImageView iconView = new ImageView();
         iconView.setImage(icon);
         iconView.setPreserveRatio(true);
-        iconView.setFitHeight(100);
-        iconView.setFitWidth(100);
-
-        Label welcomeLabel = new Label("Welcome to Airbnb London");
-        welcomeLabel.setId("title");
-
+        iconView.setFitHeight(60);
+        iconView.setFitWidth(60);
+        
+        Region leftRegion = new Region();
+        
         Label fromLabel = new Label("From:");
         Label toLabel = new Label("To:");
-
-        Label infoLabel = new Label("Select a price range to begin." +
-                                    "\nCurrently selected price range:");
-        infoLabel.setId("infoLabel");
-
-        // Set price range Labels appropriately
-        updatePriceRange(fromBox.getValue(), toBox.getValue());
-
+        
+        // Set ComboBox actions
+        fromBox.setOnAction(e -> comboBoxAction());
+        toBox.setOnAction(e -> comboBoxAction());  
+        
         fromBox.setPromptText("-");
         fromBox.setId("fromBox");
         toBox.setPromptText("-");
         toBox.setId("toBox");
 
-        frontButton.setId("frontButton");
-        backButton.setId("backButton");
-        backButton.setPrefWidth(50);
-        frontButton.setPrefWidth(50);
-        backButton.setDisable(true);
-        frontButton.setDisable(true);
-
-        // Used to align the airbnb icon to the top-left
-        Region leftRegion = new Region();
-
-        // Create a new HBox for the top area
         topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
         topPane.setSpacing(10);
         topPane.getChildren().addAll(iconView, leftRegion, fromLabel, fromBox, toLabel, toBox, new Region());
         topPane.setHgrow(leftRegion, Priority.ALWAYS);
+        
+        frontButton.setId("frontButton");
+        backButton.setId("backButton");
+        backButton.setPrefWidth(50);
+        frontButton.setPrefWidth(50);
+        disableNavigation();
 
-        // Create a new VBox for the center area
-        VBox centerPane = new VBox();
-        centerPane.setAlignment(Pos.CENTER);
-        centerPane.setSpacing(10);
-        centerPane.getChildren().addAll(logoView, welcomeLabel, infoLabel, priceRange);
-
-        // Creates a BorderPane for the bottom area
+        frontButton.setOnAction(e -> nextPanel(e));
+        backButton.setOnAction(e -> previousPanel(e));
+        
         bottomPane = new BorderPane();
         bottomPane.setRight(frontButton);
         bottomPane.setLeft(backButton);
 
-        // Create a BorderPane for the general scene
-        BorderPane root = new BorderPane();
-        root.setTop(topPane);
-        root.setCenter(centerPane);
-        root.setBottom(bottomPane);
+        main.setCenter(panels.get(0));
+        main.setTop(topPane);        
+        main.setBottom(bottomPane);        
+        
+        Scene scene = new Scene(main, 1200, 900);
+        stage.setTitle("Airbnb London");
+        stage.setScene(scene);
+        scene.getStylesheets().add("WelcomeLayout.css");
 
-        //add animation effects for all components
-        addAnimation(logoView);
-        addAnimation(iconView);
-        addAnimation(welcomeLabel);
-        addAnimation(infoLabel);
-        addAnimation(priceRange);
-        addAnimation(fromLabel);
-        addAnimation(fromBox);
-        addAnimation(toLabel);
-        addAnimation(toBox);
-
-        return root;
-    }
-
-    private void addAnimation(Node node)
-    {
-        FadeTransition ft = new FadeTransition(Duration.millis(5000), node);
-        ft.setFromValue(0.0);
-        ft.setToValue(1.0);
-        ft.setCycleCount(1);
-        ft.play();
+        // Show the Stage (window)
+        stage.centerOnScreen();
+        stage.sizeToScene();
+        stage.show();
+        stage.getIcons().add(new Image("/images/airbnb-small.png"));
     }
 
     /**
      * Performs the ComboBox actions when interacted with
      */
     private void comboBoxAction()
-    {
+    {   
         if (fromBox.getValue() != null && toBox.getValue() != null) {
             int to = getToValue();
             int from = getFromValue();
-            if (to < from) {
-                toBox.setValue(null);
-                fromBox.setValue(null);
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Value Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("From value is greater than To value.");
-                updatePriceRange(fromBox.getValue(), toBox.getValue());
-                disableNavigation();
-                map.showViewInRange(0, listingManager.getListings().size());
-                alert.showAndWait();
-            }
-            else {
-                updatePriceRange(fromBox.getValue(), toBox.getValue());
-                map.showViewInRange(from, to);
-                enableNavigation();
-            }
+            welcomePanel.updatePriceRange(fromBox.getValue(), toBox.getValue());
+            map.showViewInRange(from, to);
+            enableNavigation();
         }
     }
 
@@ -219,20 +157,6 @@ public class AirbnbApplication extends Application
         ObservableList<Integer> options = FXCollections.observableArrayList(listingManager.getMenuOptions());
         FXCollections.sort(options);
         return options;
-    }
-
-    /**
-     * Updates the priceRange Label's text
-     */
-    private void updatePriceRange(Object fromValue, Object toValue)
-    {
-        if (fromValue == null || toValue == null) {
-            priceRange.setText("From: £- To £-");
-        }
-        else {
-            priceRange.setText("From: £" + fromValue.toString() +
-                               " To: £" + toValue.toString());
-        }
     }
 
     /**
@@ -253,31 +177,34 @@ public class AirbnbApplication extends Application
         backButton.setDisable(true);
     }
 
-    private void nextScene(ActionEvent event)
+    private void nextPanel(ActionEvent event)
     {
-        currentScene++;
-        currentScene = currentScene % scenes.size();
-        moveScene(currentScene);
-    }
-
-    private void previousScene(ActionEvent event)
-    {
-        currentScene--;
-        if (currentScene < 0) {
-            currentScene = scenes.size() - 1;
+        panelIndex++;
+        if (panelIndex >= panels.size()) {
+            panelIndex = 0;
         }
-        moveScene(currentScene);
+        //panelIndex = panelIndex % panels.size();
+        changePanel(panelIndex);
     }
 
-    private void moveScene(int sceneIndex)
+    private void previousPanel(ActionEvent event)
     {
-        Scene newScene = scenes.get(sceneIndex);
-        ((BorderPane)newScene.getRoot()).setTop(topPane); // uncomment to put from/to boxes on all scenes
-        ((BorderPane)newScene.getRoot()).setBottom(bottomPane);
-        newScene.getStylesheets().add("WelcomeLayout.css");
-        mainStage.setScene(newScene);
+        panelIndex--;
+        if (panelIndex < 0) {
+            panelIndex = panels.size() - 1;
+        }
+        changePanel(panelIndex);
+    }
+
+    private void changePanel(int panelIndex)
+    {
+        main.setCenter(null);
+        main.setCenter(panels.get(panelIndex));
     }
     
+    /**
+     * @return The int value of the selected FromBox value
+     */
     public static int getFromValue() 
     {
         if (fromBox.getValue() != null) {
@@ -290,6 +217,9 @@ public class AirbnbApplication extends Application
         }
     }
     
+    /**
+     * @return The int value of the selected ToBox value
+     */
     public static int getToValue() 
     {
         if (toBox.getValue() != null) {
@@ -300,5 +230,86 @@ public class AirbnbApplication extends Application
         else {
             return -1;
         }
+    }
+    
+    /**
+     * FromBox cell factory class
+     */
+    private class FromBoxCell extends ListCell<Integer> {
+        /**
+         * Adds listener that listens for a change in the value of the toBox 
+         * and updates the relevant disabled cells
+         */
+        private FromBoxCell() 
+        {
+            toBox.valueProperty().addListener((change, oldValue, newValue) -> updateDisabled());
+        }
+        
+        /**
+         * Updates each cell's appearance
+         */
+        @Override
+        protected void updateItem(Integer item, boolean empty) 
+        {
+            super.updateItem(item, empty);
+            if (item != null) {
+                setText(item.toString());
+                updateDisabled();
+            } else {
+                setText(null);
+            }
+        }
+        
+        /**
+         * Updates the disabled property of a cell
+         */
+        private void updateDisabled() 
+        {
+            boolean isDisabled = false;
+            if (getItem() != null && toBox.getValue() != null) {
+                isDisabled = getItem().intValue() > (Integer)toBox.getValue();
+            }
+            setDisable(isDisabled);
+        }        
+    }
+    
+    /**
+     * ToBox cell factory class
+     */
+    private class ToBoxCell extends ListCell<Integer> 
+    {
+        /**
+         * Adds listener that listens for a change in the value of the toBox 
+         * and updates the relevant disabled cells
+         */
+        private ToBoxCell()
+        {
+            fromBox.valueProperty().addListener((change, oldValue, newValue) -> updateDisabled());
+        }
+
+        /**
+         * Updates each cell's appearance
+         */
+        @Override
+        protected void updateItem(Integer item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null) {
+                setText(item.toString());
+                updateDisabled();
+            } else {
+                setText(null);
+            }
+        }
+        
+        /**
+         * Updates the disabled property of a cell
+         */
+        private void updateDisabled() {
+            boolean isDisabled = false;
+            if (getItem() != null && fromBox.getValue() != null) {
+                isDisabled = getItem().intValue() < (Integer)fromBox.getValue();
+            }
+            setDisable(isDisabled);
+        }        
     }
 }
