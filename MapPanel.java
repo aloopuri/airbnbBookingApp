@@ -14,14 +14,15 @@ import javafx.geometry.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
-import javafx.collections.transformation.*;
-import java.util.List;
 public class MapPanel
 {
     private ListingManager listingManager;
     private MapPanelEngine mpe;
     private ArrayList<Button> mapButtons;
-    private List<AirbnbListing> currentPropertyCollection;
+    private ObservableList<AirbnbListing> currentPropertyCollection;
+    private Scene listingScene;
+    private Stage listingStage;
+
     private int listingIndex = -1;
     private BorderPane singlePropertyMainPane;
 
@@ -64,6 +65,7 @@ public class MapPanel
     {
         this.listingManager = listingManager;
         mpe = new MapPanelEngine();
+        listingStage = new Stage();
         initializeButtons();
     }
 
@@ -150,7 +152,6 @@ public class MapPanel
     private void openBoroughWindow(Button button)
     {
         String boroughName = mpe.getBoroughName(button);
-
         TableView<AirbnbListing> listingTable = new TableView();
         listingTable.setId("listingTable");
         listingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -159,7 +160,12 @@ public class MapPanel
           row.setOnMouseClicked(event -> {
             if (! row.isEmpty() && event.getButton() == MouseButton.PRIMARY
               && event.getClickCount() == 1) {
-                createSinglePropertyView(row.getItem());
+                listingScene = new Scene(getListingView(row.getItem()), 700, 450);
+                listingScene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
+                listingStage.setTitle("Property in " + boroughName);
+                listingStage.getIcons().add(new Image("/images/airbnb-small.png"));
+                listingStage.setScene(listingScene);
+                listingStage.show();
               }
             });
          return row;
@@ -198,13 +204,9 @@ public class MapPanel
         reviewCol.setReorderable(false);
 
         // Populate table
+        currentPropertyCollection = listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue());
         listingTable.getColumns().addAll(hostNameCol, priceCol, nightsCol, reviewCol);
-        listingTable.setItems(listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue()));
-
-        currentPropertyCollection = new ArrayList<>();
-        for(AirbnbListing oneProperty: listingTable.getItems()){
-          currentPropertyCollection.add(oneProperty);
-        }
+        listingTable.setItems(currentPropertyCollection);
 
         ComboBox sortingBox = new ComboBox();
         sortingBox.getStyleClass().add("tableViewBox");
@@ -223,36 +225,13 @@ public class MapPanel
         sortBar.getItems().addAll(sortByLabel, sortingBox, new Region(), searchLabel, searchText);
         sortBar.setId("sortBar");
 
-        //the following are the searching field implementation
-        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-        FilteredList<AirbnbListing> filteredData = new FilteredList<>(listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue()), p -> true);
-         // 2. Set the filter Predicate whenever the filter changes.
-        searchText.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(airbnbListing -> {
-                // Compare host name of every property with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                // If filter text is empty, display all properties.
-                return (newValue == null || newValue.isEmpty()
-                        //if filter text contains or euquals to the property info, display the list
-                        ||airbnbListing.getHost_name().toLowerCase().contains(lowerCaseFilter))
-                        || (Integer.toString(airbnbListing.getPrice()).equals(lowerCaseFilter))
-                        || (Integer.toString(airbnbListing.getMinimumNights()).equals(lowerCaseFilter));
-            });
-        });
-        // 3. Wrap the FilteredList in a SortedList.
-        SortedList<AirbnbListing> sortedData = new SortedList<>(filteredData);
-        //Pass the sorted list to currentPropertyCollection, with a new ArrayList.
-        currentPropertyCollection = new ArrayList<>();
-        currentPropertyCollection = sortedData;
-        // 4. Bind the SortedList comparator to the TableView comparator.
-        sortedData.comparatorProperty().bind(listingTable.comparatorProperty());
-        // 5. Add sorted (and filtered) data to the table.
-        listingTable.setItems(sortedData);
+        mpe.searchTable(listingManager, boroughName, searchText, listingTable);
 
         //set up the pane
         BorderPane boroughPane = new BorderPane();
         boroughPane.setCenter(listingTable);
         boroughPane.setTop(sortBar);
+
         //set up the scene and stage for this window
         Stage boroughWindow = new Stage();
         Scene scene = new Scene(boroughPane, 1000, 600);
@@ -263,11 +242,16 @@ public class MapPanel
         boroughWindow.show();
     }
 
-    private void createSinglePropertyView(AirbnbListing singleProperty)
+    public BorderPane getListingView(AirbnbListing aListing)
     {
-      singlePropertyMainPane = new BorderPane();
-      singlePropertyMainPane.setId("singlePropertyMainPane");
-      BorderPane bottomPane = new BorderPane();
+      if (currentPropertyCollection != null) {
+          listingIndex = currentPropertyCollection.indexOf(aListing);
+      }
+
+      //create panes
+      BorderPane singleListingView = new BorderPane();
+      singleListingView.setId("singleListingView");
+      GridPane centerPane = new GridPane();
 
       Button nextButton = new Button("Next Property ▶");
       Button previousButton = new Button("◀ Previous Property");
@@ -301,7 +285,7 @@ public class MapPanel
       GridPane centerPane = new GridPane();
       centerPane.setHgap(10);
       centerPane.setVgap(10);
-      
+
       centerPane.setAlignment(Pos.CENTER);
       centerPane.setPadding(new Insets(10, 10, 10, 10));
       centerPane.setPrefWidth(600);
@@ -405,7 +389,12 @@ public class MapPanel
       centerPane.add(borough, 1, 8);
       centerPane.add(boroughContent, 2, 8);
 
-      return centerPane;
+      return singleListingView;
+    }
+
+    private void changeListingView(BorderPane listingView)
+    {
+        listingScene.setRoot(listingView);
     }
 
     private void viewOnMapButtonClicked(double lat, double lon)
@@ -434,8 +423,9 @@ public class MapPanel
     private void nextButtonClicked()
     {
       listingIndex++;
-      if (listingIndex != currentPropertyCollection.size()) {
-          changePanel(listingIndex);
+      if (listingIndex < currentPropertyCollection.size()) {
+          AirbnbListing listing = currentPropertyCollection.get(listingIndex);
+          changeListingView(getListingView(listing));
       }
       else {
           listingIndex = -1; // reset index
@@ -450,12 +440,21 @@ public class MapPanel
     {
       listingIndex--;
       if (listingIndex >= 0) {
-          changePanel(listingIndex);
+          AirbnbListing listing = currentPropertyCollection.get(listingIndex);
+          changeListingView(getListingView(listing));
       }
       else {
           listingIndex = currentPropertyCollection.size(); // wrap to end listing
           previousButtonClicked();
       }
+    }
+
+    /**
+     * @return The listing scene
+     */
+    public Scene getListingScene()
+    {
+        return listingScene;
     }
 
     // ----------- Following methods implement click events for each map button -----------

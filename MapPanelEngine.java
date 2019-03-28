@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.collections.*;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.SortType;
+import javafx.collections.transformation.*;
 public class MapPanelEngine
 {
     private Button button;
@@ -143,7 +144,38 @@ public class MapPanelEngine
         );
         return sortOptions;
     }
-
+    
+    /**
+     * Implements search functionality to search the Borough Table
+     * Reference: https://code.makery.ch/blog/javafx-8-tableview-sorting-filtering/
+     */
+    public void searchTable(ListingManager listingManager, String boroughName, TextField searchText, TableView table) 
+    {        
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<AirbnbListing> filteredData = new FilteredList<>(listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue()), p -> true);
+        
+        // Set the filter Predicate whenever the filter changes.
+        searchText.textProperty().addListener((change, oldValue, newValue) -> {
+            filteredData.setPredicate(airbnbListing -> {
+                // Compare host name of every property with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                // If filter text is empty, display all properties.
+                return (newValue == null || newValue.isEmpty()
+                        //if filter text contains or euquals to the property info, display the list
+                        ||airbnbListing.getHost_name().toLowerCase().contains(lowerCaseFilter))
+                        || (Integer.toString(airbnbListing.getPrice()).equals(lowerCaseFilter))
+                        || (Integer.toString(airbnbListing.getMinimumNights()).equals(lowerCaseFilter));
+            });
+        });
+        
+        //Wrap the FilteredList in a SortedList
+        SortedList<AirbnbListing> sortedData = new SortedList<>(filteredData);
+        
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
+        
+        table.setItems(sortedData);
+    }
+    
     /**
      * Sorts the table data based on drop-down box selection
      */
