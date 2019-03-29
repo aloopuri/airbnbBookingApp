@@ -118,7 +118,7 @@ public class MapPanel
     /**
      * @return The list of buttons in the map panel
      */
-    private ArrayList<Button> getButtons()
+    public ArrayList<Button> getButtons()
     {
         return mapButtons;
     }
@@ -131,7 +131,10 @@ public class MapPanel
 
     public void showViewInRange(int lowerBound, int upperBound)
     {
-        //use this loading method outisde the loop so the program runs faster
+        if (lowerBound > upperBound || lowerBound < 0 || upperBound < 0) {
+            return;
+        }
+        
         ArrayList<Integer> selectedBoroughPrices = new ArrayList<>();
         for(Button button: getButtons()){
             selectedBoroughPrices.clear();
@@ -374,11 +377,18 @@ public class MapPanel
       return singleListingView;
     }
     
+    /**
+     * Switches the scene's root pane to a new pane
+     * @param listingView The new root pane to be set to
+     */
     private void changeListingView(BorderPane listingView) 
     {
         listingScene.setRoot(listingView);
     }
 
+    /**
+     * Opens the Google Map view of the selected property
+     */
     private void viewOnMapButtonClicked(double lat, double lon)
     {
         Stage mapStage = new Stage();
