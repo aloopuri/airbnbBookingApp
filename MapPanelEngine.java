@@ -205,5 +205,10 @@ public class MapPanelEngine
                 System.out.println("Column not found! No Action");
                 break;
         }
+        boroughListings.clear();
+        for (Object obj : table.getItems()) {
+            AirbnbListing listing = (AirbnbListing) obj;
+            boroughListings.add(listing);
+        }
     }
 }

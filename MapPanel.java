@@ -212,10 +212,12 @@ public class MapPanel
         sortingBox.setPromptText("❤ choose a range ❤");
         sortingBox.setItems(mpe.getSortingOptions());
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
-        sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue()), listingTable));
+        sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, currentPropertyCollection, listingTable));
+        
         TextField searchText = new TextField();
         searchText.setPromptText("❤ type here ❤");
         searchText.getStyleClass().add("tableViewBox");
+        
         ToolBar sortBar = new ToolBar();
         Label sortByLabel = new Label("Sort by:");
         Label searchLabel = new Label("Search by Host Name/Price/MinNights: ");
