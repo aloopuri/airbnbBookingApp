@@ -1,44 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button layoutX="373.0" layoutY="633.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="SUTT" />
-      <Button layoutX="435.0" layoutY="117.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HRGY" />
-      <Button layoutX="846.0" layoutY="223.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HAVE" />
-      <Button layoutX="142.0" layoutY="219.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HRRW" />
-      <Button layoutX="787.0" layoutY="328.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BARK" />
-      <Button layoutX="611.0" layoutY="429.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="GWCH" />
-      <Button layoutX="728.0" layoutY="429.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BEXL" />
-      <Button layoutX="492.0" layoutY="20.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="108.0" text="ENFI" textOverrun="CLIP" />
-      <Button layoutX="318.0" layoutY="116.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BARN" />
-      <Button layoutX="552.0" layoutY="117.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WALT" />
-      <Button layoutX="83.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HILL" />
-      <Button layoutX="199.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="EALI" />
-      <Button layoutX="259.0" layoutY="219.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BREN" />
-      <Button layoutX="376.0" layoutY="220.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CAMD" />
-      <Button layoutX="435.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WSTM" />
-      <Button layoutX="494.0" layoutY="221.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="ISLI" />
-      <Button layoutX="611.0" layoutY="222.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HACK" />
-      <Button layoutX="552.0" layoutY="325.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="TOWH" />
-      <Button layoutX="729.0" layoutY="223.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="REDB" />
-      <Button layoutX="317.0" layoutY="323.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="KENS" />
-      <Button layoutX="670.0" layoutY="326.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="NEWH" />
-      <Button layoutX="141.0" layoutY="425.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HOUN" />
-      <Button layoutX="257.0" layoutY="426.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="HAMM" />
-      <Button layoutX="375.0" layoutY="426.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="WAND" />
-      <Button layoutX="493.0" layoutY="427.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CITY" />
-      <Button layoutX="197.0" layoutY="529.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="RICH" />
-      <Button layoutX="314.0" layoutY="529.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="MERT" />
-      <Button layoutX="255.0" layoutY="631.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="KING" />
-      <Button layoutX="432.0" layoutY="530.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="LAMB" />
-      <Button layoutX="550.0" layoutY="531.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="STHW" />
-      <Button layoutX="491.0" layoutY="634.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="CROY" />
-      <Button layoutX="669.0" layoutY="531.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="LEWS" />
-      <Button layoutX="609.0" layoutY="634.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="108.0" text="BROM" />
-   </children>
-</Pane>
+<BorderPane fx:id="mapPane" minHeight="800.0" minWidth="1200.0" stylesheets="@MapLayout.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapPanel">
+   <center>
+                  <Pane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1023.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button fx:id="Sutton" layoutX="373.0" layoutY="666.0" mnemonicParsing="false" onAction="#SUTTClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="SUTT" />
+                                          <Button fx:id="Haringey" layoutX="435.0" layoutY="145.0" mnemonicParsing="false" onAction="#HRGYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRGY" />
+                                          <Button fx:id="Havering" layoutX="846.0" layoutY="251.0" mnemonicParsing="false" onAction="#HAVEClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAVE" />
+                                          <Button fx:id="Harrow" layoutX="142.0" layoutY="250.0" mnemonicParsing="false" onAction="#HRRWClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HRRW" />
+                                          <Button fx:id="BarkingandDagenham" layoutX="787.0" layoutY="355.0" mnemonicParsing="false" onAction="#BARKClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARK" />
+                                          <Button fx:id="Greenwich" layoutX="611.0" layoutY="459.0" mnemonicParsing="false" onAction="#GWCHClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="GWCH" />
+                                          <Button fx:id="Bexley" layoutX="728.0" layoutY="459.0" mnemonicParsing="false" onAction="#BEXLClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BEXL" />
+                                          <Button fx:id="Enfield" layoutX="492.0" layoutY="47.0" mnemonicParsing="false" onAction="#ENFIClick" prefHeight="122.0" prefWidth="108.0" styleClass="borough-button" text="ENFI" textOverrun="CLIP">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Button>
+                                          <Button fx:id="Barnet" layoutX="318.0" layoutY="146.0" mnemonicParsing="false" onAction="#BARNClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BARN" />
+                                          <Button fx:id="WalthamForest" layoutX="552.0" layoutY="144.0" mnemonicParsing="false" onAction="#WALTClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WALT" />
+                                          <Button fx:id="Hillingdon" layoutX="83.0" layoutY="353.0" mnemonicParsing="false" onAction="#HILLClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HILL" />
+                                          <Button fx:id="Ealing" layoutX="199.0" layoutY="353.0" mnemonicParsing="false" onAction="#EALIClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="EALI" />
+                                          <Button fx:id="Brent" layoutX="259.0" layoutY="250.0" mnemonicParsing="false" onAction="#BRENClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BREN" />
+                                          <Button fx:id="Camden" layoutX="376.0" layoutY="251.0" mnemonicParsing="false" onAction="#CAMDClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CAMD" />
+                                          <Button fx:id="Westminster" layoutX="435.0" layoutY="354.0" mnemonicParsing="false" onAction="#WSTMClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WSTM" />
+                                          <Button fx:id="Islington" layoutX="494.0" layoutY="251.0" mnemonicParsing="false" onAction="#ISLIClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="ISLI" />
+                                          <Button fx:id="Hackney" layoutX="611.0" layoutY="250.0" mnemonicParsing="false" onAction="#HACKClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HACK" />
+                                          <Button fx:id="TowerHamlets" layoutX="552.0" layoutY="354.0" mnemonicParsing="false" onAction="#TOWHClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="TOWH" />
+                                          <Button fx:id="Redbridge" layoutX="729.0" layoutY="250.0" mnemonicParsing="false" onAction="#REDBClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="REDB" />
+                                          <Button fx:id="KensingtonandChelsea" layoutX="317.0" layoutY="353.0" mnemonicParsing="false" onAction="#KENSClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KENS" />
+                                          <Button fx:id="Newham" layoutX="670.0" layoutY="354.0" mnemonicParsing="false" onAction="#NEWHClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="NEWH" />
+                                          <Button fx:id="Hounslow" layoutX="141.0" layoutY="457.0" mnemonicParsing="false" onAction="#HOUNClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HOUN" />
+                                          <Button fx:id="HammersmithandFulham" layoutX="257.0" layoutY="458.0" mnemonicParsing="false" onAction="#HAMMClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="HAMM" />
+                                          <Button fx:id="Wandsworth" layoutX="375.0" layoutY="459.0" mnemonicParsing="false" onAction="#WANDClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="WAND" />
+                                          <Button fx:id="CityofLondon" layoutX="493.0" layoutY="459.0" mnemonicParsing="false" onAction="#CITYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CITY" />
+                                          <Button fx:id="RichmonduponThames" layoutX="198.0" layoutY="561.0" mnemonicParsing="false" onAction="#RICHClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="RICH" />
+                                          <Button fx:id="Merton" layoutX="315.0" layoutY="562.0" mnemonicParsing="false" onAction="#MERTClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="MERT" />
+                                          <Button fx:id="KingstonuponThames" layoutX="255.0" layoutY="666.0" mnemonicParsing="false" onAction="#KINGClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="KING" />
+                                          <Button fx:id="Lambeth" layoutX="433.0" layoutY="563.0" mnemonicParsing="false" onAction="#LAMBClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LAMB" />
+                                          <Button fx:id="Southwark" layoutX="551.0" layoutY="563.0" mnemonicParsing="false" onAction="#STHWClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="STHW" />
+                                          <Button fx:id="Croydon" layoutX="491.0" layoutY="667.0" mnemonicParsing="false" onAction="#CROYClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="CROY" />
+                                          <Button fx:id="Lewisham" layoutX="669.0" layoutY="563.0" mnemonicParsing="false" onAction="#LEWSClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="LEWS" />
+                                          <Button fx:id="Bromley" layoutX="609.0" layoutY="666.0" mnemonicParsing="false" onAction="#BROMClick" prefHeight="128.0" prefWidth="108.0" styleClass="borough-button" text="BROM" />
+                        <Text fx:id="keyTitle" fill="WHITE" layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Available Airbnbs:" wrappingWidth="326.615234375">
+               <font>
+                  <Font name="Tw Cen MT Bold" size="23.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="13.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 -10" wrappingWidth="60.0">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="13.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10-20">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="13.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20-30">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="13.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30-40">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="13.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40-50">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="13.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50-100">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="12.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100-150">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="12.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="150-200">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="12.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200-250">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="250-300">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="300-600">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="600-1000">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000-1500">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1500-2000">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2000-2500">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2500-3500">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Text fill="WHITE" layoutX="130.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;3500">
+               <font>
+                  <Font name="Tw Cen MT" size="12.0" />
+               </font></Text>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIGHTCYAN" height="16.0" layoutX="62.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="PALETURQUOISE" height="17.0" layoutX="62.0" layoutY="77.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUAMARINE" height="17.0" layoutX="62.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TURQUOISE" height="17.0" layoutX="62.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MEDIUMTURQUOISE" height="17.0" layoutX="62.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKTURQUOISE" height="17.0" layoutX="62.0" layoutY="157.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="CADETBLUE" height="17.0" layoutX="62.0" layoutY="177.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="STEELBLUE" height="17.0" layoutX="62.0" layoutY="197.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIGHTSTEELBLUE" height="17.0" layoutX="62.0" layoutY="217.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="CORNFLOWERBLUE" height="17.0" layoutX="195.0" layoutY="177.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="195.0" layoutY="157.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="ROYALBLUE" height="17.0" layoutX="195.0" layoutY="197.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DEEPSKYBLUE" height="17.0" layoutX="195.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIGHTSKYBLUE" height="17.0" layoutX="195.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SKYBLUE" height="17.0" layoutX="195.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIGHTBLUE" height="17.0" layoutX="195.0" layoutY="77.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="POWDERBLUE" height="17.0" layoutX="195.0" layoutY="57.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                                       </children>
+                                    </Pane>
+   </center>
+</BorderPane>
