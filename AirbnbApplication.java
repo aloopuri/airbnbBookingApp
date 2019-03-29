@@ -10,7 +10,7 @@ import javafx.collections.*;
 import javafx.animation.*;
 import javafx.util.Duration;
 import javafx.scene.image.*;
-import java.util.ArrayList;
+import java.util.*;
 import javafx.scene.paint.Color;
 /**
  * Write a description of class AirbnbApp here.
@@ -25,8 +25,8 @@ public class AirbnbApplication extends Application
     private int panelIndex;
     private double animationIndex;
     private ListingManager listingManager;
+    private LoginSystem loginSystem;
     private ArrayList<AirbnbListing> listings;
-
     // Controls on most panels
     private BorderPane main;
     private Button backButton = new Button("<");
@@ -47,6 +47,7 @@ public class AirbnbApplication extends Application
     {
         panels = new ArrayList<Pane>();
         listings = new ArrayList<AirbnbListing>();
+        loginSystem = new LoginSystem();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
         listingManager = new ListingManager(listings);
@@ -70,7 +71,7 @@ public class AirbnbApplication extends Application
         welcomePanel = new WelcomePanel();
         map = new MapPanel(listingManager);
         stat = new StatisticPanel(listings, listingManager);
-        
+
         panels.add(welcomePanel.getWelcomePanel());
         panels.add(map.createMap());
         panels.add(stat.getStatisticPanel());
@@ -126,6 +127,12 @@ public class AirbnbApplication extends Application
         main.setTop(topPane);
         main.setBottom(bottomPane);
 
+        BorderPane root = new BorderPane();
+        root.setTop(topPane);
+        UserPanel xxx = new UserPanel(loginSystem);
+        root.setCenter(xxx.getPane());
+        root.setBottom(bottomPane);
+
         Scene scene = new Scene(main, 1200, 900);
         stage.setTitle("Airbnb London");
         stage.setScene(scene);
@@ -136,6 +143,13 @@ public class AirbnbApplication extends Application
         stage.sizeToScene();
         stage.show();
         stage.getIcons().add(new Image("/images/airbnb-small.png"));
+    }
+
+    private void hideLogins()
+    {
+        //TranslateTransition tt = new TranslateTransition(Duration.millis(300),);
+        //tt.setToX(-70);
+        //tt.play();
     }
 
     /**
