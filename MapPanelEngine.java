@@ -205,10 +205,22 @@ public class MapPanelEngine
                 System.out.println("Column not found! No Action");
                 break;
         }
+        updateTableListings(boroughListings, table);
+    }
+    
+    /**
+     * Re-orders the ObservableList to the order shown in the
+     * table view
+     * @param boroughListings The ObservableList to be re-ordered
+     * @param table The TableView that the ObservableList belongs to
+     */
+    public void updateTableListings(ObservableList<AirbnbListing> boroughListings, TableView table) 
+    {
         boroughListings.clear();
         for (Object obj : table.getItems()) {
             AirbnbListing listing = (AirbnbListing) obj;
+            System.out.println(listing.getHost_name());
             boroughListings.add(listing);
-        }
-    }
+        }        
+    }    
 }
