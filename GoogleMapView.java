@@ -14,13 +14,14 @@ import java.util.ArrayList;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class MapStat
+public class GoogleMapView
 {
     private ListingManager listingManager;
     private WebView browser;
     private WebEngine webEngine;
     private int listingIndex = -1;
-    public MapStat(ListingManager listingManager)
+    
+    public GoogleMapView(ListingManager listingManager)
     {
         this.listingManager = listingManager;
         browser = new WebView();
@@ -28,9 +29,9 @@ public class MapStat
     }
 
     /**
-     * Creates the Map Stats
+     * Creates the Google Map view
      */
-    public AnchorPane createMapStats(double lat, double lon)
+    public AnchorPane createGoogleMap(double lat, double lon)
     {
         // Create buttons
         Button directions = new Button("How to Get There");

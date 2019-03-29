@@ -9,8 +9,9 @@ import javafx.collections.*;
 public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
-    private ArrayList<AirbnbListing> currentListings; 
+    
     // used to hold the listings based on the price range the user chose
+    private ArrayList<AirbnbListing> currentListings;
     
     /**
      * Constructor for objects of class listingManager
@@ -22,7 +23,7 @@ public class ListingManager
     }
 
     /**
-     * Returns listings
+     * @return The listings ArrayList
      */
     public ArrayList<AirbnbListing> getListings()
     {
@@ -53,7 +54,7 @@ public class ListingManager
     }    
         
     /**
-     * Returns a list of prices incrementing by 200 up to a limit
+     * @return A list of prices incrementing by 200 up to a limit
      */
     public ArrayList<Integer> getMenuOptions() 
     {
@@ -74,7 +75,7 @@ public class ListingManager
     }    
     
     /**
-     * Returns a list containing all of the boroughs based on the data in current listings
+     * @return A list containing all of the boroughs based on the data in current listings
      */
     public ObservableList<String> getBoroughOptions() 
     {
@@ -93,8 +94,7 @@ public class ListingManager
     }
 
     /**
-     * Returns a list which containes all of the prices in the listings with no
-     * 
+     * @return A list which contains all of the prices in the listings with no
      */
     public ArrayList<Integer> getAllPrices()
     {

@@ -61,11 +61,18 @@ public class WelcomePanel
         addAnimation(priceRange);
     }
     
+    /**
+     * @return The welcome panel's root pane
+     */
     public BorderPane getWelcomePanel()
     {
         return root;
     }
     
+    /**
+     * Applies a fade-in animation to a provided node
+     * @param node The node to apply the animation onto
+     */
     private void addAnimation(Node node)
     {
         FadeTransition ft = new FadeTransition(Duration.millis(5000), node);

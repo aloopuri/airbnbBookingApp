@@ -404,7 +404,7 @@ public class MapPanel
     private void viewOnMapButtonClicked(double lat, double lon)
     {
         Stage mapStage = new Stage();
-        Scene mapScene = new Scene(new MapStat(listingManager).createMapStats(lat, lon));
+        Scene mapScene = new Scene(new GoogleMapView(listingManager).createGoogleMap(lat, lon));
         mapScene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
         mapStage.setScene(mapScene);
         mapStage.setTitle("Property Map Viewer");
