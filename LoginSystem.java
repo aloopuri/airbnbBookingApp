@@ -19,7 +19,7 @@ public class LoginSystem
     {
 
     }
-
+    
     public String addUser(String name, String pass)
     {
         String returnString = "Adding";

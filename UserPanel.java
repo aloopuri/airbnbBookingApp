@@ -22,9 +22,9 @@ public class UserPanel
     /**
      * Constructor for objects of class UserPanel
      */
-    public UserPanel()
+    public UserPanel(LoginSystem loginSystem)
     {
-        loginSystem = new LoginSystem();
+        this.loginSystem = loginSystem;
         root = new BorderPane();
 
         loginBox = new VBox();
@@ -63,6 +63,11 @@ public class UserPanel
 
         VBox favouritesBox = new VBox();
         favouritesBox.getChildren().add(new Label("FAVOURITES"));
+        
+        ListView favouritesDisplay = new ListView();
+        Button removeFavourite = new Button("Delete");
+        favouritesBox.getChildren().addAll(favouritesDisplay,
+        removeFavourite);
         mainBox.getChildren().add(favouritesBox);
 
         VBox newPropBox = new VBox();
@@ -74,9 +79,9 @@ public class UserPanel
         nameField.setPromptText("Your name");
 
         ChoiceBox neighbourhoodField = new ChoiceBox(
-                FXCollections.observableArrayList("Kingston upon Thames", "Croydon",
-                    "Bromley","Hounslow","Ealing","Havering","Hillingdon","Harrow",
-                    "Brent","Barnet","Enfield"));
+            FXCollections.observableArrayList("Kingston upon Thames", "Croydon",
+            "Bromley","Hounslow","Ealing","Havering","Hillingdon","Harrow",
+            "Brent","Barnet","Enfield"));
 
         TextField latitudeField = new TextField();
         latitudeField.setPromptText("Latitude");

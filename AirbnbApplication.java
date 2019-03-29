@@ -24,7 +24,7 @@ public class AirbnbApplication extends Application
     
     private ArrayList<Scene> scenes;
     private ListingManager listingManager;
-    
+    private LoginSystem loginSystem;
     // Controls on most panels
     private Button backButton = new Button("<");
     private Button frontButton = new Button(">");
@@ -36,6 +36,7 @@ public class AirbnbApplication extends Application
      */
     public AirbnbApplication() 
     {
+        loginSystem = new LoginSystem();
         scenes = new ArrayList<Scene>();
         ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
         AirbnbDataLoader loader = new AirbnbDataLoader();
@@ -78,7 +79,7 @@ public class AirbnbApplication extends Application
         // Create a new border pane
         BorderPane root = new BorderPane();
         root.setTop(topPane);
-        UserPanel xxx = new UserPanel();
+        UserPanel xxx = new UserPanel(loginSystem);
         root.setCenter(xxx.getPane());
         root.setBottom(bottomPane);
         
