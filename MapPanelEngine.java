@@ -109,12 +109,12 @@ public class MapPanelEngine
       else if(listingCount > 2500 && listingCount <= 3500)
       {
         color = Color.web("#6495ED");
-      }      
+      }
       else
       {
         color = Color.web("#4169E1");
       }
-      
+
       backgroundFill = new BackgroundFill(color, null, null);
       background = new Background(backgroundFill);
       button.setBackground(background);
@@ -133,16 +133,16 @@ public class MapPanelEngine
         );
         return sortOptions;
     }
-    
+
     /**
      * Implements search functionality to search the Borough Table
      * Reference: https://code.makery.ch/blog/javafx-8-tableview-sorting-filtering/
      */
-    public void searchTable(ListingManager listingManager, String boroughName, TextField searchText, TableView table) 
-    {        
+    public void searchTable(ListingManager listingManager, String boroughName, TextField searchText, TableView table)
+    {
         // Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<AirbnbListing> filteredData = new FilteredList<>(listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue()), p -> true);
-        
+
         // Set the filter Predicate whenever the filter changes.
         searchText.textProperty().addListener((change, oldValue, newValue) -> {
             filteredData.setPredicate(airbnbListing -> {
@@ -156,15 +156,15 @@ public class MapPanelEngine
                         || (Integer.toString(airbnbListing.getMinimumNights()).equals(lowerCaseFilter));
             });
         });
-        
+
         //Wrap the FilteredList in a SortedList
         SortedList<AirbnbListing> sortedData = new SortedList<>(filteredData);
-        
+
         sortedData.comparatorProperty().bind(table.comparatorProperty());
-        
+
         table.setItems(sortedData);
     }
-    
+
     /**
      * Sorts the table data based on drop-down box selection
      */

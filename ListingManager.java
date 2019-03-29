@@ -10,26 +10,26 @@ public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
     private ArrayList<AirbnbListing> currentListings;
-    
+
     /**
      * Constructor for objects of class listingManager
      */
     public ListingManager(ArrayList<AirbnbListing> listings)
     {
         this.listings = listings;
-        currentListings = new ArrayList<AirbnbListing>();
+        currentListings = new ArrayList<>();
     }
 
     public ArrayList<AirbnbListing> getListings()
     {
         return listings;
     }
-    
+
     public ArrayList<AirbnbListing> getCurrentListings()
     {
         return currentListings;
     }
-    
+
     /**
      * This creates a list of all listings which are in the price range
      */
@@ -43,12 +43,12 @@ public class ListingManager
             }
         }
         currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
-    }    
-        
-    public ArrayList<Integer> getMenuOptions() 
+    }
+
+    public ArrayList<Integer> getMenuOptions()
     {
         ArrayList<Integer> prices = getAllPrices();
-        
+
         Integer maxPrice = Collections.max(prices);
         prices = new ArrayList();
         int counter = 0;
@@ -56,12 +56,27 @@ public class ListingManager
             prices.add(counter);
             counter += 200;
         }
-        
+
         if (counter > maxPrice) {
             prices.add(counter);
         }
         return prices;
-    }    
+    }
+
+    public ObservableList<String> getBoroughOptions()
+    {
+        String borough = currentListings.get(0).getNeighbourhood();
+        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
+        ObservableList<String> allBoroughs = FXCollections.observableArrayList();
+        for (AirbnbListing aListing : currentListings)
+        {
+            if (!aListing.getNeighbourhood().equals(borough)) {
+                allBoroughs.add(borough);
+                borough = aListing.getNeighbourhood();
+            }
+        }
+        return allBoroughs;
+    }
 
     public ArrayList<Integer> getAllPrices()
     {

@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.event.*;
 import javafx.scene.*;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
@@ -12,9 +12,8 @@ import javafx.util.Duration;
 import javafx.scene.image.*;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 /**
- * Write a description of JavaFX class Application here.
+ * Write a description of class AirbnbApp here.
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -41,7 +40,7 @@ public class AirbnbApplication extends Application
     private MapPanel map;
 
     /**
-     * Class Constructor
+     * Constructor for objects of class AirbnbApp
      */
     public AirbnbApplication()
     {
