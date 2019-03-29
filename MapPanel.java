@@ -23,7 +23,7 @@ public class MapPanel
     private ObservableList<AirbnbListing> currentPropertyCollection;
     private Scene listingScene;
     private Stage listingStage;
-
+    private LoginSystem loginSystem;
     private int listingIndex = -1;
 
     // Map Button declarations
@@ -61,9 +61,10 @@ public class MapPanel
     @FXML Button Bromley;
     @FXML Button Merton;
 
-    public MapPanel(ListingManager listingManager)
+    public MapPanel(ListingManager listingManager,LoginSystem loginSystem)
     {
         this.listingManager = listingManager;
+        this.loginSystem = loginSystem;
         mpe = new MapPanelEngine();
         listingStage = new Stage();
         initializeButtons();
@@ -335,8 +336,13 @@ public class MapPanel
       lastReviewContent.getStyleClass().add("singlePropertyLabel");
       Label nullLabel = new Label("no information");
       nullLabel.getStyleClass().add("singlePropertyLabel");
-
+      
+      Button favourite = new Button("Favourite");
+      favourite.getStyleClass().add("singlePropertyButton");
+      System.out.println("listing:" + aListing);
+      favourite.setOnAction(e -> toggleFavourite(aListing));
       //add labels to specific positions on centerPane
+      centerPane.add(favourite, 1 ,0);
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
       centerPane.add(viewOnMapButton, 0, 3);
@@ -375,6 +381,16 @@ public class MapPanel
       return singleListingView;
     }
 
+    private void toggleFavourite(AirbnbListing listing)
+    {
+        System.out.println(loginSystem.getCurrentUser());
+        if (loginSystem.getCurrentUser() != null)
+        {
+            loginSystem.getCurrentUser().addFavourite(listing);
+        }
+        System.out.println("map toggle faovurtie");
+    }
+    
     private void changeListingView(BorderPane listingView)
     {
         listingScene.setRoot(listingView);

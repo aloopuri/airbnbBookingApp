@@ -4,7 +4,6 @@ import javafx.collections.*;
 import java.net.*;
 import java.util.*;
 import java.util.Random;
-
 /**
  * Write a description of class User here.
  *
@@ -15,7 +14,8 @@ public class User
 {
     // instance variables - replace the example below with your own
     private String username, password;
-    private AirbnbListing[] favourites; 
+    private ArrayList<AirbnbListing> favourites; 
+    private int maxSize;
     /**
      * Constructor for objects of class User
      */
@@ -23,7 +23,38 @@ public class User
     {
         this.username = username;
         this.password = password;
-        favourites = new AirbnbListing[5];
+        favourites = new ArrayList();
+        maxSize = 10;
+    }
+    
+    public void addFavourite(AirbnbListing listing)
+    {
+        if (!(favourites.contains(listing)))
+        {
+            System.out.println(favourites.size()+"  "+maxSize);
+            if (favourites.size() <= maxSize)
+            {
+                favourites.add(listing);
+                System.out.println(favourites.size());
+            }
+        }
+    }
+    
+    public void removeFavourite(String listingName)
+    {
+        System.out.println(listingName);
+        AirbnbListing remove = null;
+        for (AirbnbListing listing:favourites)
+        {
+            if (listing.getName().equals(listingName))
+            {
+                remove = listing;
+            }
+        }
+        if (remove != null)
+        {
+            favourites.remove(remove);
+        }
     }
     
     public String addListing(
@@ -146,7 +177,10 @@ public class User
             e.printStackTrace();
         }
     }
-    
+    public ArrayList<AirbnbListing> getFavourites()
+    {
+        return favourites;
+    }
     public String getName()
     {
         return username;

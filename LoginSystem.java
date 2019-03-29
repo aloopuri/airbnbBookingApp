@@ -45,6 +45,7 @@ public class LoginSystem
                     sb.append(name);
                     sb.append(',');
                     sb.append(cipherText(pass,name,false));
+                    sb.append(",1,2,3,4,5,6,7,8,9,0");
                     sb.append('\n');
                     writer.write(sb.toString());
                     returnString = "Account Created";
@@ -83,6 +84,7 @@ public class LoginSystem
                 {
                     found = true;
                     currentUser = new User(line[0],deCipheredPass);
+                    System.out.println(currentUser);
                 }
             }
         }

@@ -4,6 +4,7 @@ import javafx.animation.*;
 import javafx.util.*;
 import java.lang.*;
 import javafx.collections.*;
+import java.util.*;
 /**
  * Write a description of class UserPanel here.
  *
@@ -19,6 +20,7 @@ public class UserPanel
     private Button loginButton, signupButton, addListingButton;
     private Label loginStatus,nameDisplay;
     private VBox loginBox, accountBox, midBox;
+    private ListView favouritesDisplay;
     /**
      * Constructor for objects of class UserPanel
      */
@@ -64,10 +66,14 @@ public class UserPanel
         VBox favouritesBox = new VBox();
         favouritesBox.getChildren().add(new Label("FAVOURITES"));
         
-        ListView favouritesDisplay = new ListView();
+        favouritesDisplay = new ListView();
         Button removeFavourite = new Button("Delete");
+        Button showFavourite = new Button("Show");
+        Button saveFavourite = new Button("Save");
         favouritesBox.getChildren().addAll(favouritesDisplay,
-        removeFavourite);
+        removeFavourite,showFavourite,saveFavourite);
+        showFavourite.setOnAction(e -> showFavourites(favouritesDisplay));
+        removeFavourite.setOnAction(e -> deleteFavourite(favouritesDisplay));
         mainBox.getChildren().add(favouritesBox);
 
         VBox newPropBox = new VBox();
@@ -127,7 +133,26 @@ public class UserPanel
         accountBox.getChildren().add(nameDisplay);
         root.setBottom(accountBox);
     }
-
+    
+    private void showFavourites(ListView display)
+    {
+        ArrayList<String> favouriteNames = new ArrayList();
+        for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
+        {
+            favouriteNames.add(list.getName());
+            System.out.println(list);
+        }
+        display.getItems().clear();
+        display.getItems().addAll(favouriteNames);
+    }
+    
+    private void deleteFavourite(ListView display)
+    {
+        loginSystem.getCurrentUser().removeFavourite((String) display.
+        getSelectionModel().getSelectedItem());
+        showFavourites(favouritesDisplay);
+    }
+    
     private void addListing(
     TextField pNameField,TextField nameField,ChoiceBox neighbourhoodField,
     TextField latitudeField,TextField longitudeField,ChoiceBox typeField,
@@ -239,7 +264,6 @@ public class UserPanel
         showLogin();
         loginSystem.removeCurrentUser();
         updateNameDisplay();
-
         addListingButton.setDisable(true);
     }
 
@@ -290,15 +314,15 @@ public class UserPanel
     public void hideLogin()
     {
         double addedHeight = ((Pane)((BorderPane) root.getParent()).getTop()).getHeight();
-        double totalHeight = -(loginBox.getHeight() + addedHeight);
+        double totalHeight = -(loginBox.getHeight() + addedHeight+5);
         moveBox(loginBox,totalHeight);
-        moveBox(midBox,totalHeight);
+        moveBox(midBox,totalHeight+50);
     }
 
     public void showLogin()
     {
         moveBox(loginBox,0);
-        moveBox(midBox,0);
+        moveBox(midBox,25);
     }
 
     public void moveBox(Pane object, double position)

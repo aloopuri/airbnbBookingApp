@@ -70,7 +70,7 @@ public class AirbnbApplication extends Application
     public void start(Stage stage) throws Exception
     {
         welcomePanel = new WelcomePanel();
-        map = new MapPanel(listingManager);
+        map = new MapPanel(listingManager,loginSystem);
         stat = new StatisticPanel(listings, listingManager);
         user = new UserPanel(loginSystem);
         panels.add(welcomePanel.getWelcomePanel());
@@ -104,11 +104,15 @@ public class AirbnbApplication extends Application
         fromBox.setId("fromBox");
         toBox.setPromptText("-");
         toBox.setId("toBox");
-
+     
+        Button home = new Button("Home");
+        home.setOnAction(e -> goToHome());
+        
         topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
         topPane.setSpacing(10);
-        topPane.getChildren().addAll(iconView, leftRegion, fromLabel, fromBox, toLabel, toBox, new Region());
+        topPane.getChildren().addAll(iconView, home, leftRegion, 
+        fromLabel, fromBox, toLabel, toBox, new Region());
         topPane.setHgrow(leftRegion, Priority.ALWAYS);
 
         frontButton.setId("frontButton");
@@ -128,12 +132,6 @@ public class AirbnbApplication extends Application
         main.setTop(topPane);
         main.setBottom(bottomPane);
         
-        BorderPane root = new BorderPane();
-        //root.setTop(topPane);
-        UserPanel xxx = new UserPanel(loginSystem);
-        root.setCenter(xxx.getPane());
-        //root.setBottom(bottomPane);
-
         Scene scene = new Scene(main, 1200, 900);
         stage.setTitle("Airbnb London");
         stage.setScene(scene);
@@ -160,7 +158,14 @@ public class AirbnbApplication extends Application
             stat.updateStatistics(listingManager.getCurrentListings());
         }
     }
-
+    
+    private void goToHome()
+    {
+        panelIndex = 0;
+        animationIndex = -2000f;
+        changePanel(panelIndex);
+    }
+    
     /**
      * Sets up and returns the list of options for use in combo boxes
      * @return options The list of combo box options

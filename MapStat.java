@@ -50,7 +50,7 @@ public class MapStat
         toolbar.setSpacing(10);
         toolbar.setAlignment(Pos.CENTER);
 
-        toolbar.getChildren().addAll(nextProperty, previousProperty, directions);
+        toolbar.getChildren().addAll(nextProperty,previousProperty, directions);
 
         viewProperty(lat, lon);
 
