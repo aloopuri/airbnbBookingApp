@@ -3,7 +3,8 @@ import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.text.TextAlignment;
 /**
- * Write a description of class BasicStatistic here.
+ * This creates a simple display of a statistic
+ * It consists of only a title and a label which holds the statistic
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -14,7 +15,7 @@ public class BasicStatisticDisplay extends DataDisplay
     private Label data = new Label();
 
     /**
-     * Constructor for objects of class BasicStatistic
+     * Creates the basic statistic display
      */ 
     public BasicStatisticDisplay(StatisticPanel statPanel, String title, String data)
     {

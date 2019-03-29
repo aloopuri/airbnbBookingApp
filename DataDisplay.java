@@ -8,7 +8,8 @@ import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.Parent;
 /**
- * Creates a GridPane which holds a title and a statistic
+ * Abstract class which stores the shared properties of the different types 
+ * of ways a statistics is displayed
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -20,7 +21,7 @@ public abstract class DataDisplay
     private static StatisticPanel statPanel;
 
     /**
-     * Adds a title and statistics 
+     * Creates a GridPane
      */
     public DataDisplay(StatisticPanel statPanel)
     {
@@ -29,6 +30,9 @@ public abstract class DataDisplay
         dataDisplay.setStyle("-fx-background-color: rgba(239, 9, 205, 0.7)");
     }
     
+    /**
+     * When a statistic is clicked, it shows an enlarged version of it in the statistic panel
+     */
     protected void whenStatisiticClicked()
     {
         dataDisplay.addEventHandler(MouseEvent.MOUSE_CLICKED,  new EventHandler<MouseEvent>(){
@@ -54,11 +58,17 @@ public abstract class DataDisplay
         return isDisplayed;
     }
     
+    /**
+     * Sets isDisplayed to false
+     */
     public void setIsDisplayedFalse()
     {
         isDisplayed = false;
     }
     
+    /**
+     * Sets isDisplayed to false
+     */
     public void setIsDisplayedTrue()
     {
         isDisplayed = true;

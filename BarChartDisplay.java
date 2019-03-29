@@ -10,7 +10,10 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 /**
- * Write a description of class BarChartDisplay here.
+ * This creates a bar chart which can be used to show the room types in a borough
+ * or the availability of listings in a borough
+ * You can filter the data by using the combo box which contains all the boroughs
+ * with listings in the range of the price specified
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -25,7 +28,7 @@ public class BarChartDisplay extends DataDisplay
     private String bcData;
 
     /**
-     * Constructor for objects of class BarChartDisplay
+     * Creates a combo box and a default message 
      */
     public BarChartDisplay(StatisticPanel statPanel, String title, String bcData,
         ObservableList<String> allBoroughs)

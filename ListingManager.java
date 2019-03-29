@@ -9,7 +9,8 @@ import javafx.collections.*;
 public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
-    private ArrayList<AirbnbListing> currentListings;
+    private ArrayList<AirbnbListing> currentListings; 
+    // used to hold the listings based on the price range the user chose
     
     /**
      * Constructor for objects of class listingManager
@@ -20,11 +21,17 @@ public class ListingManager
         currentListings = new ArrayList<AirbnbListing>();
     }
 
+    /**
+     * Returns listings
+     */
     public ArrayList<AirbnbListing> getListings()
     {
         return listings;
     }
     
+    /**
+     * Returns current listings
+     */
     public ArrayList<AirbnbListing> getCurrentListings()
     {
         return currentListings;
@@ -45,6 +52,9 @@ public class ListingManager
         currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
     }    
         
+    /**
+     * Returns a list of prices incrementing by 200 up to a limit
+     */
     public ArrayList<Integer> getMenuOptions() 
     {
         ArrayList<Integer> prices = getAllPrices();
@@ -63,11 +73,15 @@ public class ListingManager
         return prices;
     }    
     
+    /**
+     * Returns a list containing all of the boroughs based on the data in current listings
+     */
     public ObservableList<String> getBoroughOptions() 
     {
         String borough = currentListings.get(0).getNeighbourhood();
         currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
         ObservableList<String> allBoroughs = FXCollections.observableArrayList();
+        currentListings.add(currentListings.get(0));
         for (AirbnbListing aListing : currentListings)
         {
             if (!aListing.getNeighbourhood().equals(borough)) {
@@ -78,6 +92,10 @@ public class ListingManager
         return allBoroughs;
     }
 
+    /**
+     * Returns a list which containes all of the prices in the listings with no
+     * 
+     */
     public ArrayList<Integer> getAllPrices()
     {
         ArrayList<Integer> prices = new ArrayList();
@@ -113,6 +131,9 @@ public class ListingManager
         return observableListings;
     }
 
+    /**
+     * Returns a list of all prices in a borough which is passed in as a parameter
+     */
     public ArrayList<Integer> getBoroughPrices(String borough)
     {
       ArrayList<Integer> listOfPricesInBorough = new ArrayList<>();

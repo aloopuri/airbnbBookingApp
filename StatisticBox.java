@@ -50,7 +50,7 @@ public class StatisticBox
         Button rightArrow = new Button(">");
         
         statDisplay = new GridPane();
-        addStatistic(); 
+        addUndisplayedStatistic(); 
                
         leftArrow.setOnAction(this::previousStat);
         rightArrow.setOnAction(this::nextStat);
@@ -68,36 +68,14 @@ public class StatisticBox
         
         statBox.add(leftArrow, 0, 0);
         statBox.add(statDisplay, 1, 0);
-        statBox.add(rightArrow, 2, 0);
+        statBox.add(rightArrow, 2, 0);        
+    }
         
-    }
-    
-    /*private void whenStatisiticClicked()
-    {
-        statDisplay.addEventHandler(MouseEvent.MOUSE_CLICKED,  new EventHandler<MouseEvent>(){
-            public void handle(MouseEvent event) {
-                System.out.println("Handling event with addEventHandler");
-            } 
-        });    
-    }   
-    
-    
-    public void clickGrid(javafx.scene.input.MouseEvent event) {
-        Node clickedNode = event.getPickResult().getIntersectedNode();
-        if (clickedNode != statBox) {
-            // click on descendant node
-            Integer colIndex = GridPane.getColumnIndex(clickedNode);
-            Integer rowIndex = GridPane.getRowIndex(clickedNode);
-            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
-        }
-    }
-    */
-    
     /**
      * When a new statistic box is created, the statistic shown 
      * in the statistic box is one that isn't shown in the other boxes
      */
-    private void addStatistic()
+    private void addUndisplayedStatistic()
     {
         for (int i=0; i<data.size(); i++){
             if (!data.get(i).isDisplayed()){
@@ -150,10 +128,7 @@ public class StatisticBox
             index = data.size() -1;
         }
         if (!data.get(index).isDisplayed()){
-            statBox.getChildren().remove(statDisplay);
-            statDisplay = data.get(index).getData();
-            data.get(index).toggleisDisplayed();
-            statBox.add(statDisplay, 1, 0);
+            addStatistic(index);
             return;
         }
         else {
@@ -173,15 +148,23 @@ public class StatisticBox
             index = 0;
         }
         if (!data.get(index).isDisplayed()){
-            statBox.getChildren().remove(statDisplay);
-            statDisplay = data.get(index).getData();
-            data.get(index).toggleisDisplayed();
-            statBox.add(statDisplay, 1, 0); 
+            addStatistic(index);
             return;
         }
         else {
             displayNextStat(index+1);
         }        
+    }
+    
+    /**
+     * Adds a statistic to the statistic box
+     */    
+    private void addStatistic(int index)
+    {
+        statBox.getChildren().remove(statDisplay);
+        statDisplay = data.get(index).getData();
+        data.get(index).toggleisDisplayed();
+        statBox.add(statDisplay, 1, 0); 
     }
             
     /**
@@ -192,6 +175,9 @@ public class StatisticBox
         return statBox;
     }    
     
+    /**
+     * Returns the GridPane which holds the statistic
+     */
     public GridPane getStatDisplay()
     {
         return statDisplay;

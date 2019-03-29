@@ -69,12 +69,8 @@ public class StatisticPanel
             row.setVgrow(Priority.ALWAYS);
             statPane.getRowConstraints().add(row);
         }        
-        //pane.setGridLinesVisible(true); // uncomment to show gridlines
-        
-        //createData();
-        
-        createStatisticBoxes();
-        
+        //pane.setGridLinesVisible(true); // uncomment to show gridlines       
+        createStatisticBoxes();        
         enlargedStatMessage();
         
         stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -118,8 +114,7 @@ public class StatisticPanel
     }
     
     /**
-     * This creates the data of type DataDisplay and stores it in an
-     * arraylist
+     * This creates the 8 statistics and stores them in arraylist
      */
     private void createData()
     {
@@ -127,14 +122,14 @@ public class StatisticPanel
         data.add(new BasicStatisticDisplay(this,"Total Available Properties", stats.getTotalAvailPropertiesString()));
         data.add(new BasicStatisticDisplay(this,"Number of Entire Homes\nand Apartments", stats.getNumOfHomesAndAptsString()));
         data.add(new BasicStatisticDisplay(this,"Most Expensive Borough", stats.getMostExpBorough()));
-        data.add(new PieChartDisplay(this, "Number of Properties in each Borough", stats.propertiesInBorough()));
+        data.add(new PieChartDisplay(this, "Number of Properties in each Borough", stats.getpropertiesInEachBorough()));
         data.add(new BarChartDisplay(this, "Room types in Borough ", "RoomTypes", listingManager.getBoroughOptions()));
         data.add(new BarChartDisplay(this, "Availabilty in Borough", "Availability", listingManager.getBoroughOptions()));
         data.add(new ListDisplay(this, "Statistic 8", listingManager.getBoroughOptions()));
     }
     
     /**
-     * Creates a message which shows when a statitsic is enlarged
+     * Creates a message which says when a statitsic is enlarged
      */
     public void enlargedStatMessage()
     {
@@ -162,7 +157,8 @@ public class StatisticPanel
     }    
     
     /**
-     * Enlarges a statistic in a statistic box which is enlarged on the statistic panel when clicked
+     * If you click on a statistic in one of the boxes, it enlarges that statistic
+     * and displays it on this panel
      * 
      */
     public void showEnlargedStat(GridPane stat)
@@ -228,6 +224,9 @@ public class StatisticPanel
         }     
     }
     
+    /**
+     * Removes the large statistic and places it back in it's original statistic box
+     */
     private void removeLargeStat(Pane stat)
     {
         if (stackPane.getChildren().size() >= 2) {
@@ -237,12 +236,18 @@ public class StatisticPanel
         enlargedStatBox.add(stat, 1, 0);
     }
     
+    /**
+     * Shows an enlarged statistic and a close button
+     */
     private void showLargeStat(GridPane backgroundDim, VBox container)
     {
         stackPane.getChildren().add(backgroundDim);
         stackPane.getChildren().add(container);
     }
     
+    /**
+     * Removes the layers on the statistic panel except layer 0
+     */
     private void removeStackLayers()
     {
         int num = stackPane.getChildren().size() - 1;
@@ -252,11 +257,17 @@ public class StatisticPanel
         }
     }
     
+    /**
+     * Return statistics
+     */
     public Statistics getStatistics()
     {
         return stats;
     }
     
+    /**
+     * Returns the stackpane used in this panel
+     */
     public StackPane getStatisticPanel()
     {
         return stackPane;

@@ -3,9 +3,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList; 
 import javafx.scene.chart.PieChart; 
 import javafx.geometry.Side;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 
 /**
- * Write a description of class PieChart here.
+ * This class creates a pie chart used to display a statistic
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -16,7 +19,7 @@ public class PieChartDisplay extends DataDisplay
     private String title;
 
     /**
-     * Constructor for objects of class PieChart
+     * Creates the pie chart on initialisation
      */
     public PieChartDisplay(StatisticPanel statPanel, String title, ObservableList<PieChart.Data> data)
     {
@@ -31,6 +34,9 @@ public class PieChartDisplay extends DataDisplay
         whenStatisiticClicked();
     }
     
+    /**
+     * Creates the piechart
+     */
     private void createPieChart()
     {
         pieChart.setClockwise(true); 
@@ -39,9 +45,15 @@ public class PieChartDisplay extends DataDisplay
         pieChart.setStartAngle(180); 
         getData().setVgrow(pieChart, Priority.ALWAYS);
         getData().setHgrow(pieChart, Priority.ALWAYS);
-        //pieChart.setStyle("-fx-text-fill: #FFFFFF;");
-        pieChart.setLegendSide(Side.RIGHT);
-                        
+
+        pieChart.setLegendVisible(false);
+        
+        pieChart.getData().forEach(data -> { 
+        String number = data.getName() +": " + String.format("%.0f", (data.getPieValue()));
+        Tooltip toolTip = new Tooltip(number);
+        Tooltip.install(data.getNode(), toolTip);
+        });       // this shows the borough name and number of properties in a slice
+        
         getData().getChildren().add(pieChart);        
     }
 

@@ -8,20 +8,20 @@ import java.util.Comparator;
 
 
 /**
- * This holds the statistics
+ * This class contains all the statistics used in the statistics panel
  *
  * @author (your name)
  * @version (a version number or a date)
  */
 public class Statistics
 {
-    // instance variables - replace the example below with your own
     private List<AirbnbListing> listings = new ArrayList<>();
     
     private double avgNumOfReviews;
     private int totalAvailProperties;
     private int numOfHomesAndApts;
     private String mostExpBorough;
+    private ObservableList<PieChart.Data> prprtiesInEachBrgh;
 
     /**
      * Constructor for objects of class Statistics
@@ -29,8 +29,12 @@ public class Statistics
     public Statistics(ArrayList<AirbnbListing> listings)
     {
         this.listings = listings;
+        prprtiesInEachBrgh = FXCollections.observableArrayList();
     }
     
+    /**
+     * Updates the statistics 
+     */
     public void updateStatistics(ArrayList<AirbnbListing> listings)
     {
         this.listings = listings;
@@ -39,10 +43,11 @@ public class Statistics
         totalAvailProperties();
         numOfHomesAndApts();
         mostExpensiveBorough();
+        propertiesInEachBorough();
     }
     
     /**
-     * Resets all the statistics to zero/empty strings
+     * Resets all the statistics
      */
     private void resetStatistics()
     {
@@ -50,6 +55,7 @@ public class Statistics
         totalAvailProperties = 0;
         numOfHomesAndApts = 0;
         mostExpBorough = "";
+        prprtiesInEachBrgh.clear();
     }
     
     /**
@@ -95,33 +101,41 @@ public class Statistics
      */
     private void mostExpensiveBorough()
     {
-        sortByBoroughAndRoom(listings);
-        int j = 0;
+        listings = sortByBoroughAndRoom(listings);
         String borough= listings.get(0).getNeighbourhood();
         int propertiesInBorough = 1; 
         int avgCost = 0;
         int avgCostMostExpBorough = 0;
         int totalMinPropertyPrice = 0;
         
-        for (AirbnbListing aListing : listings){
-            if (!aListing.getNeighbourhood().equalsIgnoreCase(borough)){
-                avgCost = totalMinPropertyPrice/propertiesInBorough;
-                if(avgCost > avgCostMostExpBorough){
-                    mostExpBorough = borough;
-                    avgCostMostExpBorough = avgCost;
-                    avgCost = 0;                    
+        if(listings.size() == 1) {
+            mostExpBorough = borough;
+        }
+        else{
+            for (AirbnbListing aListing : listings){
+                if (!aListing.getNeighbourhood().equalsIgnoreCase(borough)){
+                    avgCost = totalMinPropertyPrice/propertiesInBorough;
+                    if(avgCost > avgCostMostExpBorough){
+                        mostExpBorough = borough;
+                        avgCostMostExpBorough = avgCost;
+                        avgCost = 0;                    
+                    }
+                    borough = aListing.getNeighbourhood();
+                    propertiesInBorough = 0;
                 }
-                borough = aListing.getNeighbourhood();
-                propertiesInBorough = 0;
-            }
-            totalMinPropertyPrice += aListing.getPrice() * aListing.getMinimumNights();
-            propertiesInBorough ++;
-        } 
+                totalMinPropertyPrice += aListing.getPrice() * aListing.getMinimumNights();
+                propertiesInBorough ++;
+            } 
+        }
+        
     }
     
-    public ObservableList<PieChart.Data> propertiesInBorough()
+    /**
+     * Calculates the number of properties in borough
+     */
+    private void propertiesInEachBorough()
     {
-        sortByBoroughAndRoom(listings);
+        listings = sortByBoroughAndRoom(listings);
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         String borough= listings.get(0).getNeighbourhood();
         int propertiesInBorough = 1;
@@ -137,9 +151,21 @@ public class Statistics
                 propertiesInBorough ++; 
             }                       
         }
-        return data;
+        prprtiesInEachBrgh = data;
     }
     
+    /**
+     * Returns a list of data containing the number of properties in a borough
+     */
+    public ObservableList<PieChart.Data> getpropertiesInEachBorough() 
+    {
+        return prprtiesInEachBrgh;
+    }
+    
+    /**
+     * Calculates the number of different types of rooms and creates them as a bar to be
+     * part of a bar chart
+     */
     public ObservableList<XYChart.Series> getRoomTypeDistribution(String boroughName)
     {
         ArrayList<AirbnbListing> sortedList = getBoroughListings(boroughName); 
@@ -148,11 +174,8 @@ public class Statistics
         String roomType = sortedList.get(0).getRoom_type();
         int roomTypeCount = 1;
         for (AirbnbListing aListing : sortedList){            
-            if (!aListing.getRoom_type().equals(roomType)) {
-                XYChart.Series series = new XYChart.Series();
-                series.setName(roomType);
-                series.getData().add(new XYChart.Data<String, Number>(roomType, roomTypeCount));
-                data.add(series);
+            if (!aListing.getRoom_type().equals(roomType)) {               
+                data.add(addSeries(roomType, roomTypeCount));
                 roomType = aListing.getRoom_type();
                 roomTypeCount = 0;
              }            
@@ -160,13 +183,15 @@ public class Statistics
                 roomTypeCount ++;
             }             
         }
-        XYChart.Series series = new XYChart.Series();
-        series.setName(roomType);
-        series.getData().add(new XYChart.Data<String, Number>(roomType, roomTypeCount));
-        data.add(series);
+        data.add(addSeries(roomType, roomTypeCount));
         return data;
     }
     
+    /**
+     * Calculates the availability of properties in a borough and categorises them
+     * into 4 bars, 0-99, 100-99, 200-299, and 300+
+     * It then turns them into bars to be used to form a bar chart
+     */
     public ObservableList<XYChart.Series> getAvailDistribution(String boroughName)
     {
         ArrayList<AirbnbListing> sortedList = getBoroughListings(boroughName);
@@ -183,8 +208,7 @@ public class Statistics
         ranges.add(zero_99);
         ranges.add(hundred_199);
         ranges.add(twohundred_299);
-        ranges.add(threehundred);
-        
+        ranges.add(threehundred);       
         
         ObservableList<XYChart.Series> data = FXCollections.observableArrayList();
         for (AirbnbListing aListing : sortedList){ 
@@ -213,15 +237,27 @@ public class Statistics
         rangeCount.add(three100plus);
         int num = 0;
         for (String range : ranges) {
-            XYChart.Series series = new XYChart.Series();
-            series.setName(range);
-            series.getData().add(new XYChart.Data<String, Number>(range, rangeCount.get(num)));
-            data.add(series);
+            data.add(addSeries(range, rangeCount.get(num)));
             num++;
         }
         return data;
     }
     
+    /**
+     * Creates a series for a barchart and sets the name of the series as type
+     */
+    private XYChart.Series addSeries(String type, int typeCount)
+    {
+        XYChart.Series series = new XYChart.Series();
+        series.setName(type);
+        series.getData().add(new XYChart.Data<String, Number>(type, typeCount));
+        return series;
+    }
+    
+    /**
+     * Filters a list by a borough passed in and then sorts its by room type 
+     * in alphabetical order
+     */
     private ArrayList<AirbnbListing> getBoroughListings(String boroughName) 
     {
         ArrayList<AirbnbListing> tempList = new ArrayList();
@@ -238,6 +274,10 @@ public class Statistics
     {
         ArrayList<AirbnbListing> sortedList = getBoroughListings(boroughName); 
         sortedList = getTopListings(sortedList);
+        if (sortedList.isEmpty()) {
+            ArrayList<String> empty = new ArrayList();
+            return empty;
+        }
         
         double avgPrice = 0.0;
         double avgMinNights = 0.0;
@@ -245,13 +285,17 @@ public class Statistics
         int entireHme = 0;
         int sharedRm = 0;
         for (AirbnbListing aListing : sortedList){ 
+            System.out.println("x: "+aListing.getReviewsPerMonth());
             switch (aListing.getRoom_type()) {
                 case "Private room":
-                    privateRm ++;                    
+                    privateRm ++;   
+                    break;
                 case"Entire home/apt":
                     entireHme ++;
+                    break;
                 case "Shared room":
                     sharedRm ++;
+                    break;
             }
             avgPrice += aListing.getPrice();
             avgMinNights += aListing.getMinimumNights();
@@ -275,7 +319,7 @@ public class Statistics
         }
         
         if (privateRm > entireHme && privateRm > sharedRm) {
-            System.out.println("Private");
+            System.out.println("Private");//////////
             common.add("Private room");
         }
         else if (entireHme > privateRm && entireHme > sharedRm) {
@@ -293,38 +337,27 @@ public class Statistics
     {
         listings.sort(Comparator.comparing(AirbnbListing::getReviewsPerMonth));
         ArrayList<AirbnbListing> topListings = new ArrayList();
-        if (listings.size() == 0) {
-              return null;
+        if (listings.size() >=5) {
+            int count = 5;
+            while (count > 0) {
+                listings.get((listings.size()-1) - count);
+                count --;
+            }
+            return topListings;
         }
-        if (listings.size() <5) {
+        else {
             return listings;
         }
-        int count = 5;
-        while (count > 0) {
-            listings.get((listings.size()-1) - count);
-            count --;
-        }
-        return topListings;
-        /*double highestReview = listings.get(0).getReviewsPerMonth();
-        for (AirbnbListing aListing : listings){ 
-            if (aListing.getReviewsPerMonth() > highestReview) {
-                highestReview = aListing.getReviewsPerMonth();
-            }
-        }
-        double top10prcnt = highestReview * 0.9;
-        ArrayList<AirbnbListing> topListings = new ArrayList();;
-        for (AirbnbListing aListing : listings){ 
-            if (aListing.getReviewsPerMonth() >= top10prcnt) {
-                topListings.add(aListing);
-            }
-        }
-        return topListings;*/
     }
     
-    private void sortByBoroughAndRoom(List<AirbnbListing> listing)
+    /**
+     * Sorts a list by Neighbourhood first and then room type
+     */
+    private List<AirbnbListing> sortByBoroughAndRoom(List<AirbnbListing> listing)
     {
         listing.sort(Comparator.comparing(AirbnbListing::getNeighbourhood).
-                thenComparing(AirbnbListing::getRoom_type));
+                thenComparing(AirbnbListing::getRoom_type));        
+        return listing;
     }
         
     /**
@@ -336,7 +369,7 @@ public class Statistics
     }
     
     /**
-     * Returns the average number of reviews as a string
+     * Returns the average number of reviews as a string to 2 decimal places
      */
     public String getAvgNumOfReviewsString()
     {

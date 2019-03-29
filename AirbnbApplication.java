@@ -14,7 +14,12 @@ import java.util.ArrayList;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 /**
- * Write a description of JavaFX class Application here.
+ * This is the Airbnb Application.
+ * In this application, there is a map of london's borough which you can use to look
+ * for listings in each borough. You can also specify a price range and the map will show
+ * you the number of listings in each borough
+ * There is also a statistic panel which can show you some statistics about the listings based
+ * on the price range you choose
  *
  * @author (your name)
  * @version (a version number or a date)

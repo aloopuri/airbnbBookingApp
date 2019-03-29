@@ -29,7 +29,8 @@ public class ListDisplay extends DataDisplay
         
         container = new VBox();
         
-        Label message = new Label();        
+        Label message = new Label();  
+        message.setText("Common Features of Top Rated Listings");
         message.setAlignment(Pos.CENTER);
         message.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
@@ -59,10 +60,31 @@ public class ListDisplay extends DataDisplay
     
     private void createDisplay(String bToString, ArrayList<String> data) 
     {
+        removeLabels();
+        VBox labelHold = new VBox();
+        labelHold.setAlignment(Pos.CENTER);
+        if (data.isEmpty()) {
+            Label empty = new Label("No Listings in this price range");
+            labelHold.getChildren().add(empty);
+            container.getChildren().add(labelHold);
+            container.setVgrow(labelHold, Priority.ALWAYS);
+            return;
+        } 
         int count = 0;
         for (String stat : data) {
-            container.getChildren().add(new Label(data.get(count).toString()));
+            labelHold.getChildren().add(new Label(count+1 + ") " + data.get(count).toString()));
             count++;
+        }
+        container.getChildren().add(labelHold);
+        container.setVgrow(labelHold, Priority.ALWAYS);
+    }
+    
+    private void removeLabels()
+    {
+        int num = container.getChildren().size()-1;
+        while (container.getChildren().size() > 1) {
+            container.getChildren().remove(num);
+            num--;
         }
     }
     
