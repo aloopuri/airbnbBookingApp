@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=DataDisplay
+comment0.text=\r\n\ Creates\ a\ GridPane\ which\ holds\ a\ title\ and\ a\ statistic\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=statPanel
+comment1.target=DataDisplay(StatisticPanel)
+comment1.text=\r\n\ Adds\ a\ title\ and\ statistics\ \r\n
+comment2.params=
+comment2.target=void\ whenStatisiticClicked()
+comment3.params=event
+comment3.target=void\ handle(javafx.scene.input.MouseEvent)
+comment4.params=
+comment4.target=javafx.scene.layout.GridPane\ getData()
+comment4.text=\r\n\ Returns\ dataDisplay\ with\ the\ title\ and\ statistic\r\n
+comment5.params=
+comment5.target=boolean\ isDisplayed()
+comment5.text=\r\n\ Returns\ isDisplayed\r\n
+comment6.params=
+comment6.target=void\ setIsDisplayedFalse()
+comment7.params=
+comment7.target=void\ setIsDisplayedTrue()
+comment8.params=
+comment8.target=void\ toggleisDisplayed()
+comment8.text=\r\n\ Toggles\ isDisplayed\ between\ true/false\r\n
+numComments=9

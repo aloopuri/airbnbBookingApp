@@ -39,6 +39,7 @@ public class AirbnbApplication extends Application
     // Application panels
     private WelcomePanel welcomePanel;
     private MapPanel map;
+    private StatisticPanel statsPanel;
 
     /**
      * Class Constructor
@@ -69,9 +70,11 @@ public class AirbnbApplication extends Application
     {
         welcomePanel = new WelcomePanel();
         map = new MapPanel(listingManager);
+        statsPanel = new StatisticPanel(listingManager);
 
         panels.add(welcomePanel.getWelcomePanel());
         panels.add(map.createMap());
+        panels.add(statsPanel.getStatisticPanel());
 
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
@@ -145,7 +148,9 @@ public class AirbnbApplication extends Application
             int to = getToValue();
             int from = getFromValue();
             welcomePanel.updatePriceRange(fromBox.getValue(), toBox.getValue());
+            listingManager.updateUserRangeListings(from, to);
             map.showViewInRange(from, to);
+            statsPanel.updateStatistics(listingManager.getCurrentListings());
             setNavigationUsability(false);
         }
     }

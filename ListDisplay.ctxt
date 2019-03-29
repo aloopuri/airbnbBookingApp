@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ListDisplay
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ListDisplay\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=statPanel\ title\ allBoroughs
+comment1.target=ListDisplay(StatisticPanel,\ java.lang.String,\ javafx.collections.ObservableList)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ ListDisplay\r\n
+comment2.params=bToString\ data
+comment2.target=void\ createDisplay(java.lang.String,\ java.util.ArrayList)
+comment3.params=
+comment3.target=void\ selectBorough()
+numComments=4

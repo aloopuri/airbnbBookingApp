@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=PieChartDisplay
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ PieChart\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=statPanel\ title\ data
+comment1.target=PieChartDisplay(StatisticPanel,\ java.lang.String,\ javafx.collections.ObservableList)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ PieChart\r\n
+comment2.params=
+comment2.target=void\ createPieChart()
+numComments=3

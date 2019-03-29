@@ -31,7 +31,7 @@ public class ListingManager
     }
     
     /**
-     * This creates a list of all listings which are in the price range
+     * This creates a list of all listings which are in the selected range
      */
     public void updateUserRangeListings(int from, int to)
     {
@@ -62,6 +62,21 @@ public class ListingManager
         }
         return prices;
     }    
+    
+    public ObservableList<String> getBoroughOptions() 
+    {
+        String borough = currentListings.get(0).getNeighbourhood();
+        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
+        ObservableList<String> allBoroughs = FXCollections.observableArrayList();
+        for (AirbnbListing aListing : currentListings)
+        {
+            if (!aListing.getNeighbourhood().equals(borough)) {
+                allBoroughs.add(borough);
+                borough = aListing.getNeighbourhood();
+            }         
+        }
+        return allBoroughs;
+    }
 
     public ArrayList<Integer> getAllPrices()
     {
