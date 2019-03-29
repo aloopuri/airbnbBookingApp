@@ -25,6 +25,7 @@ public class AirbnbApplication extends Application
     private int panelIndex;
     private double animationIndex;
     private ListingManager listingManager;
+    private ArrayList<AirbnbListing> listings;
 
     // Controls on most panels
     private BorderPane main;
@@ -38,14 +39,14 @@ public class AirbnbApplication extends Application
     // Application panels
     private WelcomePanel welcomePanel;
     private MapPanel map;
-
+    private StatisticPanel stat;
     /**
      * Constructor for objects of class AirbnbApp
      */
     public AirbnbApplication()
     {
         panels = new ArrayList<Pane>();
-        ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
+        listings = new ArrayList<AirbnbListing>();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
         listingManager = new ListingManager(listings);
@@ -68,9 +69,11 @@ public class AirbnbApplication extends Application
     {
         welcomePanel = new WelcomePanel();
         map = new MapPanel(listingManager);
-
+        stat = new StatisticPanel(listings, listingManager);
+        
         panels.add(welcomePanel.getWelcomePanel());
         panels.add(map.createMap());
+        panels.add(stat.getStatisticPanel());
 
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
@@ -146,6 +149,7 @@ public class AirbnbApplication extends Application
             welcomePanel.updatePriceRange(fromBox.getValue(), toBox.getValue());
             map.showViewInRange(from, to);
             setNavigationUsability(false);
+            stat.updateStatistics(listingManager.getCurrentListings());
         }
     }
 
