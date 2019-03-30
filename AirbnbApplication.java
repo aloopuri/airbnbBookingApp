@@ -48,11 +48,10 @@ public class AirbnbApplication extends Application
     {
         panels = new ArrayList<Pane>();
         listings = new ArrayList<AirbnbListing>();
-        loginSystem = new LoginSystem();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
         listingManager = new ListingManager(listings);
-
+        loginSystem = new LoginSystem(listingManager);
         main = new BorderPane();
         main.setId("welcomePane");
 

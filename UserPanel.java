@@ -13,9 +13,8 @@ import java.util.*;
  */
 public class UserPanel
 {
-    // instance variables - replace the example below with your own
     private BorderPane root;
-    private LoginSystem loginSystem;
+    private LoginSystem loginSystem; //System for logging in and out
     private TextField usernameInput, passwordInput;
     private Button loginButton, signupButton, addListingButton;
     private Label loginStatus,nameDisplay;
@@ -74,6 +73,7 @@ public class UserPanel
         removeFavourite,showFavourite,saveFavourite);
         showFavourite.setOnAction(e -> showFavourites(favouritesDisplay));
         removeFavourite.setOnAction(e -> deleteFavourite(favouritesDisplay));
+        saveFavourite.setOnAction(e -> loginSystem.getCurrentUser().saveFavourites());
         mainBox.getChildren().add(favouritesBox);
 
         VBox newPropBox = new VBox();
@@ -134,8 +134,14 @@ public class UserPanel
         root.setBottom(accountBox);
     }
     
+    /**
+     * Show the current Favourites
+     * 
+     * @param display The view from which to obtain the values to show
+     */
     private void showFavourites(ListView display)
     {
+        //Gets an arraylist of names and adds it to the display
         ArrayList<String> favouriteNames = new ArrayList();
         for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
         {
@@ -146,6 +152,11 @@ public class UserPanel
         display.getItems().addAll(favouriteNames);
     }
     
+    /** 
+     * Deleting a listing
+     * 
+     * @param display The view from which to obtain the value to delete
+     */
     private void deleteFavourite(ListView display)
     {
         loginSystem.getCurrentUser().removeFavourite((String) display.
@@ -153,12 +164,17 @@ public class UserPanel
         showFavourites(favouritesDisplay);
     }
     
+    /**
+     * Adds a listing
+     * The parameters are the field which must be filled in
+     */
     private void addListing(
     TextField pNameField,TextField nameField,ChoiceBox neighbourhoodField,
     TextField latitudeField,TextField longitudeField,ChoiceBox typeField,
     TextField priceField,TextField minNightsField,TextField availabilityField,
     Label addListingStatus)
     {
+        //Checks if fields are empty and if they contain valid data
         if (pNameField.getText().length() < 4 || nameField.getText().length() < 3
         || neighbourhoodField.getSelectionModel().getSelectedItem() == null
         || typeField.getSelectionModel().getSelectedItem() == null)
@@ -218,8 +234,12 @@ public class UserPanel
         }
     }
 
+    /**
+     * Allows the user to login
+     */
     private void login()
     {
+        //Tries to log in through the loginSystem
         if (loginSystem.login(usernameInput.getText(),passwordInput.getText()))
         {
             System.out.println("Logged in");
@@ -233,10 +253,16 @@ public class UserPanel
             loginStatus.setText("There was an error when logging in");
         }
     }
-
+    
+    /**
+     * Checks if a string is a vlid number
+     * 
+     * @param text The string to check
+     */
     public boolean isValidNumber(String text)
     {
         try {
+            //Tried to parse the text as a double
             Double.parseDouble(text);
             return true;
         }
@@ -245,8 +271,17 @@ public class UserPanel
         }
     }
 
+    /**
+     * Checks if a string is a valid integer
+     * and within a range
+     * 
+     * @param text The string to test
+     * @param min The minimum value
+     * @param max The maximum allowed value
+     */
     public boolean isValidInt(String text,int min, int max)
     {
+        //Tried to parse the string as an integer and check for the range constraint
         try {
             if (Integer.parseInt(text)<min || Integer.parseInt(text)>max)
             {
@@ -259,18 +294,28 @@ public class UserPanel
         }
     }
 
+    /**
+     * Logs the current user out of the system
+     */
     private void logout()
     {
+        //
         showLogin();
         loginSystem.removeCurrentUser();
         updateNameDisplay();
         addListingButton.setDisable(true);
     }
 
+    /**
+     * Checks if the username is valid
+     * 
+     * @return booolean If the username is valid
+     */
     private boolean checkUserName(String text)
     {
         for (char letter: text.toCharArray())
         {
+            //Checks for spaces
             if (letter == ' ')
             {
                 return false;
@@ -283,6 +328,11 @@ public class UserPanel
         return true;
     }
 
+    /**
+     * Checks if the password is valid
+     * 
+     * @return booolean If the password is valid
+     */
     private boolean checkPassWord(String text)
     {
         if (text.length() < 5 || text.length() > 15)
@@ -292,8 +342,12 @@ public class UserPanel
         return true;
     }
 
+    /**
+     * Used to create new accounts
+     */
     private void signUp()
     {
+        //Checks if the username and password fields are valid before creating an account
         if (checkUserName(usernameInput.getText()))
         {
             if (checkPassWord(passwordInput.getText()))
@@ -310,21 +364,35 @@ public class UserPanel
             loginStatus.setText("Your username cannot contain spaces and must be greater than 5 and less than 15 characters");
         }
     }
-
+    
+    /**
+     * Hides the login from the user
+     */
     public void hideLogin()
     {
+        //Gets the height of the top bar
         double addedHeight = ((Pane)((BorderPane) root.getParent()).getTop()).getHeight();
+        //Adds the top bar to the height of the login box
         double totalHeight = -(loginBox.getHeight() + addedHeight+5);
         moveBox(loginBox,totalHeight);
         moveBox(midBox,totalHeight+50);
     }
 
+    /**
+     * Shows the login to the user
+     */
     public void showLogin()
     {
         moveBox(loginBox,0);
         moveBox(midBox,25);
     }
 
+    /** 
+     * Moves containers around in the panel
+     * 
+     * @param object The Pane to move
+     * @param position The position to move to
+     */
     public void moveBox(Pane object, double position)
     {
         TranslateTransition tt = new TranslateTransition(Duration.millis(500), object);
@@ -332,6 +400,10 @@ public class UserPanel
         tt.play();
     }
 
+    /**
+     * Changes the name displayed to the user
+     * depending on who is logged in
+     */
     public void updateNameDisplay()
     {
         if (loginSystem.getCurrentUser() == null)
@@ -341,10 +413,16 @@ public class UserPanel
         else
         {
             nameDisplay.setText(loginSystem.getCurrentUser().getName());
+            //Sets the text to the username of the current user
         }
 
     }
 
+    /**
+     * Accessor method to return the panel that stores all the nodes
+     * 
+     * @return root - The panel
+     */
     public Pane getPane()
     {
         return root;
