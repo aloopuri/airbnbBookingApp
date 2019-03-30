@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class ListDisplay extends DataDisplay
 {
-    private StatisticPanel statPanel;
     private Label title = new Label();
     private ComboBox boroughListBox;
     private VBox container;
@@ -24,7 +23,6 @@ public class ListDisplay extends DataDisplay
     public ListDisplay(StatisticPanel statPanel, String title, ObservableList<String> allBoroughs)
     {
         super(statPanel);
-        this.statPanel = statPanel;
         this.title.setText(title);
         
         container = new VBox();
@@ -51,11 +49,7 @@ public class ListDisplay extends DataDisplay
         
         getData().setHgrow(container, Priority.ALWAYS);
         getData().setVgrow(container, Priority.ALWAYS);
-        getData().getChildren().add(container);        
-        
-        setIsDisplayedFalse();       
-        
-        whenStatisiticClicked();       
+        getData().getChildren().add(container);            
     }
     
     private void createDisplay(String bToString, ArrayList<String> data) 
@@ -63,13 +57,6 @@ public class ListDisplay extends DataDisplay
         removeLabels();
         VBox labelHold = new VBox();
         labelHold.setAlignment(Pos.CENTER);
-        if (data.isEmpty()) {
-            Label empty = new Label("No Listings in this price range");
-            labelHold.getChildren().add(empty);
-            container.getChildren().add(labelHold);
-            container.setVgrow(labelHold, Priority.ALWAYS);
-            return;
-        } 
         int count = 0;
         for (String stat : data) {
             labelHold.getChildren().add(new Label(count+1 + ") " + data.get(count).toString()));
@@ -88,10 +75,10 @@ public class ListDisplay extends DataDisplay
         }
     }
     
-    private void selectBorough()
+    protected void selectBorough()
     {
         String bToString = (String) boroughListBox.getValue().toString();
-        ArrayList<String> data =  statPanel.getStatistics().mostPopListType(bToString);
+        ArrayList<String> data =  getStatPanel().getStatistics().mostPopListType(bToString);
         createDisplay(bToString, data);
     }
 }

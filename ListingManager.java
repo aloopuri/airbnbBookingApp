@@ -79,6 +79,9 @@ public class ListingManager
      */
     public ObservableList<String> getBoroughOptions() 
     {
+        if (currentListings.isEmpty()) {
+            return null;
+        }
         String borough = currentListings.get(0).getNeighbourhood();
         currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
         ObservableList<String> allBoroughs = FXCollections.observableArrayList();

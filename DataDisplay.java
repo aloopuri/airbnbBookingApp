@@ -28,6 +28,8 @@ public abstract class DataDisplay
         this.statPanel = statPanel;
         dataDisplay = new GridPane();
         dataDisplay.setStyle("-fx-background-color: rgba(239, 9, 205, 0.7)");
+        setIsDisplayedFalse();
+        whenStatisiticClicked();
     }
     
     /**
@@ -41,6 +43,11 @@ public abstract class DataDisplay
             } 
         });    
     }   
+    
+    protected StatisticPanel getStatPanel()
+    {
+        return statPanel;
+    }
     
     /**
      * Returns dataDisplay with the title and statistic

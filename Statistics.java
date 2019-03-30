@@ -73,7 +73,8 @@ public class Statistics
     }
     
     /**
-     * Calculates the total number of available properties
+     * Calculates the total number of available properties where the availability is
+     * greater than zero
      */
     private void totalAvailProperties()
     {
@@ -101,13 +102,17 @@ public class Statistics
      */
     private void mostExpensiveBorough()
     {
-        listings = sortByBoroughAndRoom(listings);
-        String borough= listings.get(0).getNeighbourhood();
+        if (listings.isEmpty()) {
+            mostExpBorough = "No properties in this price range";
+            return;
+        }
+        
+        listings = sortByBoroughAndRoom(listings);        
         int propertiesInBorough = 1; 
         int avgCost = 0;
         int avgCostMostExpBorough = 0;
         int totalMinPropertyPrice = 0;
-        
+        String borough= listings.get(0).getNeighbourhood();
         if(listings.size() == 1) {
             mostExpBorough = borough;
         }
@@ -135,6 +140,10 @@ public class Statistics
      */
     private void propertiesInEachBorough()
     {
+        if (listings.isEmpty()) {
+            prprtiesInEachBrgh = null;
+            return;
+        }
         listings = sortByBoroughAndRoom(listings);
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         String borough= listings.get(0).getNeighbourhood();
@@ -225,9 +234,6 @@ public class Statistics
             else if (aListing.getAvailability365() >= 300){ 
                 three100plus ++;                         
             } 
-            else {
-                System.out.println(aListing.getAvailability365());
-            }
         }
         
         ArrayList<Integer> rangeCount = new ArrayList();
@@ -285,7 +291,6 @@ public class Statistics
         int entireHme = 0;
         int sharedRm = 0;
         for (AirbnbListing aListing : sortedList){ 
-            System.out.println("x: "+aListing.getReviewsPerMonth());
             switch (aListing.getRoom_type()) {
                 case "Private room":
                     privateRm ++;   
@@ -319,16 +324,13 @@ public class Statistics
         }
         
         if (privateRm > entireHme && privateRm > sharedRm) {
-            System.out.println("Private");//////////
-            common.add("Private room");
+            common.add("Most Popular Room Type: Private room");
         }
         else if (entireHme > privateRm && entireHme > sharedRm) {
-            System.out.println("Entire");
-            common.add("Entire home/apt");
+            common.add("Most Popular Room Type: Entire home/apt");
         }
         else if (sharedRm >privateRm && sharedRm > entireHme) {
-            System.out.println("Shared");
-            common.add("Shared room");
+            common.add("Most Popular Room Type: Shared room");
         }
         return common;
     }
@@ -340,7 +342,7 @@ public class Statistics
         if (listings.size() >=5) {
             int count = 5;
             while (count > 0) {
-                listings.get((listings.size()-1) - count);
+                topListings.add(listings.get((listings.size()-1) - count));
                 count --;
             }
             return topListings;

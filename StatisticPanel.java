@@ -82,9 +82,15 @@ public class StatisticPanel
      */
     public void updateStatistics(ArrayList<AirbnbListing> listings)
     {
-        stats.updateStatistics(listings);
         data.clear();
-        createData();
+        if (listings.isEmpty()){
+            createErrorData();
+        }
+        else {
+            stats.updateStatistics(listings);        
+            createData();
+        }
+        
         for (GridPane box : statBoxes) {
             statPane.getChildren().remove(box);
         }
@@ -123,9 +129,17 @@ public class StatisticPanel
         data.add(new BasicStatisticDisplay(this,"Number of Entire Homes\nand Apartments", stats.getNumOfHomesAndAptsString()));
         data.add(new BasicStatisticDisplay(this,"Most Expensive Borough", stats.getMostExpBorough()));
         data.add(new PieChartDisplay(this, "Number of Properties in each Borough", stats.getpropertiesInEachBorough()));
-        data.add(new BarChartDisplay(this, "Room types in Borough ", "RoomTypes", listingManager.getBoroughOptions()));
-        data.add(new BarChartDisplay(this, "Availabilty in Borough", "Availability", listingManager.getBoroughOptions()));
+        data.add(new BarChartDisplay(this, "Room types in Borough ", listingManager.getBoroughOptions(), "RoomTypes"));
+        data.add(new BarChartDisplay(this, "Availabilty in Borough", listingManager.getBoroughOptions(), "Availability"));
         data.add(new ListDisplay(this, "Statistic 8", listingManager.getBoroughOptions()));
+    }
+    
+    private void createErrorData()
+    {
+        data.add(new BasicStatisticDisplay(this,"No Listings In This Range", "Please choose another price range"));
+        data.add(new BasicStatisticDisplay(this,"No Listings In This Range", "Please choose another price range"));
+        data.add(new BasicStatisticDisplay(this,"No Listings In This Range", "Please choose another price range"));
+        data.add(new BasicStatisticDisplay(this,"No Listings In This Range", "Please choose another price range"));
     }
     
     /**

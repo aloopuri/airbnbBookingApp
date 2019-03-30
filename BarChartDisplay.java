@@ -20,7 +20,6 @@ import java.util.ArrayList;
  */
 public class BarChartDisplay extends DataDisplay
 {
-    private StatisticPanel statPanel;
     private BarChart<String, Number> barchart;
     private VBox container;
     private ComboBox boroughListBox;
@@ -30,14 +29,15 @@ public class BarChartDisplay extends DataDisplay
     /**
      * Creates a combo box and a default message 
      */
-    public BarChartDisplay(StatisticPanel statPanel, String title, String bcData,
-        ObservableList<String> allBoroughs)
+    public BarChartDisplay(StatisticPanel statPanel, String title, ObservableList<String> allBoroughs,
+            String bcData)
          
     {
         super(statPanel);
-        this.statPanel = statPanel;
         this.title = title;
         this.bcData = bcData;
+        
+        
         
         Label message = new Label();
         if (bcData.equalsIgnoreCase("roomtypes")){
@@ -65,12 +65,7 @@ public class BarChartDisplay extends DataDisplay
         
         getData().setHgrow(container, Priority.ALWAYS);
         getData().setVgrow(container, Priority.ALWAYS);
-        getData().getChildren().add(container);        
-        
-        setIsDisplayedFalse();       
-        
-        whenStatisiticClicked();
-        
+        getData().getChildren().add(container);               
     }
     
     private void createBarChart(String boroughName, ObservableList<XYChart.Series> data)
@@ -87,10 +82,9 @@ public class BarChartDisplay extends DataDisplay
         }
     }
     
-    private void selectBorough()
+    protected void selectBorough()
     {
         String bToString = (String) boroughListBox.getValue().toString();
-        //ObservableList<XYChart.Series> data = statPanel.getStatistics().getRoomTypeDistribution(bToString);
         ObservableList<XYChart.Series> data = getStatistic(bToString);
         createBarChart(bToString, data);
         showGraph();        
@@ -98,13 +92,12 @@ public class BarChartDisplay extends DataDisplay
     
     private ObservableList<XYChart.Series> getStatistic(String borough)
     {
-        //ObservableList<XYChart.Series> data = statPanel.getStatistics().getRoomTypeDistribution(bToString);
         if (bcData.equalsIgnoreCase("roomtypes")) {
-            ObservableList<XYChart.Series> data = statPanel.getStatistics().getRoomTypeDistribution(borough);
+            ObservableList<XYChart.Series> data = getStatPanel().getStatistics().getRoomTypeDistribution(borough);
             return data;
         }
         else if (bcData.equalsIgnoreCase("availability")) {
-            ObservableList<XYChart.Series> data = statPanel.getStatistics().getAvailDistribution(borough);
+            ObservableList<XYChart.Series> data = getStatPanel().getStatistics().getAvailDistribution(borough);
             return data;
         }        
         return null;

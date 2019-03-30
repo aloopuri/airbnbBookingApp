@@ -26,9 +26,7 @@ public class BasicStatisticDisplay extends DataDisplay
         
         this.title.setTextAlignment(TextAlignment.CENTER);
         this.data.setTextAlignment(TextAlignment.CENTER);
-             
-        setIsDisplayedFalse();
-        
+              
         for (int i=0; i<2 ; i++) {
             RowConstraints row = new RowConstraints();
             row.setPercentHeight(50);
@@ -36,8 +34,6 @@ public class BasicStatisticDisplay extends DataDisplay
             getData().getRowConstraints().add(row);
         }
         
-
-        //getData().setStyle("-fx-background-color: #FFFFFF");  //uncomment to add white background
         getData().setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         getData().setHalignment(this.title, HPos.CENTER);
         getData().setHalignment(this.data, HPos.CENTER);
@@ -46,7 +42,6 @@ public class BasicStatisticDisplay extends DataDisplay
         getData().add(this.title, 0, 0);
         getData().add(this.data, 0, 1);
         
-        whenStatisiticClicked();
     }
 
 }

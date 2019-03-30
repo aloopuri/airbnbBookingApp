@@ -24,6 +24,8 @@ public class StatisticBox
     
     private GridPane statBox = new GridPane();
     private GridPane statDisplay;
+    private Button leftArrow;
+    private Button rightArrow;
 
     /**
      * The Statistic box is created
@@ -46,8 +48,8 @@ public class StatisticBox
         row.setVgrow(Priority.ALWAYS);
         statBox.getRowConstraints().add(row);       
 
-        Button leftArrow = new Button("<");
-        Button rightArrow = new Button(">");
+        leftArrow = new Button("<");
+        rightArrow = new Button(">");
         
         statDisplay = new GridPane();
         addUndisplayedStatistic(); 
@@ -165,6 +167,19 @@ public class StatisticBox
         statDisplay = data.get(index).getData();
         data.get(index).toggleisDisplayed();
         statBox.add(statDisplay, 1, 0); 
+    }
+    
+    public void disableNavigation()
+    {
+        leftArrow.setDisable(true);
+        rightArrow.setDisable(true);
+    }
+    
+    
+    public void enableNavigation()
+    {
+        leftArrow.setDisable(false);
+        rightArrow.setDisable(false);
     }
             
     /**

@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=BarChartDisplay
 comment0.text=\r\n\ This\ creates\ a\ bar\ chart\ which\ can\ be\ used\ to\ show\ the\ room\ types\ in\ a\ borough\r\n\ or\ the\ availability\ of\ listings\ in\ a\ borough\r\n\ You\ can\ filter\ the\ data\ by\ using\ the\ combo\ box\ which\ contains\ all\ the\ boroughs\r\n\ with\ listings\ in\ the\ range\ of\ the\ price\ specified\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=statPanel\ title\ bcData\ allBoroughs
-comment1.target=BarChartDisplay(StatisticPanel,\ java.lang.String,\ java.lang.String,\ javafx.collections.ObservableList)
+comment1.params=statPanel\ title\ allBoroughs\ bcData
+comment1.target=BarChartDisplay(StatisticPanel,\ java.lang.String,\ javafx.collections.ObservableList,\ java.lang.String)
 comment1.text=\r\n\ Creates\ a\ combo\ box\ and\ a\ default\ message\ \r\n
 comment2.params=boroughName\ data
 comment2.target=void\ createBarChart(java.lang.String,\ javafx.collections.ObservableList)
