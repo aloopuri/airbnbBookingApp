@@ -22,7 +22,7 @@ public class MapPanel
     private ObservableList<AirbnbListing> currentPropertyCollection;
     private Scene listingScene;
     private Stage listingStage;
-    
+    private LoginSystem loginSystem;
     private int listingIndex = -1;
 
     // Map Button declarations
@@ -60,9 +60,10 @@ public class MapPanel
     @FXML Button Bromley;
     @FXML Button Merton;
 
-    public MapPanel(ListingManager listingManager)
+    public MapPanel(ListingManager listingManager,LoginSystem loginSystem)
     {
         this.listingManager = listingManager;
+        this.loginSystem = loginSystem;
         mpe = new MapPanelEngine();
         listingStage = new Stage();
         initializeButtons();
@@ -275,6 +276,7 @@ public class MapPanel
       //create panes
       BorderPane singleListingView = new BorderPane();
       singleListingView.setId("singleListingView");
+      
       GridPane centerPane = new GridPane();
 
       //the GridPane is wrapped in the BorderPane in order to keep
@@ -357,6 +359,12 @@ public class MapPanel
       Label nullLabel = new Label("no information");
       nullLabel.getStyleClass().add("singlePropertyLabel");
 
+      Button favourite = new Button("Favourite");
+      favourite.getStyleClass().add("singlePropertyButton");
+      System.out.println("listing:" + aListing);
+      //add labels to specific positions on centerPane
+      favourite.setOnAction(e -> toggleFavourite(aListing));
+      centerPane.add(favourite, 1 ,0);
       //add labels to specific positions on centerPane
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
@@ -394,6 +402,16 @@ public class MapPanel
       centerPane.add(boroughContent, 2, 8);
 
       return singleListingView;
+    }
+    
+    private void toggleFavourite(AirbnbListing listing)
+    {
+        System.out.println(loginSystem.getCurrentUser());
+        if (loginSystem.getCurrentUser() != null)
+        {
+            loginSystem.getCurrentUser().addFavourite(listing);
+        }
+        System.out.println("map toggle faovurtie");
     }
     
     private void changeListingView(BorderPane listingView) 

@@ -15,6 +15,7 @@ public class MapPanelTest
     private AirbnbDataLoader airbnbDa1;
     private ListingManager listingM1;
     private MapPanel mapPanel1;
+    private LoginSystem loginSystem;
     /**
      * Default constructor for test class MapPanelTest
      */
@@ -34,7 +35,7 @@ public class MapPanelTest
         Platform.runLater(() -> {
             airbnbDa1 = new AirbnbDataLoader();
             listingM1 = new ListingManager(airbnbDa1.load());
-            mapPanel1 = new MapPanel(listingM1);
+            mapPanel1 = new MapPanel(listingM1,loginSystem);
         });
     }
 

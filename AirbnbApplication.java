@@ -31,7 +31,8 @@ public class AirbnbApplication extends Application
     private int panelIndex;
     private double animationIndex;
     private ListingManager listingManager;
-
+    private LoginSystem loginSystem;
+    
     // Controls on most panels
     private BorderPane main;
     private Button backButton = new Button("<");
@@ -44,6 +45,7 @@ public class AirbnbApplication extends Application
     // Application panels
     private WelcomePanel welcomePanel;
     private MapPanel map;
+    private UserPanel user;
     private StatisticPanel statsPanel;
 
     /**
@@ -56,6 +58,7 @@ public class AirbnbApplication extends Application
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
         listingManager = new ListingManager(listings);
+        loginSystem = new LoginSystem(listingManager);
 
         main = new BorderPane();
         main.setId("welcomePane");
@@ -74,12 +77,13 @@ public class AirbnbApplication extends Application
     public void start(Stage stage) throws Exception
     {
         welcomePanel = new WelcomePanel();
-        map = new MapPanel(listingManager);
+        map = new MapPanel(listingManager,loginSystem);
         statsPanel = new StatisticPanel(listingManager);
-
+        user = new UserPanel(loginSystem);
         panels.add(welcomePanel.getWelcomePanel());
         panels.add(map.createMap());
         panels.add(statsPanel.getStatisticPanel());
+        panels.add(user.getPane());
 
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
@@ -109,10 +113,13 @@ public class AirbnbApplication extends Application
         toBox.setPromptText("-");
         toBox.setId("toBox");
 
+        Button home = new Button("Home");
+        home.setOnAction(e -> goToHome());
+        
         topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
         topPane.setSpacing(10);
-        topPane.getChildren().addAll(iconView, leftRegion, fromLabel, fromBox, toLabel, toBox, new Region());
+        topPane.getChildren().addAll(iconView, home, leftRegion, fromLabel, fromBox, toLabel, toBox, new Region());
         topPane.setHgrow(leftRegion, Priority.ALWAYS);
 
         frontButton.setId("frontButton");
@@ -159,7 +166,15 @@ public class AirbnbApplication extends Application
             setNavigationUsability(false);
         }
     }
-
+    /**
+     * Moves the user to the welcome page
+     */
+    private void goToHome()
+    {
+        panelIndex = 0;
+        animationIndex = -2000f;
+        changePanel(panelIndex);
+    }
     /**
      * Sets up and returns the list of options for use in combo boxes
      * @return options The list of combo box options
