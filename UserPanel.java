@@ -5,6 +5,7 @@ import javafx.util.*;
 import java.lang.*;
 import javafx.collections.*;
 import java.util.*;
+import javafx.geometry.*;
 /**
  * Write a description of class UserPanel here.
  *
@@ -27,16 +28,25 @@ public class UserPanel
     {
         this.loginSystem = loginSystem;
         root = new BorderPane();
+        GridPane centerPane = new GridPane();
+        centerPane.setAlignment(Pos.CENTER);
+        centerPane.setPadding(new Insets(10, 10, 10, 10));
+        centerPane.setPrefWidth(600);
+        centerPane.setPrefHeight(600);
+        centerPane.setVgap(10);
+        centerPane.setHgap(10);
 
         loginBox = new VBox();
 
         usernameInput = new TextField();
         usernameInput.setPromptText("Enter your username");
-        loginBox.getChildren().addAll(new Label("Username: "),usernameInput);
+        Label userName = new Label("Username: ");
+        loginBox.getChildren().addAll(userName,usernameInput);
 
         passwordInput = new PasswordField();
         passwordInput.setPromptText("Enter your password");
-        loginBox.getChildren().addAll(new Label("Password: "),passwordInput);
+        Label password = new Label("Password: ");
+        loginBox.getChildren().addAll(password,passwordInput);
 
         loginStatus = new Label();
         loginBox.getChildren().add(loginStatus);
@@ -45,98 +55,97 @@ public class UserPanel
 
         loginButton = new Button("Login");
         loginButton.setOnAction(e -> login());
-
         signupButton = new Button("Sign Up");
-        signupButton.setOnAction(e -> signUp());
-
-        horizontalBox.getChildren().addAll(loginButton,signupButton);
-        loginBox.getChildren().add(horizontalBox);
-        root.setTop(loginBox);
-
-        midBox = new VBox();
-
+        signupButton.setOnAction(e -> signUp());   
         Button logoutButt = new Button("logout");
         logoutButt.setOnAction(e -> logout());
 
-        midBox.getChildren().add(logoutButt);
-
-        HBox mainBox = new HBox();
-
-        VBox favouritesBox = new VBox();
-        favouritesBox.getChildren().add(new Label("FAVOURITES"));
+        horizontalBox.getChildren().addAll(signupButton, new Label(" "), loginButton, new Label(" "), logoutButt);
+        loginBox.getChildren().add(horizontalBox);
+        root.setTop(loginBox);
         
+        Label favTitle = new Label("FAVOURITES");
         favouritesDisplay = new ListView();
         Button removeFavourite = new Button("Delete");
         Button showFavourite = new Button("Show");
         Button saveFavourite = new Button("Save");
-        favouritesBox.getChildren().addAll(favouritesDisplay,
-        removeFavourite,showFavourite,saveFavourite);
         showFavourite.setOnAction(e -> showFavourites(favouritesDisplay));
         removeFavourite.setOnAction(e -> deleteFavourite(favouritesDisplay));
         saveFavourite.setOnAction(e -> loginSystem.getCurrentUser().saveFavourites());
-        mainBox.getChildren().add(favouritesBox);
-
-        VBox newPropBox = new VBox();
-
+        
+        
+        Label createProperty = new Label("CREATE YOUR PROPERTY");
         TextField pNameField = new TextField();
         pNameField.setPromptText("Listing Description");
-
         TextField nameField = new TextField();
         nameField.setPromptText("Your name");
-
         ChoiceBox neighbourhoodField = new ChoiceBox(
             FXCollections.observableArrayList("Kingston upon Thames", "Croydon",
             "Bromley","Hounslow","Ealing","Havering","Hillingdon","Harrow",
             "Brent","Barnet","Enfield"));
-
+        neighbourhoodField.setId("neighbourhoodField");
         TextField latitudeField = new TextField();
         latitudeField.setPromptText("Latitude");
-
         TextField longitudeField = new TextField();
         longitudeField.setPromptText("Longitude");
-
         ChoiceBox typeField = new ChoiceBox(
                 FXCollections.observableArrayList(
                     "Private room","Entire home/apt","Shared room"));
-
+        typeField.setId("typeField");
         TextField priceField = new TextField();
         priceField.setPromptText("Price");
-
         TextField minNightsField = new TextField();
         minNightsField.setPromptText("Minimum # of Nights");
-
         TextField availabilityField = new TextField();
         availabilityField.setPromptText("Days available/year");
-
         Label addListingStatus = new Label();
-
         addListingButton = new Button("Create");
         addListingButton.setOnAction(e -> addListing(
                     pNameField,nameField,neighbourhoodField,latitudeField,longitudeField,
                     typeField,priceField,minNightsField,availabilityField,addListingStatus));
         addListingButton.setDisable(true);
-
-        newPropBox.getChildren().addAll(
-            pNameField,nameField,neighbourhoodField,latitudeField,longitudeField,
-            typeField,priceField,minNightsField,availabilityField,addListingStatus,
-            addListingButton);
-
-        mainBox.getChildren().add(newPropBox);
-        midBox.getChildren().add(mainBox);
-
-        root.setCenter(midBox);
+        
+        centerPane.add(favTitle, 0, 0);
+        centerPane.add(favouritesDisplay, 0, 1);
+        centerPane.add(showFavourite, 0, 2);
+        centerPane.add(removeFavourite, 0, 3);
+        centerPane.add(saveFavourite, 0, 4);
+        centerPane.add(new Label("     "), 1, 0);
+        centerPane.add(new Label("     "), 1, 1);
+        centerPane.add(new Label("     "), 1, 2);
+        centerPane.add(new Label("     "), 1, 3);
+        centerPane.add(new Label("     "), 1, 4);
+        centerPane.add(new Label("     "), 1, 5);
+        centerPane.add(new Label("     "), 1, 6);
+        centerPane.add(new Label("     "), 1, 7);
+        centerPane.add(new Label("     "), 1, 8);
+        centerPane.add(new Label("     "), 1, 9);
+        centerPane.add(createProperty, 2, 0);
+        centerPane.add(pNameField, 2, 1);
+        centerPane.add(nameField, 2, 2);
+        centerPane.add(priceField, 2, 3);
+        centerPane.add(neighbourhoodField, 2, 4);
+        centerPane.add(latitudeField, 2, 5);
+        centerPane.add(longitudeField, 2, 6);
+        centerPane.add(typeField, 2, 7);
+        centerPane.add(minNightsField, 2, 8);
+        centerPane.add(availabilityField, 2, 9);
+        centerPane.add(addListingButton, 2, 10);
+        
+        root.setCenter(centerPane);
 
         accountBox = new VBox();
-
         accountBox.getChildren().add(new Label("Account"));
         nameDisplay = new Label("Not logged in");
         accountBox.getChildren().add(nameDisplay);
         root.setBottom(accountBox);
+
+        root.getStylesheets().addAll(this.getClass().getResource("UserLayout.css").toExternalForm());
     }
-    
+
     /**
      * Show the current Favourites
-     * 
+     *
      * @param display The view from which to obtain the values to show
      */
     private void showFavourites(ListView display)
@@ -151,10 +160,10 @@ public class UserPanel
         display.getItems().clear();
         display.getItems().addAll(favouriteNames);
     }
-    
-    /** 
+
+    /**
      * Deleting a listing
-     * 
+     *
      * @param display The view from which to obtain the value to delete
      */
     private void deleteFavourite(ListView display)
@@ -163,7 +172,7 @@ public class UserPanel
         getSelectionModel().getSelectedItem());
         showFavourites(favouritesDisplay);
     }
-    
+
     /**
      * Adds a listing
      * The parameters are the field which must be filled in
@@ -221,7 +230,7 @@ public class UserPanel
                     {
                         addListingStatus.setText("Price is not valid");
                     }
-                }        
+                }
                 else
                 {
                     addListingStatus.setText("Longitude is not valid");
@@ -254,10 +263,10 @@ public class UserPanel
             loginStatus.setText("There was an error when logging in");
         }
     }
-    
+
     /**
      * Checks if a string is a vlid number
-     * 
+     *
      * @param text The string to check
      */
     public boolean isValidNumber(String text)
@@ -275,7 +284,7 @@ public class UserPanel
     /**
      * Checks if a string is a valid integer
      * and within a range
-     * 
+     *
      * @param text The string to test
      * @param min The minimum value
      * @param max The maximum allowed value
@@ -310,7 +319,7 @@ public class UserPanel
 
     /**
      * Checks if the username is valid
-     * 
+     *
      * @return booolean If the username is valid
      */
     private boolean checkUserName(String text)
@@ -332,7 +341,7 @@ public class UserPanel
 
     /**
      * Checks if the password is valid
-     * 
+     *
      * @return booolean If the password is valid
      */
     private boolean checkPassWord(String text)
@@ -366,7 +375,7 @@ public class UserPanel
             loginStatus.setText("Your username cannot contain spaces and must be greater than 5 and less than 15 characters");
         }
     }
-    
+
     /**
      * Hides the login from the user
      */
@@ -389,9 +398,9 @@ public class UserPanel
         moveBox(midBox,25);
     }
 
-    /** 
+    /**
      * Moves containers around in the panel
-     * 
+     *
      * @param object The Pane to move
      * @param position The position to move to
      */
@@ -422,7 +431,7 @@ public class UserPanel
 
     /**
      * Accessor method to return the panel that stores all the nodes
-     * 
+     *
      * @return root - The panel
      */
     public Pane getPane()

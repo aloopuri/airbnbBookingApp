@@ -81,9 +81,9 @@ public class AirbnbApplication extends Application
         statsPanel = new StatisticPanel(listingManager);
         user = new UserPanel(loginSystem);
         panels.add(welcomePanel.getWelcomePanel());
+        panels.add(user.getPane());
         panels.add(map.createMap());
         panels.add(statsPanel.getStatisticPanel());
-        panels.add(user.getPane());
 
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
