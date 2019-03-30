@@ -14,6 +14,15 @@ import javafx.geometry.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
+/**
+ * This is the GUI for the map panel
+ * It has four windows in total, they are borough window, list of properties window,
+ * single property window and the map window.
+ * Only the first window is made by fxml.
+ * The display of windows is controlled by this class.
+ * 
+ * @Paulina Tao
+ */
 public class MapPanel
 {
     private ListingManager listingManager;
@@ -123,13 +132,19 @@ public class MapPanel
     {
         return mapButtons;
     }
-
+    
+    /**
+     * inistialize all buttons for the fxml file
+     */
     @FXML
     public void initialize()
     {
         initializeButtons();
     }
-
+    
+    /**
+     * change the colors of buttons according to the price range chosen
+     */
     public void showViewInRange(int lowerBound, int upperBound)
     {
         //use this loading method outisde the loop so the program runs faster

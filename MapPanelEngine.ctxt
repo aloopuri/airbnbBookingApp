@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=MapPanelEngine
+comment0.text=\r\n\ This\ class\ is\ for\ processing\ inputs\ from\ the\ MapPanel\ class\r\n\ \r\n\ @author\ Xinran,\ Eamonn\r\n
 comment1.params=button
 comment1.target=java.lang.String\ getBoroughName(javafx.scene.control.Button)
 comment1.text=\r\n\ @param\ The\ borough\ button\ being\ processed\r\n\ @return\ A\ formatted\ string\ of\ the\ borough\ name\r\n

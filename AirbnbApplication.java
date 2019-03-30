@@ -21,8 +21,7 @@ import javafx.scene.shape.Rectangle;
  * There is also a statistic panel which can show you some statistics about the listings based
  * on the price range you choose
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Zain, Talal, Xinran, Eamonn
  */
 public class AirbnbApplication extends Application
 {

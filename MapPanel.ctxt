@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=MapPanel
+comment0.text=\r\n\ This\ is\ the\ GUI\ for\ the\ map\ panel\r\n\ It\ has\ four\ windows\ in\ total,\ they\ are\ borough\ window,\ list\ of\ properties\ window,\r\n\ single\ property\ window\ and\ the\ map\ window.\r\n\ Only\ the\ first\ window\ is\ made\ by\ fxml.\r\n\ The\ display\ of\ windows\ is\ controlled\ by\ this\ class.\r\n\ \r\n\ @Paulina\ Tao\r\n
 comment1.params=listingManager\ loginSystem
 comment1.target=MapPanel(ListingManager,\ LoginSystem)
 comment10.params=listing
@@ -93,8 +94,10 @@ comment48.params=event
 comment48.target=void\ BROMClick(javafx.event.ActionEvent)
 comment5.params=
 comment5.target=void\ initialize()
+comment5.text=\r\n\ inistialize\ all\ buttons\ for\ the\ fxml\ file\r\n
 comment6.params=lowerBound\ upperBound
 comment6.target=void\ showViewInRange(int,\ int)
+comment6.text=\r\n\ change\ the\ colors\ of\ buttons\ according\ to\ the\ price\ range\ chosen\r\n
 comment7.params=button
 comment7.target=void\ openBoroughWindow(javafx.scene.control.Button)
 comment7.text=\r\n\ Creates\ and\ displays\ the\ borough\ details\ window\r\n\ @param\ button\ The\ borough\ button\ clicked\r\n

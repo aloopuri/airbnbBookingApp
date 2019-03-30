@@ -11,10 +11,9 @@ import javafx.util.Duration;
 import javafx.scene.image.*;
 
 /**
- * Write a description of class WelcomePanel here.
+ * The first panel the user encounters when openning the GUI
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Zain, Talal, Xinran, Eamonn
  */
 public class WelcomePanel
 {

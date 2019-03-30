@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=GoogleMapView
-comment0.text=\r\n\ Write\ a\ description\ of\ JavaFX\ class\ MapStat\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ is\ the\ class\ for\ the\ map\ view\ of\ a\ single\ property.\r\n\ This\ GUI\ will\ be\ shown\ when\ user\ clicks\ on\ the\ "view\ on\ map"\ button\ \r\n\ on\ the\ single\ property\ view\r\n\r\n\ @author\ Eamonn,\ Xinran\r\n
 comment1.params=listingManager
 comment1.target=GoogleMapView(ListingManager)
 comment2.params=lat\ lon
@@ -11,4 +11,5 @@ comment3.target=void\ showDirections(double,\ double)
 comment3.text=\r\n\ Shows\ the\ directions\ to\ the\ property\r\n
 comment4.params=lat\ lon
 comment4.target=void\ viewProperty(double,\ double)
+comment4.text=\r\n\ map\ view\ of\ the\ first\ property\r\n
 numComments=5

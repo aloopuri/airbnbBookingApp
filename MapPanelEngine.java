@@ -6,6 +6,11 @@ import javafx.collections.*;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.collections.transformation.*;
+/**
+ * This class is for processing inputs from the MapPanel class
+ * 
+ * @author Xinran, Eamonn
+ */
 public class MapPanelEngine
 {
     private Button button;

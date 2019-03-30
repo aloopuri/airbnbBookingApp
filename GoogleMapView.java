@@ -9,10 +9,11 @@ import javafx.geometry.Pos;
 import javafx.scene.web.*;
 import java.util.ArrayList;
 /**
- * Write a description of JavaFX class MapStat here.
+ * This is the class for the map view of a single property.
+ * This GUI will be shown when user clicks on the "view on map" button 
+ * on the single property view
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Eamonn, Xinran
  */
 public class GoogleMapView
 {
@@ -68,7 +69,10 @@ public class GoogleMapView
         webEngine.load("https://maps.google.com/?saddr=My+Location&daddr="
                        + lat + "," + lon);
     }
-
+    
+    /**
+     * map view of the first property
+     */
     private void viewProperty(double lat, double lon)
     {
         webEngine.load("https://google.com/maps/place/" + lat + "," + lon);

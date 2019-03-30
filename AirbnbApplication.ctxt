@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AirbnbApplication
-comment0.text=\r\n\ This\ is\ the\ Airbnb\ Application.\r\n\ In\ this\ application,\ there\ is\ a\ map\ of\ london's\ borough\ which\ you\ can\ use\ to\ look\r\n\ for\ listings\ in\ each\ borough.\ You\ can\ also\ specify\ a\ price\ range\ and\ the\ map\ will\ show\r\n\ you\ the\ number\ of\ listings\ in\ each\ borough\r\n\ There\ is\ also\ a\ statistic\ panel\ which\ can\ show\ you\ some\ statistics\ about\ the\ listings\ based\r\n\ on\ the\ price\ range\ you\ choose\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ is\ the\ Airbnb\ Application.\r\n\ In\ this\ application,\ there\ is\ a\ map\ of\ london's\ borough\ which\ you\ can\ use\ to\ look\r\n\ for\ listings\ in\ each\ borough.\ You\ can\ also\ specify\ a\ price\ range\ and\ the\ map\ will\ show\r\n\ you\ the\ number\ of\ listings\ in\ each\ borough\r\n\ There\ is\ also\ a\ statistic\ panel\ which\ can\ show\ you\ some\ statistics\ about\ the\ listings\ based\r\n\ on\ the\ price\ range\ you\ choose\r\n\r\n\ @author\ Zain,\ Talal,\ Xinran,\ Eamonn\r\n
 comment1.params=
 comment1.target=AirbnbApplication()
 comment1.text=\r\n\ Class\ Constructor\r\n

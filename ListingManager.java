@@ -1,10 +1,8 @@
 import java.util.*;
 import javafx.collections.*;
 /**
- * Write a description of class listingManager here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * this class is for managing all properties
+ * It is used by every panel
  */
 public class ListingManager
 {
