@@ -1,7 +1,7 @@
 import javafx.scene.layout.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart;
+import javafx.collections.FXCollections;  
+import javafx.collections.ObservableList; 
+import javafx.scene.chart.PieChart; 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -26,13 +26,13 @@ public class PieChartDisplay extends DataDisplay
     public PieChartDisplay(StatisticPanel statPanel, String title, ObservableList<PieChart.Data> data)
     {
         super(statPanel);
-
+        
         this.title = title;
         this.data = data;
-
+        
         createPieChart();
     }
-
+    
     /**
      * Creates a piechart with no legend
      * When you hover over a slice, it shows the slice name and the slice value
@@ -44,24 +44,24 @@ public class PieChartDisplay extends DataDisplay
             return;
         }
         pieChart = new PieChart(data);
-        pieChart.setTitle(title);
-        pieChart.setClockwise(true);
-        pieChart.setLabelLineLength(40);
-        pieChart.setLabelsVisible(true);
-        pieChart.setStartAngle(90);
+        pieChart.setTitle(title); 
+        pieChart.setClockwise(true); 
+        pieChart.setLabelLineLength(40); 
+        pieChart.setLabelsVisible(true); 
+        pieChart.setStartAngle(90); 
         getData().setVgrow(pieChart, Priority.ALWAYS);
         getData().setHgrow(pieChart, Priority.ALWAYS);
         pieChart.setLegendVisible(false);
-
-        pieChart.getData().forEach(data -> {
+        
+        pieChart.getData().forEach(data -> { 
         String number = data.getName() +": " + String.format("%.0f", (data.getPieValue()));
         Tooltip toolTip = new Tooltip(number);
         Tooltip.install(data.getNode(), toolTip);
         });       // this shows the borough name and number of properties in a slice
-
-        getData().getChildren().add(pieChart);
+        
+        getData().getChildren().add(pieChart);        
     }
-
+    
     /**
      * Creates an error message if there is no data
      */

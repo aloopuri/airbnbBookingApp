@@ -8,7 +8,7 @@ import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.Parent;
 /**
- * Abstract class which stores the shared properties of the different types
+ * Abstract class which stores the shared properties of the different types 
  * of ways a statistics is displayed
  *
  * @author (your name)
@@ -16,7 +16,7 @@ import javafx.scene.Parent;
  */
 public abstract class DataDisplay
 {
-    private GridPane dataDisplay;
+    private GridPane dataDisplay;    
     private boolean isDisplayed;
     private static StatisticPanel statPanel;
 
@@ -31,7 +31,7 @@ public abstract class DataDisplay
         setIsDisplayedFalse();
         whenStatisiticClicked();
     }
-
+    
     /**
      * When a statistic is clicked, it shows an enlarged version of it in the statistic panel
      */
@@ -40,18 +40,18 @@ public abstract class DataDisplay
         dataDisplay.addEventHandler(MouseEvent.MOUSE_CLICKED,  new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
                 statPanel.showEnlargedStat(dataDisplay);
-            }
-        });
-    }
-
+            } 
+        });    
+    }   
+    
     /**
-     * Returns the statistic panel
+     * Returns the statistic panel 
      */
     protected StatisticPanel getStatPanel()
     {
         return statPanel;
     }
-
+    
     /**
      * Returns dataDisplay with the title and statistic
      */
@@ -59,7 +59,7 @@ public abstract class DataDisplay
     {
         return dataDisplay;
     }
-
+    
     /**
      * Returns isDisplayed
      */
@@ -67,7 +67,7 @@ public abstract class DataDisplay
     {
         return isDisplayed;
     }
-
+    
     /**
      * Sets isDisplayed to false
      */
@@ -75,7 +75,7 @@ public abstract class DataDisplay
     {
         isDisplayed = false;
     }
-
+    
     /**
      * Sets isDisplayed to false
      */
@@ -83,7 +83,7 @@ public abstract class DataDisplay
     {
         isDisplayed = true;
     }
-
+    
     /**
      * Toggles isDisplayed between true/false
      */

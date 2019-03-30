@@ -19,7 +19,7 @@ import javafx.scene.image.*;
 public class WelcomePanel
 {
     private BorderPane root;
-
+    
     private Label priceRange = new Label();
     /**
      * Constructor for objects of class WelcomePanel
@@ -60,7 +60,7 @@ public class WelcomePanel
         addAnimation(infoLabel);
         addAnimation(priceRange);
     }
-
+    
     /**
      * @return The welcome panel's root pane
      */
@@ -68,7 +68,7 @@ public class WelcomePanel
     {
         return root;
     }
-
+    
     /**
      * Applies a fade-in animation to a provided node
      * @param node The node to apply the animation onto
@@ -95,5 +95,5 @@ public class WelcomePanel
                                " To: £" + toValue.toString());
         }
     }
-
+    
 }

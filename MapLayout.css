@@ -30,20 +30,16 @@
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
 }
 
-#viewOnMapButton {
+#mapPane {
+    
+}
+
+.singlePropertyButton {
   -fx-background-color: black;
   -fx-font-family: "Tw Cen MT";
   -fx-text-fill:white;
   -fx-font-size: 15px;
 }
-
-.singlePropertyButton{
-  -fx-font-family: "Tw Cen MT";
-  -fx-font-size: 15px;
-  -fx-background-color: black;
-  -fx-text-fill: white;
-}
-
 
 .singlePropertyButton:hover {
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );

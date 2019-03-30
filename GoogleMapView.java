@@ -34,10 +34,6 @@ public class GoogleMapView
     public AnchorPane createGoogleMap(double lat, double lon)
     {
         // Create buttons
-        Button nextProperty = new Button("Next Property");
-        nextProperty.getStyleClass().add("googleMapButton");
-        Button previousProperty = new Button("Previous Property");
-        previousProperty.getStyleClass().add("googleMapButton");
         Button directions = new Button("How to Get There");
         directions.getStyleClass().add("googleMapButton");
         directions.setId("showDirectionButton");
@@ -51,7 +47,7 @@ public class GoogleMapView
         toolbar.setSpacing(10);
         toolbar.setAlignment(Pos.CENTER);
 
-        toolbar.getChildren().addAll(nextProperty, previousProperty, directions);
+        toolbar.getChildren().add(directions);
 
         viewProperty(lat, lon);
 
@@ -60,8 +56,6 @@ public class GoogleMapView
         pane.setRightAnchor(toolbar, 10.0);
         pane.setTopAnchor(toolbar, 5.0);
 
-        nextProperty.setOnAction(e -> nextButton());
-        previousProperty.setOnAction(e -> previousButton());
         directions.setOnAction(e -> showDirections(lat, lon));
         return pane;
     }
@@ -78,39 +72,5 @@ public class GoogleMapView
     private void viewProperty(double lat, double lon)
     {
         webEngine.load("https://google.com/maps/place/" + lat + "," + lon);
-    }
-
-    /**
-     * Move to the next property on the map
-     */
-    private void nextButton()
-    {
-        listingIndex++;
-        if (listingIndex != listingManager.getListings().size()) {
-            AirbnbListing element = listingManager.getListings().get(listingIndex);
-            webEngine.load("https://google.com/maps/place/" +
-                           element.getLatitude() + "," + element.getLongitude());
-        }
-        else {
-            listingIndex = -1; // reset index
-            nextButton();
-        }
-    }
-
-    /**
-     * Move to the previous property on the map
-     */
-    private void previousButton()
-    {
-        listingIndex--;
-        if (listingIndex >= 0) {
-            AirbnbListing element = listingManager.getListings().get(listingIndex);
-            webEngine.load("https://google.com/maps/place/" +
-                           element.getLatitude() + "," + element.getLongitude());
-        }
-        else {
-            listingIndex = listingManager.getListings().size(); // wrap to end listing
-            previousButton();
-        }
     }
 }

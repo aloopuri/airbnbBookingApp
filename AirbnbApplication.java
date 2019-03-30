@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.event.*;
 import javafx.scene.*;
-import javafx.geometry.*;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
@@ -10,8 +10,9 @@ import javafx.collections.*;
 import javafx.animation.*;
 import javafx.util.Duration;
 import javafx.scene.image.*;
-import java.util.*;
+import java.util.ArrayList;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 /**
  * This is the Airbnb Application.
  * In this application, there is a map of london's borough which you can use to look
@@ -30,8 +31,7 @@ public class AirbnbApplication extends Application
     private int panelIndex;
     private double animationIndex;
     private ListingManager listingManager;
-    private LoginSystem loginSystem;
-    private ArrayList<AirbnbListing> listings;
+
     // Controls on most panels
     private BorderPane main;
     private Button backButton = new Button("<");
@@ -47,13 +47,12 @@ public class AirbnbApplication extends Application
     private StatisticPanel statsPanel;
 
     /**
-     * Constructor for objects of class AirbnbApp
+     * Class Constructor
      */
     public AirbnbApplication()
     {
         panels = new ArrayList<Pane>();
-        listings = new ArrayList<AirbnbListing>();
-        loginSystem = new LoginSystem();
+        ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
         AirbnbDataLoader loader = new AirbnbDataLoader();
         listings = loader.load();
         listingManager = new ListingManager(listings);
@@ -133,12 +132,6 @@ public class AirbnbApplication extends Application
         main.setTop(topPane);
         main.setBottom(bottomPane);
 
-        BorderPane root = new BorderPane();
-        root.setTop(topPane);
-        UserPanel xxx = new UserPanel(loginSystem);
-        root.setCenter(xxx.getPane());
-        root.setBottom(bottomPane);
-
         Scene scene = new Scene(main, 1200, 900);
         stage.setTitle("Airbnb London");
         stage.setScene(scene);
@@ -149,13 +142,6 @@ public class AirbnbApplication extends Application
         stage.sizeToScene();
         stage.show();
         stage.getIcons().add(new Image("/images/airbnb-small.png"));
-    }
-
-    private void hideLogins()
-    {
-        //TranslateTransition tt = new TranslateTransition(Duration.millis(300),);
-        //tt.setToX(-70);
-        //tt.play();
     }
 
     /**
@@ -171,7 +157,6 @@ public class AirbnbApplication extends Application
             map.showViewInRange(from, to);
             statsPanel.updateStatistics(listingManager.getCurrentListings());
             setNavigationUsability(false);
-            stat.updateStatistics(listingManager.getCurrentListings());
         }
     }
 

@@ -14,7 +14,6 @@ import javafx.geometry.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
-import java.util.ResourceBundle;
 public class MapPanel
 {
     private ListingManager listingManager;
@@ -23,7 +22,7 @@ public class MapPanel
     private ObservableList<AirbnbListing> currentPropertyCollection;
     private Scene listingScene;
     private Stage listingStage;
-
+    
     private int listingIndex = -1;
 
     // Map Button declarations
@@ -152,16 +151,16 @@ public class MapPanel
     private void openBoroughWindow(Button button)
     {
         String boroughName = mpe.getBoroughName(button);
-
+        
         // Create Table - Adding listener to appropriately sort the observablelist
         TableView<AirbnbListing> listingTable = new TableView();
         listingTable.getSortOrder().addListener(new ListChangeListener() {
             @Override
-            public void onChanged(ListChangeListener.Change change)
+            public void onChanged(ListChangeListener.Change change) 
             {
                 mpe.updateTableListings(currentPropertyCollection, listingTable);
             }
-        });
+        });         
         listingTable.setId("listingTable");
         listingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         listingTable.setRowFactory(tv -> {
@@ -188,7 +187,7 @@ public class MapPanel
         hostNameCol.setCellValueFactory(new PropertyValueFactory<>("host_name"));
         hostNameCol.setReorderable(false);
         hostNameCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
-
+        
         // Price column
         TableColumn<AirbnbListing, Integer> priceCol = new TableColumn<>("Price");
         priceCol.getStyleClass().clear();
@@ -197,7 +196,7 @@ public class MapPanel
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         priceCol.setReorderable(false);
         priceCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
-
+        
         // Minimum nights column
         TableColumn<AirbnbListing, Integer> nightsCol = new TableColumn<>("Minimum Number of Nights to Book");
         nightsCol.getStyleClass().clear();
@@ -206,7 +205,7 @@ public class MapPanel
         nightsCol.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
         nightsCol.setReorderable(false);
         nightsCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
-
+        
         // Reviews column
         TableColumn<AirbnbListing, Integer> reviewCol = new TableColumn<>("Number of Reviews");
         reviewCol.getStyleClass().clear();
@@ -215,9 +214,9 @@ public class MapPanel
         reviewCol.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
         reviewCol.setReorderable(false);
         reviewCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
-
+        
         // Populate table
-        currentPropertyCollection = listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue());
+        currentPropertyCollection = listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue());        
         listingTable.getColumns().addAll(hostNameCol, priceCol, nightsCol, reviewCol);
         listingTable.setItems(currentPropertyCollection);
 
@@ -228,12 +227,12 @@ public class MapPanel
         sortingBox.setItems(mpe.getSortingOptions());
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
         sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, currentPropertyCollection, listingTable));
-
+        
         // Searching field
         TextField searchText = new TextField();
         searchText.setPromptText("❤ type here ❤");
         searchText.getStyleClass().add("tableViewBox");
-
+        
         ToolBar sortBar = new ToolBar();
         Label sortByLabel = new Label("Sort by:");
         Label searchLabel = new Label("Search by Host Name/Price/MinNights: ");
@@ -250,7 +249,7 @@ public class MapPanel
         boroughPane.setId("boroughPane");
         boroughPane.setCenter(listingTable);
         boroughPane.setTop(sortBar);
-
+        
         //Set up the scene and stage for this window
         Stage boroughWindow = new Stage();
         Scene scene = new Scene(boroughPane, 1000, 600);
@@ -260,7 +259,7 @@ public class MapPanel
         boroughWindow.getIcons().add(new Image("/images/airbnb-small.png"));
         boroughWindow.show();
     }
-
+    
     /**
      * Creates the single listing view that shows when
      * a listing is selected from the table
@@ -272,7 +271,7 @@ public class MapPanel
       if (currentPropertyCollection != null) {
           listingIndex = currentPropertyCollection.indexOf(aListing);
       }
-
+      
       //create panes
       BorderPane singleListingView = new BorderPane();
       singleListingView.setId("singleListingView");
@@ -396,8 +395,8 @@ public class MapPanel
 
       return singleListingView;
     }
-
-    private void changeListingView(BorderPane listingView)
+    
+    private void changeListingView(BorderPane listingView) 
     {
         listingScene.setRoot(listingView);
     }
@@ -444,11 +443,11 @@ public class MapPanel
           previousButtonClicked();
       }
     }
-
+    
     /**
      * @return The listing scene
      */
-    public Scene getListingScene()
+    public Scene getListingScene() 
     {
         return listingScene;
     }

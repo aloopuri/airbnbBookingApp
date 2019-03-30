@@ -9,17 +9,17 @@ import javafx.collections.*;
 public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
-
+    
     // used to hold the listings based on the price range the user chose
     private ArrayList<AirbnbListing> currentListings;
-
+    
     /**
      * Constructor for objects of class listingManager
      */
     public ListingManager(ArrayList<AirbnbListing> listings)
     {
         this.listings = listings;
-        currentListings = new ArrayList<>();
+        currentListings = new ArrayList<AirbnbListing>();
     }
 
     /**
@@ -29,7 +29,7 @@ public class ListingManager
     {
         return listings;
     }
-
+    
     /**
      * Returns current listings
      */
@@ -37,7 +37,7 @@ public class ListingManager
     {
         return currentListings;
     }
-
+    
     /**
      * This creates a list of all listings which are in the selected range
      */
@@ -51,33 +51,33 @@ public class ListingManager
             }
         }
         currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
-    }
-
+    }    
+        
     /**
      * @return A list of prices incrementing by 200 up to a limit
      */
-    public ArrayList<Integer> getMenuOptions()
+    public ArrayList<Integer> getMenuOptions() 
     {
         ArrayList<Integer> prices = getAllPrices();
-
+        
         Integer maxPrice = Collections.max(prices);
         prices = new ArrayList();
         int counter = 0;
         while (counter <= maxPrice) {
             prices.add(counter);
-            counter += 100;
+            counter += 200;
         }
-
+        
         if (counter > maxPrice) {
             prices.add(counter);
         }
         return prices;
-    }
-
+    }    
+    
     /**
      * @return A list containing all of the boroughs based on the data in current listings
      */
-    public ObservableList<String> getBoroughOptions()
+    public ObservableList<String> getBoroughOptions() 
     {
         if (currentListings.isEmpty()) {
             return null;
@@ -88,14 +88,14 @@ public class ListingManager
             return allBoroughs;
         }
         String borough = currentListings.get(0).getNeighbourhood();
-        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
-
+        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));       
+        
         for (AirbnbListing aListing : currentListings)
         {
             if (!aListing.getNeighbourhood().equalsIgnoreCase(borough)) {
                 allBoroughs.add(borough);
                 borough = aListing.getNeighbourhood();
-            }
+            }         
         }
         return allBoroughs;
     }
