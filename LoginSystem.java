@@ -24,7 +24,7 @@ public class LoginSystem
      * Adds a user to the system
      * @param name The Username
      * @param pass The password
-     * 
+     *
      * @returns If the adding was successful
      */
     public String addUser(String name, String pass)
@@ -45,22 +45,34 @@ public class LoginSystem
                     taken = true;
                 }
             }
-            //If the name is available addes the username and 
+            //If the name is available addes the username and
             //password to the file
             if (!taken)
             {
                 try (FileWriter writer = new FileWriter("users.csv",true))
                 {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(name);
-                    sb.append(',');
-                    //Encrypts the password before storing
-                    sb.append(cipherText(pass,name,false));
-                    sb.append(",1,2,3,4,5,6,7,8,9,0");
-                    sb.append('\n');
-                    writer.write(sb.toString());
-                    returnString = "Account Created";
-                    writer.close();
+                    String newPass = cipherText(pass,name,false);
+                    if
+                    (!(newPass.contains("\"")
+                    ||newPass.contains(",")
+                    ||newPass.contains(";")))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(name);
+                        sb.append(',');
+                        //Encrypts the password before storing
+                        sb.append(cipherText(pass,name,false));
+                        sb.append(",1,2,3,4,5,6,7,8,9,0");
+                        sb.append('\n');
+                        System.out.println(name + " " + cipherText(pass,name,false));
+                        writer.write(sb.toString());
+                        returnString = "Account Created";
+                        writer.close();
+                    }
+                    else
+                    {
+                        returnString = "Please choose another username or password";
+                    }
                 }
                 catch (FileNotFoundException e)
                 {
@@ -77,13 +89,13 @@ public class LoginSystem
         }
         return returnString;
     }
-    
+
     /**
      * Allows users to log in to the system
-     * 
+     *
      * @param name The Username
      * @param pass The password
-     * 
+     *
      * @returns If the user is found
      */
     public boolean login(String name, String pass)
@@ -118,7 +130,7 @@ public class LoginSystem
                         }
                     }
                     ArrayList<String> faveListings = new ArrayList();
-                    //Checks the listings to match the strings 
+                    //Checks the listings to match the strings
                     //against real listings
                     for (AirbnbListing listing : listingManager.getListings())
                     {
@@ -144,10 +156,10 @@ public class LoginSystem
         }
         return found;
     }
-    
+
     /**
      * A simple cipher to encrypt data before storing it
-     * 
+     *
      * @param plainText the phrase to cipher
      * @param The key used to cipher
      * @param deCipher whether to cipher or decipher the text
@@ -156,10 +168,10 @@ public class LoginSystem
     {
         StringBuilder finalString = new StringBuilder();
         char finalArray[] = plainText.toCharArray();
-        int size = finalArray.length; 
+        int size = finalArray.length;
         for (int i=0;i<size;i++)
         {
-            //The value to add is the character in the key which 
+            //The value to add is the character in the key which
             //corresponds to the position in the text
             int add = (int) key.charAt(i % key.length());
             int newLet;
@@ -181,7 +193,7 @@ public class LoginSystem
         }
         return finalString.toString();
     }
-    
+
     /**
      * Test to see if the encrption and decryption work correctly
      */
@@ -192,7 +204,7 @@ public class LoginSystem
         System.out.println("2:" + cipherText(n,u,true));
         System.out.println("3:" + p);
     }
-    
+
     /**
      * Sets the current user to null
      */
@@ -200,10 +212,10 @@ public class LoginSystem
     {
         currentUser = null;
     }
-    
+
     /**
      * Returns the current user
-     * 
+     *
      * @currentUser The user that is logged in
      */
     public User getCurrentUser()
