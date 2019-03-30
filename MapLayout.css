@@ -39,6 +39,8 @@
   -fx-font-family: "Tw Cen MT";
   -fx-text-fill:white;
   -fx-font-size: 15px;
+  -fx-pref-height: 28px;
+  -fx-pref-width: 150px;
 }
 
 .singlePropertyButton:hover {

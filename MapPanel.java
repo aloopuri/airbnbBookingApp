@@ -299,11 +299,14 @@ public class MapPanel
       Button nextButton = new Button("Next Property");
       nextButton.getStyleClass().add("singlePropertyButton");
       nextButton.setPrefSize(140, 12);
+      Button favourite = new Button("Favourite ❤");
+      favourite.getStyleClass().add("singlePropertyButton");
 
       //set button action
       viewOnMapButton.setOnAction(e -> viewOnMapButtonClicked(aListing.getLatitude(), aListing.getLongitude()));
       previousButton.setOnAction(e -> previousButtonClicked());
       nextButton.setOnAction(e -> nextButtonClicked());
+      favourite.setOnAction(e -> toggleFavourite(aListing));
 
       //create new labels
       Label hostId = new Label("Host ID: " + aListing.getHost_id());
@@ -359,18 +362,13 @@ public class MapPanel
       Label nullLabel = new Label("no information");
       nullLabel.getStyleClass().add("singlePropertyLabel");
 
-      Button favourite = new Button("Favourite");
-      favourite.getStyleClass().add("singlePropertyButton");
-      System.out.println("listing:" + aListing);
-      //add labels to specific positions on centerPane
-      favourite.setOnAction(e -> toggleFavourite(aListing));
-      centerPane.add(favourite, 1 ,0);
       //add labels to specific positions on centerPane
       centerPane.add(hostId, 0, 0);
       centerPane.add(calculatedHostListings, 2, 0);
       centerPane.add(viewOnMapButton, 0, 3);
       centerPane.add(previousButton, 0 , 2);
       centerPane.add(nextButton, 0 , 1);
+      centerPane.add(favourite, 0, 4);
       centerPane.add(reviews, 0, 9);
       centerPane.add(reviewNum, 0, 10);
       centerPane.add(reviewNumContent, 1, 10);

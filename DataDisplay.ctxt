@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=DataDisplay
-comment0.text=\r\n\ Abstract\ class\ which\ stores\ the\ shared\ properties\ of\ the\ different\ types\ \r\n\ of\ ways\ a\ statistics\ is\ displayed\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Abstract\ class\ which\ stores\ the\ shared\ properties\ of\ the\ different\ types\r\n\ of\ ways\ a\ statistics\ is\ displayed\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=statPanel
 comment1.target=DataDisplay(StatisticPanel)
 comment1.text=\r\n\ Creates\ a\ GridPane\r\n
@@ -11,7 +11,7 @@ comment3.params=event
 comment3.target=void\ handle(javafx.scene.input.MouseEvent)
 comment4.params=
 comment4.target=StatisticPanel\ getStatPanel()
-comment4.text=\r\n\ Returns\ the\ statistic\ panel\ \r\n
+comment4.text=\r\n\ Returns\ the\ statistic\ panel\r\n
 comment5.params=
 comment5.target=javafx.scene.layout.GridPane\ getData()
 comment5.text=\r\n\ Returns\ dataDisplay\ with\ the\ title\ and\ statistic\r\n
