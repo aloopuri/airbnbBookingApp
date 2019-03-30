@@ -404,6 +404,11 @@ public class MapPanel
       return singleListingView;
     }
     
+    /**
+     * Adds a listing to the favourites when the button is pressed
+     * 
+     * @param listing The listing to add
+     */
     private void toggleFavourite(AirbnbListing listing)
     {
         System.out.println(loginSystem.getCurrentUser());

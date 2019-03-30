@@ -20,6 +20,7 @@ public class LoginSystem
     {
         this.listingManager = listingMan;
     }
+    
     /**
      * Adds a user to the system
      * @param name The Username

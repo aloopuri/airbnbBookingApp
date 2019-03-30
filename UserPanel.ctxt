@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=UserPanel
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ UserPanel\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ is\ the\ GUI\ for\ the\ user\ panel\r\n\ This\ allows\ the\ user\ to\ log\ in\ and\ sign\ up\r\n\ They\ can\ add\ listings\ and\ also\ dave\ listings\ to\ their\ favourites\r\n\r\n\ @Zain\ Raja\r\n
 comment1.params=loginSystem
 comment1.target=UserPanel(LoginSystem)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ UserPanel\r\n
@@ -36,7 +36,7 @@ comment4.target=void\ addListing(javafx.scene.control.TextField,\ javafx.scene.c
 comment4.text=\r\n\ Adds\ a\ listing\r\n\ The\ parameters\ are\ the\ field\ which\ must\ be\ filled\ in\r\n
 comment5.params=
 comment5.target=void\ login()
-comment5.text=\r\n\ Allows\ the\ user\ to\ login\r\n
+comment5.text=\r\n\ Allows\ the\ user\ to\ login\ to\ the\ application\r\n
 comment6.params=text
 comment6.target=boolean\ isValidNumber(java.lang.String)
 comment6.text=\r\n\ Checks\ if\ a\ string\ is\ a\ vlid\ number\r\n\ \r\n\ @param\ text\ The\ string\ to\ check\r\n

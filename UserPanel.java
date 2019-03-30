@@ -6,10 +6,11 @@ import java.lang.*;
 import javafx.collections.*;
 import java.util.*;
 /**
- * Write a description of class UserPanel here.
+ * This is the GUI for the user panel
+ * This allows the user to log in and sign up
+ * They can add listings and also dave listings to their favourites
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @Zain Raja
  */
 public class UserPanel
 {
@@ -27,7 +28,7 @@ public class UserPanel
     {
         this.loginSystem = loginSystem;
         root = new BorderPane();
-
+        //Creates a box for the login/sign up components
         loginBox = new VBox();
 
         usernameInput = new TextField();
@@ -40,7 +41,7 @@ public class UserPanel
 
         loginStatus = new Label();
         loginBox.getChildren().add(loginStatus);
-
+        //Adds a box for the buttons
         HBox horizontalBox = new HBox();
 
         loginButton = new Button("Login");
@@ -53,6 +54,7 @@ public class UserPanel
         loginBox.getChildren().add(horizontalBox);
         root.setTop(loginBox);
 
+        //Creats a box for the central components
         midBox = new VBox();
 
         Button logoutButt = new Button("logout");
@@ -62,6 +64,7 @@ public class UserPanel
 
         HBox mainBox = new HBox();
 
+        //Adds a Vbox for the favourites
         VBox favouritesBox = new VBox();
         favouritesBox.getChildren().add(new Label("FAVOURITES"));
         
@@ -76,6 +79,7 @@ public class UserPanel
         saveFavourite.setOnAction(e -> loginSystem.getCurrentUser().saveFavourites());
         mainBox.getChildren().add(favouritesBox);
 
+        //Adds a VBox for the new property adder
         VBox newPropBox = new VBox();
 
         TextField pNameField = new TextField();
@@ -87,7 +91,12 @@ public class UserPanel
         ChoiceBox neighbourhoodField = new ChoiceBox(
             FXCollections.observableArrayList("Kingston upon Thames", "Croydon",
             "Bromley","Hounslow","Ealing","Havering","Hillingdon","Harrow",
-            "Brent","Barnet","Enfield"));
+            "Brent","Barnet","Enfield","Waltham Forest","Redbridge","Sutton",
+            "Lambeth","Southwark","Lewisham","Greenwich","Bexley",
+            "Richmond upon Thames","Merton","Wandsworth","Hammersmith and Fulham",
+            "Kensington and Chelsea","City of London","Westminister","Camden",
+            "Tower Hamlets","Islington","Hackney","Haringey","Newham",
+            "Barking and Dagenham"));
 
         TextField latitudeField = new TextField();
         latitudeField.setPromptText("Latitude");
@@ -235,7 +244,7 @@ public class UserPanel
     }
 
     /**
-     * Allows the user to login
+     * Allows the user to login to the application
      */
     private void login()
     {
