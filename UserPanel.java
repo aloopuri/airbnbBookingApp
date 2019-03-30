@@ -143,10 +143,20 @@ public class UserPanel
     {
         //Gets an arraylist of names and adds it to the display
         ArrayList<String> favouriteNames = new ArrayList();
+<<<<<<< HEAD
+        if (loginSystem.getCurrentUser() !=  null)
+        {
+            for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
+            {
+                favouriteNames.add(list.getName());
+                System.out.println(list);
+            }
+=======
         for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
         {
             favouriteNames.add(list.getName());
             System.out.println(list);
+>>>>>>> 1c82953bf2f83c5c13390941250bca2eabf0edc7
         }
         display.getItems().clear();
         display.getItems().addAll(favouriteNames);
@@ -247,6 +257,7 @@ public class UserPanel
             passwordInput.setText("");
             updateNameDisplay();
             addListingButton.setDisable(false);
+            showFavourites(favouritesDisplay);
         }
         else
         {
@@ -304,6 +315,7 @@ public class UserPanel
         loginSystem.removeCurrentUser();
         updateNameDisplay();
         addListingButton.setDisable(true);
+        showFavourites(favouritesDisplay);
     }
 
     /**

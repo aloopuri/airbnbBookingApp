@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #BlueJ class context
 comment0.target=User
 comment0.text=\r\n\ Represents\ a\ logged\ in\ user\ in\ the\ system\r\n\ Has\ favourite\ properties\ which\ can\ be\r\n\ added/deleted/updated\ in\ the\ file\r\n\ Can\ add\ properties\ to\ the\ file\r\n
@@ -26,3 +27,33 @@ comment8.params=
 comment8.target=java.lang.String\ getName()
 comment8.text=\r\n\ Accessor\ which\ returns\ the\ user's\ name\r\n\ @return\ username\ The\ name\ of\ the\ user\r\n
 numComments=9
+=======
+#BlueJ class context
+comment0.target=User
+comment0.text=\r\n\ Represents\ a\ logged\ in\ user\ in\ the\ system\r\n\ Has\ favourite\ properties\ which\ can\ be\r\n\ added/deleted/updated\ in\ the\ file\r\n\ Can\ add\ properties\ to\ the\ file\r\n
+comment1.params=username\ password
+comment1.target=User(java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ User\r\n\ @param\ username\ The\ name\ of\ the\ user\r\n\ @param\ password\ The\ password\ of\ the\ user\r\n
+comment2.params=listing
+comment2.target=void\ addFavourite(AirbnbListing)
+comment2.text=\r\n\ Adds\ a\ listing\ to\ the\ list\ of\ favourites\r\n\ \r\n\ @param\ listing\ The\ listing\ to\ add\r\n
+comment3.params=listingName
+comment3.target=void\ removeFavourite(java.lang.String)
+comment3.text=\r\n\ Remove\ a\ listing\ from\ the\ favourites\r\n\ \r\n\ @param\ THe\ listing\ to\ remove\r\n
+comment4.params=
+comment4.target=void\ saveFavourites()
+comment4.text=\r\n\ Saves\ the\ favourites\ ot\ the\ user\ file\r\n
+comment5.params=propName\ name\ neighbourhood\ latitude\ longitude\ type\ price\ minNights\ availability
+comment5.target=java.lang.String\ addListing(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment5.text=\r\n\ Adds\ a\ listing\ the\ user\ would\ like\ to\ add,\ to\ the\ file\r\n\ The\ parameters\ are\ the\ fields\ stored\ about\ the\ listing\r\n\ @return\ String\ shows\ if\ the\ function\ was\ successful\ or\ not\r\n
+comment6.params=id
+comment6.target=void\ updateListings(java.lang.String)
+comment6.text=\r\n\ Goes\ through\ the\ listings\ and\ updates\ the\ field\ which\ stores\r\n\ how\ many\ listings\ each\ user\ has\ added\r\n\ \r\n\ @param\ id\ The\ id/username\ of\ the\ user\r\n
+comment7.params=
+comment7.target=java.util.ArrayList\ getFavourites()
+comment7.text=\r\n\ Accessor\ method\ which\ returns\ the\ array\ list\ of\ favourites\r\n\ @return\ favourites\ An\ ArrayList\ of\ favourites\r\n
+comment8.params=
+comment8.target=java.lang.String\ getName()
+comment8.text=\r\n\ Accessor\ which\ returns\ the\ user's\ name\r\n\ @return\ username\ The\ name\ of\ the\ user\r\n
+numComments=9
+>>>>>>> 1c82953bf2f83c5c13390941250bca2eabf0edc7

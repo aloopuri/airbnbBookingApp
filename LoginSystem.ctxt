@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #BlueJ class context
 comment0.target=LoginSystem
 comment0.text=\r\n\ Controls\ the\ creating\ of\ users\ and\ the\ process\ of\ logging\ in\r\n\r\n@Zain\ Raja\r\n
@@ -23,3 +24,30 @@ comment7.params=
 comment7.target=User\ getCurrentUser()
 comment7.text=\r\n\ Returns\ the\ current\ user\r\n\ \r\n\ @currentUser\ The\ user\ that\ is\ logged\ in\r\n
 numComments=8
+=======
+#BlueJ class context
+comment0.target=LoginSystem
+comment0.text=\r\n\ Controls\ the\ creating\ of\ users\ and\ the\ process\ of\ logging\ in\r\n\r\n@Zain\ Raja\r\n
+comment1.params=listingMan
+comment1.target=LoginSystem(ListingManager)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ LoginSystem\r\n
+comment2.params=name\ pass
+comment2.target=java.lang.String\ addUser(java.lang.String,\ java.lang.String)
+comment2.text=\r\n\ Adds\ a\ user\ to\ the\ system\r\n\ @param\ name\ The\ Username\r\n\ @param\ pass\ The\ password\r\n\ \r\n\ @returns\ If\ the\ adding\ was\ successful\r\n
+comment3.params=name\ pass
+comment3.target=boolean\ login(java.lang.String,\ java.lang.String)
+comment3.text=\r\n\ Allows\ users\ to\ log\ in\ to\ the\ system\r\n\ \r\n\ @param\ name\ The\ Username\r\n\ @param\ pass\ The\ password\r\n\ \r\n\ @returns\ If\ the\ user\ is\ found\r\n
+comment4.params=plainText\ key\ deCipher
+comment4.target=java.lang.String\ cipherText(java.lang.String,\ java.lang.String,\ boolean)
+comment4.text=\r\n\ A\ simple\ cipher\ to\ encrypt\ data\ before\ storing\ it\r\n\ \r\n\ @param\ plainText\ the\ phrase\ to\ cipher\r\n\ @param\ The\ key\ used\ to\ cipher\r\n\ @param\ deCipher\ whether\ to\ cipher\ or\ decipher\ the\ text\r\n
+comment5.params=u\ p
+comment5.target=void\ test(java.lang.String,\ java.lang.String)
+comment5.text=\r\n\ Test\ to\ see\ if\ the\ encrption\ and\ decryption\ work\ correctly\r\n
+comment6.params=
+comment6.target=void\ removeCurrentUser()
+comment6.text=\r\n\ Sets\ the\ current\ user\ to\ null\r\n
+comment7.params=
+comment7.target=User\ getCurrentUser()
+comment7.text=\r\n\ Returns\ the\ current\ user\r\n\ \r\n\ @currentUser\ The\ user\ that\ is\ logged\ in\r\n
+numComments=8
+>>>>>>> 1c82953bf2f83c5c13390941250bca2eabf0edc7

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #BlueJ class context
 comment0.target=StatisticBox
 comment0.text=\r\n\ This\ creates\ the\ layout\ for\ an\ individual\ statistic\ box.\r\n\ You\ can\ click\ through\ different\ statistics\ using\ the\ arrows\ on\ the\ sides\r\n\ of\ the\ boxes.\r\n\ All\ objects\ of\ the\ class\ share\ the\ same\ data.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
@@ -25,3 +26,32 @@ comment7.text=\r\n\ This\ returns\ the\ statistic\ box\r\n
 comment8.params=
 comment8.target=javafx.scene.layout.GridPane\ getStatDisplay()
 numComments=9
+=======
+#BlueJ class context
+comment0.target=StatisticBox
+comment0.text=\r\n\ This\ creates\ the\ layout\ for\ an\ individual\ statistic\ box.\r\n\ You\ can\ click\ through\ different\ statistics\ using\ the\ arrows\ on\ the\ sides\r\n\ of\ the\ boxes.\r\n\ All\ objects\ of\ the\ class\ share\ the\ same\ data.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=data
+comment1.target=StatisticBox(java.util.List)
+comment1.text=\r\n\ The\ Statistic\ box\ is\ created\r\n
+comment2.params=
+comment2.target=void\ addStatistic()
+comment2.text=\r\n\ When\ a\ new\ statistic\ box\ is\ created,\ the\ statistic\ shown\ \r\n\ in\ the\ statistic\ box\ is\ one\ that\ isn't\ shown\ in\ the\ other\ boxes\r\n
+comment3.params=event
+comment3.target=void\ previousStat(javafx.event.ActionEvent)
+comment3.text=\r\n\ Shows\ the\ previous\ statistic\ on\ the\ statistic\ box\ which\ isn't\r\n\ shown\ in\ other\ boxes\r\n
+comment4.params=event
+comment4.target=void\ nextStat(javafx.event.ActionEvent)
+comment4.text=\r\n\ Shows\ the\ next\ statistic\ on\ the\ statistic\ box\ which\ isn't\r\n\ shown\ in\ other\ boxes\r\n
+comment5.params=index
+comment5.target=void\ displayPreviousStat(int)
+comment5.text=\r\n\ If\ the\ previous\ data\ is\ displayed\ in\ another\ box,\ it\ recursively\ \r\n\ checks\ if\ the\ data\ before\ that\ is\ also\ in\ another\ box\ \r\n\ When\ it\ finds\ data\ which\ isn't\ displayed\ in\ another\ box,\ it\ displays\r\n\ that\ data\ in\ the\ current\ statistic\ box\r\n
+comment6.params=index
+comment6.target=void\ displayNextStat(int)
+comment6.text=\r\n\ If\ the\ next\ data\ is\ displayed\ in\ another\ box,\ it\ recursively\ \r\n\ checks\ if\ the\ data\ after\ that\ is\ also\ in\ another\ box\ \r\n\ When\ it\ finds\ data\ which\ isn't\ displayed\ in\ another\ box,\ it\ displays\ \r\n\ that\ data\ in\ the\ current\ statistic\ box\r\n
+comment7.params=
+comment7.target=javafx.scene.layout.GridPane\ getStatBox()
+comment7.text=\r\n\ This\ returns\ the\ statistic\ box\r\n
+comment8.params=
+comment8.target=javafx.scene.layout.GridPane\ getStatDisplay()
+numComments=9
+>>>>>>> 1c82953bf2f83c5c13390941250bca2eabf0edc7

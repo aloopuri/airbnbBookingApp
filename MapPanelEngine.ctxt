@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #BlueJ class context
 comment0.target=MapPanelEngine
 comment1.params=button
@@ -14,3 +15,21 @@ comment5.params=sortBox\ boroughListings\ table
 comment5.target=void\ tableSort(javafx.scene.control.ComboBox,\ javafx.collections.ObservableList,\ javafx.scene.control.TableView)
 comment5.text=\r\n\ Sorts\ the\ table\ data\ based\ on\ drop-down\ box\ selection\r\n
 numComments=6
+=======
+#BlueJ class context
+comment0.target=MapPanelEngine
+comment1.params=button
+comment1.target=java.lang.String\ getBoroughName(javafx.scene.control.Button)
+comment2.params=button\ listingCount
+comment2.target=void\ setButtonColor(javafx.scene.control.Button,\ int)
+comment3.params=
+comment3.target=javafx.collections.ObservableList\ getSortingOptions()
+comment3.text=\r\n\ Create\ an\ ObservableList\ that\ holds\ the\ sorting\ options\ for\ the\ drop-down\ box\r\n\ @return\ sortOptions\ The\ list\ of\ sorting\ options\r\n
+comment4.params=listingManager\ boroughName\ searchText\ table
+comment4.target=void\ searchTable(ListingManager,\ java.lang.String,\ javafx.scene.control.TextField,\ javafx.scene.control.TableView)
+comment4.text=\r\n\ Implements\ search\ functionality\ to\ search\ the\ Borough\ Table\r\n\ Reference\:\ https\://code.makery.ch/blog/javafx-8-tableview-sorting-filtering/\r\n
+comment5.params=sortBox\ boroughListings\ table
+comment5.target=void\ tableSort(javafx.scene.control.ComboBox,\ javafx.collections.ObservableList,\ javafx.scene.control.TableView)
+comment5.text=\r\n\ Sorts\ the\ table\ data\ based\ on\ drop-down\ box\ selection\r\n
+numComments=6
+>>>>>>> 1c82953bf2f83c5c13390941250bca2eabf0edc7
