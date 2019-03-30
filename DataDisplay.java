@@ -26,7 +26,7 @@ public abstract class DataDisplay
     {
         this.statPanel = statPanel;
         dataDisplay = new GridPane();
-        dataDisplay.setStyle("-fx-background-color: rgba(59, 34, 26, 0.8)");
+        dataDisplay.setStyle("-fx-background-color: rgba(123, 42, 26, 0.8)");
         setIsDisplayedFalse();
         whenStatisiticClicked();
     }

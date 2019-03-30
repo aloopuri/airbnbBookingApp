@@ -90,6 +90,7 @@ public class UserPanel
             "Kensington and Chelsea","City of London","Westminister","Camden",
             "Tower Hamlets","Islington","Hackney","Haringey","Newham",
             "Barking and Dagenham"));
+        neighbourhoodField.setId("neighbourhoodField");
 
         TextField latitudeField = new TextField();
         latitudeField.setPromptText("Latitude");
