@@ -25,3 +25,7 @@
   -fx-pref-height: 28px;
   -fx-pref-width: 200px;
 }
+
+.choice-box .context-menu {
+   -fx-background-color: black;
+}
