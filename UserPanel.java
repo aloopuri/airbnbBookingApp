@@ -19,7 +19,7 @@ public class UserPanel
     private TextField usernameInput, passwordInput;
     private Button loginButton, signupButton, addListingButton;
     private Label loginStatus,nameDisplay;
-    private VBox loginBox, accountBox, midBox;
+    private GridPane topPane, centerPane, bottomPane;
     private ListView favouritesDisplay;
     /**
      * Constructor for objects of class UserPanel
@@ -28,28 +28,25 @@ public class UserPanel
     {
         this.loginSystem = loginSystem;
         root = new BorderPane();
-        GridPane centerPane = new GridPane();
+        centerPane = new GridPane();
         centerPane.setAlignment(Pos.CENTER);
         centerPane.setPadding(new Insets(10, 10, 10, 10));
         centerPane.setPrefWidth(600);
         centerPane.setPrefHeight(600);
         centerPane.setVgap(10);
         centerPane.setHgap(10);
-
-        loginBox = new VBox();
+        topPane = new GridPane();
+        topPane.setAlignment(Pos.TOP_LEFT);
 
         usernameInput = new TextField();
         usernameInput.setPromptText("Enter your username");
         Label userName = new Label("Username: ");
-        loginBox.getChildren().addAll(userName,usernameInput);
 
         passwordInput = new PasswordField();
         passwordInput.setPromptText("Enter your password");
         Label password = new Label("Password: ");
-        loginBox.getChildren().addAll(password,passwordInput);
 
         loginStatus = new Label();
-        loginBox.getChildren().add(loginStatus);
 
         HBox horizontalBox = new HBox();
 
@@ -60,9 +57,14 @@ public class UserPanel
         Button logoutButt = new Button("logout");
         logoutButt.setOnAction(e -> logout());
 
-        horizontalBox.getChildren().addAll(signupButton, new Label(" "), loginButton, new Label(" "), logoutButt);
-        loginBox.getChildren().add(horizontalBox);
-        root.setTop(loginBox);
+        horizontalBox.getChildren().addAll(signupButton, new Label(" "), loginButton, new Label(" "));
+        topPane.add(userName, 0, 0);
+        topPane.add(usernameInput, 0, 1);
+        topPane.add(password, 0, 2);
+        topPane.add(passwordInput, 0 ,3);
+        topPane.add(loginStatus, 0, 4);
+        topPane.add(horizontalBox, 0, 5);
+        root.setTop(topPane);
         
         Label favTitle = new Label("FAVOURITES");
         favouritesDisplay = new ListView();
@@ -72,8 +74,7 @@ public class UserPanel
         showFavourite.setOnAction(e -> showFavourites(favouritesDisplay));
         removeFavourite.setOnAction(e -> deleteFavourite(favouritesDisplay));
         saveFavourite.setOnAction(e -> loginSystem.getCurrentUser().saveFavourites());
-        
-        
+ 
         Label createProperty = new Label("CREATE YOUR PROPERTY");
         TextField pNameField = new TextField();
         pNameField.setPromptText("Listing Description");
@@ -105,40 +106,45 @@ public class UserPanel
                     typeField,priceField,minNightsField,availabilityField,addListingStatus));
         addListingButton.setDisable(true);
         
-        centerPane.add(favTitle, 0, 0);
-        centerPane.add(favouritesDisplay, 0, 1);
-        centerPane.add(showFavourite, 0, 2);
-        centerPane.add(removeFavourite, 0, 3);
-        centerPane.add(saveFavourite, 0, 4);
-        centerPane.add(new Label("     "), 1, 0);
-        centerPane.add(new Label("     "), 1, 1);
-        centerPane.add(new Label("     "), 1, 2);
-        centerPane.add(new Label("     "), 1, 3);
-        centerPane.add(new Label("     "), 1, 4);
-        centerPane.add(new Label("     "), 1, 5);
-        centerPane.add(new Label("     "), 1, 6);
-        centerPane.add(new Label("     "), 1, 7);
-        centerPane.add(new Label("     "), 1, 8);
-        centerPane.add(new Label("     "), 1, 9);
-        centerPane.add(createProperty, 2, 0);
-        centerPane.add(pNameField, 2, 1);
-        centerPane.add(nameField, 2, 2);
-        centerPane.add(priceField, 2, 3);
-        centerPane.add(neighbourhoodField, 2, 4);
-        centerPane.add(latitudeField, 2, 5);
-        centerPane.add(longitudeField, 2, 6);
-        centerPane.add(typeField, 2, 7);
-        centerPane.add(minNightsField, 2, 8);
-        centerPane.add(availabilityField, 2, 9);
-        centerPane.add(addListingButton, 2, 10);
+        GridPane innerPane = new GridPane();
+        innerPane.setPadding(new Insets(10, 10, 10, 10));
+        innerPane.setPrefWidth(600);
+        innerPane.setPrefHeight(600);
+        innerPane.setVgap(10);
+        innerPane.setHgap(10);
+        
+        innerPane.add(pNameField, 0, 0);
+        innerPane.add(nameField, 0, 1);
+        innerPane.add(priceField, 0, 2);
+        innerPane.add(neighbourhoodField, 0, 3);
+        innerPane.add(latitudeField, 0, 4);
+        innerPane.add(longitudeField, 0, 5);
+        innerPane.add(typeField, 0, 6);
+        innerPane.add(minNightsField, 0, 7);
+        innerPane.add(availabilityField, 0, 8);
+        innerPane.add(addListingButton, 0, 9);
+        innerPane.add(addListingStatus, 0, 10);
+        
+        centerPane.add(new Label("                       "), 0, 0);
+        centerPane.add(favTitle, 1, 0);
+        centerPane.add(favouritesDisplay, 1, 1);
+        centerPane.add(showFavourite, 1, 2);
+        centerPane.add(removeFavourite, 1, 3);
+        centerPane.add(saveFavourite, 1, 4);
+        centerPane.add(new Label("                       "), 2, 0);
+        centerPane.add(createProperty, 3, 0);
+        centerPane.add(innerPane, 3, 1);
         
         root.setCenter(centerPane);
-
-        accountBox = new VBox();
-        accountBox.getChildren().add(new Label("Account"));
+        
+        bottomPane = new GridPane();
+        Label account = new Label("Account");
         nameDisplay = new Label("Not logged in");
-        accountBox.getChildren().add(nameDisplay);
-        root.setBottom(accountBox);
+        bottomPane.add(account, 0, 0);
+        bottomPane.add(nameDisplay, 0, 1);
+        bottomPane.add(new Label("   "), 1, 1);
+        bottomPane.add(logoutButt, 2, 1);
+        root.setBottom(bottomPane);
 
         root.getStylesheets().addAll(this.getClass().getResource("UserLayout.css").toExternalForm());
     }
@@ -384,9 +390,9 @@ public class UserPanel
         //Gets the height of the top bar
         double addedHeight = ((Pane)((BorderPane) root.getParent()).getTop()).getHeight();
         //Adds the top bar to the height of the login box
-        double totalHeight = -(loginBox.getHeight() + addedHeight+5);
-        moveBox(loginBox,totalHeight);
-        moveBox(midBox,totalHeight+50);
+        double totalHeight = -(topPane.getHeight() + addedHeight+5);
+        moveBox(topPane,totalHeight);
+        moveBox(centerPane,totalHeight+50);
     }
 
     /**
@@ -394,8 +400,8 @@ public class UserPanel
      */
     public void showLogin()
     {
-        moveBox(loginBox,0);
-        moveBox(midBox,25);
+        moveBox(topPane,0);
+        moveBox(centerPane,25);
     }
 
     /**
