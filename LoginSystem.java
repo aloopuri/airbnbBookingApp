@@ -51,16 +51,28 @@ public class LoginSystem
             {
                 try (FileWriter writer = new FileWriter("users.csv",true))
                 {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(name);
-                    sb.append(',');
-                    //Encrypts the password before storing
-                    sb.append(cipherText(pass,name,false));
-                    sb.append(",1,2,3,4,5,6,7,8,9,0");
-                    sb.append('\n');
-                    writer.write(sb.toString());
-                    returnString = "Account Created";
-                    writer.close();
+                    String newPass = cipherText(pass,name,false);
+                    if 
+                    (!(newPass.contains("\"")
+                    ||newPass.contains(",")
+                    ||newPass.contains(";")))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(name);
+                        sb.append(',');
+                        //Encrypts the password before storing
+                        sb.append(cipherText(pass,name,false));
+                        sb.append(",1,2,3,4,5,6,7,8,9,0");
+                        sb.append('\n');
+                        System.out.println(name + " " + cipherText(pass,name,false));
+                        writer.write(sb.toString());
+                        returnString = "Account Created";
+                        writer.close();
+                    }
+                    else
+                    {
+                        returnString = "Please choose another username or password";
+                    }
                 }
                 catch (FileNotFoundException e)
                 {
