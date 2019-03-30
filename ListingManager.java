@@ -9,6 +9,8 @@ import javafx.collections.*;
 public class ListingManager
 {
     private ArrayList<AirbnbListing> listings;
+
+    // used to hold the listings based on the price range the user chose
     private ArrayList<AirbnbListing> currentListings;
 
     /**
@@ -20,18 +22,24 @@ public class ListingManager
         currentListings = new ArrayList<>();
     }
 
+    /**
+     * @return The listings ArrayList
+     */
     public ArrayList<AirbnbListing> getListings()
     {
         return listings;
     }
 
+    /**
+     * Returns current listings
+     */
     public ArrayList<AirbnbListing> getCurrentListings()
     {
         return currentListings;
     }
 
     /**
-     * This creates a list of all listings which are in the price range
+     * This creates a list of all listings which are in the selected range
      */
     public void updateUserRangeListings(int from, int to)
     {
@@ -45,6 +53,9 @@ public class ListingManager
         currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
     }
 
+    /**
+     * @return A list of prices incrementing by 200 up to a limit
+     */
     public ArrayList<Integer> getMenuOptions()
     {
         ArrayList<Integer> prices = getAllPrices();
@@ -63,14 +74,25 @@ public class ListingManager
         return prices;
     }
 
+    /**
+     * @return A list containing all of the boroughs based on the data in current listings
+     */
     public ObservableList<String> getBoroughOptions()
     {
+        if (currentListings.isEmpty()) {
+            return null;
+        }
+        ObservableList<String> allBoroughs = FXCollections.observableArrayList();
+        if (currentListings.size() == 1) {
+            allBoroughs.add(currentListings.get(0).getNeighbourhood());
+            return allBoroughs;
+        }
         String borough = currentListings.get(0).getNeighbourhood();
         currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
-        ObservableList<String> allBoroughs = FXCollections.observableArrayList();
+
         for (AirbnbListing aListing : currentListings)
         {
-            if (!aListing.getNeighbourhood().equals(borough)) {
+            if (!aListing.getNeighbourhood().equalsIgnoreCase(borough)) {
                 allBoroughs.add(borough);
                 borough = aListing.getNeighbourhood();
             }
@@ -78,6 +100,9 @@ public class ListingManager
         return allBoroughs;
     }
 
+    /**
+     * @return A list which contains all of the prices in the listings with no
+     */
     public ArrayList<Integer> getAllPrices()
     {
         ArrayList<Integer> prices = new ArrayList();
@@ -113,6 +138,9 @@ public class ListingManager
         return observableListings;
     }
 
+    /**
+     * Returns a list of all prices in a borough which is passed in as a parameter
+     */
     public ArrayList<Integer> getBoroughPrices(String borough)
     {
       ArrayList<Integer> listOfPricesInBorough = new ArrayList<>();

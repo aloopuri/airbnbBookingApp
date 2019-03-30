@@ -119,7 +119,7 @@ public class MapPanel
     /**
      * @return The list of buttons in the map panel
      */
-    private ArrayList<Button> getButtons()
+    public ArrayList<Button> getButtons()
     {
         return mapButtons;
     }
@@ -152,7 +152,16 @@ public class MapPanel
     private void openBoroughWindow(Button button)
     {
         String boroughName = mpe.getBoroughName(button);
+
+        // Create Table - Adding listener to appropriately sort the observablelist
         TableView<AirbnbListing> listingTable = new TableView();
+        listingTable.getSortOrder().addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(ListChangeListener.Change change)
+            {
+                mpe.updateTableListings(currentPropertyCollection, listingTable);
+            }
+        });
         listingTable.setId("listingTable");
         listingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         listingTable.setRowFactory(tv -> {
@@ -178,6 +187,7 @@ public class MapPanel
         hostNameCol.setId("hostName");
         hostNameCol.setCellValueFactory(new PropertyValueFactory<>("host_name"));
         hostNameCol.setReorderable(false);
+        hostNameCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
 
         // Price column
         TableColumn<AirbnbListing, Integer> priceCol = new TableColumn<>("Price");
@@ -186,6 +196,7 @@ public class MapPanel
         priceCol.setId("price");
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         priceCol.setReorderable(false);
+        priceCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
 
         // Minimum nights column
         TableColumn<AirbnbListing, Integer> nightsCol = new TableColumn<>("Minimum Number of Nights to Book");
@@ -194,6 +205,7 @@ public class MapPanel
         nightsCol.setId("nights");
         nightsCol.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
         nightsCol.setReorderable(false);
+        nightsCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
 
         // Reviews column
         TableColumn<AirbnbListing, Integer> reviewCol = new TableColumn<>("Number of Reviews");
@@ -202,12 +214,14 @@ public class MapPanel
         reviewCol.setId("review");
         reviewCol.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
         reviewCol.setReorderable(false);
+        reviewCol.sortTypeProperty().addListener(o -> FXCollections.reverse(currentPropertyCollection));
 
         // Populate table
         currentPropertyCollection = listingManager.getBoroughListings(boroughName, AirbnbApplication.getFromValue(), AirbnbApplication.getToValue());
         listingTable.getColumns().addAll(hostNameCol, priceCol, nightsCol, reviewCol);
         listingTable.setItems(currentPropertyCollection);
 
+        // Sorting drop-down
         ComboBox sortingBox = new ComboBox();
         sortingBox.getStyleClass().add("tableViewBox");
         sortingBox.setPromptText("❤ choose a range ❤");
@@ -215,6 +229,7 @@ public class MapPanel
         sortingBox.setMaxWidth(Integer.MAX_VALUE);
         sortingBox.setOnAction(e -> mpe.tableSort(sortingBox, currentPropertyCollection, listingTable));
 
+        // Searching field
         TextField searchText = new TextField();
         searchText.setPromptText("❤ type here ❤");
         searchText.getStyleClass().add("tableViewBox");
@@ -227,15 +242,16 @@ public class MapPanel
         sortBar.getItems().addAll(sortByLabel, sortingBox, new Region(), searchLabel, searchText);
         sortBar.setId("sortBar");
 
+        // Add search functionality
         mpe.searchTable(listingManager, boroughName, searchText, listingTable);
 
-        //set up the pane
+        //Set up the pane
         BorderPane boroughPane = new BorderPane();
         boroughPane.setId("boroughPane");
         boroughPane.setCenter(listingTable);
         boroughPane.setTop(sortBar);
 
-        //set up the scene and stage for this window
+        //Set up the scene and stage for this window
         Stage boroughWindow = new Stage();
         Scene scene = new Scene(boroughPane, 1000, 600);
         scene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
@@ -245,6 +261,12 @@ public class MapPanel
         boroughWindow.show();
     }
 
+    /**
+     * Creates the single listing view that shows when
+     * a listing is selected from the table
+     * @param aListing The Airbnb listing whose data will be displayed
+     * @return The listing view BorderPane
+     */
     public BorderPane getListingView(AirbnbListing aListing)
     {
       if (currentPropertyCollection != null) {
@@ -383,7 +405,7 @@ public class MapPanel
     private void viewOnMapButtonClicked(double lat, double lon)
     {
         Stage mapStage = new Stage();
-        Scene mapScene = new Scene(new SinglePropertyMap(listingManager).createMapStats(lat, lon));
+        Scene mapScene = new Scene(new GoogleMapView(listingManager).createGoogleMap(lat, lon));
         mapScene.getStylesheets().addAll(this.getClass().getResource("MapLayout.css").toExternalForm());
         mapStage.setScene(mapScene);
         mapStage.setTitle("Property Map Viewer");

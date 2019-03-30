@@ -11,6 +11,11 @@ public class MapPanelEngine
     private Button button;
     private BackgroundFill backgroundFill;
     private Background background;
+    
+    /**
+     * @param The borough button being processed
+     * @return A formatted string of the borough name
+     */
     public String getBoroughName(Button button)
     {
       switch(button.getId()){
@@ -43,6 +48,11 @@ public class MapPanelEngine
       }
     }
 
+    /**
+     * Sets borough button colours
+     * @param button The button being processed
+     * @param listingCount The number of listings in the borough
+     */
     public void setButtonColor(Button button, int listingCount)
     {
       Color color;
@@ -167,6 +177,9 @@ public class MapPanelEngine
 
     /**
      * Sorts the table data based on drop-down box selection
+     * @param sortBox The drop-down box with sorting options
+     * @param boroughListings The list of listings in a borough
+     * @param table The borough table
      */
     public void tableSort(ComboBox sortBox, ObservableList<AirbnbListing> boroughListings, TableView table)
     {
@@ -205,10 +218,21 @@ public class MapPanelEngine
                 System.out.println("Column not found! No Action");
                 break;
         }
+        updateTableListings(boroughListings, table);
+    }
+    
+    /**
+     * Re-orders the ObservableList to the order shown in the
+     * table view
+     * @param boroughListings The ObservableList to be re-ordered
+     * @param table The TableView that the ObservableList belongs to
+     */
+    public void updateTableListings(ObservableList<AirbnbListing> boroughListings, TableView table) 
+    {
         boroughListings.clear();
         for (Object obj : table.getItems()) {
             AirbnbListing listing = (AirbnbListing) obj;
             boroughListings.add(listing);
-        }
-    }
+        }        
+    }    
 }

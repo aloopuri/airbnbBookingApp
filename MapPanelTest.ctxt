@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=MapPanelTest
+comment0.text=\r\n\ This\ is\ the\ Map\ Panel's\ unit\ testing\ class.\r\n\ It\ tests\ all\ of\ the\ public\ methods\ from\ the\r\n\ map\ panel\ class\ for\ null\ values,\ array\ sizes,\r\n\ and\ proper\ initialization\r\n
+comment1.params=
+comment1.target=MapPanelTest()
+comment1.text=\r\n\ Default\ constructor\ for\ test\ class\ MapPanelTest\r\n
+comment2.params=
+comment2.target=void\ setUp()
+comment2.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\r\n\ Called\ before\ every\ test\ case\ method.\r\n
+comment3.params=
+comment3.target=void\ tearDown()
+comment3.text=\r\n\ Tears\ down\ the\ test\ fixture.\r\n\r\n\ Called\ after\ every\ test\ case\ method.\r\n
+comment4.params=
+comment4.target=void\ nullTests()
+comment4.text=\r\n\ Tests\ to\ ensure\ that\ there\ are\ no\ null\ values\ being\r\n\ returned.\r\n
+comment5.params=
+comment5.target=void\ sizeTest()
+comment5.text=\r\n\ Test\ to\ ensure\ the\ map\ buttons\ have\ been\ correctly\r\n\ initialized.\r\n
+comment6.params=
+comment6.target=void\ exceptionTest()
+comment6.text=\r\n\ Test\ for\ any\ thrown\ exceptions\ from\ the\r\n\ map\ panel's\ showViewInRange\ method\r\n
+numComments=7

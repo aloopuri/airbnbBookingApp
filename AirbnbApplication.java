@@ -13,7 +13,12 @@ import javafx.scene.image.*;
 import java.util.*;
 import javafx.scene.paint.Color;
 /**
- * Write a description of class AirbnbApp here.
+ * This is the Airbnb Application.
+ * In this application, there is a map of london's borough which you can use to look
+ * for listings in each borough. You can also specify a price range and the map will show
+ * you the number of listings in each borough
+ * There is also a statistic panel which can show you some statistics about the listings based
+ * on the price range you choose
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -39,7 +44,8 @@ public class AirbnbApplication extends Application
     // Application panels
     private WelcomePanel welcomePanel;
     private MapPanel map;
-    private StatisticPanel stat;
+    private StatisticPanel statsPanel;
+
     /**
      * Constructor for objects of class AirbnbApp
      */
@@ -70,11 +76,11 @@ public class AirbnbApplication extends Application
     {
         welcomePanel = new WelcomePanel();
         map = new MapPanel(listingManager);
-        stat = new StatisticPanel(listings, listingManager);
+        statsPanel = new StatisticPanel(listingManager);
 
         panels.add(welcomePanel.getWelcomePanel());
         panels.add(map.createMap());
-        panels.add(stat.getStatisticPanel());
+        panels.add(statsPanel.getStatisticPanel());
 
         // Set ComboBox actions
         fromBox.setOnAction(e -> comboBoxAction());
@@ -161,7 +167,9 @@ public class AirbnbApplication extends Application
             int to = getToValue();
             int from = getFromValue();
             welcomePanel.updatePriceRange(fromBox.getValue(), toBox.getValue());
+            listingManager.updateUserRangeListings(from, to);
             map.showViewInRange(from, to);
+            statsPanel.updateStatistics(listingManager.getCurrentListings());
             setNavigationUsability(false);
             stat.updateStatistics(listingManager.getCurrentListings());
         }

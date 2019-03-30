@@ -5,20 +5,21 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.Pos;
-import javafx.collections.FXCollections;  
-import javafx.collections.ObservableList; 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
-
 /**
- * Write a description of class BarChartDisplay here.
+ * This creates a bar chart which can be used to show the room types in a borough
+ * or the availability of listings in a borough
+ * You can filter the data by using the combo box which contains all the boroughs
+ * with listings in the range of the price specified
  *
  * @author (your name)
  * @version (a version number or a date)
  */
 public class BarChartDisplay extends DataDisplay
 {
-    private StatisticPanel statPanel;
     private BarChart<String, Number> barchart;
     private VBox container;
     private ComboBox boroughListBox;
@@ -26,100 +27,97 @@ public class BarChartDisplay extends DataDisplay
     private String bcData;
 
     /**
-     * Constructor for objects of class BarChartDisplay
+     * Creates a combo box of boroughs and shows a default message
+     * When an option in combo box selected, updates and show stats
      */
-    public BarChartDisplay(StatisticPanel statPanel, String title, String bcData,
-        ObservableList<String> allBoroughs)
-         
+    public BarChartDisplay(StatisticPanel statPanel, String title, ObservableList<String> allBoroughs,
+            String bcData)
+
     {
         super(statPanel);
-        this.statPanel = statPanel;
         this.title = title;
         this.bcData = bcData;
-                
-        final Label message = new Label("Room Types In Borough");
+
+        Label message = new Label();
+        if (bcData.equalsIgnoreCase("roomtypes")){
+            message.setText("Room Types In Borough");
+        }
+        else if (bcData.equalsIgnoreCase("availability")){
+            message.setText("Avavilability In Borough");
+        }
         message.setAlignment(Pos.CENTER);
-        FXCollections.sort(allBoroughs);     
-        GridPane msgPane = new GridPane();
-        
-        msgPane.add(message, 0, 0);
-        msgPane.setAlignment(Pos.CENTER);
-        msgPane.setHgrow(message, Priority.ALWAYS);
-        msgPane.setVgrow(message, Priority.ALWAYS);
-        
-        boroughListBox = new ComboBox(allBoroughs);   
+        message.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        FXCollections.sort(allBoroughs);
+
+        boroughListBox = new ComboBox(allBoroughs);
         boroughListBox.setOnAction(e -> selectBorough());
-        boroughListBox.setPromptText("Choose a Borough");        
-        
+        boroughListBox.setPromptText("Choose a Borough");
+
         HBox topBar = new HBox();
         topBar.setAlignment(Pos.TOP_LEFT);
-        getData().setHgrow(topBar, Priority.ALWAYS);
         topBar.getChildren().add(boroughListBox);
-        
-        //GridPane bcContainer = new GridPane();
-        //bcContainer.setVgrow(_Node_, _Priority_)
-        
+
         container = new VBox();
         container.setAlignment(Pos.CENTER);
-        //container.setVgrow(message, Priority.ALWAYS);
-        container.getChildren().addAll(topBar, msgPane);
-        
-        //container.setVgrow(barchart, Priority.ALWAYS);        
-        getData().setVgrow(message, Priority.NEVER);
+        container.setVgrow(message, Priority.ALWAYS);
+        container.getChildren().addAll(topBar, message);
+
         getData().setHgrow(container, Priority.ALWAYS);
         getData().setVgrow(container, Priority.ALWAYS);
-        getData().getChildren().add(container);        
-        
-        setIsDisplayedFalse();       
-        
-        whenStatisiticClicked();
-        
+        getData().getChildren().add(container);
     }
-    
+
+    /**
+     * This creates the barchart using the data passed into it
+     */
     private void createBarChart(String boroughName, ObservableList<XYChart.Series> data)
     {
         final CategoryAxis boroughs = new CategoryAxis();
         final NumberAxis numOfProperties = new NumberAxis();
         barchart = new BarChart<String, Number>(boroughs, numOfProperties);
         barchart.setTitle(title);
-        boroughs.setLabel(boroughName);
+        boroughs.setLabel(bcData);
         numOfProperties.setLabel("Number of Properties");
-        
+
         for (XYChart.Series series : data) {
             barchart.getData().add(series);
         }
     }
-    
+
+    /**
+     * This creates the options in the combo box
+     */
     private void selectBorough()
     {
         String bToString = (String) boroughListBox.getValue().toString();
-        //ObservableList<XYChart.Series> data = statPanel.getStatistics().getRoomTypeDistribution(bToString);
         ObservableList<XYChart.Series> data = getStatistic(bToString);
         createBarChart(bToString, data);
-        showGraph();        
+        showGraph();
     }
-    
+
+    /**
+     * This returns the series of a bar chart depending on which statistic stated in bcData
+     */
     private ObservableList<XYChart.Series> getStatistic(String borough)
     {
-        //ObservableList<XYChart.Series> data = statPanel.getStatistics().getRoomTypeDistribution(bToString);
         if (bcData.equalsIgnoreCase("roomtypes")) {
-            ObservableList<XYChart.Series> data = statPanel.getStatistics().getRoomTypeDistribution(borough);
+            ObservableList<XYChart.Series> data = getStatPanel().getStatistics().getRoomTypeDistribution(borough);
             return data;
         }
         else if (bcData.equalsIgnoreCase("availability")) {
-            ObservableList<XYChart.Series> data = statPanel.getStatistics().getAvailDistribution(borough);
+            ObservableList<XYChart.Series> data = getStatPanel().getStatistics().getAvailDistribution(borough);
             return data;
-        }        
+        }
         return null;
     }
-    
+
+    /**
+     * This shows the bar chart in the display
+     */
     private void showGraph()
     {
         container.getChildren().remove(1);
         container.getChildren().add(barchart);
         container.setVgrow(barchart, Priority.ALWAYS);
     }
-
-    
-
 }
