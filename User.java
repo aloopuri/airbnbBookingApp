@@ -148,7 +148,6 @@ public class User
             //Adds all the IDs to a list
             while ((line = reader.readNext()) != null) {
                 listingIDs.add(line[0]);
-                System.out.println(line);
             }
             Random rand = new Random();
             Boolean taken = true;
@@ -227,11 +226,9 @@ public class User
             //a counter. Copy the lines into an arraylist
             while ((line = reader.readNext()) != null) {
                 lines.add(line);
-                System.out.println(line[2] + " " + id);
                 if (line[2].equals(id))
                 {
                     numID ++;
-                    System.out.println(line[1]);
                 }
             }
             //for each listing, change the field where the id matches
@@ -240,7 +237,6 @@ public class User
                 if (currLine[2].equals(id))
                 {
                     currLine[13] = numID+"";
-                    System.out.println(currLine[1]);
                 }
             }
             //Write the array list back into the file

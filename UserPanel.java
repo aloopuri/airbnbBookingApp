@@ -76,7 +76,7 @@ public class UserPanel
         removeFavourite,showFavourite,saveFavourite);
         showFavourite.setOnAction(e -> showFavourites(favouritesDisplay));
         removeFavourite.setOnAction(e -> deleteFavourite(favouritesDisplay));
-        saveFavourite.setOnAction(e -> loginSystem.getCurrentUser().saveFavourites());
+        saveFavourite.setOnAction(e -> saveFavourites());
         mainBox.getChildren().add(favouritesBox);
 
         //Adds a VBox for the new property adder
@@ -144,6 +144,17 @@ public class UserPanel
     }
     
     /**
+     * Saves the favourites when the button is pressed
+     */
+    private void saveFavourites()
+    {
+        if (loginSystem.getCurrentUser() != null)
+        {
+            loginSystem.getCurrentUser().saveFavourites();
+        }
+    }
+    
+    /**
      * Show the current Favourites
      * 
      * @param display The view from which to obtain the values to show
@@ -152,13 +163,15 @@ public class UserPanel
     {
         //Gets an arraylist of names and adds it to the display
         ArrayList<String> favouriteNames = new ArrayList();
-        for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
-        {
-            favouriteNames.add(list.getName());
-            System.out.println(list);
-        }
         display.getItems().clear();
-        display.getItems().addAll(favouriteNames);
+        if (loginSystem.getCurrentUser() != null)
+        {
+            for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
+            {
+                favouriteNames.add(list.getName());
+            }
+            display.getItems().addAll(favouriteNames);
+        }
     }
     
     /** 
@@ -168,9 +181,12 @@ public class UserPanel
      */
     private void deleteFavourite(ListView display)
     {
-        loginSystem.getCurrentUser().removeFavourite((String) display.
-        getSelectionModel().getSelectedItem());
-        showFavourites(favouritesDisplay);
+        if (loginSystem.getCurrentUser() != null)
+        {
+            loginSystem.getCurrentUser().removeFavourite((String) display.
+            getSelectionModel().getSelectedItem());
+            showFavourites(favouritesDisplay);
+        }
     }
     
     /**
@@ -251,7 +267,6 @@ public class UserPanel
         //Tries to log in through the loginSystem
         if (loginSystem.login(usernameInput.getText(),passwordInput.getText()))
         {
-            System.out.println("Logged in");
             hideLogin();
             passwordInput.setText("");
             updateNameDisplay();

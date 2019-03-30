@@ -65,7 +65,6 @@ public class LoginSystem
                         sb.append(cipherText(pass,name,false));
                         sb.append(",1,2,3,4,5,6,7,8,9,0");
                         sb.append('\n');
-                        System.out.println(name + " " + cipherText(pass,name,false));
                         writer.write(sb.toString());
                         returnString = "Account Created";
                         writer.close();
@@ -135,7 +134,6 @@ public class LoginSystem
                     //against real listings
                     for (AirbnbListing listing : listingManager.getListings())
                     {
-                        System.out.println(listing);
                         if (listing != null)
                         {
                             for (String lName : faveListingS)
@@ -197,13 +195,15 @@ public class LoginSystem
     
     /**
      * Test to see if the encrption and decryption work correctly
+     * @param u Username
+     * @param p Password
      */
     public void test(String u,String p)
     {
         String n = cipherText(p,u,false);
-        System.out.println("1:" + n);
-        System.out.println("2:" + cipherText(n,u,true));
-        System.out.println("3:" + p);
+        System.out.println("Ciphered:" + n);
+        System.out.println("Deciphered:" + cipherText(n,u,true));
+        System.out.println("Real value:" + p);
     }
     
     /**
