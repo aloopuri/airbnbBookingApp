@@ -82,13 +82,17 @@ public class ListingManager
         if (currentListings.isEmpty()) {
             return null;
         }
-        String borough = currentListings.get(0).getNeighbourhood();
-        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));
         ObservableList<String> allBoroughs = FXCollections.observableArrayList();
-        currentListings.add(currentListings.get(0));
+        if (currentListings.size() == 1) {
+            allBoroughs.add(currentListings.get(0).getNeighbourhood());
+            return allBoroughs;
+        }
+        String borough = currentListings.get(0).getNeighbourhood();
+        currentListings.sort(Comparator.comparing(AirbnbListing::getNeighbourhood));       
+        
         for (AirbnbListing aListing : currentListings)
         {
-            if (!aListing.getNeighbourhood().equals(borough)) {
+            if (!aListing.getNeighbourhood().equalsIgnoreCase(borough)) {
                 allBoroughs.add(borough);
                 borough = aListing.getNeighbourhood();
             }         

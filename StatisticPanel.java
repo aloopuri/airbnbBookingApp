@@ -131,9 +131,12 @@ public class StatisticPanel
         data.add(new PieChartDisplay(this, "Number of Properties in each Borough", stats.getpropertiesInEachBorough()));
         data.add(new BarChartDisplay(this, "Room types in Borough ", listingManager.getBoroughOptions(), "RoomTypes"));
         data.add(new BarChartDisplay(this, "Availabilty in Borough", listingManager.getBoroughOptions(), "Availability"));
-        data.add(new ListDisplay(this, "Statistic 8", listingManager.getBoroughOptions()));
+        data.add(new ListDisplay(this, "Common Features of Top Rated Listings", listingManager.getBoroughOptions()));
     }
     
+    /**
+     * Creates messages used to show an error
+     */
     private void createErrorData()
     {
         data.add(new BasicStatisticDisplay(this,"No Listings In This Range", "Please choose another price range"));
@@ -183,10 +186,11 @@ public class StatisticPanel
             ObservableList<Node> list = FXCollections.observableArrayList();
             list = (ObservableList<Node>)box.getChildren();
             for (Node node : list){
+                // iterates through the statboxes
                 if (node instanceof GridPane) {
+                    // checks if the node is a statistic (which is held in a gridpane)
                     GridPane node1 = (GridPane) node;
                     if (node1 == stat) {
-                        //node.setVisible(false);                        
                         box.getChildren().remove(stat);                        
                         box.add(enlargedStatMessage, 1, 0); 
                         enlargedStatBox = box;

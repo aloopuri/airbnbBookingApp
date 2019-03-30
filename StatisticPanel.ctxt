@@ -32,6 +32,7 @@ comment5.target=void\ createData()
 comment5.text=\r\n\ This\ creates\ the\ 8\ statistics\ and\ stores\ them\ in\ arraylist\r\n
 comment6.params=
 comment6.target=void\ createErrorData()
+comment6.text=\r\n\ Creates\ messages\ used\ to\ show\ an\ error\r\n
 comment7.params=
 comment7.target=void\ enlargedStatMessage()
 comment7.text=\r\n\ Creates\ a\ message\ which\ says\ when\ a\ statitsic\ is\ enlarged\r\n

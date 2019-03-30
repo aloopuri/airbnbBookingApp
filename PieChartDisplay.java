@@ -34,7 +34,8 @@ public class PieChartDisplay extends DataDisplay
     }
     
     /**
-     * Creates the piechart
+     * Creates a piechart with no legend
+     * When you hover over a slice, it shows the slice name and the slice value
      */
     private void createPieChart()
     {

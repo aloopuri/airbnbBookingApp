@@ -144,10 +144,13 @@ public class Statistics
             prprtiesInEachBrgh = null;
             return;
         }
-        listings = sortByBoroughAndRoom(listings);
-        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
-        String borough= listings.get(0).getNeighbourhood();
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList(); 
+        String borough= listings.get(0).getNeighbourhood();        
         int propertiesInBorough = 1;
+        if (listings.size() == 1) {
+            data.add(new PieChart.Data(borough, propertiesInBorough));
+        }
+        listings = sortByBoroughAndRoom(listings);
         for (AirbnbListing aListing : listings){
             if (!aListing.getNeighbourhood().equalsIgnoreCase(borough)) {                
                 if (propertiesInBorough >0){
@@ -276,6 +279,10 @@ public class Statistics
         return tempList;
     }
     
+    /**
+     * This creates an and returns an arraylist containing the common features
+     * between the top 5 properties in a borough
+     */
     public ArrayList<String> mostPopListType(String boroughName)
     {
         ArrayList<AirbnbListing> sortedList = getBoroughListings(boroughName); 
@@ -329,12 +336,16 @@ public class Statistics
         else if (entireHme > privateRm && entireHme > sharedRm) {
             common.add("Most Popular Room Type: Entire home/apt");
         }
-        else if (sharedRm >privateRm && sharedRm > entireHme) {
+        else if (sharedRm > privateRm && sharedRm > entireHme) {
             common.add("Most Popular Room Type: Shared room");
         }
         return common;
     }
     
+    /**
+     * Returns an arraylist of the top 5 listings 
+     * If the list passed in has less than 5 listings, it returns the list
+     */
     private ArrayList<AirbnbListing> getTopListings(ArrayList<AirbnbListing> listings)
     {
         listings.sort(Comparator.comparing(AirbnbListing::getReviewsPerMonth));

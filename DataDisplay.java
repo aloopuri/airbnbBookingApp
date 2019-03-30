@@ -44,6 +44,9 @@ public abstract class DataDisplay
         });    
     }   
     
+    /**
+     * Returns the statistic panel 
+     */
     protected StatisticPanel getStatPanel()
     {
         return statPanel;

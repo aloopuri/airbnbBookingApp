@@ -27,7 +27,8 @@ public class BarChartDisplay extends DataDisplay
     private String bcData;
 
     /**
-     * Creates a combo box and a default message 
+     * Creates a combo box of boroughs and shows a default message 
+     * When an option in combo box selected, updates and show stats
      */
     public BarChartDisplay(StatisticPanel statPanel, String title, ObservableList<String> allBoroughs,
             String bcData)
@@ -36,8 +37,6 @@ public class BarChartDisplay extends DataDisplay
         super(statPanel);
         this.title = title;
         this.bcData = bcData;
-        
-        
         
         Label message = new Label();
         if (bcData.equalsIgnoreCase("roomtypes")){
@@ -68,6 +67,9 @@ public class BarChartDisplay extends DataDisplay
         getData().getChildren().add(container);               
     }
     
+    /**
+     * This creates the barchart using the data passed into it
+     */
     private void createBarChart(String boroughName, ObservableList<XYChart.Series> data)
     {
         final CategoryAxis boroughs = new CategoryAxis();
@@ -82,7 +84,10 @@ public class BarChartDisplay extends DataDisplay
         }
     }
     
-    protected void selectBorough()
+    /**
+     * This creates the options in the combo box
+     */
+    private void selectBorough()
     {
         String bToString = (String) boroughListBox.getValue().toString();
         ObservableList<XYChart.Series> data = getStatistic(bToString);
@@ -90,6 +95,9 @@ public class BarChartDisplay extends DataDisplay
         showGraph();        
     }
     
+    /**
+     * This returns the series of a bar chart depending on which statistic stated in bcData
+     */
     private ObservableList<XYChart.Series> getStatistic(String borough)
     {
         if (bcData.equalsIgnoreCase("roomtypes")) {
@@ -103,6 +111,9 @@ public class BarChartDisplay extends DataDisplay
         return null;
     }
     
+    /**
+     * This shows the bar chart in the display
+     */
     private void showGraph()
     {
         container.getChildren().remove(1);

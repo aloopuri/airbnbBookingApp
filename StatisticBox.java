@@ -169,13 +169,18 @@ public class StatisticBox
         statBox.add(statDisplay, 1, 0); 
     }
     
+    /**
+     * Disbales the use of the left and right arrow
+     */
     public void disableNavigation()
     {
         leftArrow.setDisable(true);
         rightArrow.setDisable(true);
     }
     
-    
+    /**
+     * Enables the use of the left and right arrow
+     */
     public void enableNavigation()
     {
         leftArrow.setDisable(false);

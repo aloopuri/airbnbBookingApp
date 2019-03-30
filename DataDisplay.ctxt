@@ -11,6 +11,7 @@ comment3.params=event
 comment3.target=void\ handle(javafx.scene.input.MouseEvent)
 comment4.params=
 comment4.target=StatisticPanel\ getStatPanel()
+comment4.text=\r\n\ Returns\ the\ statistic\ panel\ \r\n
 comment5.params=
 comment5.target=javafx.scene.layout.GridPane\ getData()
 comment5.text=\r\n\ Returns\ dataDisplay\ with\ the\ title\ and\ statistic\r\n

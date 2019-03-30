@@ -18,7 +18,8 @@ public class ListDisplay extends DataDisplay
     private VBox container;
 
     /**
-     * Constructor for objects of class ListDisplay
+     * Creates a combo box of boroughs and shows a default message 
+     * When option in combo box selected, updates and show stats
      */
     public ListDisplay(StatisticPanel statPanel, String title, ObservableList<String> allBoroughs)
     {
@@ -27,10 +28,10 @@ public class ListDisplay extends DataDisplay
         
         container = new VBox();
         
-        Label message = new Label();  
-        message.setText("Common Features of Top Rated Listings");
-        message.setAlignment(Pos.CENTER);
-        message.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        //Label message = new Label();  
+        //this.title.setText("Common Features of Top Rated Listings");
+        this.title.setAlignment(Pos.CENTER);
+        this.title.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
         FXCollections.sort(allBoroughs);     
         
@@ -44,19 +45,23 @@ public class ListDisplay extends DataDisplay
         
         container = new VBox();
         container.setAlignment(Pos.CENTER);
-        container.setVgrow(message, Priority.ALWAYS);
-        container.getChildren().addAll(topBar, message);
+        container.setVgrow(this.title, Priority.ALWAYS);
+        container.getChildren().addAll(topBar, this.title);
         
         getData().setHgrow(container, Priority.ALWAYS);
         getData().setVgrow(container, Priority.ALWAYS);
         getData().getChildren().add(container);            
     }
     
+    /**
+     * This creates the data as labels places them in a VBox and into the display
+     */
     private void createDisplay(String bToString, ArrayList<String> data) 
     {
         removeLabels();
         VBox labelHold = new VBox();
         labelHold.setAlignment(Pos.CENTER);
+        labelHold.getChildren().add(new Label("Common Features of Top Listings: " + bToString));
         int count = 0;
         for (String stat : data) {
             labelHold.getChildren().add(new Label(count+1 + ") " + data.get(count).toString()));
@@ -66,6 +71,9 @@ public class ListDisplay extends DataDisplay
         container.setVgrow(labelHold, Priority.ALWAYS);
     }
     
+    /**
+     * This removes all of the labels in the display
+     */
     private void removeLabels()
     {
         int num = container.getChildren().size()-1;
@@ -75,7 +83,10 @@ public class ListDisplay extends DataDisplay
         }
     }
     
-    protected void selectBorough()
+    /**
+     * This
+     */
+    private void selectBorough()
     {
         String bToString = (String) boroughListBox.getValue().toString();
         ArrayList<String> data =  getStatPanel().getStatistics().mostPopListType(bToString);
