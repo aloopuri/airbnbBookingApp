@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=UserPanel
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ UserPanel\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ is\ the\ GUI\ for\ the\ user\ panel\r\n\ This\ allows\ the\ user\ to\ log\ in\ and\ sign\ up\r\n\ They\ can\ add\ listings\ and\ also\ dave\ listings\ to\ their\ favourites\r\n\r\n\ @Zain\ Raja\r\n
 comment1.params=loginSystem
 comment1.target=UserPanel(LoginSystem)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ UserPanel\r\n
@@ -11,8 +11,8 @@ comment11.params=
 comment11.target=void\ signUp()
 comment11.text=\r\n\ Used\ to\ create\ new\ accounts\r\n
 comment12.params=
-comment12.target=void\ hideLogin()
-comment12.text=\r\n\ Hides\ the\ login\ from\ the\ user\r\n
+comment12.target=void\ signUp()
+comment12.text=\r\n\ Used\ to\ create\ new\ accounts\r\n
 comment13.params=
 comment13.target=void\ showLogin()
 comment13.text=\r\n\ Shows\ the\ login\ to\ the\ user\r\n

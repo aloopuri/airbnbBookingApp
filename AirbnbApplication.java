@@ -176,6 +176,7 @@ public class AirbnbApplication extends Application
         animationIndex = -2000f;
         changePanel(panelIndex);
     }
+    
     /**
      * Sets up and returns the list of options for use in combo boxes
      * @return options The list of combo box options

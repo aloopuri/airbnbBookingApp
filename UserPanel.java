@@ -7,10 +7,11 @@ import javafx.collections.*;
 import java.util.*;
 import javafx.geometry.*;
 /**
- * Write a description of class UserPanel here.
+ * This is the GUI for the user panel
+ * This allows the user to log in and sign up
+ * They can add listings and also dave listings to their favourites
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @Zain Raja
  */
 public class UserPanel
 {
@@ -53,7 +54,7 @@ public class UserPanel
         loginButton = new Button("Login");
         loginButton.setOnAction(e -> login());
         signupButton = new Button("Sign Up");
-        signupButton.setOnAction(e -> signUp());   
+        signupButton.setOnAction(e -> signUp());
         Button logoutButt = new Button("logout");
         logoutButt.setOnAction(e -> logout());
 
@@ -65,7 +66,7 @@ public class UserPanel
         topPane.add(loginStatus, 0, 4);
         topPane.add(horizontalBox, 0, 5);
         root.setTop(topPane);
-        
+
         Label favTitle = new Label("FAVOURITES");
         favouritesDisplay = new ListView();
         Button removeFavourite = new Button("Delete");
@@ -73,8 +74,8 @@ public class UserPanel
         Button saveFavourite = new Button("Save");
         showFavourite.setOnAction(e -> showFavourites(favouritesDisplay));
         removeFavourite.setOnAction(e -> deleteFavourite(favouritesDisplay));
-        saveFavourite.setOnAction(e -> loginSystem.getCurrentUser().saveFavourites());
- 
+        saveFavourite.setOnAction(e -> saveFavourites());
+
         Label createProperty = new Label("CREATE YOUR PROPERTY");
         TextField pNameField = new TextField();
         pNameField.setPromptText("Listing Description");
@@ -83,8 +84,13 @@ public class UserPanel
         ChoiceBox neighbourhoodField = new ChoiceBox(
             FXCollections.observableArrayList("Kingston upon Thames", "Croydon",
             "Bromley","Hounslow","Ealing","Havering","Hillingdon","Harrow",
-            "Brent","Barnet","Enfield"));
-        neighbourhoodField.setId("neighbourhoodField");
+            "Brent","Barnet","Enfield","Waltham Forest","Redbridge","Sutton",
+            "Lambeth","Southwark","Lewisham","Greenwich","Bexley",
+            "Richmond upon Thames","Merton","Wandsworth","Hammersmith and Fulham",
+            "Kensington and Chelsea","City of London","Westminister","Camden",
+            "Tower Hamlets","Islington","Hackney","Haringey","Newham",
+            "Barking and Dagenham"));
+
         TextField latitudeField = new TextField();
         latitudeField.setPromptText("Latitude");
         TextField longitudeField = new TextField();
@@ -105,14 +111,14 @@ public class UserPanel
                     pNameField,nameField,neighbourhoodField,latitudeField,longitudeField,
                     typeField,priceField,minNightsField,availabilityField,addListingStatus));
         addListingButton.setDisable(true);
-        
+
         GridPane innerPane = new GridPane();
         innerPane.setPadding(new Insets(10, 10, 10, 10));
         innerPane.setPrefWidth(600);
         innerPane.setPrefHeight(600);
         innerPane.setVgap(10);
         innerPane.setHgap(10);
-        
+
         innerPane.add(pNameField, 0, 0);
         innerPane.add(nameField, 0, 1);
         innerPane.add(priceField, 0, 2);
@@ -124,7 +130,7 @@ public class UserPanel
         innerPane.add(availabilityField, 0, 8);
         innerPane.add(addListingButton, 0, 9);
         innerPane.add(addListingStatus, 0, 10);
-        
+
         centerPane.add(new Label("                       "), 0, 0);
         centerPane.add(favTitle, 1, 0);
         centerPane.add(favouritesDisplay, 1, 1);
@@ -134,9 +140,9 @@ public class UserPanel
         centerPane.add(new Label("                       "), 2, 0);
         centerPane.add(createProperty, 3, 0);
         centerPane.add(innerPane, 3, 1);
-        
+
         root.setCenter(centerPane);
-        
+
         bottomPane = new GridPane();
         Label account = new Label("Account");
         nameDisplay = new Label("Not logged in");
@@ -150,6 +156,17 @@ public class UserPanel
     }
 
     /**
+     * Saves the favourites when the button is pressed
+     */
+    private void saveFavourites()
+    {
+        if (loginSystem.getCurrentUser() != null)
+        {
+            loginSystem.getCurrentUser().saveFavourites();
+        }
+    }
+
+    /**
      * Show the current Favourites
      *
      * @param display The view from which to obtain the values to show
@@ -158,13 +175,15 @@ public class UserPanel
     {
         //Gets an arraylist of names and adds it to the display
         ArrayList<String> favouriteNames = new ArrayList();
-        for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
-        {
-            favouriteNames.add(list.getName());
-            System.out.println(list);
-        }
         display.getItems().clear();
-        display.getItems().addAll(favouriteNames);
+        if (loginSystem.getCurrentUser() != null)
+        {
+            for (AirbnbListing list:loginSystem.getCurrentUser().getFavourites())
+            {
+                favouriteNames.add(list.getName());
+            }
+            display.getItems().addAll(favouriteNames);
+        }
     }
 
     /**
@@ -174,9 +193,12 @@ public class UserPanel
      */
     private void deleteFavourite(ListView display)
     {
-        loginSystem.getCurrentUser().removeFavourite((String) display.
-        getSelectionModel().getSelectedItem());
-        showFavourites(favouritesDisplay);
+        if (loginSystem.getCurrentUser() != null)
+        {
+            loginSystem.getCurrentUser().removeFavourite((String) display.
+            getSelectionModel().getSelectedItem());
+            showFavourites(favouritesDisplay);
+        }
     }
 
     /**
@@ -250,14 +272,13 @@ public class UserPanel
     }
 
     /**
-     * Allows the user to login
+     * Allows the user to login to the application
      */
     private void login()
     {
         //Tries to log in through the loginSystem
         if (loginSystem.login(usernameInput.getText(),passwordInput.getText()))
         {
-            System.out.println("Logged in");
             hideLogin();
             passwordInput.setText("");
             updateNameDisplay();

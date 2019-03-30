@@ -4,6 +4,7 @@ comment1.params=listingManager\ loginSystem
 comment1.target=MapPanel(ListingManager,\ LoginSystem)
 comment10.params=listing
 comment10.target=void\ toggleFavourite(AirbnbListing)
+comment10.text=\r\n\ Adds\ a\ listing\ to\ the\ favourites\ when\ the\ button\ is\ pressed\r\n\ \r\n\ @param\ listing\ The\ listing\ to\ add\r\n
 comment11.params=listingView
 comment11.target=void\ changeListingView(javafx.scene.layout.BorderPane)
 comment12.params=lat\ lon
