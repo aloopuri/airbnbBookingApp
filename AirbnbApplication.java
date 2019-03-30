@@ -32,7 +32,7 @@ public class AirbnbApplication extends Application
     private double animationIndex;
     private ListingManager listingManager;
     private LoginSystem loginSystem;
-    
+
     // Controls on most panels
     private BorderPane main;
     private Button backButton = new Button("<");
@@ -114,8 +114,9 @@ public class AirbnbApplication extends Application
         toBox.setId("toBox");
 
         Button home = new Button("Home");
+        home.setId("homeButton");
         home.setOnAction(e -> goToHome());
-        
+
         topPane = new HBox();
         topPane.setAlignment(Pos.CENTER_RIGHT);
         topPane.setSpacing(10);

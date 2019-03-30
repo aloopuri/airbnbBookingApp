@@ -45,6 +45,17 @@
     -fx-text-fill: black;
 }
 
+#homeButton{
+  -fx-font: 15px "Tw Cen MT";
+  -fx-text-fill: black;
+  -fx-background-color: white;
+}
+
+#homeButton:hover{
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+  -fx-background-color: #e0ffff;
+}
+
 #frontButton{
   -fx-font: 15px "Tw Cen MT";
   -fx-text-fill: black;
